@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Management extends Model
 {
     use HasFactory;
+    protected $table = 'managements';
 
     protected $fillable = [
         'photo',

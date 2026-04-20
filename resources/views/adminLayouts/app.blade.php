@@ -13,7 +13,7 @@
 	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
 
 	<link rel="canonical" href="https://demo-basic.adminkit.io/" />
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<title>AdminKit Demo - Bootstrap 5 Admin Template</title>
 
 	<link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
