@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('about_clubs', function (Blueprint $table) {
             $table->id();
+            $table->string('type'); // vision, mission, about, goal
             $table->timestamps();
         });
     }

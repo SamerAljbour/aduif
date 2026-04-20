@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('management_translations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('management_id')
+                ->constrained('managements')
+                ->onDelete('cascade');
+            $table->string('locale');
+            $table->string('name');
+            $table->text('bio');
             $table->timestamps();
         });
     }

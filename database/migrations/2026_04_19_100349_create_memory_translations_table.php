@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('memory_translations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('memory_id')->constrained()->onDelete('cascade');
+            $table->string('locale');
+            $table->string('title');
+            $table->text('description');
             $table->timestamps();
         });
     }

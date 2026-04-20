@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('contact_translations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('contact_id')->constrained()->onDelete('cascade');
+            $table->string('locale');
+            $table->string('name');
+            $table->text('message');
             $table->timestamps();
         });
     }

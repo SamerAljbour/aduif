@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('management', function (Blueprint $table) {
+        Schema::create('managements', function (Blueprint $table) {
             $table->id();
+            $table->string('photo')->nullable();
+            $table->string('email')->nullable();
+            $table->string('position');
+            $table->enum('type', ['current', 'former', 'honorary']);
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }

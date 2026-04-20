@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('join_request_translations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('join_request_id')->constrained()->onDelete('cascade');
+            $table->string('locale');
+            $table->text('bio')->nullable();
             $table->timestamps();
         });
     }

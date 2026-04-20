@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('join_request_documents', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('join_request_id')->constrained()->onDelete('cascade');
+            $table->string('file_path');
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }

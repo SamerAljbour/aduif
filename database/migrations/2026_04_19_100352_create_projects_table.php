@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->enum('status', ['coming_soon', 'active', 'completed'])->default('coming_soon');
             $table->timestamps();
         });
     }

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('news', function (Blueprint $table) {
             $table->id();
+            $table->string('image')->nullable();
+            $table->date('event_date')->nullable();
             $table->timestamps();
         });
     }

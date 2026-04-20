@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('about_club_translations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('about_club_id')->constrained()->onDelete('cascade');
+            $table->string('locale'); // ar, fr
+            $table->string('title')->nullable();
+            $table->text('content');
             $table->timestamps();
         });
     }
