@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ManagementController;
+use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +20,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard.index');
 
     Route::resource('managements', ManagementController::class);
+    Route::resource('posts', PostController::class);
+    Route::resource('projects', ProjectController::class);
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

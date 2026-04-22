@@ -20,6 +20,16 @@
               <i class="align-middle" data-feather="user"></i> <span class="align-middle">Managers</span>
             </a>
 					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{{ route('posts.index') }}">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Posts (memories & news)</span>
+            </a>
+					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{{ route('projects.index') }}">
+              <i class="align-middle" data-feather="user"></i> <span class="align-middle">Projects</span>
+            </a>
+					</li>
 
 					<li class="sidebar-item">
 						<a class="sidebar-link" href="pages-sign-in.html">

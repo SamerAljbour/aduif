@@ -22,8 +22,8 @@
 
     {{-- PAGE HEADER --}}
     <div class="mgmt-header">
-        <h1 class="mgmt-title">{{ isset($management) ? 'Edit Manager' : 'Add Manager' }}</h1>
-        <a href="{{ route('managements.index') }}" class="btn-add">
+        <h1 class="mgmt-title">{{ isset($post) ? 'Edit Post' : 'Add Post' }}</h1>
+        <a href="{{ route('posts.index') }}" class="btn-add">
             <span class="btn-add__icon">←</span> Back to list
         </a>
     </div>
@@ -31,13 +31,13 @@
     {{-- FORM CARD --}}
     <div class="mgmt-card">
 
-        @if (isset($management))
-            <form action="{{ route('managements.update', $management->id) }}"
+        @if (isset($post))
+            <form action="{{ route('posts.update', $post->id) }}"
                   method="POST"
                   enctype="multipart/form-data">
             @method('PUT')
         @else
-            <form action="{{ route('managements.store') }}"
+            <form action="{{ route('posts.store') }}"
                   method="POST"
                   enctype="multipart/form-data">
         @endif
@@ -45,86 +45,68 @@
 
         <div class="mgmt-form__body">
 
-            {{-- ROW 1: NAMES --}}
+            {{-- ROW 1: TITLE (AR / FR) --}}
             <div class="mgmt-form__row">
+
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Name (Arabic)</label>
+                    <label class="mgmt-form__label">Title (Arabic)</label>
                     <input type="text"
-                           name="name_ar"
-                           class="mgmt-form__control @error('name_ar') is-invalid @enderror"
-                           value="{{ old('name_ar', $ar->name ?? '') }}">
-                    @error('name_ar')
+                           name="title_ar"
+                           class="mgmt-form__control @error('title_ar') is-invalid @enderror"
+                           value="{{ old('title_ar', $ar->title ?? '') }}">
+                    @error('title_ar')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Name (French)</label>
+                    <label class="mgmt-form__label">Title (French)</label>
                     <input type="text"
-                           name="name_fr"
-                           class="mgmt-form__control @error('name_fr') is-invalid @enderror"
-                           value="{{ old('name_fr', $fr->name ?? '') }}">
-                    @error('name_fr')
+                           name="title_fr"
+                           class="mgmt-form__control @error('title_fr') is-invalid @enderror"
+                           value="{{ old('title_fr', $fr->title ?? '') }}">
+                    @error('title_fr')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
+
             </div>
 
-            {{-- ROW 2: BIO --}}
+            {{-- ROW 2: DESCRIPTION --}}
             <div class="mgmt-form__row">
+
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Bio (Arabic)</label>
-                    <textarea name="bio_ar"
-                              class="mgmt-form__control @error('bio_ar') is-invalid @enderror"
-                              rows="3">{{ old('bio_ar', $ar->bio ?? '') }}</textarea>
-                    @error('bio_ar')
+                    <label class="mgmt-form__label">Description (Arabic)</label>
+                    <textarea name="description_ar"
+                              class="mgmt-form__control @error('description_ar') is-invalid @enderror"
+                              rows="3">{{ old('description_ar', $ar->description ?? '') }}</textarea>
+                    @error('description_ar')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
 
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Bio (French)</label>
-                    <textarea name="bio_fr"
-                              class="mgmt-form__control @error('bio_fr') is-invalid @enderror"
-                              rows="3">{{ old('bio_fr', $fr->bio ?? '') }}</textarea>
-                    @error('bio_fr')
+                    <label class="mgmt-form__label">Description (French)</label>
+                    <textarea name="description_fr"
+                              class="mgmt-form__control @error('description_fr') is-invalid @enderror"
+                              rows="3">{{ old('description_fr', $fr->description ?? '') }}</textarea>
+                    @error('description_fr')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
+
             </div>
 
-            {{-- ROW 3: EMAIL, POSITION, TYPE --}}
+            {{-- ROW 3: DATE + TYPE --}}
             <div class="mgmt-form__row">
-                <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Email</label>
-                    <input type="email"
-                           name="email"
-                           class="mgmt-form__control @error('email') is-invalid @enderror"
-                           value="{{ old('email', $management->email ?? '') }}">
-                    @error('email')
-                        <small class="mgmt-form__error">{{ $message }}</small>
-                    @enderror
-                </div>
 
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Position</label>
-                    <select name="position"
-                            class="mgmt-form__control @error('position') is-invalid @enderror">
-                        <option value="">Select Position</option>
-                        @foreach([
-                            'president' => 'President',
-                            'vice_president' => 'Vice President',
-                            'secretary' => 'Secretary',
-                            'treasurer' => 'Treasurer',
-                            'board_member' => 'Board Member'
-                        ] as $key => $label)
-                            <option value="{{ $key }}"
-                                {{ (old('position', $management->position ?? '') == $key) ? 'selected' : '' }}>
-                                {{ $label }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('position')
+                    <label class="mgmt-form__label">Event Date</label>
+                    <input type="date"
+                           name="event_date"
+                           class="mgmt-form__control @error('event_date') is-invalid @enderror"
+                           value="{{ old('event_date', $post->event_date ?? '') }}">
+                    @error('event_date')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
@@ -133,35 +115,38 @@
                     <label class="mgmt-form__label">Type</label>
                     <select name="type"
                             class="mgmt-form__control @error('type') is-invalid @enderror">
+
                         <option value="">Select Type</option>
-                        <option value="current"
-                            {{ (old('type', $management->type ?? '') == 'current') ? 'selected' : '' }}>
-                            Current
+
+                        <option value="news"
+                            {{ (old('type', $post->type ?? '') == 'news') ? 'selected' : '' }}>
+                            News
                         </option>
-                        <option value="former"
-                            {{ (old('type', $management->type ?? '') == 'former') ? 'selected' : '' }}>
-                            Former
+
+                        <option value="memory"
+                            {{ (old('type', $post->type ?? '') == 'memory') ? 'selected' : '' }}>
+                            Memory
                         </option>
-                        <option value="honorary"
-                            {{ (old('type', $management->type ?? '') == 'honorary') ? 'selected' : '' }}>
-                            Honorary
-                        </option>
+
                     </select>
+
                     @error('type')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
+
             </div>
 
-            {{-- ROW 4: PHOTO WITH PREVIEW --}}
+            {{-- ROW 4: IMAGE --}}
             <div class="mgmt-form__row">
+
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Photo</label>
+                    <label class="mgmt-form__label">Image</label>
                     <input type="file"
-                           name="photo"
-                           class="mgmt-form__control @error('photo') is-invalid @enderror"
+                           name="image"
+                           class="mgmt-form__control @error('image') is-invalid @enderror"
                            onchange="previewImage(event)">
-                    @error('photo')
+                    @error('image')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
@@ -170,19 +155,20 @@
                     <label class="mgmt-form__label">Preview</label>
                     <div class="mgmt-avatar-wrap">
                         <img id="preview"
-                             src="{{ isset($management->photo)
-                                ? asset('storage/'.$management->photo)
+                             src="{{ isset($post->image)
+                                ? asset('storage/'.$post->image)
                                 : 'https://via.placeholder.com/130' }}"
                              class="mgmt-avatar mgmt-avatar--preview"
                              style="max-height:130px; object-fit:cover;">
                     </div>
                 </div>
+
             </div>
 
-            {{-- FORM ACTIONS --}}
+            {{-- ACTIONS --}}
             <div class="mgmt-form__actions">
                 <button type="submit" class="btn-add">
-                    {{ isset($management) ? 'Update Manager' : 'Save Manager' }}
+                    {{ isset($post) ? 'Update Post' : 'Save Post' }}
                 </button>
             </div>
 
@@ -192,11 +178,6 @@
     </div>
 </div>
 
-{{-- STYLES (extended from index) --}}
-<style>
-</style>
-
-{{-- IMAGE PREVIEW + AUTO-DISMISS SCRIPT --}}
 <script>
 function previewImage(event) {
     const reader = new FileReader();
@@ -206,7 +187,6 @@ function previewImage(event) {
     reader.readAsDataURL(event.target.files[0]);
 }
 
-// Auto-dismiss toasts after 4 seconds
 document.querySelectorAll('.alert-toast').forEach(function(el) {
     setTimeout(function() {
         el.style.transition = 'opacity 0.4s';

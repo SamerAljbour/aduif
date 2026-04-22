@@ -13,12 +13,21 @@ return new class extends Migration
     {
         Schema::create('managements', function (Blueprint $table) {
             $table->id();
+
             $table->string('photo')->nullable();
             $table->string('email')->nullable();
-            $table->string('position');
+
+            // ✅ controlled positions
+            $table->enum('position', [
+                'president',
+                'vice_president',
+                'secretary',
+                'treasurer',
+                'board_member'
+            ]);
+
             $table->enum('type', ['current', 'former', 'honorary']);
-            // $table->date('start_date')->nullable();
-            // $table->date('end_date')->nullable();
+
             $table->timestamps();
         });
     }

@@ -13,9 +13,23 @@ return new class extends Migration
     {
         Schema::create('join_requests', function (Blueprint $table) {
             $table->id();
+
+            // 🔹 Basic Info
+            $table->string('name'); // الاسم (can stay here for simplicity)
             $table->string('email');
             $table->string('phone')->nullable();
-            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+
+            // 🔹 Nationality
+            $table->enum('nationality', ['jordanian', 'non_jordanian']);
+
+            // 🔹 Files
+            $table->string('photo')->nullable(); // صورة
+            $table->string('cv')->nullable();    // السيرة الذاتية (CV)
+
+            // 🔹 Status
+            $table->enum('status', ['pending', 'approved', 'rejected'])
+                ->default('pending');
+
             $table->timestamps();
         });
     }

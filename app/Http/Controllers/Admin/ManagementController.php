@@ -22,22 +22,21 @@ class ManagementController extends Controller
 
     public function store(ManagementRequest $request)
     {
-        // upload photo
+        // ✅ Upload photo
         $photo = null;
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo')->store('managements', 'public');
         }
 
-        // create main record
+        // ✅ Create main record
         $management = Management::create([
             'photo' => $photo,
             'email' => $request->email,
-            'position' => $request->position,
+            'position' => $request->position, // enum
             'type' => $request->type,
-
         ]);
 
-        // create translations
+        // ✅ Create translations
         $management->translations()->createMany([
             [
                 'locale' => 'ar',
@@ -59,9 +58,9 @@ class ManagementController extends Controller
     {
         $management = Management::with('translations')->findOrFail($id);
 
-        // get translations
-        $ar = $management->translations->where('locale', 'ar')->first();
-        $fr = $management->translations->where('locale', 'fr')->first();
+        // ✅ Get translations safely
+        $ar = $management->translations->firstWhere('locale', 'ar');
+        $fr = $management->translations->firstWhere('locale', 'fr');
 
         return view('dashboard.management.createOrUpdate', compact('management', 'ar', 'fr'));
     }
@@ -70,24 +69,26 @@ class ManagementController extends Controller
     {
         $management = Management::findOrFail($id);
 
-        // update photo if exists
+        // ✅ Update photo if exists
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo')->store('managements', 'public');
             $management->photo = $photo;
         }
 
-        // update main fields
+        // ✅ Update main fields
         $management->update([
             'email' => $request->email,
             'position' => $request->position,
             'type' => $request->type,
-
         ]);
 
-        // update translations
+        // ❗ FIXED: correct updateOrCreate (DO NOT use translation())
         foreach (['ar', 'fr'] as $locale) {
-            $management->translation()->updateOrCreate(
-                ['locale' => $locale],
+            $management->translations()->updateOrCreate(
+                [
+                    'management_id' => $management->id,
+                    'locale' => $locale
+                ],
                 [
                     'name' => $request->input("name_$locale"),
                     'bio'  => $request->input("bio_$locale"),

@@ -13,9 +13,13 @@ return new class extends Migration
     {
         Schema::create('members', function (Blueprint $table) {
             $table->id();
+
             $table->string('email')->nullable();
             $table->string('photo')->nullable();
+            $table->string('cv')->nullable(); // upload CV file
+
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
+
             $table->timestamps();
         });
     }

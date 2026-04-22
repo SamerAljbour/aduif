@@ -22,9 +22,9 @@
 
     {{-- PAGE HEADER --}}
     <div class="mgmt-header">
-        <h1 class="mgmt-title">Management</h1>
-        <a href="{{ route('managements.create') }}" class="btn-add">
-            <span class="btn-add__icon">+</span> Add a manager
+        <h1 class="mgmt-title">Projects</h1>
+        <a href="{{ route('projects.create') }}" class="btn-add">
+            <span class="btn-add__icon">+</span> Add a Project
         </a>
     </div>
 
@@ -33,12 +33,12 @@
 
         {{-- CARD HEADER --}}
         <div class="mgmt-card__header">
-            <span class="mgmt-card__label">All managers</span>
+            <span class="mgmt-card__label">All Projects</span>
             <input
                 type="text"
                 id="mgmtSearch"
                 class="mgmt-search"
-                placeholder="Search by name or email…"
+                placeholder="Search by title or status…"
                 oninput="mgmtFilter()"
             />
         </div>
@@ -48,66 +48,39 @@
             <table class="mgmt-table">
                 <thead>
                     <tr>
-                        <th>Photo</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Position</th>
-                        <th>Type</th>
+                        <th>Title (AR)</th>
+                        <th>Title (FR)</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
 
                 <tbody id="mgmtTableBody">
-                    @forelse($managements as $m)
+                    @forelse($projects as $p)
                         <tr class="mgmt-row">
 
-                            {{-- PHOTO --}}
+                            {{-- TITLE AR --}}
                             <td>
-                                @if($m->photo)
-                                    <img src="{{ asset('storage/'.$m->photo) }}"
-                                         class="mgmt-avatar"
-                                         alt="Photo">
-                                @else
-                                    <div class="mgmt-avatar mgmt-avatar--placeholder">
-                                        {{ strtoupper(substr(optional($m->translations->where('locale','ar')->first())->name ?? 'M', 0, 1)) }}
-                                    </div>
-                                @endif
+                                {{ optional($p->translations->where('locale','ar')->first())->title }}
                             </td>
 
-                            {{-- NAME (AR + FR) --}}
+                            {{-- TITLE FR --}}
                             <td>
-                                <div class="mgmt-name">
-                                    <span class="mgmt-name__primary">
-                                        {{ optional($m->translations->where('locale','ar')->first())->name }}
-                                    </span>
-                                    <span class="mgmt-name__secondary">
-                                        {{ optional($m->translations->where('locale','fr')->first())->name }}
-                                    </span>
-                                </div>
+                                {{ optional($p->translations->where('locale','fr')->first())->title }}
                             </td>
 
-                            {{-- EMAIL --}}
-                            <td class="mgmt-email">{{ $m->email }}</td>
-
-                            {{-- POSITION --}}
-                            <td>
-                                <span class="badge badge--pos">
-                                    {{ ucfirst(str_replace('_', ' ', $m->position)) }}
-                                </span>
-                            </td>
-
-                            {{-- TYPE --}}
+                            {{-- STATUS --}}
                             <td>
                                 @php
-                                    $typeClass = match($m->type) {
-                                        'current'  => 'badge--current',
-                                        'former'   => 'badge--former',
-                                        'honorary' => 'badge--honorary',
-                                        default    => 'badge--former',
+                                    $statusClass = match($p->status) {
+                                        'active' => 'badge--current',
+                                        'completed' => 'badge--honorary',
+                                        default => 'badge--former',
                                     };
                                 @endphp
-                                <span class="badge {{ $typeClass }}">
-                                    {{ ucfirst($m->type) }}
+
+                                <span class="badge {{ $statusClass }}">
+                                    {{ ucfirst(str_replace('_',' ', $p->status)) }}
                                 </span>
                             </td>
 
@@ -115,20 +88,21 @@
                             <td>
                                 <div class="mgmt-actions">
 
-                                    <a href="{{ route('managements.edit', $m->id) }}"
+                                    <a href="{{ route('projects.edit', $p->id) }}"
                                        class="btn-row btn-row--edit">
                                         <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5l2 2L5 13H3v-2L11.5 2.5z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
                                         Edit
                                     </a>
 
-                                    <form action="{{ route('managements.destroy', $m->id) }}"
+                                    <form action="{{ route('projects.destroy', $p->id) }}"
                                           method="POST"
                                           style="display:inline-block">
                                         @csrf
                                         @method('DELETE')
+
                                         <button type="submit"
                                                 class="btn-row btn-row--delete"
-                                                onclick="return confirm('Delete this manager?')">
+                                                onclick="return confirm('Delete this project?')">
                                             <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><path d="M3 4h10M6 4V3h4v1M5 4l.5 9h5L11 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                                             Delete
                                         </button>
@@ -140,21 +114,21 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="mgmt-empty">No managers found.</td>
+                            <td colspan="4" class="mgmt-empty">No projects found.</td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
 
-            <p id="mgmtNoResults" class="mgmt-empty" style="display:none;">No managers match your search.</p>
+            <p id="mgmtNoResults" class="mgmt-empty" style="display:none;">
+                No projects match your search.
+            </p>
         </div>
 
     </div>
 
 </div>
 
-
-{{-- SEARCH + AUTO-DISMISS SCRIPT --}}
 <script>
 function mgmtFilter() {
     var q = document.getElementById('mgmtSearch').value.toLowerCase();
@@ -172,7 +146,6 @@ function mgmtFilter() {
     noResults.style.display = visible === 0 ? 'block' : 'none';
 }
 
-// Auto-dismiss toasts after 4 seconds
 document.querySelectorAll('.alert-toast').forEach(function(el) {
     setTimeout(function() {
         el.style.transition = 'opacity 0.4s';

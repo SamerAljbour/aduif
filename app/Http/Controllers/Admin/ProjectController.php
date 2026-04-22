@@ -1,0 +1,85 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\Models\Project;
+use App\Http\Requests\ProjectRequest;
+
+class ProjectController extends Controller
+{
+    public function index()
+    {
+        $projects = Project::with('translations')->latest()->get();
+        return view('dashboard.projects.index', compact('projects'));
+    }
+
+    public function create()
+    {
+        return view('dashboard.projects.createOrUpdate');
+    }
+
+    public function store(ProjectRequest $request)
+    {
+        $project = Project::create([
+            'status' => $request->status,
+        ]);
+
+        $project->translations()->createMany([
+            [
+                'locale' => 'ar',
+                'title' => $request->title_ar,
+                'description' => $request->description_ar,
+            ],
+            [
+                'locale' => 'fr',
+                'title' => $request->title_fr,
+                'description' => $request->description_fr,
+            ],
+        ]);
+
+        return redirect()->route('projects.index')
+            ->with('success', 'Project created successfully');
+    }
+
+    public function edit($id)
+    {
+        $project = Project::with('translations')->findOrFail($id);
+
+        $ar = $project->translations->where('locale', 'ar')->first();
+        $fr = $project->translations->where('locale', 'fr')->first();
+
+        return view('dashboard.projects.createOrUpdate', compact('project', 'ar', 'fr'));
+    }
+
+    public function update(ProjectRequest $request, $id)
+    {
+        $project = Project::findOrFail($id);
+
+        $project->update([
+            'status' => $request->status,
+        ]);
+
+        foreach (['ar', 'fr'] as $locale) {
+            $project->translations()->updateOrCreate(
+                ['locale' => $locale],
+                [
+                    'title' => $request->input("title_$locale"),
+                    'description' => $request->input("description_$locale"),
+                ]
+            );
+        }
+
+        return redirect()->route('projects.index')
+            ->with('success', 'Project updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        $project = Project::findOrFail($id);
+        $project->delete();
+
+        return redirect()->route('projects.index')
+            ->with('success', 'Project deleted successfully');
+    }
+}
