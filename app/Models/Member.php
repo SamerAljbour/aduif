@@ -12,9 +12,9 @@ class Member extends Model
     protected $fillable = [
         'email',
         'photo',
+        'cv',
         'status',
     ];
-
     public function translations()
     {
         return $this->hasMany(MemberTranslation::class);
@@ -24,5 +24,9 @@ class Member extends Model
     {
         $locale = $locale ?? app()->getLocale();
         return $this->hasOne(MemberTranslation::class)->where('locale', $locale);
+    }
+    public function documents()
+    {
+        return $this->hasMany(JoinRequestDocument::class);
     }
 }

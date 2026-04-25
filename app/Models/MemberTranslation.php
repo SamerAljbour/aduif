@@ -13,6 +13,12 @@ class MemberTranslation extends Model
         'member_id',
         'locale',
         'name',
+        'specialization',
+        'degree',
+        'graduation_university',
+        'current_job',
+        'workplace',
+        'interests',
         'bio',
     ];
 

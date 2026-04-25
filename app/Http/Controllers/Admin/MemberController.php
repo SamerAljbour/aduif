@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Member;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        //
+        $members = Member::with(['translations', 'documents'])->latest()->get();
+        // dd($members);
+        return view('dashboard.members.index', compact('members'));
     }
 
     /**

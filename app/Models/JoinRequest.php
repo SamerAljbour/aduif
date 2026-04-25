@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class JoinRequest extends Model
 {
     use HasFactory;
+    // JoinRequest.php
 
     protected $fillable = [
         'name',
@@ -16,8 +17,14 @@ class JoinRequest extends Model
         'nationality',
         'photo',
         'cv',
+        'documents',
         'status',
     ];
+
+    // protected $casts = [
+    //     'documents' => 'array',
+    // ];
+
 
     /*
     |--------------------------------------------------------------------------

@@ -16,15 +16,29 @@
                 <li><a class="smoothscroll" href="#pricing" title="pricing">Pricing</a></li>
                 <li><a href="blog.html" title="blog">Blog</a></li>
                 <li>
-                    <a href="{{ route('dashboard.index') }}" title="blog">Blog</a>
+                    <a href="{{ route('dashboard.index') }}" title="blog">Login</a>
                 </li>
        </ul>
 
             <ul class="header-social">
-                <li><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                <li><a href="#0"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
-            </ul>
+
+    <li><a href="#0"><i class="fab fa-facebook-f"></i></a></li>
+    <li><a href="#0"><i class="fab fa-twitter"></i></a></li>
+    <li><a href="#0"><i class="fab fa-instagram"></i></a></li>
+
+    <li>
+        @if(app()->getLocale() == 'fr')
+            <a href="{{ route('set.locale', 'ar') }}">
+                AR
+            </a>
+        @else
+            <a href="{{ route('set.locale', 'fr') }}">
+                FR
+            </a>
+        @endif
+    </li>
+
+</ul>
         </nav>
 
         <a class="header-menu-toggle" href="#"><span>Menu</span></a>

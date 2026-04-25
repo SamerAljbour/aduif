@@ -12,9 +12,14 @@ class JoinRequestTranslation extends Model
     protected $fillable = [
         'join_request_id',
         'locale',
+        'specialization',
+        'degree',
+        'graduation_university',
+        'current_job',
+        'workplace',
+        'interests',
         'bio',
     ];
-
     public function joinRequest()
     {
         return $this->belongsTo(JoinRequest::class);

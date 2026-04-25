@@ -13,10 +13,15 @@ class JoinRequestDocument extends Model
         'join_request_id',
         'file_path',
         'type',
+        'member_id',
     ];
 
     public function joinRequest()
     {
         return $this->belongsTo(JoinRequest::class);
+    }
+    public function member()
+    {
+        return $this->belongsTo(Member::class);
     }
 }
