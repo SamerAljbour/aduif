@@ -1,0 +1,698 @@
+@charset "UTF-8";
+
+/* ===================================================================
+ *
+ *  rtl.css — RTL overrides for Arabic (ar) locale
+ *  Loaded only when app()->getLocale() === 'ar'
+ *  The <html> element already carries dir="rtl" from the blade template.
+ *
+ * =================================================================== */
+
+/* ===================================================================
+ * # Base / Typography
+ * ------------------------------------------------------------------- */
+
+/* Flip margin on lists */
+ol,
+ul {
+    margin-left: 0;
+    margin-right: 1.6rem;
+}
+
+ul li {
+    padding-left: 0;
+    padding-right: 0.4rem;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+    margin: 0.8rem 1.6rem 0.8rem 0;
+}
+
+/* disc list — bullet on the right */
+ul.disc li {
+    padding: 0 0.8rem 0 0;
+}
+
+ul.disc li::before {
+    left: auto;
+    right: -16px;
+}
+
+/* blockquote — opening quote on the right */
+blockquote {
+    padding-left: 0;
+    padding-right: 4.8rem;
+}
+
+blockquote:before {
+    left: auto;
+    right: -6px;
+    content: "\201D"; /* right double quotation mark for RTL */
+}
+
+/* dd */
+dd {
+    margin: 0 2rem 0 0;
+}
+
+/* floated images */
+img.pull-right {
+    margin: 1.2rem 0 0 2.8rem; /* stays the same visually — keep as-is */
+    float: left;
+}
+
+img.pull-left {
+    margin: 1.2rem 2.8rem 0 0;
+    float: right;
+}
+
+/* tables */
+th,
+td {
+    text-align: right;
+}
+
+th:first-child,
+td:first-child {
+    padding-left: 1.6rem; /* restore default padding */
+    padding-right: 0;
+}
+
+th:last-child,
+td:last-child {
+    padding-right: 1.6rem;
+    padding-left: 0;
+}
+
+/* label text */
+label > .label-text {
+    margin-left: 0;
+    margin-right: 1rem;
+}
+
+/* ===================================================================
+ * # Forms
+ * ------------------------------------------------------------------- */
+
+/* custom select arrow — move to left side */
+.cl-custom-select::after {
+    right: auto;
+    left: 2.4rem;
+}
+
+/* subscribe form email input — padding swap */
+.footer__subscribe #mc-form input[type="email"] {
+    padding: 1.6rem 32px 1.6rem 140px;
+}
+
+/* subscribe submit button — move to left */
+.footer__subscribe #mc-form input[type="submit"] {
+    right: auto;
+    left: 0;
+    border-radius: 5px 0 0 5px;
+}
+
+/* label icon padding */
+.footer__subscribe #mc-form label i {
+    padding-right: 0;
+    padding-left: 6px;
+}
+
+@media only screen and (max-width: 600px) {
+    .footer__subscribe #mc-form input[type="email"] {
+        padding: 0 2.4rem;
+    }
+}
+
+/* ===================================================================
+ * # Buttons
+ * ------------------------------------------------------------------- */
+
+.btn,
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+    margin: 0 0 1.6rem 0.4rem; /* swap left/right margin */
+}
+
+/* ===================================================================
+ * # Additional components
+ * ------------------------------------------------------------------- */
+
+/* pull-quote */
+.pull-quote {
+    padding: 2.4rem 0px 2.4rem 3.2rem;
+}
+
+.pull-quote:before {
+    left: auto;
+    right: -6px;
+    content: "\201D";
+}
+
+.pull-quote:after {
+    right: auto;
+    left: 6px;
+    content: "\201C";
+}
+
+.pull-quote blockquote {
+    padding-left: 0;
+    padding-right: 4.8rem;
+}
+
+/* stats tabs — border swap */
+.stats-tabs li {
+    margin: 0 0 3.2rem 1.6rem;
+    padding: 0 0 0 1.5rem;
+    border-right: none;
+    border-left: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.stats-tabs li:last-child {
+    border: none;
+}
+
+/* skill bars — label on the right */
+.skill-bars li strong {
+    left: auto;
+    right: 0;
+}
+
+/* skill bars progress span — percentage label on the left */
+.skill-bars li .progress span {
+    right: auto;
+    left: 0;
+}
+
+.skill-bars li .progress span::after {
+    left: auto;
+    right: 50%;
+    margin-left: 0;
+    margin-right: -5px;
+}
+
+/* pagination arrows swap */
+.pgn__prev {
+    background-image: url("../images/icons/icon-arrow-right.svg");
+    left: auto;
+    right: 0;
+}
+
+.pgn__next {
+    background-image: url("../images/icons/icon-arrow-left.svg");
+    right: auto;
+    left: 0;
+}
+
+/* ===================================================================
+ * # Header
+ * ------------------------------------------------------------------- */
+
+/* Logo — move to right */
+.header-logo {
+    left: auto;
+    right: 4.8rem;
+}
+
+/* Nav list — margin swap */
+.header-nav-wrap .header-main-nav {
+    margin: 0 4px 0 0;
+}
+
+.header-nav-wrap .header-main-nav li {
+    margin-right: 0;
+    margin-left: 1.5rem;
+}
+
+/* Social icons — move to left */
+.header-nav-wrap .header-social {
+    right: auto;
+    left: 4rem;
+}
+
+.header-nav-wrap .header-social li {
+    margin-right: 0;
+    margin-left: 4px;
+}
+
+.header-nav-wrap .header-social li:last-child {
+    margin-left: 0;
+}
+
+/* Hamburger toggle — move to left */
+.header-menu-toggle {
+    right: auto;
+    left: 32px;
+}
+
+/* Hamburger bar — center it */
+.header-menu-toggle span {
+    left: auto;
+    right: 9px;
+}
+
+/* Responsive header */
+@media only screen and (max-width: 1880px) {
+    .header-nav-wrap .header-main-nav {
+        padding-left: 0;
+        padding-right: 240px;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .header-nav-wrap .header-main-nav {
+        padding-left: 0;
+        padding-right: 230px;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .header-logo {
+        left: auto;
+        right: 40px;
+    }
+
+    .header-nav-wrap {
+        right: 0;
+        left: auto;
+    }
+
+    .header-nav-wrap .header-main-nav {
+        padding-right: 0;
+    }
+
+    .header-menu-toggle {
+        right: auto;
+        left: 32px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .header-logo {
+        left: auto;
+        right: 36px;
+    }
+}
+
+/* ===================================================================
+ * # Home
+ * ------------------------------------------------------------------- */
+
+/* Dark left bar — flip to right */
+.s-home::after {
+    left: auto;
+    right: 0;
+}
+
+/* Hero image — flip to left */
+.s-home .home-image-part {
+    right: auto;
+    left: 0;
+}
+
+/* Heading accent bar — flip to right */
+.home-content h1::before {
+    left: auto;
+    right: 8px;
+}
+
+/* Scroll indicator — flip to left */
+.home-scroll {
+    right: auto;
+    left: 40px;
+}
+
+.home-scroll__icon {
+    right: auto;
+    left: 0;
+}
+
+/* Video button — flip horizontally */
+.btn-video {
+    left: auto;
+    right: calc(50% + 200px - 45px);
+}
+
+/* Responsive home */
+@media only screen and (max-width: 1400px) {
+    .btn-video {
+        left: auto;
+        right: calc(50% + 150px - 45px);
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .btn-video {
+        left: auto;
+        right: calc(50% + 100px - 40px);
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .btn-video {
+        left: auto;
+        right: calc(50% + 80px - 40px);
+    }
+
+    .home-scroll {
+        right: auto;
+        left: 3rem;
+    }
+}
+
+@media only screen and (max-width: 900px) {
+    .btn-video {
+        left: auto;
+        right: calc(50% + 40px - 40px);
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .btn-video {
+        left: auto;
+        right: calc(50% + 80px - 40px);
+    }
+}
+
+/* ===================================================================
+ * # Process
+ * ------------------------------------------------------------------- */
+
+/* Step numbers — flip to right */
+.process h3 {
+    padding-left: 0;
+    padding-right: 6.4rem;
+}
+
+.process h3::before {
+    left: auto;
+    right: 0;
+}
+
+/* ===================================================================
+ * # Features
+ * ------------------------------------------------------------------- */
+
+.item-feature:nth-child(2n + 1) {
+    padding-right: 0;
+    padding-left: 50px;
+}
+
+.item-feature:nth-child(2n + 2) {
+    padding-left: 0;
+    padding-right: 50px;
+}
+
+.item-feature__text {
+    margin-left: 0;
+    margin-right: 7.2rem;
+}
+
+.item-feature__icon {
+    float: right;
+}
+
+@media only screen and (max-width: 1200px) {
+    .features .item-feature:nth-child(2n + 1) {
+        padding-right: 0;
+        padding-left: 30px;
+    }
+
+    .features .item-feature:nth-child(2n + 2) {
+        padding-left: 0;
+        padding-right: 30px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .features .item-feature:nth-child(2n + 1) {
+        padding-right: 0;
+        padding-left: 20px;
+    }
+
+    .features .item-feature:nth-child(2n + 2) {
+        padding-left: 0;
+        padding-right: 20px;
+    }
+
+    .item-feature__text {
+        margin-right: 0;
+    }
+
+    .item-feature__icon {
+        float: none;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .features .item-feature:nth-child(n) {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .features .item-feature:nth-child(n) {
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .features .item-feature:nth-child(n) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+/* ===================================================================
+ * # Download
+ * ------------------------------------------------------------------- */
+
+/* Download phone image — flip to right */
+.s-download .download-content__image {
+    left: auto;
+    right: 20px;
+}
+
+/* ===================================================================
+ * # Footer
+ * ------------------------------------------------------------------- */
+
+/* Footer top column padding — swap */
+.footer__top [class*="col-"]:first-child {
+    padding-right: 0;
+    padding-left: 60px;
+}
+
+/* Footer social */
+.footer__social li {
+    margin-right: 0;
+    margin-left: 4px;
+}
+
+.footer__social li:last-child {
+    margin-left: 0;
+}
+
+/* Footer site links */
+.footer__site-links {
+    margin: 0 -1.5rem 0 0;
+}
+
+/* Go-to-top button — flip to left */
+.go-top {
+    right: auto;
+    left: 40px;
+}
+
+/* Copyright separator */
+.cl-copyright span::after {
+    padding: 0 1.2rem 0 1rem; /* swap padding sides */
+}
+
+@media only screen and (max-width: 1200px) {
+    .footer__top [class*="col-"]:first-child {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .go-top {
+        right: auto;
+        left: 3rem;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .footer__top [class*="col-"]:first-child {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* ===================================================================
+ * # Blog — single nav
+ * ------------------------------------------------------------------- */
+
+.blog-single-nav-wrap::before {
+    left: auto;
+    right: 50%;
+}
+
+.blog-single-nav__prev {
+    float: right;
+    padding: 0 20px 0 60px;
+}
+
+.blog-single-nav__next {
+    float: left;
+    padding: 0 60px 0 20px;
+}
+
+@media only screen and (max-width: 800px) {
+    .blog-single-nav__prev,
+    .blog-single-nav__next {
+        float: none;
+        padding: 0;
+    }
+}
+
+/* ===================================================================
+ * # Blog — entries
+ * ------------------------------------------------------------------- */
+
+.entries .col-block {
+    float: right;
+}
+
+/* ===================================================================
+ * # Blog — content
+ * ------------------------------------------------------------------- */
+
+.blog-content__main {
+    padding-left: 6.4rem;
+    padding-right: 6.4rem;
+}
+
+.blog-content__main img {
+    margin: 3.2rem -6.4rem 3.2rem 0;
+}
+
+@media only screen and (max-width: 1200px) {
+    .blog-content__main img {
+        margin: 3.2rem -6rem 3.2rem 0;
+    }
+}
+
+@media only screen and (max-width: 1040px) {
+    .blog-content__main img {
+        margin: 3.2rem -4.8rem 3.2rem 0;
+    }
+}
+
+@media only screen and (max-width: 940px) {
+    .blog-content__main img {
+        margin: 3.2rem 0 3.2rem;
+    }
+}
+
+/* ===================================================================
+ * # Comments
+ * ------------------------------------------------------------------- */
+
+.commentlist > .comment {
+    padding-left: 0;
+    padding-right: 14%;
+}
+
+.comment__avatar {
+    left: auto;
+    right: 0;
+}
+
+/* Comment meta — flip to left */
+.comment__meta {
+    text-align: left;
+    right: auto;
+    left: 0;
+}
+
+.comment__text {
+    padding: 0 0 0 175px;
+}
+
+.comment ul.children li {
+    border-left: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+    padding-left: 0;
+    padding-right: 5%;
+}
+
+@media only screen and (max-width: 1000px) {
+    .comment__meta {
+        text-align: right; /* restore natural RTL alignment */
+    }
+
+    .comment__meta .comment__time {
+        margin-right: 0;
+        margin-left: 12px;
+    }
+
+    .comment__text {
+        padding: 0;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .commentlist > .comment {
+        padding-right: 0;
+    }
+
+    .comment ul.children li {
+        border-right: none;
+    }
+}
+
+/* ===================================================================
+ * # Page header / search overlay
+ * ------------------------------------------------------------------- */
+
+.page-header__meta::before {
+    left: auto;
+    right: 50%;
+    margin-left: 0;
+    margin-right: -50px;
+}
+
+a.page-header__search-trigger span {
+    margin-left: 0;
+    margin-right: 0.4rem;
+}
+.home-scroll__text {
+    display: inline-block;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    line-height: 5.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    color: #000000;
+    border-bottom: 1px solid transparent;
+    -webkit-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    right: 13rem;
+    -webkit-transform: rotate(90deg) translate3d(-8rem, 0, 0);
+    -ms-transform: rotate(90deg) translate3d(-8rem, 0, 0);
+    transform: rotate(90deg) translate3d(-8rem, 0, 0);
+    -webkit-transform-origin: right bottom;
+    -ms-transform-origin: right bottom;
+    transform-origin: right bottom;
+}

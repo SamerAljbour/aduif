@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="{{ app()->getLocale() }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}">
 <head>
 
     <!--- basic page needs
     ================================================== -->
     <meta charset="utf-8">
-    <title>Standout</title>
+    <title>Aduif</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="{{ asset('user/css/base.css') }}">
     <link rel="stylesheet" href="{{ asset('user/css/vendor.css') }}">
     <link rel="stylesheet" href="{{ asset('user/css/main.css') }}">
-
+    @if(app()->getLocale() === 'ar')
+        <link rel="stylesheet" href="{{ asset('user/css/rtl.css') }}">
+    @endif
     <!-- script
     ================================================== -->
     <script src="{{ asset('user/js/modernizr.js') }}"></script>
