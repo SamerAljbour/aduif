@@ -1,6 +1,8 @@
 @extends('userLayouts.app')
 
 @section('content')
+{{-- {{ app()->getLocale() }} --}}
+
 <!-- home
     ================================================== -->
     <section id="home" class="s-home target-section">
@@ -41,6 +43,111 @@
     </section> <!-- end s-home -->
 
 
+    <!-- About us
+    ================================================== -->
+    <section id="download" class="s-download">
+
+        <div class="row download-content">
+            <div class="col-six md-seven download-content__text pull-right" data-aos="fade-up">
+                <h1 class="display-2">
+                    {{ __('home-page.about-us.title') }}
+                </h1>
+                <p>
+                  {{ __('home-page.about-us.description') }}
+                </p>
+                {{-- <ul class="download-content__badges">
+                    <li><a href="#0" title="" class="badge-appstore">App Store</a></li>
+                    <li><a href="#0" title="" class="badge-googleplay">Play Store</a></li>
+                </ul> --}}
+            </div>
+            <div class="download-content__image" data-aos="fade-up">
+                <img src="images/phone-app-profile-550.png"
+                     srcset="images/phone-app-profile-550.png 1x, images/phone-app-profile-1100.png 2x">
+            </div>
+        </div>
+
+    </section> <!-- end about us -->
+
+        <!-- process
+    ================================================== -->
+   <!-- process / mission
+================================================== -->
+<section id="process" class="s-process">
+
+    <div class="row">
+        <div class="col-full text-center" data-aos="fade-up">
+            {{-- <span class="mission-eyebrow">{{ __('home-page.mission.eyebrow') }}</span> --}}
+            <h2 class="display-2">{{ __('home-page.mission.eyebrow') }}</h2>
+            <div class="mission-divider"></div>
+        </div>
+    </div>
+
+    <div class="row mission-grid" data-aos="fade-up">
+
+        <div class="col-block mission-card">
+            <div class="mission-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+            </div>
+            <span class="mission-card__num">{{ __('home-page.mission.items.0.number') }}</span>
+            <h3>{{ __('home-page.mission.items.0.title') }}</h3>
+            <p>{{ __('home-page.mission.items.0.description') }}</p>
+        </div>
+
+        <div class="col-block mission-card">
+            <div class="mission-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                </svg>
+            </div>
+            <span class="mission-card__num">{{ __('home-page.mission.items.1.number') }}</span>
+            <h3>{{ __('home-page.mission.items.1.title') }}</h3>
+            <p>{{ __('home-page.mission.items.1.description') }}</p>
+        </div>
+
+        <div class="col-block mission-card">
+            <div class="mission-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+            </div>
+            <span class="mission-card__num">{{ __('home-page.mission.items.2.number') }}</span>
+            <h3>{{ __('home-page.mission.items.2.title') }}</h3>
+            <p>{{ __('home-page.mission.items.2.description') }}</p>
+        </div>
+
+        <div class="col-block mission-card">
+            <div class="mission-card__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+            </div>
+            <span class="mission-card__num">{{ __('home-page.mission.items.3.number') }}</span>
+            <h3>{{ __('home-page.mission.items.3.title') }}</h3>
+            <p>{{ __('home-page.mission.items.3.description') }}</p>
+        </div>
+
+    </div>
+
+    <div class="row process-bottom-image" data-aos="fade-up">
+        <img src="images/phone-app-screens-1000.png"
+             srcset="images/phone-app-screens-600.png 600w,
+                     images/phone-app-screens-1000.png 1000w,
+                     images/phone-app-screens-2000.png 2000w"
+             sizes="(max-width: 2000px) 100vw, 2000px"
+             alt="App Screenshots">
+    </div>
+
+</section> <!-- end s-process -->
     <!-- about
     ================================================== -->
     <section id="about" class="s-about target-section">
@@ -48,17 +155,17 @@
         <div class="row section-header narrower align-center" data-aos="fade-up">
             <div class="col-full">
                 <h1 class="display-1">
-                    The Most Popular And Number 1 Mail App.
+                    {{ __('home-page.vision.title') }}
                 </h1>
+                            <div class="mission-divider" style="background-color: #fff; margin-bottom: 3rem;"></div>
+
                 <p class="lead">
-                    Et nihil atque ex. Reiciendis et rerum ut voluptate. Omnis molestiae nemo est.
-                    Ut quis enim rerum quia assumenda repudiandae non cumque qui. Amet repellat
-                    omnis ea.
+                    {{ __('home-page.vision.description') }}
                 </p>
             </div>
         </div> <!-- end section-header -->
 
-        <div class="row about-desc" data-aos="fade-up">
+        {{-- <div class="row about-desc" data-aos="fade-up">
             <div class="col-full slick-slider about-desc__slider">
 
                 <div class="about-desc__slide">
@@ -102,7 +209,7 @@
                 </div>  <!-- end about-desc__slide -->
 
             </div> <!-- end about-desc__slider -->
-        </div> <!-- end about-desc -->
+        </div> <!-- end about-desc --> --}}
 
         <div class="row about-bottom-image" data-aos="fade-up">
             <img src="images/app-screen-1400.png"
@@ -116,65 +223,7 @@
     </section> <!-- end s-about -->
 
 
-    <!-- process
-    ================================================== -->
-    <section id="process" class="s-process">
 
-        <div class="row">
-            <div class="col-full text-center" data-aos="fade-up">
-                <h2 class="display-2">How The App Works?</h2>
-            </div>
-        </div>
-
-        <div class="row process block-1-4 block-m-1-2 block-tab-full">
-            <div class="col-block item-process" data-aos="fade-up">
-                <div class="item-process__text">
-                    <h3>Sign Up</h3>
-                    <p>
-                    Quos dolores saepe mollitia deserunt accusamus autem reprehenderit. Voluptas facere animi explicabo non quis magni recusandae.
-                    Numquam debitis pariatur omnis facere unde.
-                    </p>
-                </div>
-            </div>
-            <div class="col-block item-process" data-aos="fade-up">
-                <div class="item-process__text">
-                    <h3>Create</h3>
-                    <p>
-                    Quos dolores saepe mollitia deserunt accusamus autem reprehenderit. Voluptas facere animi explicabo non quis magni recusandae.
-                    Numquam debitis pariatur omnis facere unde.
-                    </p>
-                </div>
-            </div>
-            <div class="col-block item-process" data-aos="fade-up">
-                <div class="item-process__text">
-                    <h3>Compose</h3>
-                    <p>
-                    Quos dolores saepe mollitia deserunt accusamus autem reprehenderit. Voluptas facere animi explicabo non quis magni recusandae.
-                    Numquam debitis pariatur omnis facere unde.
-                    </p>
-                </div>
-            </div>
-            <div class="col-block item-process" data-aos="fade-up">
-                <div class="item-process__text">
-                    <h3>Send</h3>
-                    <p>
-                    Quos dolores saepe mollitia deserunt accusamus autem reprehenderit. Voluptas facere animi explicabo non quis magni recusandae.
-                    Numquam debitis pariatur omnis facere unde.
-                    </p>
-                </div>
-            </div>
-        </div> <!-- end process -->
-
-        <div class="row process-bottom-image" data-aos="fade-up">
-            <img src="images/phone-app-screens-1000.png"
-                 srcset="images/phone-app-screens-600.png 600w,
-                         images/phone-app-screens-1000.png 1000w,
-                         images/phone-app-screens-2000.png 2000w"
-                 sizes="(max-width: 2000px) 100vw, 2000px"
-                 alt="App Screenshots">
-         </div>
-
-    </section> <!-- end s-process -->
 
 
     <!-- features
@@ -184,17 +233,18 @@
         <div class="row section-header narrower align-center has-bottom-sep" data-aos="fade-up">
             <div class="col-full">
                 <h1 class="display-1">
-                    Loaded With Features You Would Surely Love.
+                    {{ __('home-page.goals.title') }}
                 </h1>
+                            <div class="mission-divider" style=" margin-bottom: 3rem;"></div>
+
                 <p class="lead">
-                    Et nihil atque ex. Reiciendis et rerum ut voluptate. Omnis molestiae nemo est.
-                    Ut quis enim rerum quia assumenda repudiandae non cumque qui. Amet repellat
-                    omnis ea.
+                    {{ __('home-page.goals.description') }}
+                </p>
                 </p>
             </div>
         </div> <!-- end section-header -->
 
-        <div class="row bit-narrow features block-1-2 block-mob-full">
+        {{-- <div class="row bit-narrow features block-1-2 block-mob-full">
 
             <div class="col-block item-feature" data-aos="fade-up">
                 <div class="item-feature__icon">
@@ -274,7 +324,7 @@
                 </div>
             </div>
 
-        </div> <!-- end features -->
+        </div> <!-- end features --> --}}
 
         <div class="testimonials-wrap" data-aos="fade-up">
 
@@ -329,7 +379,7 @@
 
     <!-- pricing
     ================================================== -->
-    <section id="pricing" class="s-pricing target-section">
+    {{-- <section id="pricing" class="s-pricing target-section">
 
         <div class="row section-header narrower align-center" data-aos="fade-up">
             <div class="col-full">
@@ -416,34 +466,7 @@
 
         </div> <!-- end plans -->
 
-    </section> <!-- end s-pricing -->
+    </section> <!-- end s-pricing --> --}}
 
 
-    <!-- download
-    ================================================== -->
-    <section id="download" class="s-download">
-
-        <div class="row download-content">
-            <div class="col-six md-seven download-content__text pull-right" data-aos="fade-up">
-                <h1 class="display-2">
-                    Download The App Now!
-                </h1>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
-                <ul class="download-content__badges">
-                    <li><a href="#0" title="" class="badge-appstore">App Store</a></li>
-                    <li><a href="#0" title="" class="badge-googleplay">Play Store</a></li>
-                </ul>
-            </div>
-            <div class="download-content__image" data-aos="fade-up">
-                <img src="images/phone-app-profile-550.png"
-                     srcset="images/phone-app-profile-550.png 1x, images/phone-app-profile-1100.png 2x">
-            </div>
-        </div>
-
-    </section> <!-- end s-download -->
 @endsection

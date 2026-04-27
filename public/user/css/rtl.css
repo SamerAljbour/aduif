@@ -696,3 +696,106 @@ a.page-header__search-trigger span {
     -ms-transform-origin: right bottom;
     transform-origin: right bottom;
 }
+/* about */
+.mission-eyebrow {
+    display: block;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #00a650;
+    margin-bottom: 0.8rem;
+}
+
+.mission-divider {
+    width: 48px;
+    height: 3px;
+    background: #00a650;
+    margin: 1.6rem auto 0;
+    border-radius: 2px;
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.4rem;
+    margin-top: 4rem;
+}
+
+.mission-card {
+    border: 1.5px solid #e6f9ee;
+    border-radius: 14px;
+    padding: 3rem 2.8rem;
+    position: relative;
+    overflow: hidden;
+    direction: rtl;
+    text-align: right;
+}
+
+.mission-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0; /* ← moved from left to right */
+    left: auto;
+    width: 4px;
+    height: 100%;
+    background: #00a650;
+    border-radius: 0 4px 4px 0; /* ← flipped radius */
+}
+
+.mission-card__icon {
+    width: 52px;
+    height: 52px;
+    background: #e6f9ee;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.6rem;
+    margin-right: 0;
+    margin-left: auto; /* pushes icon to the right */
+    color: #00a650;
+}
+
+.mission-card__icon svg {
+    width: 24px !important;
+    height: 24px !important;
+    flex-shrink: 0;
+}
+
+.mission-card__num {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em; /* reduced — Arabic doesn't need wide tracking */
+    text-transform: uppercase;
+    color: #00a650;
+    margin-bottom: 0.6rem;
+    font-family: "IBM Plex Sans", sans-serif;
+}
+
+.mission-card h3 {
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    margin-top: 1rem;
+}
+
+.mission-card h3::before {
+    display: none;
+}
+
+.mission-card p {
+    color: #555;
+    font-size: 1.5rem;
+    line-height: 1.9; /* slightly more for Arabic readability */
+    margin: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .mission-grid {
+        grid-template-columns: 1fr;
+    }
+}
