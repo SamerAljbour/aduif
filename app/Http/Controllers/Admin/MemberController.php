@@ -18,6 +18,13 @@ class MemberController extends Controller
         return view('dashboard.members.index', compact('members'));
     }
 
+    // show the members to the public
+    public function showMembers()
+    {
+        $members = Member::with(['translations'])->latest()->paginate(12);
+        // dd($members);
+        return view('members', compact('members'));
+    }
     /**
      * Show the form for creating a new resource.
      */

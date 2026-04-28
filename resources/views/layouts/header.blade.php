@@ -14,9 +14,13 @@
                 <li><a class="smoothscroll" href="#about" title="about">About</a></li>
                 <li><a class="smoothscroll" href="#features" title="features">Features</a></li>
                 <li><a class="smoothscroll" href="#pricing" title="pricing">Pricing</a></li>
-                <li><a href="blog.html" title="blog">Blog</a></li>
+                <li><a class="smoothscroll" href="{{ route('managements.showManagers') }}" title="managers">Managers</a></li>
+                <li><a href="{{ route('members.showMembers') }}" title="Members">Members</a></li>
                 <li>
-                    <a href="{{ route('dashboard.index') }}" title="blog">Login</a>
+                    <a href="{{ route('register') }}" title="register">Register</a>
+                </li>
+                <li>
+                    <a href="{{ route('login') }}" title="blog">Login</a>
                 </li>
        </ul>
 

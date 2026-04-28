@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Management;
 use App\Http\Requests\ManagementRequest;
+use Illuminate\Support\Collection;
 
 class ManagementController extends Controller
 {
@@ -107,5 +108,25 @@ class ManagementController extends Controller
 
         return redirect()->route('managements.index')
             ->with('success', 'Deleted successfully');
+    }
+    public function showManagement()
+    {
+        $tree = Management::whereNull('parent_id')
+            ->with('allChildren.translations', 'translations')
+            ->orderBy('order')
+            ->where('type', 'current')
+            ->get();
+
+        return view('management.index', compact('tree'));
+    }
+
+    /** Flatten the entire tree into a single collection */
+    public static function flattenTree(Collection $nodes): Collection
+    {
+        return $nodes->flatMap(function ($node) {
+            return collect([$node])->merge(
+                self::flattenTree($node->allChildren)
+            );
+        });
     }
 }

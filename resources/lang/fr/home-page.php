@@ -9,7 +9,7 @@ return [
         'title' => "notre vision ",
         'description' => "Construire une communauté dynamique de diplômés des universités et instituts français en Jordanie qui collaborent pour un bénéfice mutuel et un avancement commun et promouvoir excellence académique et professionnelle de ses membres tout en renforçant les liens entre la France et la Jordanie",
     ],
-    'Goals' => [
+    'goals' => [
         'title' => "notre objectif ",
         'description' => "L'association vise à créer une plateforme de communication et de mise en réseau pour ses membres en organisant des événements culturels. Elle a également pour objectif de collaborer avec des établissements d'enseignement et des entreprises afin d'établir des partenariats bénéfiques pour les diplômés. De surcroît, elle cherche à encourager la participation aux initiatives sociales et communautaires pour contribuer au développement de la société jordanienne, tout en renforçant le principe de l’interculturalité dans le but de respecter et de préserver les identités culturelles",
     ],

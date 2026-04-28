@@ -10,22 +10,25 @@ class Localization
 {
     public function handle($request, Closure $next)
     {
-        // ✅ Allowed languages
         $allowed = ['fr', 'ar'];
 
-        // 1️⃣ Get from URL parameter: ?lang=fr
         $localeFromParam = $request->query('lang');
 
         if (in_array($localeFromParam, $allowed)) {
-            // Save to session if valid
+            // Valid → save & use it
             Session::put('locale', $localeFromParam);
             $locale = $localeFromParam;
         } else {
-            // 2️⃣ Fallback to session OR default (fr)
-            $locale = Session::get('locale', config('app.locale'));
+            // ❗ Invalid (like en, es, null, etc.)
+            // Always fallback to FR
+            $locale = Session::get('locale');
+
+            if (!in_array($locale, $allowed)) {
+                $locale = 'fr';
+                Session::put('locale', 'fr'); // optional but recommended
+            }
         }
 
-        // 3️⃣ Apply language
         App::setLocale($locale);
 
         return $next($request);

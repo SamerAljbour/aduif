@@ -44,6 +44,10 @@ Route::middleware(['locale'])->group(function () {
     Route::get('/', function () {
         return view('welcome');
     });
+    Route::get('members', [MemberController::class, 'showMembers'])
+        ->name('members.showMembers');
+    Route::get('managers', [ManagementController::class, 'showManagement'])
+        ->name('managements.showManagers');
 
     // Route::get('/about', function () {
     //     return view('about');

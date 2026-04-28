@@ -6,9 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('managements', function (Blueprint $table) {
@@ -17,7 +14,6 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('email')->nullable();
 
-            // ✅ controlled positions
             $table->enum('position', [
                 'president',
                 'vice_president',
@@ -26,17 +22,23 @@ return new class extends Migration
                 'board_member'
             ]);
 
+            // Hierarchy: self-referencing parent
+            $table->foreignId('parent_id')
+                ->nullable()
+                ->constrained('managements')
+                ->onDelete('set null');
+
+            // Order among siblings
+            $table->integer('order')->default(0);
+
             $table->enum('type', ['current', 'former', 'honorary']);
 
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        Schema::dropIfExists('management');
+        Schema::dropIfExists('managements');
     }
 };
