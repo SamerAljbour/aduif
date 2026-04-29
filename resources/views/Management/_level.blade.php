@@ -53,7 +53,7 @@
                 @php
                     $locale      = app()->getLocale();
                     $translation = $member->translations->firstWhere('locale', $locale)
-                                ?? $member->translations->firstWhere('locale', 'fr');
+                                ?? $member->translations->firstWhere('locale', 'en');
                     $name  = $translation?->name ?? '—';
                     $bio   = $translation?->bio   ?? '';
                     $photo = $member->photo ? asset('storage/'.$member->photo) : null;
@@ -69,6 +69,8 @@
                     <div class="org-card card--{{ $position }}"
                          data-id="{{ $member->id }}"
                          data-position="{{ $position }}"
+                         data-name="{{ $name }}"
+                         data-photo="{{ $photo ?? '' }}"
                          data-email="{{ $member->email }}"
                          data-bio="{{ $bio }}"
                          data-badge="{{ $label }}"

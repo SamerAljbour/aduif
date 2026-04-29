@@ -46,6 +46,12 @@ Route::middleware(['locale'])->group(function () {
     });
     Route::get('members', [MemberController::class, 'showMembers'])
         ->name('members.showMembers');
+    // Route::get('new-and-memories', [PostController::class, 'newsAndMemories'])
+    //     ->name('posts.newsAndMemories');
+    Route::get('posts', [PostController::class, 'posts'])
+        ->name('posts.allPosts');
+    Route::get('/post/{id}', [PostController::class, 'showPost'])
+        ->name('post.singlePost');
     Route::get('managers', [ManagementController::class, 'showManagement'])
         ->name('managements.showManagers');
 

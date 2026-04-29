@@ -11,7 +11,10 @@ class ManagementController extends Controller
 {
     public function index()
     {
-        $managements = Management::with('translations')->latest()->get();
+        $managements = Management::with('translations')
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
 
         return view('dashboard.management.index', compact('managements'));
     }

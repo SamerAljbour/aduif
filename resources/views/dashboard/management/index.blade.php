@@ -149,6 +149,12 @@
             <p id="mgmtNoResults" class="mgmt-empty" style="display:none;">No managers match your search.</p>
         </div>
 
+        @if($managements->hasPages())
+            <div class="mgmt-pagination">
+                {{ $managements->onEachSide(1)->links('pagination::bootstrap-5') }}
+            </div>
+        @endif
+
     </div>
 
 </div>

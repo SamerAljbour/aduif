@@ -68,8 +68,7 @@
     transform: translateX(-50%);
     height: 2px;
     background: var(--connector);
-    /* width: calc(100% - 218px); leave margin equal to half a card */
-    width: calc(100% - 124px);
+    width: calc(100% - 124px); /* leave margin equal to half a card */
     min-width: 2px;
 }
 /* single child — no horizontal bar needed */
@@ -158,48 +157,175 @@
 
 /* ─── MODAL ──────────────────────────────────────────────── */
 .mgmt-overlay {
-    display:none; position:fixed; inset:0;
-    background:rgba(10,20,55,.52);
-    backdrop-filter:blur(6px);
-    -webkit-backdrop-filter:blur(6px);
-    z-index:9999;
-    align-items:center; justify-content:center;
-    padding:20px;
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(10,20,55,.55);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
 }
-.mgmt-overlay.open { display:flex; }
+.mgmt-overlay.open { display: flex; }
+
 .mgmt-modal {
-    background:#fff; border-radius:24px;
-    padding:40px 36px 32px;
-    max-width:500px; width:100%;
-    position:relative;
-    box-shadow:0 24px 80px rgba(0,0,0,.22);
-    animation:modalPop .22s ease;
-    direction:rtl; max-height:88vh; overflow-y:auto;
+    background: #fff;
+    border-radius: 28px;
+    width: 100%;
+    max-width: 680px;          /* ← was 500px */
+    position: relative;
+    box-shadow: 0 32px 100px rgba(0,0,0,.26);
+    animation: modalPop .24s cubic-bezier(.34,1.56,.64,1);
+    direction: rtl;
+    max-height: 90vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
+
 @keyframes modalPop {
-    from { opacity:0; transform:translateY(24px) scale(.96); }
+    from { opacity:0; transform:translateY(32px) scale(.93); }
     to   { opacity:1; transform:none; }
 }
+
+/* ── Modal header band ── */
+.modal-header {
+    padding: 32px 40px 28px;
+    border-bottom: 1px solid #eef0f8;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-shrink: 0;
+}
+.modal-header-avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #dde3f0;
+    background: linear-gradient(135deg,#e4e8f4,#c8d0e8);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; color: var(--text-muted);
+    flex-shrink: 0;
+}
+.modal-header-info { flex: 1; min-width: 0; }
+.modal-header-name {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    line-height: 1.25;
+    margin-bottom: 10px;
+}
+.modal-pos-badge {
+    display: inline-block;
+    font-size: .85rem;
+    font-weight: 700;
+    padding: 6px 20px;
+    border-radius: 30px;
+    letter-spacing: .2px;
+}
+
+/* ── Modal close button ── */
 .mgmt-modal-close {
-    position:absolute; top:16px; left:20px;
-    background:#f0f2f8; border:none;
-    width:32px; height:32px; border-radius:50%;
-    font-size:1.1rem; color:var(--text-muted);
-    cursor:pointer; display:flex; align-items:center; justify-content:center;
-    transition:background var(--tr),color var(--tr);
+    position: absolute;
+    top: 18px; left: 22px;
+    background: #f0f2f8; border: none;
+    width: 38px; height: 38px;
+    border-radius: 5%;
+    font-size: 1.2rem; color: var(--text-muted);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background var(--tr), color var(--tr), transform var(--tr);
+    z-index: 1;
 }
-.mgmt-modal-close:hover { background:#e0e4ef; color:var(--text-dark); }
-.modal-pos-badge { display:inline-block; font-size:.82rem; font-weight:700; padding:5px 18px; border-radius:30px; margin-bottom:20px; }
-.modal-label { font-size:.75rem; font-weight:700; color:var(--text-muted); text-transform:uppercase; letter-spacing:.6px; margin:20px 0 8px; }
-.modal-bio   { font-size:.93rem; color:var(--text-dark); line-height:1.75; background:#f6f7fb; border-radius:12px; padding:14px 16px; }
+.mgmt-modal-close:hover {
+    background: #e0e4ef;
+    color: var(--text-dark);
+    transform: rotate(90deg);
+}
+
+/* ── Modal body (scrollable) ── */
+.modal-body {
+    padding: 28px 40px 36px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-label {
+    font-size: 2.3rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin: 0 0 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.modal-label::before {
+    content: '';
+    display: inline-block;
+    width: 3px; height: 14px;
+    border-radius: 2px;
+    background: var(--gold);
+    flex-shrink: 0;
+}
+
+.modal-bio {
+    font-size: 1.27rem;       /* ← was .93rem */
+    color: var(--text-dark);
+    line-height: 1.85;
+    background: #f6f7fb;
+    border-radius: 14px;
+    padding: 20px 22px;       /* ← was 14px 16px */
+    margin-bottom: 28px;
+}
+
+.modal-email-wrap {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #eef4ff;
+    border-radius: 14px;
+    padding: 16px 20px;
+}
+.modal-email-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    background: var(--blue);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+}
+.modal-email-icon svg { color: #fff; }
+.modal-email-text { flex: 1; min-width: 0; }
+.modal-email-text small {
+    display: block;
+    font-size: 1.27rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 3px;
+}
 .modal-email {
-    display:inline-flex; align-items:center; gap:7px;
-    font-size:.9rem; color:var(--blue); text-decoration:none; font-weight:600;
-    padding:8px 14px; background:#eef4ff; border-radius:10px;
-    transition:background var(--tr);
+    display: block;
+    font-size: 1.4rem;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: color var(--tr);
 }
-.modal-email:hover { background:#dce9ff; }
-.modal-empty { color:var(--text-muted); font-size:.9rem; margin-top:8px; text-align:center; padding:16px 0; }
+.modal-email:hover { color: #2a5ca8; text-decoration: underline; }
+
+.modal-empty {
+    color: var(--text-muted);
+    font-size: 1rem;
+    text-align: center;
+    padding: 28px 0;
+}
 
 /* ─── Responsive ─────────────────────────────────────────── */
 @media(max-width:700px){
@@ -208,7 +334,12 @@
     .card-photo,.card-photo-ph { width:68px; height:68px; font-size:1.6rem; }
     .card--president .card-photo,.card--president .card-photo-ph { width:80px; height:80px; }
     .siblings-row { gap:12px; }
-    .mgmt-modal { padding:28px 18px 22px; }
+    .modal-header { padding:22px 20px 18px; gap:14px; }
+    .modal-header-avatar { width:60px; height:60px; font-size:1.5rem; }
+    .modal-header-name { font-size:1.1rem; }
+    .modal-body { padding:20px 20px 28px; }
+    .modal-bio { font-size:.93rem; padding:14px 16px; }
+    .mgmt-modal { max-width:100%; border-radius:20px; }
 }
 </style>
 
@@ -224,7 +355,8 @@
 <div class="mgmt-overlay" id="mgmtOverlay" role="dialog" aria-modal="true">
     <div class="mgmt-modal" id="mgmtModal" tabindex="-1">
         <button class="mgmt-modal-close" onclick="closeMgmtModal()" aria-label="إغلاق">✕</button>
-        <div id="mgmtModalBody"></div>
+        <div class="modal-header" id="mgmtModalHeader"></div>
+        <div class="modal-body" id="mgmtModalBody"></div>
     </div>
 </div>
 
@@ -232,6 +364,8 @@
 const mgmtMap = {};
 document.querySelectorAll('.org-card').forEach(c => {
     mgmtMap[c.dataset.id] = {
+        name:  c.dataset.name  || '',
+        photo: c.dataset.photo || '',
         email: c.dataset.email || '',
         bio:   c.dataset.bio   || '',
         badge: c.dataset.badge || '',
@@ -247,21 +381,67 @@ const badgeStyle = {
     board_member:   'background:linear-gradient(135deg,#4c7ec9,#80aaef);color:#fff',
 };
 
+const positionAccent = {
+    president:      '#c9a84c',
+    vice_president: '#6b7a99',
+    secretary:      '#a0714f',
+    treasurer:      '#7a4e2a',
+    board_member:   '#4c7ec9',
+};
+
 function openMgmtModal(id) {
     const m = mgmtMap[id];
     if (!m) return;
-    let html = `<span class="modal-pos-badge" style="${badgeStyle[m.pos]||''}">${m.badge}</span>`;
-    if (m.bio)   html += `<div class="modal-label">نبذة</div><div class="modal-bio">${m.bio}</div>`;
-    if (m.email) html += `<div class="modal-label">البريد الإلكتروني</div>
-        <a class="modal-email" href="mailto:${m.email}">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
-          </svg>${m.email}</a>`;
-    if (!m.bio && !m.email) html += `<p class="modal-empty">لا توجد تفاصيل إضافية.</p>`;
-    document.getElementById('mgmtModalBody').innerHTML = html;
+
+    // ── Header ──────────────────────────────────────────────
+    const avatarHtml = m.photo
+        ? `<img class="modal-header-avatar" src="${m.photo}" alt="${m.name}">`
+        : `<div class="modal-header-avatar" style="border-color:${positionAccent[m.pos]||'#dde3f0'}">👤</div>`;
+
+    document.getElementById('mgmtModalHeader').innerHTML = `
+        ${avatarHtml}
+        <div class="modal-header-info">
+            <div class="modal-header-name">${m.name}</div>
+            <span class="modal-pos-badge" style="${badgeStyle[m.pos]||''}">${m.badge}</span>
+        </div>
+    `;
+
+    // ── Body ────────────────────────────────────────────────
+    let body = '';
+
+    if (m.bio) {
+        body += `
+            <div class="modal-label">نبذة</div>
+            <div class="modal-bio">${m.bio}</div>
+        `;
+    }
+
+    if (m.email) {
+        body += `
+            <div class="modal-label">التواصل</div>
+            <div class="modal-email-wrap">
+                <div class="modal-email-icon">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/>
+                    </svg>
+                </div>
+                <div class="modal-email-text">
+                    <small>البريد الإلكتروني</small>
+                    <a class="modal-email" href="mailto:${m.email}">${m.email}</a>
+                </div>
+            </div>
+        `;
+    }
+
+    if (!m.bio && !m.email) {
+        body = `<p class="modal-empty">لا توجد تفاصيل إضافية.</p>`;
+    }
+
+    document.getElementById('mgmtModalBody').innerHTML = body;
     document.getElementById('mgmtOverlay').classList.add('open');
     document.getElementById('mgmtModal').focus();
 }
+
 function closeMgmtModal() {
     document.getElementById('mgmtOverlay').classList.remove('open');
 }

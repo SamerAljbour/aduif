@@ -114,4 +114,38 @@ class PostController extends Controller
         return redirect()->route('posts.index')
             ->with('success', 'Post deleted successfully');
     }
+    public function posts()
+    {
+        $news = Post::with('translation')
+            ->where('type', 'news')
+            ->latest()
+            ->get();
+
+        $memories = Post::with('translation')
+            ->where('type', 'memory')
+            ->latest()
+            ->get();
+
+        return view('posts.allPosts', compact('news', 'memories'));
+    }
+    public function showPost($id)
+    {
+        $post = Post::with('translations')->findOrFail($id);
+
+        // 🔥 PREVIOUS (same type only)
+        $prev = Post::with('translations')
+            ->where('type', $post->type)
+            ->where('id', '<', $post->id)
+            ->latest('id')
+            ->first();
+
+        // 🔥 NEXT (same type only)
+        $next = Post::with('translations')
+            ->where('type', $post->type)
+            ->where('id', '>', $post->id)
+            ->oldest('id')
+            ->first();
+
+        return view('posts.singlePost', compact('post', 'prev', 'next'));
+    }
 }

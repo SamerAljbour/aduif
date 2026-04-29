@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+    protected $casts = [
+        'event_date' => 'date',
+    ];
     protected $fillable = [
         'event_date',
         'image',
@@ -19,9 +22,12 @@ class Post extends Model
     }
 
     // 🔥 helper: get translation by locale
-    public function translation($locale)
+    public function translation($locale = null)
     {
-        return $this->hasMany(PostTranslation::class)->where('locale', $locale);
+        $locale = $locale ?? app()->getLocale();
+
+        return $this->hasOne(PostTranslation::class)
+            ->where('locale', $locale);
     }
 
     // 🔥 shortcut accessors (optional but useful)
