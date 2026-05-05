@@ -102,6 +102,7 @@ return [
 
     'validation' => [
         'fix_errors' => 'يرجى تصحيح الأخطاء التالية:',
+        'required' => 'هذا الحقل مطلوب',
         'name_fr_required' => 'الاسم بالفرنسية مطلوب',
         'name_ar_required' => 'الاسم بالعربية مطلوب',
         'email_required' => 'البريد الإلكتروني الصحيح مطلوب',

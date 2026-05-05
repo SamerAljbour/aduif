@@ -124,7 +124,10 @@ letter-spacing: 0.2rem;
 .jr-field .error-msg { font-size: 12px; color: var(--danger); display: none; }
 .jr-field.has-error .error-msg { display: block; }
 .jr-field.has-error input,
-.jr-field.has-error select { border-color: var(--danger); }
+.jr-field.has-error select,
+.jr-field.has-error textarea,
+.jr-field.has-error .jr-upload-zone,
+.jr-field.has-error .jr-multi-zone { border-color: var(--danger); }
 .jr-field select {
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
@@ -353,7 +356,7 @@ letter-spacing: 0.2rem;
                                    placeholder="{{ __('joinUs.placeholders.name_fr') }}"
                                    data-required="true" />
                             <span class="error-msg">
-                                @error('name_fr') {{ $message }} @enderror
+                                @error('name_fr') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror
                             </span>
                         </div>
                         <div class="jr-field @error('name_ar') has-error @enderror">
@@ -363,7 +366,7 @@ letter-spacing: 0.2rem;
                                    placeholder="{{ __('joinUs.placeholders.name_ar') }}"
                                    data-required="true" />
                             <span class="error-msg">
-                                @error('name_ar') {{ $message }} @enderror
+                                @error('name_ar') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror
                             </span>
                         </div>
                     </div>
@@ -376,15 +379,16 @@ letter-spacing: 0.2rem;
                                    placeholder="{{ __('joinUs.placeholders.email') }}"
                                    data-required="true" />
                             <span class="error-msg">
-                                @error('email') {{ $message }} @enderror
+                                @error('email') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror
                             </span>
                         </div>
                         <div class="jr-field @error('phone') has-error @enderror">
-                            <label for="phone">{{ __('joinUs.fields.phone') }}</label>
+                            <label for="phone">{{ __('joinUs.fields.phone') }} <span class="req">*</span></label>
                             <input type="tel" id="phone" name="phone"
                                    value="{{ old('phone') }}"
-                                   placeholder="{{ __('joinUs.placeholders.phone') }}" />
-                            @error('phone')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                                   placeholder="{{ __('joinUs.placeholders.phone') }}"
+                                   data-required="true" />
+                            <span class="error-msg">@error('phone') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
                     </div>
 
@@ -429,24 +433,45 @@ letter-spacing: 0.2rem;
                 <div style="display:flex;flex-direction:column;gap:1rem;">
                     <div class="jr-grid">
                         <div class="jr-field @error('specialization_fr') has-error @enderror">
-                            <label for="specialization_fr">{{ __('joinUs.fields.specialization_fr') }}</label>
+                            <label for="specialization_fr">{{ __('joinUs.fields.specialization_fr') }} <span class="req">*</span></label>
                             <input type="text" id="specialization_fr" name="specialization_fr"
                                    value="{{ old('specialization_fr') }}"
-                                   placeholder="{{ __('joinUs.placeholders.specialization_fr') }}" />
-                            @error('specialization_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                                   placeholder="{{ __('joinUs.placeholders.specialization_fr') }}"
+                                   data-required="true" />
+                            <span class="error-msg">@error('specialization_fr') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
                         <div class="jr-field @error('specialization_ar') has-error @enderror">
-                            <label for="specialization_ar">{{ __('joinUs.fields.specialization_ar') }}</label>
+                            <label for="specialization_ar">{{ __('joinUs.fields.specialization_ar') }} <span class="req">*</span></label>
                             <input type="text" id="specialization_ar" name="specialization_ar"
                                    value="{{ old('specialization_ar') }}"
-                                   placeholder="{{ __('joinUs.placeholders.specialization_ar') }}" />
-                            @error('specialization_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                                   placeholder="{{ __('joinUs.placeholders.specialization_ar') }}"
+                                   data-required="true" />
+                            <span class="error-msg">@error('specialization_ar') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
                     </div>
                     <div class="jr-grid">
-                        <div class="jr-field @error('degree') has-error @enderror">
-                            <label for="degree">{{ __('joinUs.fields.degree') }}</label>
-                            <select id="degree" name="degree">
+
+                        <div class="jr-field @error('graduation_university_fr') has-error @enderror">
+                            <label for="graduation_university_fr">{{ __('joinUs.fields.university_fr') }} <span class="req">*</span></label>
+                            <input type="text" id="graduation_university_fr" name="graduation_university_fr"
+                                   value="{{ old('graduation_university_fr') }}"
+                                   placeholder="{{ __('joinUs.placeholders.university_fr') }}"
+                                   data-required="true" />
+                            <span class="error-msg">@error('graduation_university_fr') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
+                        </div>
+                        <div class="jr-field @error('graduation_university_ar') has-error @enderror">
+                            <label for="graduation_university_ar">{{ __('joinUs.fields.university_ar') }} <span class="req">*</span></label>
+                            <input type="text" id="graduation_university_ar" name="graduation_university_ar"
+                                   value="{{ old('graduation_university_ar') }}"
+                                   placeholder="{{ __('joinUs.placeholders.university_ar') }}"
+                                   data-required="true" />
+                            <span class="error-msg">@error('graduation_university_ar') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
+                        </div>
+                    </div>
+
+                     <div class="jr-field @error('degree') has-error @enderror">
+                            <label for="degree">{{ __('joinUs.fields.degree') }} <span class="req">*</span></label>
+                            <select id="degree" name="degree" data-required="true">
                                 <option value="">{{ __('joinUs.fields.select_degree') }}</option>
                               @foreach(['bachelor', 'master', 'phd', 'postdoctoral', 'other'] as $deg)
                                     <option value="{{ $deg }}" {{ old('degree') === $deg ? 'selected' : '' }}>
@@ -454,25 +479,8 @@ letter-spacing: 0.2rem;
                                     </option>
                                 @endforeach
                             </select>
-                            @error('degree')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                            <span class="error-msg">@error('degree') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
-                        <div class="jr-field @error('graduation_university_fr') has-error @enderror">
-                            <label for="graduation_university_fr">{{ __('joinUs.fields.university_fr') }}</label>
-                            <input type="text" id="graduation_university_fr" name="graduation_university_fr"
-                                   value="{{ old('graduation_university_fr') }}"
-                                   placeholder="{{ __('joinUs.placeholders.university_fr') }}" />
-                            @error('graduation_university_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
-                    <div class="jr-grid">
-                        <div class="jr-field @error('graduation_university_ar') has-error @enderror">
-                            <label for="graduation_university_ar">{{ __('joinUs.fields.university_ar') }}</label>
-                            <input type="text" id="graduation_university_ar" name="graduation_university_ar"
-                                   value="{{ old('graduation_university_ar') }}"
-                                   placeholder="{{ __('joinUs.placeholders.university_ar') }}" />
-                            @error('graduation_university_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -481,34 +489,38 @@ letter-spacing: 0.2rem;
                 <div style="display:flex;flex-direction:column;gap:1rem;">
                     <div class="jr-grid">
                         <div class="jr-field @error('current_job_fr') has-error @enderror">
-                            <label for="current_job_fr">{{ __('joinUs.fields.job_fr') }}</label>
+                            <label for="current_job_fr">{{ __('joinUs.fields.job_fr') }} <span class="req">*</span></label>
                             <input type="text" id="current_job_fr" name="current_job_fr"
                                    value="{{ old('current_job_fr') }}"
-                                   placeholder="{{ __('joinUs.placeholders.job_fr') }}" />
-                            @error('current_job_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                                   placeholder="{{ __('joinUs.placeholders.job_fr') }}"
+                                   data-required="true" />
+                            <span class="error-msg">@error('current_job_fr') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
                         <div class="jr-field @error('current_job_ar') has-error @enderror">
-                            <label for="current_job_ar">{{ __('joinUs.fields.job_ar') }}</label>
+                            <label for="current_job_ar">{{ __('joinUs.fields.job_ar') }} <span class="req">*</span></label>
                             <input type="text" id="current_job_ar" name="current_job_ar"
                                    value="{{ old('current_job_ar') }}"
-                                   placeholder="{{ __('joinUs.placeholders.job_ar') }}" />
-                            @error('current_job_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                                   placeholder="{{ __('joinUs.placeholders.job_ar') }}"
+                                   data-required="true" />
+                            <span class="error-msg">@error('current_job_ar') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
                     </div>
                     <div class="jr-grid">
                         <div class="jr-field @error('workplace_fr') has-error @enderror">
-                            <label for="workplace_fr">{{ __('joinUs.fields.workplace_fr') }}</label>
+                            <label for="workplace_fr">{{ __('joinUs.fields.workplace_fr') }} <span class="req">*</span></label>
                             <input type="text" id="workplace_fr" name="workplace_fr"
                                    value="{{ old('workplace_fr') }}"
-                                   placeholder="{{ __('joinUs.placeholders.workplace_fr') }}" />
-                            @error('workplace_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                                   placeholder="{{ __('joinUs.placeholders.workplace_fr') }}"
+                                   data-required="true" />
+                            <span class="error-msg">@error('workplace_fr') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
                         <div class="jr-field @error('workplace_ar') has-error @enderror">
-                            <label for="workplace_ar">{{ __('joinUs.fields.workplace_ar') }}</label>
+                            <label for="workplace_ar">{{ __('joinUs.fields.workplace_ar') }} <span class="req">*</span></label>
                             <input type="text" id="workplace_ar" name="workplace_ar"
                                    value="{{ old('workplace_ar') }}"
-                                   placeholder="{{ __('joinUs.placeholders.workplace_ar') }}" />
-                            @error('workplace_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                                   placeholder="{{ __('joinUs.placeholders.workplace_ar') }}"
+                                   data-required="true" />
+                            <span class="error-msg">@error('workplace_ar') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
                     </div>
                 </div>
@@ -518,24 +530,24 @@ letter-spacing: 0.2rem;
                 <div class="jr-card-title"><span class="dot"></span> {{ __('joinUs.sections.about') }}</div>
                 <div style="display:flex;flex-direction:column;gap:1rem;">
                     <div class="jr-field @error('interests_fr') has-error @enderror">
-                        <label for="interests_fr">{{ __('joinUs.fields.interests_fr') }}</label>
-                        <textarea id="interests_fr" name="interests_fr" placeholder="{{ __('joinUs.placeholders.interests_fr') }}">{{ old('interests_fr') }}</textarea>
-                        @error('interests_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        <label for="interests_fr">{{ __('joinUs.fields.interests_fr') }} <span class="req">*</span></label>
+                        <textarea id="interests_fr" name="interests_fr" placeholder="{{ __('joinUs.placeholders.interests_fr') }}" data-required="true">{{ old('interests_fr') }}</textarea>
+                        <span class="error-msg">@error('interests_fr') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                     </div>
                     <div class="jr-field @error('interests_ar') has-error @enderror">
-                        <label for="interests_ar">{{ __('joinUs.fields.interests_ar') }}</label>
-                        <textarea id="interests_ar" name="interests_ar" placeholder="{{ __('joinUs.placeholders.interests_ar') }}">{{ old('interests_ar') }}</textarea>
-                        @error('interests_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        <label for="interests_ar">{{ __('joinUs.fields.interests_ar') }} <span class="req">*</span></label>
+                        <textarea id="interests_ar" name="interests_ar" placeholder="{{ __('joinUs.placeholders.interests_ar') }}" data-required="true">{{ old('interests_ar') }}</textarea>
+                        <span class="error-msg">@error('interests_ar') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                     </div>
                     <div class="jr-field @error('bio_fr') has-error @enderror">
-                        <label for="bio_fr">{{ __('joinUs.fields.bio_fr') }}</label>
-                        <textarea id="bio_fr" name="bio_fr" placeholder="{{ __('joinUs.placeholders.bio_fr') }}">{{ old('bio_fr') }}</textarea>
-                        @error('bio_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        <label for="bio_fr">{{ __('joinUs.fields.bio_fr') }} <span class="req">*</span></label>
+                        <textarea id="bio_fr" name="bio_fr" placeholder="{{ __('joinUs.placeholders.bio_fr') }}" data-required="true">{{ old('bio_fr') }}</textarea>
+                        <span class="error-msg">@error('bio_fr') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                     </div>
                     <div class="jr-field @error('bio_ar') has-error @enderror">
-                        <label for="bio_ar">{{ __('joinUs.fields.bio_ar') }}</label>
-                        <textarea id="bio_ar" name="bio_ar" placeholder="{{ __('joinUs.placeholders.bio_ar') }}">{{ old('bio_ar') }}</textarea>
-                        @error('bio_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        <label for="bio_ar">{{ __('joinUs.fields.bio_ar') }} <span class="req">*</span></label>
+                        <textarea id="bio_ar" name="bio_ar" placeholder="{{ __('joinUs.placeholders.bio_ar') }}" data-required="true">{{ old('bio_ar') }}</textarea>
+                        <span class="error-msg">@error('bio_ar') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                     </div>
                 </div>
             </div>
@@ -560,11 +572,12 @@ letter-spacing: 0.2rem;
                 <div class="jr-grid">
                     {{-- Photo --}}
                     <div class="jr-field @error('photo') has-error @enderror">
-                        <label id="photo_label">{{ __('joinUs.upload.photo_label') }}</label>
+                        <label id="photo_label">{{ __('joinUs.upload.photo_label') }} <span class="req">*</span></label>
                         <div class="jr-upload-zone" id="zone_photo">
                             <input type="file" name="photo" id="inp_photo"
                                    accept="image/jpeg,image/png,image/webp"
-                                   onchange="jrSingleFile('photo', this)" />
+                                   onchange="jrSingleFile('photo', this)"
+                                   data-required="true" />
                             <div class="jr-upload-icon">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                             </div>
@@ -572,16 +585,17 @@ letter-spacing: 0.2rem;
                             <div class="jr-upload-sub">{{ __('joinUs.upload.photo_hint') }}</div>
                             <div class="jr-file-name" id="photo_name"></div>
                         </div>
-                        @error('photo')<span class="error-msg" style="display:block;margin-top:4px">{{ $message }}</span>@enderror
+                        <span class="error-msg">@error('photo') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                     </div>
 
                     {{-- CV --}}
                     <div class="jr-field @error('cv') has-error @enderror">
-                        <label id="cv_label">{{ __('joinUs.upload.cv_label') }}</label>
+                        <label id="cv_label">{{ __('joinUs.upload.cv_label') }} <span class="req">*</span></label>
                         <div class="jr-upload-zone" id="zone_cv">
                             <input type="file" name="cv" id="inp_cv"
                                    accept=".pdf,.doc,.docx"
-                                   onchange="jrSingleFile('cv', this)" />
+                                   onchange="jrSingleFile('cv', this)"
+                                   data-required="true" />
                             <div class="jr-upload-icon">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                             </div>
@@ -589,14 +603,14 @@ letter-spacing: 0.2rem;
                             <div class="jr-upload-sub">{{ __('joinUs.upload.cv_hint') }}</div>
                             <div class="jr-file-name" id="cv_name"></div>
                         </div>
-                        @error('cv')<span class="error-msg" style="display:block;margin-top:4px">{{ $message }}</span>@enderror
+                        <span class="error-msg">@error('cv') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                     </div>
                 </div>
             </div>
 
             {{-- Multi-doc upload --}}
             <div class="jr-card">
-                <div class="jr-card-title" id="additional_docs_label"><span class="dot"></span> {{ __('joinUs.upload.docs') }}</div>
+                <div class="jr-card-title" id="additional_docs_label"><span class="dot"></span> {{ __('joinUs.upload.docs') }} <span class="req">*</span></div>
                 <p style="font-size:13px;color:var(--text-muted);margin-bottom:1rem;line-height:1.6;">
                     {{ __('joinUs.upload.docs_desc') }}
                 </p>
@@ -620,6 +634,9 @@ letter-spacing: 0.2rem;
                         <div class="jr-multi-zone-title">{{ __('joinUs.upload.docs_drop') }}</div>
                         <div class="jr-multi-zone-sub">{{ __('joinUs.upload.docs_hint') }}</div>
                     </div>
+                </div>
+                <div class="jr-field @error('documents') has-error @enderror @error('documents.*') has-error @enderror" id="docs_field">
+                    <span class="error-msg">@error('documents') {{ $message }} @else @error('documents.*') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror @enderror</span>
                 </div>
 
                 <div id="docs_list" class="jr-docs-list" data-remove="{{ __('joinUs.actions.remove') }}"></div>
@@ -710,6 +727,22 @@ letter-spacing: 0.2rem;
 
     // ── Navigation ──
     function jrGoTo(n) {
+        if (n > current) {
+            for (let step = current; step < n; step++) {
+                if (!validateStep(step)) {
+                    if (step !== current) showStep(step);
+                    focusFirstInvalid(step);
+                    return false;
+                }
+                document.getElementById('sb' + step).classList.add('done');
+            }
+        }
+        showStep(n);
+        return true;
+    }
+    window.jrGoTo = jrGoTo;
+
+    function showStep(n) {
         document.getElementById('panel' + current).classList.remove('active');
         document.getElementById('sb' + current).classList.remove('active');
         current = n;
@@ -719,13 +752,67 @@ letter-spacing: 0.2rem;
         if (n === totalSteps) buildReview();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-    window.jrGoTo = jrGoTo;
 
     function jrNext(from) {
-        document.getElementById('sb' + from).classList.add('done');
-        jrGoTo(from + 1);
+        if (validateStep(from)) {
+            document.getElementById('sb' + from).classList.add('done');
+            jrGoTo(from + 1);
+        } else {
+            focusFirstInvalid(from);
+        }
     }
     window.jrNext = jrNext;
+
+    function validateStep(step) {
+        const panel = document.getElementById('panel' + step);
+        let ok = true;
+
+        panel.querySelectorAll('[data-required="true"]').forEach((field) => {
+            const fieldOk = isRequiredFieldFilled(field);
+            setFieldError(field, !fieldOk);
+            if (!fieldOk) ok = false;
+        });
+
+        if (step === 3) {
+            const docsOk = docsFiles.length > 0 || document.getElementById('inp_docs').files.length > 0;
+            document.getElementById('docs_field').classList.toggle('has-error', !docsOk);
+            if (!docsOk) ok = false;
+        }
+
+        return ok;
+    }
+
+    function isRequiredFieldFilled(field) {
+        if (field.type === 'file') return field.files && field.files.length > 0;
+        if (field.type === 'radio') return !!document.querySelector('input[name="' + field.name + '"]:checked');
+        return field.value.trim() !== '';
+    }
+
+    function setFieldError(field, hasError) {
+        const wrap = field.closest('.jr-field');
+        if (wrap) wrap.classList.toggle('has-error', hasError);
+    }
+
+    function focusFirstInvalid(step) {
+        const invalid = document.querySelector('#panel' + step + ' .jr-field.has-error input, #panel' + step + ' .jr-field.has-error select, #panel' + step + ' .jr-field.has-error textarea');
+        if (invalid) invalid.focus({ preventScroll: true });
+    }
+
+    document.querySelectorAll('[data-required="true"]').forEach((field) => {
+        field.addEventListener('input', () => setFieldError(field, !isRequiredFieldFilled(field)));
+        field.addEventListener('change', () => setFieldError(field, !isRequiredFieldFilled(field)));
+    });
+
+    document.getElementById('jr-form').addEventListener('submit', function (event) {
+        for (let step = 1; step < totalSteps; step++) {
+            if (!validateStep(step)) {
+                event.preventDefault();
+                showStep(step);
+                focusFirstInvalid(step);
+                return;
+            }
+        }
+    });
 
     // ── Single file (photo / cv) ──
     function jrSingleFile(type, input) {
@@ -744,6 +831,7 @@ letter-spacing: 0.2rem;
         }
         renderDocsList();
         syncDocsInput();
+        document.getElementById('docs_field').classList.toggle('has-error', docsFiles.length === 0);
     }
     window.jrAddDocs = jrAddDocs;
 
@@ -751,6 +839,7 @@ letter-spacing: 0.2rem;
         docsFiles.splice(idx, 1);
         renderDocsList();
         syncDocsInput();
+        document.getElementById('docs_field').classList.toggle('has-error', docsFiles.length === 0);
     }
     window.removeDoc = removeDoc;
 

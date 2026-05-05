@@ -15,35 +15,35 @@ class StoreJoinRequest extends FormRequest
             'name_fr' => 'required|string|max:255',
             'name_ar' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'nullable|string|max:20',
+            'phone' => 'required|string|max:20',
             'nationality' => 'required|in:jordanian,non_jordanian',
 
             // 🔹 Files
-            'photo' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
-            'cv' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
+            'photo' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
+            'cv' => 'required|file|mimes:pdf,doc,docx|max:10240',
 
             // 🔹 Multi docs
-            'documents' => 'nullable|array',
-            'documents.*' => 'file|mimes:pdf,doc,docx,jpg,jpeg,png,webp|max:10240',
+            'documents' => 'required|array|min:1',
+            'documents.*' => 'required|file|mimes:pdf,doc,docx,jpg,jpeg,png,webp|max:10240',
 
             // 🔹 Translation - French
-            'specialization_fr' => 'nullable|string',
-            'graduation_university_fr' => 'nullable|string',
-            'current_job_fr' => 'nullable|string',
-            'workplace_fr' => 'nullable|string',
-            'interests_fr' => 'nullable|string',
-            'bio_fr' => 'nullable|string',
+            'specialization_fr' => 'required|string',
+            'graduation_university_fr' => 'required|string',
+            'current_job_fr' => 'required|string',
+            'workplace_fr' => 'required|string',
+            'interests_fr' => 'required|string',
+            'bio_fr' => 'required|string',
 
             // 🔹 Translation - Arabic
-            'specialization_ar' => 'nullable|string',
-            'graduation_university_ar' => 'nullable|string',
-            'current_job_ar' => 'nullable|string',
-            'workplace_ar' => 'nullable|string',
-            'interests_ar' => 'nullable|string',
-            'bio_ar' => 'nullable|string',
+            'specialization_ar' => 'required|string',
+            'graduation_university_ar' => 'required|string',
+            'current_job_ar' => 'required|string',
+            'workplace_ar' => 'required|string',
+            'interests_ar' => 'required|string',
+            'bio_ar' => 'required|string',
 
             // 🔹 Degree (shared)
-            'degree' => 'nullable|string',
+            'degree' => 'required|string',
         ];
     }
 }

@@ -7,8 +7,7 @@ return [
     ],
 
     'steps' => [
-        'basic' => 'Informations
-        de base',
+        'basic' => 'Informations de base',
         'professional' => 'Professionnel',
         'documents' => 'Documents',
         'review' => 'Révision',
@@ -103,6 +102,7 @@ return [
 
     'validation' => [
         'fix_errors' => 'Veuillez corriger les erreurs suivantes :',
+        'required' => 'Ce champ est obligatoire',
         'name_fr_required' => 'Le nom en français est obligatoire',
         'name_ar_required' => 'Le nom en arabe est obligatoire',
         'email_required' => 'Une adresse email valide est obligatoire',
