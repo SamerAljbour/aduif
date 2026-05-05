@@ -67,13 +67,16 @@
 
                     {{-- The card --}}
                     <div class="org-card card--{{ $position }}"
-                         data-id="{{ $member->id }}"
+                         data-mgmt-id="{{ $member->id }}"
                          data-position="{{ $position }}"
                          data-name="{{ $name }}"
                          data-photo="{{ $photo ?? '' }}"
                          data-email="{{ $member->email }}"
                          data-bio="{{ $bio }}"
                          data-badge="{{ $label }}"
+                         data-date-from=""
+                         data-date-to=""
+                         data-type="current"
                          onclick="openMgmtModal('{{ $member->id }}')"
                          tabindex="0"
                          role="button"

@@ -13,10 +13,10 @@ class ManagementSeeder extends Seeder
         DB::table('managements')->delete();
 
         // ══════════════════════════════════════════════════════════
-        //  BUREAU ACTUEL
+        //  CURRENT BOARD
         // ══════════════════════════════════════════════════════════
 
-        // ── 1. Président ─────────────────────────────────────────
+        // ── 1. President ─────────────────────────────────────────
         $president = $this->insert('president', null, 1, 'president@club.jo', 'current');
         $this->translate($president, [
             'ar' => [
@@ -25,11 +25,11 @@ class ManagementSeeder extends Seeder
             ],
             'fr' => [
                 'name' => 'Ahmad Mohammad Al-Khalidi',
-                'bio'  => 'Président du club depuis 2020, il possède plus de quinze ans d\'expérience dans la gestion d\'organisations sportives et culturelles. Il a réalisé des accomplissements remarquables aux niveaux local et régional, supervisant le lancement de plus de vingt initiatives de développement.',
+                'bio'  => "Président du club depuis 2020, il possède plus de quinze ans d'expérience dans la gestion d'organisations sportives et culturelles. Il a réalisé des accomplissements remarquables aux niveaux local et régional, supervisant le lancement de plus de vingt initiatives de développement.",
             ],
         ]);
 
-        // ── 2. Vice-présidents (DEUX) ────────────────────────────
+        // ── 2. Vice Presidents (TWO) ─────────────────────────────
         $vp1 = $this->insert('vice_president', $president, 1, 'vp1@club.jo', 'current');
         $this->translate($vp1, [
             'ar' => [
@@ -38,7 +38,7 @@ class ManagementSeeder extends Seeder
             ],
             'fr' => [
                 'name' => 'Sara Abdullah Al-Nuaimi',
-                'bio'  => 'Vice-présidente aux affaires internes, chargée de la coordination entre les comités et de la gestion des réunions périodiques. Titulaire d\'un MBA avec plus de dix ans d\'expérience dans le secteur à but non lucratif.',
+                'bio'  => "Vice-présidente aux affaires internes, chargée de la coordination entre les comités et de la gestion des réunions périodiques. Titulaire d'un MBA avec plus de dix ans d'expérience dans le secteur à but non lucratif.",
             ],
         ]);
 
@@ -50,11 +50,11 @@ class ManagementSeeder extends Seeder
             ],
             'fr' => [
                 'name' => 'Mohammad Rashed Al-Otaibi',
-                'bio'  => 'Vice-président aux affaires extérieures et aux relations publiques, il représente le club dans les forums internationaux et les négociations officielles. Titulaire d\'un doctorat en Relations Internationales.',
+                'bio'  => "Vice-président aux affaires extérieures et aux relations publiques, il représente le club dans les forums internationaux et les négociations officielles. Titulaire d'un doctorat en Relations Internationales.",
             ],
         ]);
 
-        // ── 3. Secrétaires (TROIS) ───────────────────────────────
+        // ── 3. Secretaries (THREE) ───────────────────────────────
         $sec1 = $this->insert('secretary', $vp1, 1, 'secretary1@club.jo', 'current');
         $this->translate($sec1, [
             'ar' => [
@@ -63,7 +63,7 @@ class ManagementSeeder extends Seeder
             ],
             'fr' => [
                 'name' => 'Khalid Yousef Al-Masri',
-                'bio'  => 'Premier secrétaire chargé de la documentation des procès-verbaux et de la gestion de la correspondance officielle. Solide formation juridique et plus de huit ans d\'expérience en gestion documentaire institutionnelle.',
+                'bio'  => "Premier secrétaire chargé de la documentation des procès-verbaux et de la gestion de la correspondance officielle. Solide formation juridique et plus de huit ans d'expérience en gestion documentaire institutionnelle.",
             ],
         ]);
 
@@ -75,7 +75,7 @@ class ManagementSeeder extends Seeder
             ],
             'fr' => [
                 'name' => 'Nour Mohammad Al-Bakri',
-                'bio'  => 'Deuxième secrétaire responsable de l\'archivage électronique et de la gestion des bases de données des membres. Spécialisée en informatique et administration des systèmes numériques.',
+                'bio'  => "Deuxième secrétaire responsable de l'archivage électronique et de la gestion des bases de données des membres. Spécialisée en informatique et administration des systèmes numériques.",
             ],
         ]);
 
@@ -87,11 +87,11 @@ class ManagementSeeder extends Seeder
             ],
             'fr' => [
                 'name' => 'Reem Sultan Al-Dosari',
-                'bio'  => 'Secrétaire aux affaires extérieures, elle rédige la correspondance diplomatique et les rapports destinés aux instances officielles. Maîtrise quatre langues et est titulaire d\'une licence en Traduction et Relations Internationales.',
+                'bio'  => "Secrétaire aux affaires extérieures, elle rédige la correspondance diplomatique et les rapports destinés aux instances officielles. Maîtrise quatre langues et est titulaire d'une licence en Traduction et Relations Internationales.",
             ],
         ]);
 
-        // ── 4. Trésoriers (DEUX) ─────────────────────────────────
+        // ── 4. Treasurers (TWO) ──────────────────────────────────
         $tr1 = $this->insert('treasurer', $sec1, 1, 'treasurer1@club.jo', 'current');
         $this->translate($tr1, [
             'ar' => [
@@ -100,7 +100,7 @@ class ManagementSeeder extends Seeder
             ],
             'fr' => [
                 'name' => 'Mona Hassan Al-Zaidi',
-                'bio'  => 'Comptable agréée supervisant le budget général et la préparation des rapports financiers périodiques. Plus de huit ans d\'expérience dans le secteur à but non lucratif et la gestion de fonds de subventions.',
+                'bio'  => "Comptable agréée supervisant le budget général et la préparation des rapports financiers périodiques. Plus de huit ans d'expérience dans le secteur à but non lucratif et la gestion de fonds de subventions.",
             ],
         ]);
 
@@ -112,194 +112,366 @@ class ManagementSeeder extends Seeder
             ],
             'fr' => [
                 'name' => 'Faisal Omar Al-Rashid',
-                'bio'  => 'Supervise les opérations de dépenses et de recettes et élabore le budget prévisionnel annuel. Expert financier certifié ayant travaillé auparavant dans plusieurs grandes institutions financières.',
+                'bio'  => "Supervise les opérations de dépenses et de recettes et élabore le budget prévisionnel annuel. Expert financier certifié ayant travaillé auparavant dans plusieurs grandes institutions financières.",
             ],
         ]);
 
-        // ── 5. Membres du conseil (SIX) ──────────────────────────
-        $membresConseil = [
+        // ── 5. Board Members (SIX) ───────────────────────────────
+        $boardMembers = [
             [
                 'order' => 1,
                 'email' => 'board1@club.jo',
-                'ar' => [
+                'ar'    => [
                     'name' => 'عمر فيصل الحربي',
-                    'bio'  => 'عضو هيئة إدارية متخصص في الشؤون الرياضية والتدريب. أشرف على تنظيم أكثر من خمس عشرة بطولة محلية وإقليمية، ويعمل حالياً على تطوير برامج اكتشاف المواهب الشبابية.'
+                    'bio'  => 'عضو هيئة إدارية متخصص في الشؤون الرياضية والتدريب. أشرف على تنظيم أكثر من خمس عشرة بطولة محلية وإقليمية، ويعمل حالياً على تطوير برامج اكتشاف المواهب الشبابية.',
                 ],
-                'fr' => [
+                'fr'    => [
                     'name' => 'Omar Faisal Al-Harbi',
-                    'bio'  => 'Membre du conseil spécialisé dans les affaires sportives et la formation. A supervisé plus de quinze tournois locaux et régionaux et développe actuellement des programmes de détection de jeunes talents.'
+                    'bio'  => "Membre du conseil spécialisé dans les affaires sportives et la formation. A supervisé plus de quinze tournois locaux et régionaux et développe actuellement des programmes de détection de jeunes talents.",
                 ],
             ],
             [
                 'order' => 2,
                 'email' => 'board2@club.jo',
-                'ar' => [
+                'ar'    => [
                     'name' => 'ليلى إبراهيم القاسم',
-                    'bio'  => 'عضوة هيئة إدارية مسؤولة عن الأنشطة الثقافية والتطوعية. تعمل على تعزيز الشراكات المجتمعية وتنظيم الفعاليات الثقافية والمهرجانات السنوية للنادي.'
+                    'bio'  => 'عضوة هيئة إدارية مسؤولة عن الأنشطة الثقافية والتطوعية. تعمل على تعزيز الشراكات المجتمعية وتنظيم الفعاليات الثقافية والمهرجانات السنوية للنادي.',
                 ],
-                'fr' => [
+                'fr'    => [
                     'name' => 'Layla Ibrahim Al-Qasim',
-                    'bio'  => 'Membre du conseil responsable des activités culturelles et bénévoles. Renforce les partenariats communautaires et organise les événements culturels et les festivals annuels du club.'
+                    'bio'  => "Membre du conseil responsable des activités culturelles et bénévoles. Renforce les partenariats communautaires et organise les événements culturels et les festivals annuels du club.",
                 ],
             ],
             [
                 'order' => 3,
                 'email' => 'board3@club.jo',
-                'ar' => [
+                'ar'    => [
                     'name' => 'ناصر علي الشمري',
-                    'bio'  => 'عضو هيئة إدارية متخصص في الشؤون القانونية والتنظيمية. يتولى مراجعة العقود والاتفاقيات، وسبق له العمل مستشاراً قانونياً في عدة مؤسسات حكومية.'
+                    'bio'  => 'عضو هيئة إدارية متخصص في الشؤون القانونية والتنظيمية. يتولى مراجعة العقود والاتفاقيات، وسبق له العمل مستشاراً قانونياً في عدة مؤسسات حكومية.',
                 ],
-                'fr' => [
+                'fr'    => [
                     'name' => 'Nasser Ali Al-Shammari',
-                    'bio'  => 'Membre du conseil spécialisé dans les affaires juridiques et réglementaires. Examine les contrats et conventions, a précédemment exercé en tant que conseiller juridique dans plusieurs institutions gouvernementales.'
+                    'bio'  => "Membre du conseil spécialisé dans les affaires juridiques et réglementaires. Examine les contrats et conventions, a précédemment exercé en tant que conseiller juridique dans plusieurs institutions gouvernementales.",
                 ],
             ],
             [
                 'order' => 4,
                 'email' => 'board4@club.jo',
-                'ar' => [
+                'ar'    => [
                     'name' => 'هند طارق المنصور',
-                    'bio'  => 'عضوة هيئة إدارية مسؤولة عن ملف التسويق والتواصل الرقمي. طوّرت الحضور الرقمي للنادي وضاعفت قاعدة متابعيه على منصات التواصل الاجتماعي ثلاث مرات خلال عامين.'
+                    'bio'  => 'عضوة هيئة إدارية مسؤولة عن ملف التسويق والتواصل الرقمي. طوّرت الحضور الرقمي للنادي وضاعفت قاعدة متابعيه على منصات التواصل الاجتماعي ثلاث مرات خلال عامين.',
                 ],
-                'fr' => [
+                'fr'    => [
                     'name' => 'Hind Tariq Al-Mansour',
-                    'bio'  => 'Membre du conseil responsable du marketing et de la communication numérique. A développé la présence en ligne du club et triplé sa communauté sur les réseaux sociaux en deux ans.'
+                    'bio'  => "Membre du conseil responsable du marketing et de la communication numérique. A développé la présence en ligne du club et triplé sa communauté sur les réseaux sociaux en deux ans.",
                 ],
             ],
             [
                 'order' => 5,
                 'email' => 'board5@club.jo',
-                'ar' => [
+                'ar'    => [
                     'name' => 'بدر سعود الغامدي',
-                    'bio'  => 'عضو هيئة إدارية متخصص في إدارة المشاريع والبنية التحتية. يشرف على مشاريع التطوير العمراني للنادي ويتابع تنفيذ الخطط الاستراتيجية طويلة الأمد.'
+                    'bio'  => 'عضو هيئة إدارية متخصص في إدارة المشاريع والبنية التحتية. يشرف على مشاريع التطوير العمراني للنادي ويتابع تنفيذ الخطط الاستراتيجية طويلة الأمد.',
                 ],
-                'fr' => [
+                'fr'    => [
                     'name' => 'Badr Saud Al-Ghamdi',
-                    'bio'  => 'Membre du conseil spécialisé en gestion de projets et en infrastructure. Supervise les projets de développement immobilier du club et assure le suivi des plans stratégiques à long terme.'
+                    'bio'  => "Membre du conseil spécialisé en gestion de projets et en infrastructure. Supervise les projets de développement immobilier du club et assure le suivi des plans stratégiques à long terme.",
                 ],
             ],
             [
                 'order' => 6,
                 'email' => 'board6@club.jo',
-                'ar' => [
+                'ar'    => [
                     'name' => 'رنا جاسم الكواري',
-                    'bio'  => 'عضوة هيئة إدارية مسؤولة عن شؤون الأعضاء وخدمات المجتمع. تعمل على تحسين تجربة الأعضاء وتطوير برامج الرعاية الاجتماعية والصحية للنادي.'
+                    'bio'  => 'عضوة هيئة إدارية مسؤولة عن شؤون الأعضاء وخدمات المجتمع. تعمل على تحسين تجربة الأعضاء وتطوير برامج الرعاية الاجتماعية والصحية للنادي.',
                 ],
-                'fr' => [
+                'fr'    => [
                     'name' => 'Rana Jasim Al-Kawari',
-                    'bio'  => 'Membre du conseil responsable des affaires des membres et des services communautaires. Améliore l\'expérience des membres et développe les programmes de protection sociale et sanitaire du club.'
+                    'bio'  => "Membre du conseil responsable des affaires des membres et des services communautaires. Améliore l'expérience des membres et développe les programmes de protection sociale et sanitaire du club.",
                 ],
             ],
         ];
 
-        foreach ($membresConseil as $m) {
+        foreach ($boardMembers as $m) {
             $id = $this->insert('board_member', $tr1, $m['order'], $m['email'], 'current');
             $this->translate($id, ['ar' => $m['ar'], 'fr' => $m['fr']]);
         }
 
         // ══════════════════════════════════════════════════════════
-        //  ANCIEN BUREAU
+        //  FORMER BOARD  (type = 'former', with date_from / date_to)
         // ══════════════════════════════════════════════════════════
 
-        $fmrPresident = $this->insert('president', null, 1, 'former.president@club.jo', 'former');
+        $fmrPresident = $this->insert(
+            'president',
+            null,
+            1,
+            'former.president@club.jo',
+            'former',
+            '2015-01-01',
+            '2020-12-31'
+        );
         $this->translate($fmrPresident, [
             'ar' => [
                 'name' => 'يوسف ماجد السالم',
-                'bio'  => 'تولى رئاسة النادي خلال الفترة 2015–2020. قاد النادي نحو الاحترافية وأسس أول أكاديمية رياضية متكاملة في تاريخ النادي.'
+                'bio'  => 'تولى رئاسة النادي خلال الفترة 2015–2020. قاد النادي نحو الاحترافية وأسس أول أكاديمية رياضية متكاملة في تاريخ النادي.',
             ],
             'fr' => [
                 'name' => 'Yousef Majed Al-Salem',
-                'bio'  => 'A présidé le club de 2015 à 2020. Il a conduit le club vers le professionnalisme et fondé la première académie sportive intégrée de l\'histoire du club.'
+                'bio'  => "A présidé le club de 2015 à 2020. Il a conduit le club vers le professionnalisme et fondé la première académie sportive intégrée de l'histoire du club.",
             ],
         ]);
 
-        $fmrVp = $this->insert('vice_president', $fmrPresident, 1, 'former.vp@club.jo', 'former');
+        $fmrVp = $this->insert(
+            'vice_president',
+            null,
+            1,
+            'former.vp@club.jo',
+            'former',
+            '2015-01-01',
+            '2020-12-31'
+        );
         $this->translate($fmrVp, [
             'ar' => [
                 'name' => 'عبدالرحمن ناصر القحطاني',
-                'bio'  => 'نائب رئيس سابق أسهم في بناء شراكات استراتيجية مع عدد من الاتحادات الرياضية الدولية خلال فترة توليه المنصب.'
+                'bio'  => 'نائب رئيس سابق أسهم في بناء شراكات استراتيجية مع عدد من الاتحادات الرياضية الدولية خلال فترة توليه المنصب.',
             ],
             'fr' => [
                 'name' => 'Abdulrahman Nasser Al-Qahtani',
-                'bio'  => 'Ancien vice-président ayant contribué à l\'établissement de partenariats stratégiques avec plusieurs fédérations sportives internationales durant son mandat.'
+                'bio'  => "Ancien vice-président ayant contribué à l'établissement de partenariats stratégiques avec plusieurs fédérations sportives internationales durant son mandat.",
             ],
         ]);
 
-        $fmrBoard = $this->insert('board_member', $fmrVp, 1, 'former.board@club.jo', 'former');
-        $this->translate($fmrBoard, [
+        $fmrSec = $this->insert(
+            'secretary',
+            null,
+            1,
+            'former.sec@club.jo',
+            'former',
+            '2015-01-01',
+            '2020-12-31'
+        );
+        $this->translate($fmrSec, [
+            'ar' => [
+                'name' => 'ماجد عبدالله الحربي',
+                'bio'  => 'أمين سر سابق أدار الوثائق الرسمية للنادي وأشرف على تحديث منظومة الأرشفة المؤسسية خلال فترة توليه المنصب.',
+            ],
+            'fr' => [
+                'name' => 'Majed Abdullah Al-Harbi',
+                'bio'  => "Ancien secrétaire ayant géré les documents officiels du club et supervisé la modernisation du système d'archivage institutionnel durant son mandat.",
+            ],
+        ]);
+
+        $fmrTr = $this->insert(
+            'treasurer',
+            null,
+            1,
+            'former.tr@club.jo',
+            'former',
+            '2015-01-01',
+            '2020-12-31'
+        );
+        $this->translate($fmrTr, [
+            'ar' => [
+                'name' => 'سلمى خالد المطيري',
+                'bio'  => 'أمينة صندوق سابقة أشرفت على تطوير السياسات المالية للنادي وحققت فائضاً في الميزانية لأول مرة في تاريخ النادي خلال عام 2018.',
+            ],
+            'fr' => [
+                'name' => 'Salma Khalid Al-Mutairi',
+                'bio'  => "Ancienne trésorière ayant supervisé le développement des politiques financières du club et réalisé un excédent budgétaire pour la première fois dans l'histoire du club en 2018.",
+            ],
+        ]);
+
+        $fmrBoard1 = $this->insert(
+            'board_member',
+            null,
+            1,
+            'former.board1@club.jo',
+            'former',
+            '2016-06-01',
+            '2020-12-31'
+        );
+        $this->translate($fmrBoard1, [
             'ar' => [
                 'name' => 'جميلة حمد العجمي',
-                'bio'  => 'عضوة هيئة إدارية سابقة أشرفت على إنشاء برنامج المنح الدراسية لأبناء الأعضاء الذي لا يزال قائماً حتى اليوم.'
+                'bio'  => 'عضوة هيئة إدارية سابقة أشرفت على إنشاء برنامج المنح الدراسية لأبناء الأعضاء الذي لا يزال قائماً حتى اليوم.',
             ],
             'fr' => [
                 'name' => 'Jameela Hamad Al-Ajmi',
-                'bio'  => 'Ancienne membre du conseil ayant supervisé la création du programme de bourses d\'études pour les enfants des membres, qui perdure encore aujourd\'hui.'
+                'bio'  => "Ancienne membre du conseil ayant supervisé la création du programme de bourses d'études pour les enfants des membres, qui perdure encore aujourd'hui.",
+            ],
+        ]);
+
+        $fmrBoard2 = $this->insert(
+            'board_member',
+            null,
+            2,
+            'former.board2@club.jo',
+            'former',
+            '2015-01-01',
+            '2018-06-30'
+        );
+        $this->translate($fmrBoard2, [
+            'ar' => [
+                'name' => 'طارق سعيد البلوشي',
+                'bio'  => 'عضو هيئة إدارية سابق تولى ملف البنية التحتية والمشاريع الإنشائية، وأشرف على مشروع توسعة مقر النادي عام 2017.',
+            ],
+            'fr' => [
+                'name' => 'Tariq Saeed Al-Balushi',
+                'bio'  => "Ancien membre du conseil en charge de l'infrastructure et des projets de construction, ayant supervisé le projet d'expansion du siège du club en 2017.",
+            ],
+        ]);
+
+        $fmrBoard3 = $this->insert(
+            'board_member',
+            null,
+            3,
+            'former.board3@club.jo',
+            'former',
+            '2015-01-01',
+            '2019-12-31'
+        );
+        $this->translate($fmrBoard3, [
+            'ar' => [
+                'name' => 'نوال إبراهيم الزهراني',
+                'bio'  => 'عضوة هيئة إدارية سابقة متخصصة في العلاقات الإعلامية والاتصال المؤسسي، أسهمت في رفع مستوى الوعي بأنشطة النادي على الصعيد المحلي.',
+            ],
+            'fr' => [
+                'name' => 'Nawal Ibrahim Al-Zahrani',
+                'bio'  => "Ancienne membre du conseil spécialisée dans les relations médiatiques et la communication institutionnelle, ayant contribué à accroître la visibilité des activités du club au niveau local.",
             ],
         ]);
 
         // ══════════════════════════════════════════════════════════
-        //  MEMBRES D'HONNEUR
+        //  CONSULTANTS  (type = 'consultant')
+        // ══════════════════════════════════════════════════════════
+
+        $con1 = $this->insert('board_member', null, 1, 'consultant1@club.jo', 'consultant');
+        $this->translate($con1, [
+            'ar' => [
+                'name' => 'د. عبدالله محمد الطيار',
+                'bio'  => 'مستشار قانوني متخصص في قانون الرياضة والمنازعات الدولية. سبق له الإشراف على عدد من قضايا التحكيم الرياضي أمام المحاكم الدولية.',
+            ],
+            'fr' => [
+                'name' => 'Dr. Abdullah Mohammad Al-Tayar',
+                'bio'  => "Conseiller juridique spécialisé en droit du sport et arbitrage international. A supervisé plusieurs affaires d'arbitrage sportif devant des juridictions internationales.",
+            ],
+        ]);
+
+        $con2 = $this->insert('board_member', null, 2, 'consultant2@club.jo', 'consultant');
+        $this->translate($con2, [
+            'ar' => [
+                'name' => 'م. ريم خالد السعد',
+                'bio'  => 'مستشارة في التخطيط الاستراتيجي وتطوير المنظمات الرياضية. ساهمت في وضع الخطة الاستراتيجية الخمسية للنادي وإعداد دليل الحوكمة المؤسسية.',
+            ],
+            'fr' => [
+                'name' => 'Ing. Reem Khalid Al-Saad',
+                'bio'  => "Consultante en planification stratégique et développement d'organisations sportives. A contribué à l'élaboration du plan stratégique quinquennal du club et du guide de gouvernance institutionnelle.",
+            ],
+        ]);
+
+        $con3 = $this->insert('president', null, 3, 'consultant3@club.jo', 'consultant');
+        $this->translate($con3, [
+            'ar' => [
+                'name' => 'أ. ياسر فهد الحجيلان',
+                'bio'  => 'مستشار مالي متخصص في الاستدامة المالية للمنظمات غير الربحية. يقدم دعماً استشارياً لمجلس الإدارة في قرارات الاستثمار والتخطيط المالي طويل الأمد.',
+            ],
+            'fr' => [
+                'name' => 'M. Yasser Fahd Al-Hujaylan',
+                'bio'  => "Conseiller financier spécialisé dans la durabilité financière des organisations à but non lucratif. Apporte un soutien consultatif au conseil d'administration dans les décisions d'investissement et la planification financière à long terme.",
+            ],
+        ]);
+
+        // ══════════════════════════════════════════════════════════
+        //  HONORARY MEMBERS  (type = 'honorary')
         // ══════════════════════════════════════════════════════════
 
         $hon1 = $this->insert('president', null, 1, null, 'honorary');
         $this->translate($hon1, [
             'ar' => [
                 'name' => 'الأمير فهد بن سلمان',
-                'bio'  => 'عضو شرفي فخري للنادي، قدّم دعماً لا محدوداً لمسيرة النادي على مدار عقدين من الزمن.'
+                'bio'  => 'عضو شرفي فخري للنادي، قدّم دعماً لا محدوداً لمسيرة النادي على مدار عقدين من الزمن.',
             ],
             'fr' => [
                 'name' => 'Prince Fahd bin Salman',
-                'bio'  => 'Membre honoraire du club, il a apporté un soutien indéfectible au parcours du club pendant deux décennies.'
+                'bio'  => "Membre honoraire du club, il a apporté un soutien indéfectible au parcours du club pendant deux décennies.",
             ],
         ]);
 
-        $hon2 = $this->insert('board_member', null, 1, 'honorary2@club.jo', 'honorary');
+        $hon2 = $this->insert('board_member', null, 2, 'honorary2@club.jo', 'honorary');
         $this->translate($hon2, [
             'ar' => [
                 'name' => 'د. سلوى إبراهيم الحمدان',
-                'bio'  => 'عضو شرف تقديراً لإسهاماتها الأكاديمية في تطوير برامج الرياضة والصحة المجتمعية المرتبطة بالنادي.'
+                'bio'  => 'عضو شرف تقديراً لإسهاماتها الأكاديمية في تطوير برامج الرياضة والصحة المجتمعية المرتبطة بالنادي.',
             ],
             'fr' => [
                 'name' => 'Dr. Salwa Ibrahim Al-Hamdan',
-                'bio'  => 'Membre honoraire en reconnaissance de ses contributions académiques au développement des programmes de santé communautaire et de sport affiliés au club.'
+                'bio'  => "Membre honoraire en reconnaissance de ses contributions académiques au développement des programmes de santé communautaire et de sport affiliés au club.",
             ],
         ]);
 
-        // ── Résumé ───────────────────────────────────────────────
-        $this->command->info('✅  Hiérarchie des gestionnaires insérée (AR + FR).');
+        $hon3 = $this->insert('vice_president', null, 3, null, 'honorary');
+        $this->translate($hon3, [
+            'ar' => [
+                'name' => 'المهندس سالم بن راشد العامري',
+                'bio'  => 'عضو شرفي منح لقب العضوية تكريماً لتمويله مشروع الملعب الرئيسي للنادي عام 2012، ولا يزال من أبرز المانحين المؤسسيين للنادي.',
+            ],
+            'fr' => [
+                'name' => 'Ing. Salem bin Rashed Al-Ameri',
+                'bio'  => "Membre honoraire nommé en hommage à son financement du projet du stade principal du club en 2012, il demeure l'un des plus éminents donateurs institutionnels du club.",
+            ],
+        ]);
+
+        // ── Summary ───────────────────────────────────────────────
+        $this->command->info('');
+        $this->command->info('✅  Management seeded successfully — AR + FR, all types.');
         $this->command->table(
-            ['Type', 'Poste', 'Nom (AR)', 'Email'],
+            ['Type', 'Position', 'Name (AR)', 'Email'],
             [
-                ['current',  'Président',                 'أحمد محمد الخالدي',       'president@club.jo'],
-                ['current',  'Vice-président (1)',        'سارة عبدالله النعيمي',    'vp1@club.jo'],
-                ['current',  'Vice-président (2)',        'محمد راشد العتيبي',       'vp2@club.jo'],
-                ['current',  'Secrétaire (1)',            'خالد يوسف المصري',        'secretary1@club.jo'],
-                ['current',  'Secrétaire (2)',            'نور محمد البكري',          'secretary2@club.jo'],
-                ['current',  'Secrétaire (3)',            'ريم سلطان الدوسري',       'secretary3@club.jo'],
-                ['current',  'Trésorier (1)',             'منى حسن الزيدي',          'treasurer1@club.jo'],
-                ['current',  'Trésorier (2)',             'فيصل عمر الرشيد',         'treasurer2@club.jo'],
-                ['current',  'Membre (1)',                'عمر فيصل الحربي',         'board1@club.jo'],
-                ['current',  'Membre (2)',                'ليلى إبراهيم القاسم',     'board2@club.jo'],
-                ['current',  'Membre (3)',                'ناصر علي الشمري',         'board3@club.jo'],
-                ['current',  'Membre (4)',                'هند طارق المنصور',        'board4@club.jo'],
-                ['current',  'Membre (5)',                'بدر سعود الغامدي',        'board5@club.jo'],
-                ['current',  'Membre (6)',                'رنا جاسم الكواري',        'board6@club.jo'],
-                ['former',   'Ancien président',          'يوسف ماجد السالم',        'former.president@club.jo'],
-                ['former',   'Ancien vice-président',     'عبدالرحمن ناصر القحطاني', 'former.vp@club.jo'],
-                ['former',   'Ancien membre',             'جميلة حمد العجمي',        'former.board@club.jo'],
-                ['honorary', 'Président d\'honneur',      'الأمير فهد بن سلمان',     '—'],
-                ['honorary', 'Membre d\'honneur',         'د. سلوى إبراهيم الحمدان', 'honorary2@club.jo'],
+                // Current
+                ['current',    'رئيس',           'أحمد محمد الخالدي',       'president@club.jo'],
+                ['current',    'نائب رئيس (1)',   'سارة عبدالله النعيمي',    'vp1@club.jo'],
+                ['current',    'نائب رئيس (2)',   'محمد راشد العتيبي',       'vp2@club.jo'],
+                ['current',    'أمين سر (1)',     'خالد يوسف المصري',        'secretary1@club.jo'],
+                ['current',    'أمين سر (2)',     'نور محمد البكري',          'secretary2@club.jo'],
+                ['current',    'أمين سر (3)',     'ريم سلطان الدوسري',       'secretary3@club.jo'],
+                ['current',    'أمين صندوق (1)', 'منى حسن الزيدي',          'treasurer1@club.jo'],
+                ['current',    'أمين صندوق (2)', 'فيصل عمر الرشيد',         'treasurer2@club.jo'],
+                ['current',    'عضو إداري (1)',   'عمر فيصل الحربي',         'board1@club.jo'],
+                ['current',    'عضو إداري (2)',   'ليلى إبراهيم القاسم',     'board2@club.jo'],
+                ['current',    'عضو إداري (3)',   'ناصر علي الشمري',         'board3@club.jo'],
+                ['current',    'عضو إداري (4)',   'هند طارق المنصور',        'board4@club.jo'],
+                ['current',    'عضو إداري (5)',   'بدر سعود الغامدي',        'board5@club.jo'],
+                ['current',    'عضو إداري (6)',   'رنا جاسم الكواري',        'board6@club.jo'],
+                // Former
+                ['former',     'رئيس',           'يوسف ماجد السالم',        'former.president@club.jo'],
+                ['former',     'نائب رئيس',      'عبدالرحمن ناصر القحطاني', 'former.vp@club.jo'],
+                ['former',     'أمين سر',        'ماجد عبدالله الحربي',     'former.sec@club.jo'],
+                ['former',     'أمين صندوق',     'سلمى خالد المطيري',       'former.tr@club.jo'],
+                ['former',     'عضو إداري (1)',   'جميلة حمد العجمي',        'former.board1@club.jo'],
+                ['former',     'عضو إداري (2)',   'طارق سعيد البلوشي',       'former.board2@club.jo'],
+                ['former',     'عضو إداري (3)',   'نوال إبراهيم الزهراني',   'former.board3@club.jo'],
+                // Consultants
+                ['consultant', 'مستشار (1)',      'د. عبدالله محمد الطيار',  'consultant1@club.jo'],
+                ['consultant', 'مستشار (2)',      'م. ريم خالد السعد',        'consultant2@club.jo'],
+                ['consultant', 'مستشار (3)',      'أ. ياسر فهد الحجيلان',    'consultant3@club.jo'],
+                // Honorary
+                ['honorary',   'شرفي (1)',        'الأمير فهد بن سلمان',     '—'],
+                ['honorary',   'شرفي (2)',        'د. سلوى إبراهيم الحمدان', 'honorary2@club.jo'],
+                ['honorary',   'شرفي (3)',        'م. سالم بن راشد العامري', '—'],
             ]
         );
     }
 
     // ── Helpers ───────────────────────────────────────────────────
+
     private function insert(
         string  $position,
         ?int    $parentId,
         int     $order,
         ?string $email,
-        string  $type
+        string  $type,
+        ?string $dateFrom = null,
+        ?string $dateTo   = null,
     ): int {
         return DB::table('managements')->insertGetId([
             'position'   => $position,
@@ -308,6 +480,8 @@ class ManagementSeeder extends Seeder
             'email'      => $email,
             'photo'      => null,
             'type'       => $type,
+            'date_from'  => $dateFrom,
+            'date_to'    => $dateTo,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

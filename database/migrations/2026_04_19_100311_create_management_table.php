@@ -19,19 +19,23 @@ return new class extends Migration
                 'vice_president',
                 'secretary',
                 'treasurer',
-                'board_member'
+                'board_member',
             ]);
 
-            // Hierarchy: self-referencing parent
+            // Hierarchy: self-referencing parent (used by current board tree)
             $table->foreignId('parent_id')
                 ->nullable()
                 ->constrained('managements')
                 ->onDelete('set null');
 
-            // Order among siblings
+            // Sibling order
             $table->integer('order')->default(0);
 
-            $table->enum('type', ['current', 'former', 'honorary']);
+            $table->enum('type', ['current', 'former', 'honorary', 'consultant']);
+
+            // Tenure dates — used by former members
+            $table->date('date_from')->nullable();
+            $table->date('date_to')->nullable();
 
             $table->timestamps();
         });

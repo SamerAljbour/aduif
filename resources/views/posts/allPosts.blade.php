@@ -6,9 +6,9 @@
 <section class="page-header">
     <div class="row page-header__content narrower text-center">
         <div class="col-full">
-            <h3 class="subhead">Our Blog</h3>
+            <h3 class="subhead">{{ __('posts.page_title') }}</h3>
             <h1 class="display-1">
-                News & Memories
+                {{ __('posts.title') }}
             </h1>
         </div>
     </div>
@@ -21,8 +21,8 @@
     <div class="row text-center" style="margin-bottom:40px;">
         <div class="col-full">
             <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('news')">News</button>
-                <button class="tab-btn" onclick="switchTab('memories')">Memories</button>
+                <button class="tab-btn active" onclick="switchTab('news')"> {{ __('posts.news') }} </button>
+                <button class="tab-btn" onclick="switchTab('memories')"> {{ __('posts.memories') }} </button>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@
 
                         <div class="item-entry" data-aos="fade-up">
 
-                            {{-- IMAGE --}}s
+                            {{-- IMAGE --}}
                             <div class="item-entry__thumb">
                                 <a href="{{ route('post.singlePost', $post->id) }}" class="item-entry__thumb-link">
                                     <img
@@ -77,7 +77,7 @@
 
                     </article>
                 @empty
-                    <p style="text-align:center;">No news found.</p>
+                    <p style="text-align:center;">{{ __('posts.No_news_found') }}</p>
                 @endforelse
 
             </div>
@@ -134,7 +134,7 @@
 
                     </article>
                 @empty
-                    <p style="text-align:center;">No memories found.</p>
+                    <p style="text-align:center;">{{ __('posts.No_memories_found') }}</p>
                 @endforelse
 
             </div>

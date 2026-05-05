@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\App;
 
 class Management extends Model
 {
@@ -52,16 +53,16 @@ class Management extends Model
     }
 
     /** Human-readable position labels */
+
     public static function positionLabel(string $position): string
     {
-        return match ($position) {
-            'president'      => 'رئيس النادي',
-            'vice_president' => 'نائب الرئيس',
-            'secretary'      => 'أمين السر',
-            'treasurer'      => 'أمين الصندوق',
-            'board_member'   => 'عضو هيئة إدارية',
-            default          => $position,
-        };
+        $key = 'management.position_' . $position;
+
+        // Try translation
+        $translated = __($key);
+
+        // If translation key doesn't exist → fallback to raw value
+        return $translated !== $key ? $translated : ucfirst(str_replace('_', ' ', $position));
     }
 
     /** Position hierarchy order */

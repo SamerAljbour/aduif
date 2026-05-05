@@ -114,13 +114,28 @@ class ManagementController extends Controller
     }
     public function showManagement()
     {
+        // ── Tab 1: current board — full hierarchy ──────────────────
         $tree = Management::whereNull('parent_id')
+            ->where('type', 'current')
             ->with('allChildren.translations', 'translations')
             ->orderBy('order')
-            ->where('type', 'current')
             ->get();
 
-        return view('management.index', compact('tree'));
+        // ── Tab 2: former members — flat list, ordered by date_to desc ──
+        $formerMembers = Management::where('type', 'former')
+            ->with('translations')
+            ->orderByDesc('date_to')
+            ->orderBy('order')
+            ->get();
+
+        // ── Tab 3: honorary + consultants — flat list ──────────────
+        $honoraryMembers = Management::whereIn('type', ['honorary', 'consultant'])
+            ->with('translations')
+            ->orderByRaw("FIELD(type, 'consultant', 'honorary')")  // consultants first
+            ->orderBy('order')
+            ->get();
+
+        return view('management.index', compact('tree', 'formerMembers', 'honoraryMembers'));;
     }
 
     /** Flatten the entire tree into a single collection */
