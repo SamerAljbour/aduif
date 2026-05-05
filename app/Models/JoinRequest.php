@@ -11,7 +11,6 @@ class JoinRequest extends Model
     // JoinRequest.php
 
     protected $fillable = [
-        'name',
         'email',
         'phone',
         'nationality',

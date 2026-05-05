@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
 
             // 🔹 Basic Info
-            $table->string('name'); // الاسم (can stay here for simplicity)
+            // $table->string('name'); // الاسم (can stay here for simplicity)
             $table->string('email');
             $table->string('phone')->nullable();
 

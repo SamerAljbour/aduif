@@ -46,6 +46,7 @@
                         <th>Name (AR)</th>
                         <th>Name (FR)</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>Status</th>
                         <th>CV</th>
                         <th>Actions</th>
@@ -64,19 +65,22 @@
                                          class="mgmt-avatar">
                                 @else
                                     <div class="mgmt-avatar mgmt-avatar--placeholder">
-                                        {{ strtoupper(substr(optional($m->translation('ar'))->name ?? 'M', 0, 1)) }}
+                                        {{ strtoupper(substr($m->translations->where('locale', 'ar')->first()?->name ?? $m->translations->where('locale', 'fr')->first()?->name ?? 'M', 0, 1)) }}
                                     </div>
                                 @endif
                             </td>
 
                             {{-- NAME AR --}}
-                            <td>{{ optional($m->translation('ar'))->name }}</td>
+                            <td>{{ $m->translations->where('locale', 'ar')->first()?->name ?: '—' }}</td>
 
                             {{-- NAME FR --}}
-                            <td>{{ optional($m->translation('fr'))->name }}</td>
+                            <td>{{ $m->translations->where('locale', 'fr')->first()?->name ?: '—' }}</td>
 
                             {{-- EMAIL --}}
                             <td class="mgmt-email">{{ $m->email }}</td>
+
+                            {{-- PHONE --}}
+                            <td>{{ $m->phone ?: '—' }}</td>
 
                             {{-- STATUS --}}
                             <td>
@@ -111,7 +115,7 @@
 
                     @empty
                         <tr>
-                            <td colspan="7" class="mgmt-empty">No members found.</td>
+                            <td colspan="8" class="mgmt-empty">No members found.</td>
                         </tr>
                     @endforelse
 
@@ -385,6 +389,7 @@ const docs = member.documents || [];
         <p class="modal-section-title">Basic Info</p>
         <table class="modal-info-table">
             ${row('Email', member.email)}
+            ${row('Phone', member.phone)}
             ${row('CV', cvHtml)}
         </table>
 

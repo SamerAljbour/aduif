@@ -21,10 +21,40 @@ class MemberController extends Controller
     // show the members to the public
     public function showMembers()
     {
+        $locale = app()->getLocale() === 'ar' ? 'ar' : 'fr';
+        $fallbackLocale = $locale === 'fr' ? 'ar' : 'fr';
+
         $members = Member::with(['translations'])->latest()->paginate(12);
-        // dd($members);
-        return view('members', compact('members'));
+
+        $memberProfiles = $members->getCollection()->map(function (Member $member) use ($locale, $fallbackLocale) {
+            $translation = $member->translations->firstWhere('locale', $locale)
+                ?: $member->translations->firstWhere('locale', $fallbackLocale);
+
+            return [
+                'id' => $member->id,
+                'email' => $member->email,
+                'phone' => $member->phone,
+                'photo' => $member->photo,
+                'cv' => $member->cv,
+                'translation' => [
+                    'locale' => $translation?->locale,
+                    'name' => $translation?->name,
+                    'specialization' => $translation?->specialization,
+                    'degree' => $translation?->degree,
+                    'graduation_university' => $translation?->graduation_university,
+                    'current_job' => $translation?->current_job,
+                    'workplace' => $translation?->workplace,
+                    'interests' => $translation?->interests,
+                    'bio' => $translation?->bio,
+                ],
+            ];
+        });
+
+        $members->setCollection($memberProfiles);
+
+        return view('members', compact('members', 'locale'));
     }
+
     /**
      * Show the form for creating a new resource.
      */
