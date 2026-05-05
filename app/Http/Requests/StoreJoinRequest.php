@@ -12,7 +12,8 @@ class StoreJoinRequest extends FormRequest
     {
         return [
             // 🔹 Basic
-            'name' => 'required|string|max:255',
+            'name_fr' => 'required|string|max:255',
+            'name_ar' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'phone' => 'nullable|string|max:20',
             'nationality' => 'required|in:jordanian,non_jordanian',
@@ -25,14 +26,24 @@ class StoreJoinRequest extends FormRequest
             'documents' => 'nullable|array',
             'documents.*' => 'file|mimes:pdf,doc,docx,jpg,jpeg,png,webp|max:10240',
 
-            // 🔹 Translation
-            'specialization' => 'nullable|string',
+            // 🔹 Translation - French
+            'specialization_fr' => 'nullable|string',
+            'graduation_university_fr' => 'nullable|string',
+            'current_job_fr' => 'nullable|string',
+            'workplace_fr' => 'nullable|string',
+            'interests_fr' => 'nullable|string',
+            'bio_fr' => 'nullable|string',
+
+            // 🔹 Translation - Arabic
+            'specialization_ar' => 'nullable|string',
+            'graduation_university_ar' => 'nullable|string',
+            'current_job_ar' => 'nullable|string',
+            'workplace_ar' => 'nullable|string',
+            'interests_ar' => 'nullable|string',
+            'bio_ar' => 'nullable|string',
+
+            // 🔹 Degree (shared)
             'degree' => 'nullable|string',
-            'graduation_university' => 'nullable|string',
-            'current_job' => 'nullable|string',
-            'workplace' => 'nullable|string',
-            'interests' => 'nullable|string',
-            'bio' => 'nullable|string',
         ];
     }
 }

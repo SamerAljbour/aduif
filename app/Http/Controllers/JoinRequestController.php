@@ -46,7 +46,6 @@ class JoinRequestController extends Controller
 
         // ✅ Create main record
         $join = JoinRequest::create([
-            'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'nationality' => $request->nationality,
@@ -54,16 +53,30 @@ class JoinRequestController extends Controller
             'cv' => $cvPath,
         ]);
 
-        // ✅ Save translation
+        // ✅ Save French translation
         $join->translations()->create([
-            'locale' => app()->getLocale(),
-            'specialization' => $request->specialization,
+            'locale' => 'fr',
+            'name' => $request->name_fr,
+            'specialization' => $request->specialization_fr,
             'degree' => $request->degree,
-            'graduation_university' => $request->graduation_university,
-            'current_job' => $request->current_job,
-            'workplace' => $request->workplace,
-            'interests' => $request->interests,
-            'bio' => $request->bio,
+            'graduation_university' => $request->graduation_university_fr,
+            'current_job' => $request->current_job_fr,
+            'workplace' => $request->workplace_fr,
+            'interests' => $request->interests_fr,
+            'bio' => $request->bio_fr,
+        ]);
+
+        // ✅ Save Arabic translation
+        $join->translations()->create([
+            'locale' => 'ar',
+            'name' => $request->name_ar,
+            'specialization' => $request->specialization_ar,
+            'degree' => $request->degree,
+            'graduation_university' => $request->graduation_university_ar,
+            'current_job' => $request->current_job_ar,
+            'workplace' => $request->workplace_ar,
+            'interests' => $request->interests_ar,
+            'bio' => $request->bio_ar,
         ]);
 
         // ✅ Multi documents upload
@@ -141,6 +154,7 @@ class JoinRequestController extends Controller
             // 🔹 Create member
             $member = Member::create([
                 'email' => $req->email,
+                'phone' => $req->phone,
                 'photo' => $req->photo,
                 'cv'    => $req->cv,
                 'status' => 'approved',
@@ -151,7 +165,7 @@ class JoinRequestController extends Controller
 
                 $member->translations()->create([
                     'locale' => $t->locale,
-                    'name'   => $req->name, // from main table
+                    'name'   => $t->name, // from translation
                     'specialization' => $t->specialization,
                     'degree' => $t->degree,
                     'graduation_university' => $t->graduation_university,
@@ -162,7 +176,6 @@ class JoinRequestController extends Controller
                 ]);
             }
 
-            // 🔥 NEW PART (IMPORTANT)
             // 🔹 Move documents to member (NO duplication)
             foreach ($req->documents as $doc) {
                 $doc->update([

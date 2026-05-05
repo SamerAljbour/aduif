@@ -12,6 +12,7 @@ class JoinRequestTranslation extends Model
     protected $fillable = [
         'join_request_id',
         'locale',
+        'name',
         'specialization',
         'degree',
         'graduation_university',

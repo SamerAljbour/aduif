@@ -26,7 +26,8 @@
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
-    max-width: 720px;
+    max-width: 811px;
+
     margin: 0 auto;
     padding: 2.5rem 2rem 5rem;
     border-radius: 2%;
@@ -41,6 +42,9 @@
     border-radius: 100px; margin-bottom: 1rem;
     letter-spacing: 0.06em; text-transform: uppercase;
 }
+.btn, button, input[type="submit"], input[type="reset"], input[type="button"] {
+letter-spacing: 0.2rem;
+    }
 .jr-tag span { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); display: inline-block; }
 .jr-header h1 {
     font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 700;
@@ -294,7 +298,7 @@
     {{-- Laravel validation errors --}}
     @if ($errors->any())
     <div class="jr-alert-errors">
-        <strong>Please fix the following errors:</strong>
+        <strong>{{ __('joinUs.validation.fix_errors') }}</strong>
         <ul>
             @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -305,9 +309,9 @@
 
     {{-- Header --}}
     <div class="jr-header">
-        <div class="jr-tag"><span></span> Membership Application</div>
-        <h1>Join Our Network</h1>
-        <p>Fill out the form below to submit your join request. Fields marked <span style="color:var(--brand)">*</span> are required.</p>
+        <div class="jr-tag"><span></span>  {{ __('joinUs.header.tag') }}</div>
+        <h1>{{ __('joinUs.header.title') }}</h1>
+        <p>{{ __('joinUs.header.desc') }}</p>
     </div>
 
     {{-- Progress bar --}}
@@ -318,16 +322,16 @@
     {{-- Step pills --}}
     <div class="jr-steps">
         <button type="button" class="jr-step-btn active" id="sb1" onclick="jrGoTo(1)">
-            <span class="jr-step-num">1</span> Basic Info
+            <span class="jr-step-num">1</span> {{ __('joinUs.steps.basic') }}
         </button>
         <button type="button" class="jr-step-btn" id="sb2" onclick="jrGoTo(2)">
-            <span class="jr-step-num">2</span> Professional
+            <span class="jr-step-num">2</span> {{ __('joinUs.steps.professional') }}
         </button>
         <button type="button" class="jr-step-btn" id="sb3" onclick="jrGoTo(3)">
-            <span class="jr-step-num">3</span> Documents
+            <span class="jr-step-num">3</span> {{ __('joinUs.steps.documents') }}
         </button>
         <button type="button" class="jr-step-btn" id="sb4" onclick="jrGoTo(4)">
-            <span class="jr-step-num">4</span> Review
+            <span class="jr-step-num">4</span> {{ __('joinUs.steps.review') }}
         </button>
     </div>
 
@@ -338,56 +342,68 @@
         <div class="jr-panel active" id="panel1">
 
             <div class="jr-card">
-                <div class="jr-card-title"><span class="dot"></span> Personal Information</div>
+                <div class="jr-card-title"><span class="dot"></span> {{ __('joinUs.sections.personal') }}</div>
                 <div style="display:flex;flex-direction:column;gap:1rem;">
 
                     <div class="jr-grid">
-                        <div class="jr-field @error('name') has-error @enderror">
-                            <label for="name">Full Name <span class="req">*</span></label>
-                            <input type="text" id="name" name="name"
-                                   value="{{ old('name') }}"
-                                   placeholder="Ahmad Al-Hassan"
+                        <div class="jr-field @error('name_fr') has-error @enderror">
+                            <label for="name_fr">{{ __('joinUs.fields.name_fr') }} <span class="req">*</span></label>
+                            <input type="text" id="name_fr" name="name_fr"
+                                   value="{{ old('name_fr') }}"
+                                   placeholder="{{ __('joinUs.placeholders.name_fr') }}"
                                    data-required="true" />
                             <span class="error-msg">
-                                @error('name') {{ $message }} @else Name is required @enderror
+                                @error('name_fr') {{ $message }} @enderror
                             </span>
                         </div>
-                        <div class="jr-field @error('email') has-error @enderror">
-                            <label for="email">Email Address <span class="req">*</span></label>
-                            <input type="email" id="email" name="email"
-                                   value="{{ old('email') }}"
-                                   placeholder="ahmad@example.com"
+                        <div class="jr-field @error('name_ar') has-error @enderror">
+                            <label for="name_ar">{{ __('joinUs.fields.name_ar') }} <span class="req">*</span></label>
+                            <input type="text" id="name_ar" name="name_ar"
+                                   value="{{ old('name_ar') }}"
+                                   placeholder="{{ __('joinUs.placeholders.name_ar') }}"
                                    data-required="true" />
                             <span class="error-msg">
-                                @error('email') {{ $message }} @else Valid email is required @enderror
+                                @error('name_ar') {{ $message }} @enderror
                             </span>
                         </div>
                     </div>
 
-                    <div class="jr-field @error('phone') has-error @enderror">
-                        <label for="phone">Phone Number</label>
-                        <input type="tel" id="phone" name="phone"
-                               value="{{ old('phone') }}"
-                               placeholder="+962 7X XXX XXXX" />
-                        @error('phone')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                    <div class="jr-grid">
+                        <div class="jr-field @error('email') has-error @enderror">
+                            <label for="email">{{ __('joinUs.fields.email') }} <span class="req">*</span></label>
+                            <input type="email" id="email" name="email"
+                                   value="{{ old('email') }}"
+                                   placeholder="{{ __('joinUs.placeholders.email') }}"
+                                   data-required="true" />
+                            <span class="error-msg">
+                                @error('email') {{ $message }} @enderror
+                            </span>
+                        </div>
+                        <div class="jr-field @error('phone') has-error @enderror">
+                            <label for="phone">{{ __('joinUs.fields.phone') }}</label>
+                            <input type="tel" id="phone" name="phone"
+                                   value="{{ old('phone') }}"
+                                   placeholder="{{ __('joinUs.placeholders.phone') }}" />
+                            @error('phone')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        </div>
                     </div>
 
                     <div class="jr-field @error('nationality') has-error @enderror">
-                        <label>Nationality <span class="req">*</span></label>
+                        <label id="nationality_label">{{ __('joinUs.fields.nationality') }} <span class="req">*</span></label>
                         <div class="jr-radio-group">
                             <label class="jr-radio-option {{ old('nationality', 'jordanian') === 'jordanian' ? 'selected' : '' }}"
                                    id="r_jo" onclick="jrSelectNat('jordanian')">
                                 <input type="radio" name="nationality" value="jordanian"
                                        {{ old('nationality', 'jordanian') === 'jordanian' ? 'checked' : '' }} />
                                 <span class="jr-radio-dot"></span>
-                                <span class="jr-radio-label">Jordanian</span>
+                                <span class="jr-radio-label">{{ __('joinUs.fields.jordanian') }}</span>
                             </label>
                             <label class="jr-radio-option {{ old('nationality') === 'non_jordanian' ? 'selected' : '' }}"
                                    id="r_nj" onclick="jrSelectNat('non_jordanian')">
                                 <input type="radio" name="nationality" value="non_jordanian"
                                        {{ old('nationality') === 'non_jordanian' ? 'checked' : '' }} />
                                 <span class="jr-radio-dot"></span>
-                                <span class="jr-radio-label">Non-Jordanian</span>
+                                <span class="jr-radio-label">{{ __('joinUs.fields.non_jordanian') }}</span>
                             </label>
                         </div>
                         @error('nationality')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
@@ -399,7 +415,7 @@
             <div class="jr-nav">
                 <div></div>
                 <button type="button" class="jr-btn-primary" onclick="jrNext(1)">
-                    Continue
+                    {{ __('joinUs.buttons.continue') }}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>
             </div>
@@ -409,71 +425,117 @@
         <div class="jr-panel" id="panel2">
 
             <div class="jr-card">
-                <div class="jr-card-title"><span class="dot"></span> Academic Background</div>
+                <div class="jr-card-title"><span class="dot"></span> {{ __('joinUs.sections.academic') }}</div>
                 <div style="display:flex;flex-direction:column;gap:1rem;">
                     <div class="jr-grid">
-                        <div class="jr-field @error('specialization') has-error @enderror">
-                            <label for="specialization">Specialization</label>
-                            <input type="text" id="specialization" name="specialization"
-                                   value="{{ old('specialization') }}"
-                                   placeholder="e.g. Computer Science" />
-                            @error('specialization')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        <div class="jr-field @error('specialization_fr') has-error @enderror">
+                            <label for="specialization_fr">{{ __('joinUs.fields.specialization_fr') }}</label>
+                            <input type="text" id="specialization_fr" name="specialization_fr"
+                                   value="{{ old('specialization_fr') }}"
+                                   placeholder="{{ __('joinUs.placeholders.specialization_fr') }}" />
+                            @error('specialization_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
                         </div>
+                        <div class="jr-field @error('specialization_ar') has-error @enderror">
+                            <label for="specialization_ar">{{ __('joinUs.fields.specialization_ar') }}</label>
+                            <input type="text" id="specialization_ar" name="specialization_ar"
+                                   value="{{ old('specialization_ar') }}"
+                                   placeholder="{{ __('joinUs.placeholders.specialization_ar') }}" />
+                            @error('specialization_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="jr-grid">
                         <div class="jr-field @error('degree') has-error @enderror">
-                            <label for="degree">Highest Degree</label>
+                            <label for="degree">{{ __('joinUs.fields.degree') }}</label>
                             <select id="degree" name="degree">
-                                <option value="">Select degree</option>
-                                @foreach(["Bachelor's", "Master's", "PhD", "Postdoctoral", "Other"] as $deg)
-                                    <option value="{{ $deg }}" {{ old('degree') === $deg ? 'selected' : '' }}>{{ $deg }}</option>
+                                <option value="">{{ __('joinUs.fields.select_degree') }}</option>
+                              @foreach(['bachelor', 'master', 'phd', 'postdoctoral', 'other'] as $deg)
+                                    <option value="{{ $deg }}" {{ old('degree') === $deg ? 'selected' : '' }}>
+                                        {{ __('members.degrees.' . $deg) }}
+                                    </option>
                                 @endforeach
                             </select>
                             @error('degree')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
                         </div>
+                        <div class="jr-field @error('graduation_university_fr') has-error @enderror">
+                            <label for="graduation_university_fr">{{ __('joinUs.fields.university_fr') }}</label>
+                            <input type="text" id="graduation_university_fr" name="graduation_university_fr"
+                                   value="{{ old('graduation_university_fr') }}"
+                                   placeholder="{{ __('joinUs.placeholders.university_fr') }}" />
+                            @error('graduation_university_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        </div>
                     </div>
-                    <div class="jr-field @error('graduation_university') has-error @enderror">
-                        <label for="graduation_university">Graduation University (France)</label>
-                        <input type="text" id="graduation_university" name="graduation_university"
-                               value="{{ old('graduation_university') }}"
-                               placeholder="e.g. Université Paris-Saclay" />
-                        @error('graduation_university')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                    <div class="jr-grid">
+                        <div class="jr-field @error('graduation_university_ar') has-error @enderror">
+                            <label for="graduation_university_ar">{{ __('joinUs.fields.university_ar') }}</label>
+                            <input type="text" id="graduation_university_ar" name="graduation_university_ar"
+                                   value="{{ old('graduation_university_ar') }}"
+                                   placeholder="{{ __('joinUs.placeholders.university_ar') }}" />
+                            @error('graduation_university_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        </div>
                     </div>
                 </div>
             </div>
 
             <div class="jr-card">
-                <div class="jr-card-title"><span class="dot"></span> Current Position</div>
+                <div class="jr-card-title"><span class="dot"></span> {{ __('joinUs.sections.current_position') }}</div>
                 <div style="display:flex;flex-direction:column;gap:1rem;">
                     <div class="jr-grid">
-                        <div class="jr-field @error('current_job') has-error @enderror">
-                            <label for="current_job">Current Job Title</label>
-                            <input type="text" id="current_job" name="current_job"
-                                   value="{{ old('current_job') }}"
-                                   placeholder="e.g. Senior Engineer" />
-                            @error('current_job')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        <div class="jr-field @error('current_job_fr') has-error @enderror">
+                            <label for="current_job_fr">{{ __('joinUs.fields.job_fr') }}</label>
+                            <input type="text" id="current_job_fr" name="current_job_fr"
+                                   value="{{ old('current_job_fr') }}"
+                                   placeholder="{{ __('joinUs.placeholders.job_fr') }}" />
+                            @error('current_job_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
                         </div>
-                        <div class="jr-field @error('workplace') has-error @enderror">
-                            <label for="workplace">Workplace / Organization</label>
-                            <input type="text" id="workplace" name="workplace"
-                                   value="{{ old('workplace') }}"
-                                   placeholder="e.g. Ministry of Education" />
-                            @error('workplace')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        <div class="jr-field @error('current_job_ar') has-error @enderror">
+                            <label for="current_job_ar">{{ __('joinUs.fields.job_ar') }}</label>
+                            <input type="text" id="current_job_ar" name="current_job_ar"
+                                   value="{{ old('current_job_ar') }}"
+                                   placeholder="{{ __('joinUs.placeholders.job_ar') }}" />
+                            @error('current_job_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        </div>
+                    </div>
+                    <div class="jr-grid">
+                        <div class="jr-field @error('workplace_fr') has-error @enderror">
+                            <label for="workplace_fr">{{ __('joinUs.fields.workplace_fr') }}</label>
+                            <input type="text" id="workplace_fr" name="workplace_fr"
+                                   value="{{ old('workplace_fr') }}"
+                                   placeholder="{{ __('joinUs.placeholders.workplace_fr') }}" />
+                            @error('workplace_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                        </div>
+                        <div class="jr-field @error('workplace_ar') has-error @enderror">
+                            <label for="workplace_ar">{{ __('joinUs.fields.workplace_ar') }}</label>
+                            <input type="text" id="workplace_ar" name="workplace_ar"
+                                   value="{{ old('workplace_ar') }}"
+                                   placeholder="{{ __('joinUs.placeholders.workplace_ar') }}" />
+                            @error('workplace_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="jr-card">
-                <div class="jr-card-title"><span class="dot"></span> About You</div>
+                <div class="jr-card-title"><span class="dot"></span> {{ __('joinUs.sections.about') }}</div>
                 <div style="display:flex;flex-direction:column;gap:1rem;">
-                    <div class="jr-field @error('interests') has-error @enderror">
-                        <label for="interests">Areas of Interest</label>
-                        <textarea id="interests" name="interests" placeholder="Research areas, hobbies, professional interests...">{{ old('interests') }}</textarea>
-                        @error('interests')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                    <div class="jr-field @error('interests_fr') has-error @enderror">
+                        <label for="interests_fr">{{ __('joinUs.fields.interests_fr') }}</label>
+                        <textarea id="interests_fr" name="interests_fr" placeholder="{{ __('joinUs.placeholders.interests_fr') }}">{{ old('interests_fr') }}</textarea>
+                        @error('interests_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
                     </div>
-                    <div class="jr-field @error('bio') has-error @enderror">
-                        <label for="bio">Short Bio</label>
-                        <textarea id="bio" name="bio" placeholder="A brief paragraph introducing yourself to the network...">{{ old('bio') }}</textarea>
-                        @error('bio')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                    <div class="jr-field @error('interests_ar') has-error @enderror">
+                        <label for="interests_ar">{{ __('joinUs.fields.interests_ar') }}</label>
+                        <textarea id="interests_ar" name="interests_ar" placeholder="{{ __('joinUs.placeholders.interests_ar') }}">{{ old('interests_ar') }}</textarea>
+                        @error('interests_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="jr-field @error('bio_fr') has-error @enderror">
+                        <label for="bio_fr">{{ __('joinUs.fields.bio_fr') }}</label>
+                        <textarea id="bio_fr" name="bio_fr" placeholder="{{ __('joinUs.placeholders.bio_fr') }}">{{ old('bio_fr') }}</textarea>
+                        @error('bio_fr')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
+                    </div>
+                    <div class="jr-field @error('bio_ar') has-error @enderror">
+                        <label for="bio_ar">{{ __('joinUs.fields.bio_ar') }}</label>
+                        <textarea id="bio_ar" name="bio_ar" placeholder="{{ __('joinUs.placeholders.bio_ar') }}">{{ old('bio_ar') }}</textarea>
+                        @error('bio_ar')<span class="error-msg" style="display:block">{{ $message }}</span>@enderror
                     </div>
                 </div>
             </div>
@@ -481,10 +543,10 @@
             <div class="jr-nav">
                 <button type="button" class="jr-btn-ghost" onclick="jrGoTo(1)">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                    Back
+                    {{ __('joinUs.buttons.back') }}
                 </button>
                 <button type="button" class="jr-btn-primary" onclick="jrNext(2)">
-                    Continue
+                    {{ __('joinUs.buttons.continue') }}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>
             </div>
@@ -494,11 +556,11 @@
         <div class="jr-panel" id="panel3">
 
             <div class="jr-card">
-                <div class="jr-card-title"><span class="dot"></span> Profile Photo & CV</div>
+                <div class="jr-card-title"><span class="dot"></span> {{ __('joinUs.sections.profile_documents') }}</div>
                 <div class="jr-grid">
                     {{-- Photo --}}
                     <div class="jr-field @error('photo') has-error @enderror">
-                        <label>Profile Photo</label>
+                        <label id="photo_label">{{ __('joinUs.upload.photo_label') }}</label>
                         <div class="jr-upload-zone" id="zone_photo">
                             <input type="file" name="photo" id="inp_photo"
                                    accept="image/jpeg,image/png,image/webp"
@@ -506,8 +568,8 @@
                             <div class="jr-upload-icon">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                             </div>
-                            <div class="jr-upload-title">Upload photo</div>
-                            <div class="jr-upload-sub">JPG, PNG, WEBP — max 5MB</div>
+                            <div class="jr-upload-title">{{ __('joinUs.upload.photo') }}</div>
+                            <div class="jr-upload-sub">{{ __('joinUs.upload.photo_hint') }}</div>
                             <div class="jr-file-name" id="photo_name"></div>
                         </div>
                         @error('photo')<span class="error-msg" style="display:block;margin-top:4px">{{ $message }}</span>@enderror
@@ -515,7 +577,7 @@
 
                     {{-- CV --}}
                     <div class="jr-field @error('cv') has-error @enderror">
-                        <label>CV / Résumé</label>
+                        <label id="cv_label">{{ __('joinUs.upload.cv_label') }}</label>
                         <div class="jr-upload-zone" id="zone_cv">
                             <input type="file" name="cv" id="inp_cv"
                                    accept=".pdf,.doc,.docx"
@@ -523,8 +585,8 @@
                             <div class="jr-upload-icon">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                             </div>
-                            <div class="jr-upload-title">Upload CV</div>
-                            <div class="jr-upload-sub">PDF, DOC, DOCX — max 10MB</div>
+                            <div class="jr-upload-title">{{ __('joinUs.upload.cv') }}</div>
+                            <div class="jr-upload-sub">{{ __('joinUs.upload.cv_hint') }}</div>
                             <div class="jr-file-name" id="cv_name"></div>
                         </div>
                         @error('cv')<span class="error-msg" style="display:block;margin-top:4px">{{ $message }}</span>@enderror
@@ -534,10 +596,9 @@
 
             {{-- Multi-doc upload --}}
             <div class="jr-card">
-                <div class="jr-card-title"><span class="dot"></span> Additional Documents</div>
+                <div class="jr-card-title" id="additional_docs_label"><span class="dot"></span> {{ __('joinUs.upload.docs') }}</div>
                 <p style="font-size:13px;color:var(--text-muted);margin-bottom:1rem;line-height:1.6;">
-                    Attach any supporting documents: certificates, recommendation letters, research papers, etc.
-                    You can upload multiple files at once.
+                    {{ __('joinUs.upload.docs_desc') }}
                 </p>
 
                 @error('documents')
@@ -556,13 +617,16 @@
                         <div class="jr-multi-zone-icon">
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                         </div>
-                        <div class="jr-multi-zone-title">Drop files here or click to browse</div>
-                        <div class="jr-multi-zone-sub">PDF, DOC, DOCX, JPG, PNG — max 10MB each</div>
+                        <div class="jr-multi-zone-title">{{ __('joinUs.upload.docs_drop') }}</div>
+                        <div class="jr-multi-zone-sub">{{ __('joinUs.upload.docs_hint') }}</div>
                     </div>
                 </div>
 
-                <div id="docs_list" class="jr-docs-list"></div>
-                <div id="docs_count" class="jr-docs-count" style="display:none"></div>
+                <div id="docs_list" class="jr-docs-list" data-remove="{{ __('joinUs.actions.remove') }}"></div>
+                <div id="docs_count" class="jr-docs-count" style="display:none"
+                     data-file="{{ __('joinUs.units.file') }}"
+                     data-files="{{ __('joinUs.units.files') }}"
+                     data-selected="{{ __('joinUs.units.selected') }}"></div>
 
                 {{-- Hidden inputs injected by JS --}}
                 <div id="docs_inputs"></div>
@@ -571,10 +635,10 @@
             <div class="jr-nav">
                 <button type="button" class="jr-btn-ghost" onclick="jrGoTo(2)">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                    Back
+                    {{ __('joinUs.buttons.back') }}
                 </button>
                 <button type="button" class="jr-btn-primary" onclick="jrNext(3)">
-                    Review
+                    {{ __('joinUs.buttons.review') }}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </button>
             </div>
@@ -582,26 +646,29 @@
 
         {{-- ══════════════════ STEP 4 — Review ══════════════════ --}}
         <div class="jr-panel" id="panel4">
-            <div class="jr-card">
-                <div class="jr-card-title"><span class="dot"></span> Review Your Application</div>
+            <div class="jr-card" id="jr-review-card"
+                 data-empty="{{ __('joinUs.review.empty') }}"
+                 data-not-uploaded="{{ __('joinUs.review.not_uploaded') }}"
+                 data-none="{{ __('joinUs.review.none') }}">
+                <div class="jr-card-title"><span class="dot"></span> {{ __('joinUs.review.title') }}</div>
 
-                <div class="jr-section-label">Personal Details</div>
+                <div class="jr-section-label">{{ __('joinUs.sections.personal') }}</div>
                 <div id="rv_personal"></div>
 
-                <div class="jr-section-label" style="margin-top:1.5rem">Professional Details</div>
+                <div class="jr-section-label" style="margin-top:1.5rem">{{ __('joinUs.review.professional') }}</div>
                 <div id="rv_professional"></div>
 
-                <div class="jr-section-label" style="margin-top:1.5rem">Documents</div>
+                <div class="jr-section-label" style="margin-top:1.5rem">{{ __('joinUs.review.documents') }}</div>
                 <div id="rv_documents"></div>
             </div>
 
             <div class="jr-nav">
                 <button type="button" class="jr-btn-ghost" onclick="jrGoTo(3)">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-                    Back
+                    {{ __('joinUs.buttons.back') }}
                 </button>
                 <button type="submit" class="jr-btn-primary jr-btn-submit">
-                    Submit Application
+                    {{ __('joinUs.buttons.submit') }}
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
                 </button>
             </div>
@@ -615,11 +682,11 @@
         <div class="jr-success-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <h2 style="font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-bottom:.75rem;">Application Submitted!</h2>
+        <h2 style="font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-bottom:.75rem;">{{ __('joinUs.success.title') }}</h2>
         <p style="color:var(--text-muted);font-size:15px;line-height:1.6;max-width:380px;margin-bottom:2rem;">
-            Thank you for your application. We'll review your request and get back to you via email within 3–5 business days.
+            {{ __('joinUs.success.desc') }}
         </p>
-        <span class="jr-badge jr-badge-green">Status: Pending Review</span>
+        <span class="jr-badge jr-badge-green">{{ __('joinUs.success.status') }}</span>
     </div>
     @endif
 
@@ -655,23 +722,10 @@
     window.jrGoTo = jrGoTo;
 
     function jrNext(from) {
-        if (from === 1) {
-            const name  = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            let ok = true;
-            setFieldError('name',  !name,  'Name is required');
-            setFieldError('email', !email, 'Valid email is required');
-            if (!name || !email) return;
-        }
         document.getElementById('sb' + from).classList.add('done');
         jrGoTo(from + 1);
     }
     window.jrNext = jrNext;
-
-    function setFieldError(id, hasError, msg) {
-        const wrap = document.getElementById(id).closest('.jr-field');
-        wrap.classList.toggle('has-error', hasError);
-    }
 
     // ── Single file (photo / cv) ──
     function jrSingleFile(type, input) {
@@ -686,7 +740,6 @@
     function jrAddDocs(newFiles) {
         for (let i = 0; i < newFiles.length; i++) {
             const f = newFiles[i];
-            if (f.size > 10 * 1024 * 1024) { alert(f.name + ' exceeds 10MB and was skipped.'); continue; }
             if (!docsFiles.find(x => x.name === f.name && x.size === f.size)) docsFiles.push(f);
         }
         renderDocsList();
@@ -704,6 +757,7 @@
     function renderDocsList() {
         const list  = document.getElementById('docs_list');
         const count = document.getElementById('docs_count');
+        const removeLabel = list.dataset.remove;
         list.innerHTML = '';
         docsFiles.forEach((f, i) => {
             const size = f.size < 1024 * 1024 ? Math.round(f.size / 1024) + ' KB' : (f.size / (1024*1024)).toFixed(1) + ' MB';
@@ -718,13 +772,13 @@
                     <div class="jr-doc-name" title="${f.name}">${f.name}</div>
                     <div class="jr-doc-size">${ext} · ${size}</div>
                 </div>
-                <button type="button" class="jr-doc-remove" onclick="removeDoc(${i})" title="Remove">&#x2715;</button>
+                <button type="button" class="jr-doc-remove" onclick="removeDoc(${i})" title="${removeLabel}">&#x2715;</button>
             `;
             list.appendChild(item);
         });
         if (docsFiles.length) {
             count.style.display = 'block';
-            count.textContent = docsFiles.length + ' file' + (docsFiles.length > 1 ? 's' : '') + ' selected';
+            count.textContent = docsFiles.length + ' ' + (docsFiles.length > 1 ? count.dataset.files : count.dataset.file) + ' ' + count.dataset.selected;
         } else {
             count.style.display = 'none';
         }
@@ -756,7 +810,25 @@
     window.jrDrop      = jrDrop;
 
     // ── Review builder ──
-    function gv(id) { return document.getElementById(id)?.value || '—'; }
+    function reviewText(key) {
+        return document.getElementById('jr-review-card').dataset[key];
+    }
+
+    function cleanLabel(text) {
+        return text.replace('*', '').trim();
+    }
+
+    function labelFor(id) {
+        const label = document.querySelector('label[for="' + id + '"]');
+        return label ? cleanLabel(label.textContent) : id;
+    }
+
+    function textFor(id) {
+        const node = document.getElementById(id);
+        return node ? cleanLabel(node.textContent) : id;
+    }
+
+    function gv(id) { return document.getElementById(id)?.value || reviewText('empty'); }
 
     function rv(key, val) {
         return `<div class="jr-review-row">
@@ -766,30 +838,38 @@
     }
 
     function buildReview() {
-        const nat    = document.querySelector('input[name="nationality"]:checked')?.value === 'jordanian' ? 'Jordanian' : 'Non-Jordanian';
-        const photo  = document.getElementById('photo_name').textContent || 'Not uploaded';
-        const cv     = document.getElementById('cv_name').textContent    || 'Not uploaded';
-        const docsSummary = docsFiles.length ? docsFiles.map(f => f.name).join(', ') : 'None';
+        const checkedNat = document.querySelector('input[name="nationality"]:checked');
+        const nat    = checkedNat?.closest('.jr-radio-option')?.querySelector('.jr-radio-label')?.textContent || reviewText('empty');
+        const photo  = document.getElementById('photo_name').textContent || reviewText('notUploaded');
+        const cv     = document.getElementById('cv_name').textContent    || reviewText('notUploaded');
+        const docsSummary = docsFiles.length ? docsFiles.map(f => f.name).join(', ') : reviewText('none');
 
         document.getElementById('rv_personal').innerHTML =
-            rv('Full Name', gv('name')) +
-            rv('Email', gv('email')) +
-            rv('Phone', gv('phone') || '—') +
-            rv('Nationality', `<span class="jr-badge jr-badge-green">${nat}</span>`);
+            rv(labelFor('name_fr'), gv('name_fr')) +
+            rv(labelFor('name_ar'), gv('name_ar')) +
+            rv(labelFor('email'), gv('email')) +
+            rv(labelFor('phone'), gv('phone')) +
+            rv(textFor('nationality_label'), `<span class="jr-badge jr-badge-green">${nat}</span>`);
 
         document.getElementById('rv_professional').innerHTML =
-            rv('Specialization', gv('specialization')) +
-            rv('Highest Degree', gv('degree')) +
-            rv('University (France)', gv('graduation_university')) +
-            rv('Current Job', gv('current_job')) +
-            rv('Workplace', gv('workplace')) +
-            rv('Interests', `<span style="max-width:280px;display:inline-block;text-align:right">${gv('interests')}</span>`) +
-            rv('Bio', `<span style="max-width:280px;display:inline-block;text-align:right">${gv('bio')}</span>`);
+            rv(labelFor('specialization_fr'), gv('specialization_fr')) +
+            rv(labelFor('specialization_ar'), gv('specialization_ar')) +
+            rv(labelFor('degree'), gv('degree')) +
+            rv(labelFor('graduation_university_fr'), gv('graduation_university_fr')) +
+            rv(labelFor('graduation_university_ar'), gv('graduation_university_ar')) +
+            rv(labelFor('current_job_fr'), gv('current_job_fr')) +
+            rv(labelFor('current_job_ar'), gv('current_job_ar')) +
+            rv(labelFor('workplace_fr'), gv('workplace_fr')) +
+            rv(labelFor('workplace_ar'), gv('workplace_ar')) +
+            rv(labelFor('interests_fr'), `<span style="max-width:280px;display:inline-block;text-align:right">${gv('interests_fr')}</span>`) +
+            rv(labelFor('interests_ar'), `<span style="max-width:280px;display:inline-block;text-align:right">${gv('interests_ar')}</span>`) +
+            rv(labelFor('bio_fr'), `<span style="max-width:280px;display:inline-block;text-align:right">${gv('bio_fr')}</span>`) +
+            rv(labelFor('bio_ar'), `<span style="max-width:280px;display:inline-block;text-align:right">${gv('bio_ar')}</span>`);
 
         document.getElementById('rv_documents').innerHTML =
-            rv('Profile Photo', photo) +
-            rv('CV / Résumé', cv) +
-            rv('Additional Docs', `<span style="max-width:280px;display:inline-block;text-align:right;font-weight:400;color:var(--text-muted)">${docsSummary}</span>`);
+            rv(textFor('photo_label'), photo) +
+            rv(textFor('cv_label'), cv) +
+            rv(textFor('additional_docs_label'), `<span style="max-width:280px;display:inline-block;text-align:right;font-weight:400;color:var(--text-muted)">${docsSummary}</span>`);
     }
 
     // ── If Laravel returned errors, jump to step 1 ──
