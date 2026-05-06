@@ -178,39 +178,12 @@
 .tab-content.active {
     display: block;
 }
-
-.entries {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-}
-
 /* FORCE SAME IMAGE HEIGHT */
-.col-block {
-    display: flex;
-}
-
-.item-entry {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    border: 1px solid #e5e7eb;
-    border-radius: 1.2rem;
-    background: #fff;
-    overflow: hidden;
-    transition: transform .25s ease, box-shadow .25s ease;
-}
-
-.item-entry:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 16px 45px rgba(15, 23, 42, .08);
-}
-
 .item-entry__thumb {
     width: 100%;
-    height: 180px;
+    height: 220px; /* you control this */
     overflow: hidden;
-    border-bottom: 1px solid #e5e7eb;
+    border-radius: 6px;
 }
 
 /* IMAGE COVER */
@@ -219,83 +192,36 @@
     height: 100%;
     object-fit: cover; /* 🔥 key line */
     display: block;
-    transition: transform .35s ease;
 }
 
-.item-entry:hover .item-entry__thumb img {
-    transform: scale(1.04);
+/* MAKE CARDS SAME HEIGHT */
+.col-block {
+    display: flex;
 }
 
+.item-entry {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* PUSH CONTENT TO FILL */
 .item-entry__text {
     flex: 1;
     display: flex;
     flex-direction: column;
-    padding: 1.25rem 1.5rem 1.6rem;
 }
 
-.item-entry__cat a {
-    color: #475569;
-    font-size: .95rem;
-    font-weight: 600;
-    letter-spacing: .04em;
-    text-transform: uppercase;
-}
-
-.item-entry__title {
-    margin: 1rem 0 .75rem;
-    font-size: 1.55rem;
-    line-height: 1.2;
-}
-
-.item-entry__title a {
-    color: #0f172a;
-    text-decoration: none;
-}
-
-.item-entry__title a:hover {
-    color: #2563eb;
-}
-
+/* KEEP "READ MORE" AT BOTTOM */
 .item-entry__content {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
 }
 
 .item-entry__content p {
     flex: 1;
-    margin: 0;
-    color: #475569;
-    line-height: 1.75;
-    font-size: 1rem;
 }
-
-.more-link {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: .75rem 1rem;
-    border-radius: .85rem;
-    background: #111827;
-    color: #fff;
-    text-decoration: none;
-    font-size: .95rem;
-    font-weight: 600;
-    width: fit-content;
-    transition: background .2s ease;
-}
-
-.more-link:hover {
-    background: #1d4ed8;
-}
-
-@media screen and (max-width: 720px) {
-    .entries {
-        grid-template-columns: 1fr;
-    }
-}
-
 </style>
 
 {{-- ================= SCRIPT ================= --}}

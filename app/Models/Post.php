@@ -8,10 +8,14 @@ class Post extends Model
 {
     protected $casts = [
         'event_date' => 'date',
+        'photos' => 'array',
+        'videos' => 'array',
     ];
     protected $fillable = [
         'event_date',
         'image',
+        'photos',
+        'videos',
         'type',
     ];
 

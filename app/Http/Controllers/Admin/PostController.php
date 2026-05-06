@@ -36,6 +36,8 @@ class PostController extends Controller
             'type' => $request->type,
             'event_date' => $request->event_date,
             'image' => $image,
+            'photos' => $this->storeFiles($request->file('photos', []), 'posts/photos'),
+            'videos' => $this->storeFiles($request->file('videos', []), 'posts/videos'),
         ]);
 
         $post->translations()->createMany([
@@ -70,6 +72,10 @@ class PostController extends Controller
     public function update(PostRequest $request, $id)
     {
         $post = Post::findOrFail($id);
+        $oldPhotos = $post->photos ?? [];
+        $oldVideos = $post->videos ?? [];
+        $keptPhotos = $request->input('existing_photos', []);
+        $keptVideos = $request->input('existing_videos', []);
 
         if ($request->hasFile('image')) {
 
@@ -80,10 +86,25 @@ class PostController extends Controller
             $post->image = $request->file('image')->store('posts', 'public');
         }
 
+        $photos = array_values(array_merge(
+            array_intersect($oldPhotos, $keptPhotos),
+            $this->storeFiles($request->file('photos', []), 'posts/photos')
+        ));
+
+        $videos = array_values(array_merge(
+            array_intersect($oldVideos, $keptVideos),
+            $this->storeFiles($request->file('videos', []), 'posts/videos')
+        ));
+
+        $this->deleteMissingFiles($oldPhotos, $photos);
+        $this->deleteMissingFiles($oldVideos, $videos);
+
         $post->update([
             'type' => $request->type,
             'event_date' => $request->event_date,
             'image' => $post->image,
+            'photos' => $photos,
+            'videos' => $videos,
         ]);
 
         foreach (['ar', 'fr'] as $locale) {
@@ -108,6 +129,9 @@ class PostController extends Controller
         if ($post->image) {
             Storage::disk('public')->delete($post->image);
         }
+
+        $this->deleteFiles($post->photos ?? []);
+        $this->deleteFiles($post->videos ?? []);
 
         $post->delete();
 
@@ -147,5 +171,31 @@ class PostController extends Controller
             ->first();
 
         return view('posts.singlePost', compact('post', 'prev', 'next'));
+    }
+
+    private function storeFiles(array|\Illuminate\Http\UploadedFile $files, string $directory): array
+    {
+        if ($files instanceof \Illuminate\Http\UploadedFile) {
+            $files = [$files];
+        }
+
+        return array_values(array_filter(array_map(
+            fn($file) => $file instanceof \Illuminate\Http\UploadedFile
+                ? $file->store($directory, 'public')
+                : null,
+            $files
+        )));
+    }
+
+    private function deleteMissingFiles(array $oldFiles, array $currentFiles): void
+    {
+        $this->deleteFiles(array_diff($oldFiles, $currentFiles));
+    }
+
+    private function deleteFiles(array $files): void
+    {
+        foreach ($files as $file) {
+            Storage::disk('public')->delete($file);
+        }
     }
 }
