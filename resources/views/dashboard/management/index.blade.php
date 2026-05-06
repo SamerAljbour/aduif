@@ -51,6 +51,7 @@
                         <th>Photo</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Phone</th>
                         <th>Position</th>
                         <th>Type</th>
                         <th>Actions</th>
@@ -89,6 +90,9 @@
                             {{-- EMAIL --}}
                             <td class="mgmt-email">{{ $m->email }}</td>
 
+                            {{-- PHONE --}}
+                            <td class="mgmt-email">{{ $m->phone ?: '—' }}</td>
+
                             {{-- POSITION --}}
                             <td>
                                 <span class="badge badge--pos">
@@ -103,6 +107,7 @@
                                         'current'  => 'badge--current',
                                         'former'   => 'badge--former',
                                         'honorary' => 'badge--honorary',
+                                        'consultant' => 'badge--honorary',
                                         default    => 'badge--former',
                                     };
                                 @endphp
@@ -140,7 +145,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="6" class="mgmt-empty">No managers found.</td>
+                            <td colspan="7" class="mgmt-empty">No managers found.</td>
                         </tr>
                     @endforelse
                 </tbody>

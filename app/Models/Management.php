@@ -13,10 +13,13 @@ class Management extends Model
     protected $fillable = [
         'photo',
         'email',
+        'phone',
         'position',
         'parent_id',
         'order',
         'type',
+        'date_from',
+        'date_to',
     ];
 
     /** Children in the hierarchy */

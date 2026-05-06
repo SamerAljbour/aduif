@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            {{-- ROW 3: EMAIL, POSITION, TYPE --}}
+            {{-- ROW 3: EMAIL, PHONE, POSITION, TYPE --}}
             <div class="mgmt-form__row">
                 <div class="mgmt-form__group">
                     <label class="mgmt-form__label">Email</label>
@@ -102,6 +102,17 @@
                            class="mgmt-form__control @error('email') is-invalid @enderror"
                            value="{{ old('email', $management->email ?? '') }}">
                     @error('email')
+                        <small class="mgmt-form__error">{{ $message }}</small>
+                    @enderror
+                </div>
+
+                <div class="mgmt-form__group">
+                    <label class="mgmt-form__label">Phone</label>
+                    <input type="tel"
+                           name="phone"
+                           class="mgmt-form__control @error('phone') is-invalid @enderror"
+                           value="{{ old('phone', $management->phone ?? '') }}">
+                    @error('phone')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
@@ -145,6 +156,10 @@
                         <option value="honorary"
                             {{ (old('type', $management->type ?? '') == 'honorary') ? 'selected' : '' }}>
                             Honorary
+                        </option>
+                        <option value="consultant"
+                            {{ (old('type', $management->type ?? '') == 'consultant') ? 'selected' : '' }}>
+                            Consultant
                         </option>
                     </select>
                     @error('type')

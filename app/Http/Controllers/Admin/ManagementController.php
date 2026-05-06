@@ -36,8 +36,10 @@ class ManagementController extends Controller
         $management = Management::create([
             'photo' => $photo,
             'email' => $request->email,
+            'phone' => $request->phone,
             'position' => $request->position, // enum
             'type' => $request->type,
+            'order' => $this->nextOrder($request->type),
         ]);
 
         // ✅ Create translations
@@ -72,6 +74,8 @@ class ManagementController extends Controller
     public function update(ManagementRequest $request, $id)
     {
         $management = Management::findOrFail($id);
+        $shouldAssignOrder = $management->order <= 0
+            || $management->type !== $request->type;
 
         // ✅ Update photo if exists
         if ($request->hasFile('photo')) {
@@ -80,11 +84,18 @@ class ManagementController extends Controller
         }
 
         // ✅ Update main fields
-        $management->update([
+        $data = [
             'email' => $request->email,
+            'phone' => $request->phone,
             'position' => $request->position,
             'type' => $request->type,
-        ]);
+        ];
+
+        if ($shouldAssignOrder) {
+            $data['order'] = $this->nextOrder($request->type, $management->parent_id, $management->id);
+        }
+
+        $management->update($data);
 
         // ❗ FIXED: correct updateOrCreate (DO NOT use translation())
         foreach (['ar', 'fr'] as $locale) {
@@ -114,28 +125,41 @@ class ManagementController extends Controller
     }
     public function showManagement()
     {
-        // ── Tab 1: current board — full hierarchy ──────────────────
         $tree = Management::whereNull('parent_id')
             ->where('type', 'current')
             ->with('allChildren.translations', 'translations')
             ->orderBy('order')
             ->get();
 
-        // ── Tab 2: former members — flat list, ordered by date_to desc ──
+        $currentMembers = self::flattenTree($tree)
+            ->sortBy([
+                fn ($a, $b) => (Management::positionOrder()[$a->position] ?? 99) <=> (Management::positionOrder()[$b->position] ?? 99),
+                fn ($a, $b) => $a->order <=> $b->order,
+            ])
+            ->values();
+
+        $honoraryMembers = Management::where('type', 'honorary')
+            ->with('translations')
+            ->orderBy('order')
+            ->get();
+
+        $advisoryMembers = Management::where('type', 'consultant')
+            ->with('translations')
+            ->orderBy('order')
+            ->get();
+
         $formerMembers = Management::where('type', 'former')
             ->with('translations')
             ->orderByDesc('date_to')
             ->orderBy('order')
             ->get();
 
-        // ── Tab 3: honorary + consultants — flat list ──────────────
-        $honoraryMembers = Management::whereIn('type', ['honorary', 'consultant'])
-            ->with('translations')
-            ->orderByRaw("FIELD(type, 'consultant', 'honorary')")  // consultants first
-            ->orderBy('order')
-            ->get();
-
-        return view('management.index', compact('tree', 'formerMembers', 'honoraryMembers'));;
+        return view('Management.index', compact(
+            'currentMembers',
+            'honoraryMembers',
+            'advisoryMembers',
+            'formerMembers'
+        ));
     }
 
     /** Flatten the entire tree into a single collection */
@@ -146,5 +170,14 @@ class ManagementController extends Controller
                 self::flattenTree($node->allChildren)
             );
         });
+    }
+
+    private function nextOrder(string $type, ?int $parentId = null, ?int $ignoreId = null): int
+    {
+        return Management::query()
+            ->where('type', $type)
+            ->where('parent_id', $parentId)
+            ->when($ignoreId, fn ($query) => $query->whereKeyNot($ignoreId))
+            ->max('order') + 1;
     }
 }

@@ -17,8 +17,9 @@ class ManagementRequest extends FormRequest
             // main table
             'photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'email' => 'nullable|email',
+            'phone' => 'nullable|string|max:30',
             'position' => 'required|string|max:255',
-            'type' => 'required|in:current,former,honorary',
+            'type' => 'required|in:current,former,honorary,consultant',
 
 
             // translations

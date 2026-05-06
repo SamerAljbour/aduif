@@ -1,14 +1,27 @@
 <?php
 
 return [
-    'close' => 'إغلاق',
+    'page_title' => 'إدارة النادي',
+    'title' => 'إدارة النادي',
+    'section_label' => 'إدارة النادي',
+    'tabs_label' => 'أقسام إدارة النادي',
+
+    'tab_current' => 'اللجنة الإدارية الحالية',
+    'tab_honorary_president' => 'الرئيس الفخري للنادي',
+    'tab_advisory' => 'اللجنة الاستشارية للنادي',
+    'tab_former_presidents' => 'رؤساء النادي السابقين',
 
     'bio' => 'نبذة',
-    'contact' => 'التواصل',
+    'contact' => 'معلومات التواصل',
     'email' => 'البريد الإلكتروني',
+    'phone' => 'رقم الهاتف',
+    'tenure' => 'فترة الخدمة',
+    'date_from' => 'من',
+    'date_to' => 'إلى',
+    'present' => 'الآن',
+    'close' => 'إغلاق',
     'no_details' => 'لا توجد تفاصيل إضافية.',
-    'click_details' => 'انقر للتفاصيل',
-
+    'unknown_member' => 'عضو الإدارة',
 
     'position_president' => 'رئيس النادي',
     'position_vice_president' => 'نائب الرئيس',
@@ -16,34 +29,20 @@ return [
     'position_treasurer' => 'أمين الصندوق',
     'position_board_member' => 'عضو هيئة إدارية',
 
-    // 'page_title' => 'فريقنا',
-    // 'title' => 'الهيكل الإداري',
-
-    'page_title'       => 'الهيئة الإدارية',
-    'title'            => 'الهيكل الإداري',
-
-    /* Tabs */
-    'tab_current'      => 'الإدارة الحالية',
-    'tab_former'       => 'الإدارة السابقة',
-    'tab_honorary'     => 'الشرفيون والمستشارون',
-
-    /* Sub-section headings */
-    'consultants'      => 'المستشارون',
-    'honorary'         => 'الأعضاء الشرفيون',
-
-    /* Badge labels */
+    'consultants' => 'المستشارون',
+    'honorary' => 'الأعضاء الشرفيون',
     'consultant_label' => 'مستشار',
-    'honorary_label'   => 'عضو شرفي',
+    'honorary_label' => 'عضو شرفي',
+    'honorary_president_label' => 'رئيس فخري',
 
-    /* Modal labels */
+    'tab_current_old' => 'الإدارة الحالية',
+    'tab_former' => 'الإدارة السابقة',
+    'tab_honorary' => 'الشرفيون والمستشارون',
+    'click_details' => 'انقر للتفاصيل',
 
-    'tenure'           => 'فترة الخدمة',
-    'date_from'        => 'من',
-    'date_to'          => 'إلى',
-    'present'          => 'الآن',
-
-
-    /* Empty states */
-    'no_former'        => 'لا يوجد أعضاء في الإدارة السابقة حالياً.',
-    'no_honorary'      => 'لا يوجد أعضاء شرفيون أو مستشارون حالياً.',
+    'no_current' => 'لا توجد بيانات للجنة الإدارية الحالية حالياً.',
+    'no_honorary_president' => 'لا توجد بيانات للرئيس الفخري حالياً.',
+    'no_advisory' => 'لا توجد بيانات للجنة الاستشارية حالياً.',
+    'no_former' => 'لا توجد بيانات لرؤساء النادي السابقين حالياً.',
+    'no_honorary' => 'لا يوجد أعضاء شرفيون أو مستشارون حالياً.',
 ];
