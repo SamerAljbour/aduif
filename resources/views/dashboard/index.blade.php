@@ -1,272 +1,393 @@
 ﻿@extends('adminLayouts.app')
 
 @section('content')
-<div class="container-fluid p-0">
+@php
+    $statusLabels = ['approved' => 'Approved', 'pending' => 'Pending', 'rejected' => 'Rejected'];
+    $statusClasses = ['approved' => 'badge--honorary', 'pending' => 'badge--current', 'rejected' => 'badge--former'];
+    $memberPieValues = [
+        $memberStatusDistribution['approved'] ?? 0,
+        $memberStatusDistribution['pending'] ?? 0,
+        $memberStatusDistribution['rejected'] ?? 0,
+    ];
+@endphp
 
-					<h1 class="h3 mb-3"><strong>Analytics</strong> Dashboard</h1>
+<div class="mgmt-wrap dashboard-overview">
 
-					<div class="row">
-						<div class="col-xl-6 col-xxl-5 d-flex">
-							<div class="w-100">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Sales</h5>
-													</div>
 
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="truck"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">2.382</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Visitors</h5>
-													</div>
+    <div class="mgmt-header dashboard-header">
+        <div>
+            <h1 class="mgmt-title">Website Statistics</h1>
+            <p class="dashboard-subtitle">Live overview of members, requests, projects, and published posts.</p>
+        </div>
+        <a href="{{ route('joinRequests.index') }}" class="btn-add">
+            <span class="btn-add__icon">+</span> Review Requests
+        </a>
+    </div>
 
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="users"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">14.212</h1>
-												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Earnings</h5>
-													</div>
 
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="dollar-sign"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">$21.300</h1>
-												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Orders</h5>
-													</div>
+    <div class="row g-3">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <div class="stat-card__top">
+                        <span class="stat-card__label">Total Members</span>
+                        <span class="stat text-primary"><i data-feather="users"></i></span>
+                    </div>
+                    <h2>{{ number_format($membersCount) }}</h2>
+                    <p><span class="text-success">{{ number_format($approvedMembersCount) }}</span> approved members</p>
+                </div>
+            </div>
+        </div>
 
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="shopping-cart"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">64</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
 
-						<div class="col-xl-6 col-xxl-7">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <div class="stat-card__top">
+                        <span class="stat-card__label">Join Requests</span>
+                        <span class="stat text-primary"><i data-feather="inbox"></i></span>
+                    </div>
+                    <h2>{{ number_format($joinRequestCount) }}</h2>
+                    <p><span class="text-warning">{{ number_format($pendingJoinRequests) }}</span> waiting, <span class="text-danger">{{ number_format($rejectedJoinRequests) }}</span> rejected</p>
+                </div>
+            </div>
+        </div>
 
-									<h5 class="card-title mb-0">Recent Movement</h5>
-								</div>
-								<div class="card-body py-3">
-									<div class="chart chart-sm">
-										<canvas id="chartjs-dashboard-line"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 
-					<div class="row">
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-2 order-xxl-3">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <div class="stat-card__top">
+                        <span class="stat-card__label">Projects</span>
+                        <span class="stat text-primary"><i data-feather="briefcase"></i></span>
+                    </div>
+                    <h2>{{ number_format($projectCount) }}</h2>
+                    <p>Projects shown on the website</p>
+                </div>
+            </div>
+        </div>
 
-									<h5 class="card-title mb-0">Browser Usage</h5>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="py-3">
-											<div class="chart chart-xs">
-												<canvas id="chartjs-dashboard-pie"></canvas>
-											</div>
-										</div>
 
-										<table class="table mb-0">
-											<tbody>
-												<tr>
-													<td>Chrome</td>
-													<td class="text-end">4306</td>
-												</tr>
-												<tr>
-													<td>Firefox</td>
-													<td class="text-end">3801</td>
-												</tr>
-												<tr>
-													<td>IE</td>
-													<td class="text-end">1689</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-12 col-xxl-6 d-flex order-3 order-xxl-2">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
+        <div class="col-sm-6 col-xl-3">
+            <div class="card stat-card">
+                <div class="card-body">
+                    <div class="stat-card__top">
+                        <span class="stat-card__label">Posts</span>
+                        <span class="stat text-primary"><i data-feather="file-text"></i></span>
+                    </div>
+                    <h2>{{ number_format($postCount) }}</h2>
+                    <p>News and memories published</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-									<h5 class="card-title mb-0">Real-Time</h5>
-								</div>
-								<div class="card-body px-4">
-									<div id="world_map" style="height:350px;"></div>
-								</div>
-							</div>
-						</div>
-						<div class="col-12 col-md-6 col-xxl-3 d-flex order-1 order-xxl-1">
-							<div class="card flex-fill">
-								<div class="card-header">
+    <div class="row g-3 mt-1">
+        <div class="col-xl-8 d-flex">
+            <div class="card flex-fill w-100">
+                <div class="card-header dashboard-card-header">
+                    <div>
+                        <h5 class="card-title mb-0">Members Joined This Week</h5>
+                        <small class="text-muted">Daily new member registrations</small>
+                    </div>
+                </div>
+                <div class="card-body py-3">
+                    <div class="chart chart-sm">
+                        <canvas id="chartjs-dashboard-line"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-									<h5 class="card-title mb-0">Calendar</h5>
-								</div>
-								<div class="card-body d-flex">
-									<div class="align-self-center w-100">
-										<div class="chart">
-											<div id="datetimepicker-dashboard"></div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
+        <div class="col-xl-4 d-flex">
+            <div class="card flex-fill w-100">
+                <div class="card-header dashboard-card-header">
+                    <div>
+                        <h5 class="card-title mb-0">Member Status</h5>
+                        <small class="text-muted">Approved, pending, and rejected</small>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="chart chart-xs mb-3">
+                        <canvas id="chartjs-dashboard-pie"></canvas>
+                    </div>
+                    <table class="table mb-0 dashboard-status-table">
+                        <tbody>
+                            @foreach($statusLabels as $key => $label)
+                                <tr>
+                                    <td><span class="badge {{ $statusClasses[$key] }}">{{ $label }}</span></td>
+                                    <td class="text-end">{{ number_format($memberStatusDistribution[$key] ?? 0) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                    <h6 class="dashboard-mini-title">Join Requests</h6>
+                    <table class="table mb-0 dashboard-status-table">
+                        <tbody>
+                            @foreach($statusLabels as $key => $label)
+                                <tr>
+                                    <td><span class="badge {{ $statusClasses[$key] }}">{{ $label }}</span></td>
+                                    <td class="text-end">{{ number_format($joinRequestStatusDistribution[$key] ?? 0) }}</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
-					<div class="row">
-						<div class="col-12 col-lg-8 col-xxl-9 d-flex">
-							<div class="card flex-fill">
-								<div class="card-header">
 
-									<h5 class="card-title mb-0">Latest Projects</h5>
-								</div>
-								<table class="table table-hover my-0">
-									<thead>
-										<tr>
-											<th>Name</th>
-											<th class="d-none d-xl-table-cell">Start Date</th>
-											<th class="d-none d-xl-table-cell">End Date</th>
-											<th>Status</th>
-											<th class="d-none d-md-table-cell">Assignee</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Project Apollo</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Fireball</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-danger">Cancelled</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project Hades</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Nitro</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">Vanessa Tucker</td>
-										</tr>
-										<tr>
-											<td>Project Phoenix</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-										<tr>
-											<td>Project X</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Sharon Lessman</td>
-										</tr>
-										<tr>
-											<td>Project Romeo</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-success">Done</span></td>
-											<td class="d-none d-md-table-cell">Christina Mason</td>
-										</tr>
-										<tr>
-											<td>Project Wombat</td>
-											<td class="d-none d-xl-table-cell">01/01/2021</td>
-											<td class="d-none d-xl-table-cell">31/06/2021</td>
-											<td><span class="badge bg-warning">In progress</span></td>
-											<td class="d-none d-md-table-cell">William Harris</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
+    <div class="row g-3 mt-1">
+        <div class="col-xl-4 d-flex">
+            <div class="card flex-fill w-100">
+                <div class="card-header dashboard-card-header">
+                    <div>
+                        <h5 class="card-title mb-0">Six-Month Growth</h5>
+                        <small class="text-muted">New members per month</small>
+                    </div>
+                </div>
+                <div class="card-body d-flex w-100">
+                    <div class="align-self-center chart chart-lg">
+                        <canvas id="chartjs-dashboard-bar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-									<h5 class="card-title mb-0">Monthly Sales</h5>
-								</div>
-								<div class="card-body d-flex w-100">
-									<div class="align-self-center chart chart-lg">
-										<canvas id="chartjs-dashboard-bar"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
 
-				</div>
+        <div class="col-xl-8 d-flex">
+            <div class="card flex-fill">
+                <div class="card-header dashboard-card-header">
+                    <div>
+                        <h5 class="card-title mb-0">Latest Members</h5>
+                        <small class="text-muted">Recently added to the website</small>
+                    </div>
+                    <a href="{{ route('members.index') }}" class="btn-row btn-row--edit">View all</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover my-0 dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th class="text-end">Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($recentMembers as $member)
+                                <tr>
+                                    <td>{{ $member->translation?->name ?? 'Unnamed member' }}</td>
+                                    <td class="text-muted">{{ $member->email ?? '-' }}</td>
+                                    <td><span class="badge {{ $statusClasses[$member->status] ?? 'badge--former' }}">{{ ucfirst($member->status) }}</span></td>
+                                    <td class="text-end text-muted">{{ $member->created_at?->format('M d, Y') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="mgmt-empty">No members yet.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row g-3 mt-1">
+        <div class="col-xl-7 d-flex">
+            <div class="card flex-fill">
+                <div class="card-header dashboard-card-header">
+                    <div>
+                        <h5 class="card-title mb-0">Latest Join Requests</h5>
+                        <small class="text-muted">Newest applications from the public form</small>
+                    </div>
+                    <a href="{{ route('joinRequests.index') }}" class="btn-row btn-row--edit">Manage</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover my-0 dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Nationality</th>
+                                <th>Status</th>
+                                <th class="text-end">Submitted</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($recentJoinRequests as $request)
+                                <tr>
+                                    <td>{{ $request->translation?->name ?? 'Unnamed applicant' }}</td>
+                                    <td>{{ ucfirst(str_replace('_', ' ', $request->nationality)) }}</td>
+                                    <td><span class="badge {{ $statusClasses[$request->status] ?? 'badge--former' }}">{{ ucfirst($request->status) }}</span></td>
+                                    <td class="text-end text-muted">{{ $request->created_at?->format('M d, Y') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="mgmt-empty">No join requests yet.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-xl-5 d-flex">
+            <div class="card flex-fill">
+                <div class="card-header dashboard-card-header">
+                    <div>
+                        <h5 class="card-title mb-0">Latest Projects</h5>
+                        <small class="text-muted">Most recently created project pages</small>
+                    </div>
+                    <a href="{{ route('projects.index') }}" class="btn-row btn-row--edit">View all</a>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover my-0 dashboard-table">
+                        <thead>
+                            <tr>
+                                <th>Project</th>
+                                <th>Status</th>
+                                <th class="text-end">Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($recentProjects as $project)
+                                @php
+                                    $projectStatusClass = match($project->status) {
+                                        'active' => 'badge--current',
+                                        'completed' => 'badge--honorary',
+                                        default => 'badge--former',
+                                    };
+                                @endphp
+                                <tr>
+                                    <td>{{ $project->translation?->title ?? 'Untitled project' }}</td>
+                                    <td><span class="badge {{ $projectStatusClass }}">{{ ucfirst(str_replace('_', ' ', $project->status)) }}</span></td>
+                                    <td class="text-end text-muted">{{ $project->created_at?->format('M d') }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="3" class="mgmt-empty">No projects yet.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.dashboardLineData = {
+        labels: @json($days->map(fn ($date) => $date->format('D'))->toArray()),
+        values: @json($dailyCounts),
+        label: 'New members'
+    };
+
+
+    window.dashboardPieData = {
+        labels: ['Approved', 'Pending', 'Rejected'],
+        values: @json($memberPieValues)
+    };
+
+
+    window.dashboardBarData = {
+        labels: @json($months->map(fn ($date) => $date->format('M'))->toArray()),
+        values: @json($monthlyMemberCounts)
+    };
+</script>
+
+<style>
+.dashboard-overview .card {
+    border: 0;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, .06);
+}
+
+.dashboard-header {
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.dashboard-subtitle {
+    margin: 6px 0 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.stat-card {
+    height: 100%;
+}
+
+.stat-card__top,
+.dashboard-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.stat-card__label {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.stat-card h2 {
+    margin: 14px 0 6px;
+    color: #0f172a;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.stat-card p {
+    margin: 0;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.dashboard-card-header {
+    min-height: 72px;
+}
+
+.dashboard-mini-title {
+    margin: 18px 0 8px;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+.dashboard-status-table td,
+.dashboard-table td,
+.dashboard-table th {
+    vertical-align: middle;
+}
+
+.dashboard-table th {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+
+@media (max-width: 575.98px) {
+    .dashboard-header {
+        flex-direction: column;
+    }
+
+
+    .dashboard-card-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+</style>
 @endsection
