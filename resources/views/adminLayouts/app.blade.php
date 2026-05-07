@@ -36,34 +36,32 @@
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
-			var ctx = document.getElementById("chartjs-dashboard-line").getContext("2d");
+			var lineCanvas = document.getElementById("chartjs-dashboard-line");
+			if (!lineCanvas) {
+				return;
+			}
+
+			var lineData = window.dashboardLineData || {
+				labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+				values: [0, 0, 0, 0, 0, 0, 0],
+				label: "New members"
+			};
+
+			var ctx = lineCanvas.getContext("2d");
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
 			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
 			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
 			// Line chart
-			new Chart(document.getElementById("chartjs-dashboard-line"), {
+			new Chart(lineCanvas, {
 				type: "line",
 				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+					labels: lineData.labels,
 					datasets: [{
-						label: "Sales ($)",
+						label: lineData.label,
 						fill: true,
 						backgroundColor: gradient,
 						borderColor: window.theme.primary,
-						data: [
-							2115,
-							1562,
-							1584,
-							1892,
-							1587,
-							1923,
-							2566,
-							2448,
-							2805,
-							3438,
-							2917,
-							3327
-						]
+						data: lineData.values
 					}]
 				},
 				options: {
@@ -91,7 +89,7 @@
 						}],
 						yAxes: [{
 							ticks: {
-								stepSize: 1000
+								stepSize: 1
 							},
 							display: true,
 							borderDash: [3, 3],
@@ -106,13 +104,22 @@
 	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
-			// Pie chart
-			new Chart(document.getElementById("chartjs-dashboard-pie"), {
+			var pieCanvas = document.getElementById("chartjs-dashboard-pie");
+			if (!pieCanvas) {
+				return;
+			}
+
+			var pieData = window.dashboardPieData || {
+				labels: ["Approved", "Pending", "Rejected"],
+				values: [0, 0, 0]
+			};
+
+			new Chart(pieCanvas, {
 				type: "pie",
 				data: {
-					labels: ["Chrome", "Firefox", "IE"],
+					labels: pieData.labels,
 					datasets: [{
-						data: [4306, 3801, 1689],
+						data: pieData.values,
 						backgroundColor: [
 							window.theme.primary,
 							window.theme.warning,
@@ -134,18 +141,27 @@
 	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
-			// Bar chart
-			new Chart(document.getElementById("chartjs-dashboard-bar"), {
+			var barCanvas = document.getElementById("chartjs-dashboard-bar");
+			if (!barCanvas) {
+				return;
+			}
+
+			var barData = window.dashboardBarData || {
+				labels: ["Members", "Projects", "Posts", "Join Requests"],
+				values: [0, 0, 0, 0]
+			};
+
+			new Chart(barCanvas, {
 				type: "bar",
 				data: {
-					labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+					labels: barData.labels,
 					datasets: [{
-						label: "This year",
+						label: "Totals",
 						backgroundColor: window.theme.primary,
 						borderColor: window.theme.primary,
 						hoverBackgroundColor: window.theme.primary,
 						hoverBorderColor: window.theme.primary,
-						data: [54, 67, 41, 55, 62, 45, 55, 73, 60, 76, 48, 79],
+						data: barData.values,
 						barPercentage: .75,
 						categoryPercentage: .5
 					}]
@@ -178,6 +194,11 @@
 	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
+			var mapElement = document.querySelector("#world_map");
+			if (!mapElement || typeof jsVectorMap === 'undefined') {
+				return;
+			}
+
 			var markers = [{
 					coords: [31.230391, 121.473701],
 					name: "Shanghai"
@@ -245,9 +266,14 @@
 	</script>
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
+			var pickerElement = document.getElementById("datetimepicker-dashboard");
+			if (!pickerElement || typeof flatpickr === 'undefined') {
+				return;
+			}
+
 			var date = new Date(Date.now() - 5 * 24 * 60 * 60 * 1000);
 			var defaultDate = date.getUTCFullYear() + "-" + (date.getUTCMonth() + 1) + "-" + date.getUTCDate();
-			document.getElementById("datetimepicker-dashboard").flatpickr({
+			pickerElement.flatpickr({
 				inline: true,
 				prevArrow: "<span title=\"Previous month\">&laquo;</span>",
 				nextArrow: "<span title=\"Next month\">&raquo;</span>",

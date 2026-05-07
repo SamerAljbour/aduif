@@ -1,6 +1,12 @@
 <?php
 return [
 
+    'hero-title-line1' => "L'Association des Diplômés",
+    'hero-title-line2' => "des Universités et Instituts Français",
+
+    'hero-description' => "Une association jordanienne réunissant les diplômés des universités et instituts français afin de renforcer les liens académiques, culturels et professionnels.",
+
+    'join-us' => 'Rejoignez nous',
     'about-us' => [
         'title' => "L'Association des Diplômés des Universités et Instituts Français ",
         'description' => "L'ADUIF est une association jordanienne pour les diplômés d’universités et d’instituts français, fondé à Amman en 1991 dans le but de se réunir et d’organiser des activités académiques, culturelles et sociales. L'association vise également à faire reconnaître les diplômes français auprès des autorités jordaniennes. Elle sert aussi bien à créer un espace convivial qui convenait aux activités diversifiées de l’association. Les différents comités administratifs organisent des réceptions, des tables rondes, des conférences et des cours de langue en collaboration avec l’Ambassade de France et des établissements locaux. L’association regroupait plus de cent cinquante membres.",

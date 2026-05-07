@@ -9,41 +9,41 @@
 						Pages
 					</li>
 
-					<li class="sidebar-item active">
-						<a class="sidebar-link" href="index.html">
+					<li class="sidebar-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+						<a class="sidebar-link" href="{{ route('admin.dashboard') }}">
               <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
             </a>
 					</li>
 
-					<li class="sidebar-item">
+					<li class="sidebar-item {{ request()->routeIs('managements.*') ? 'active' : '' }}">
     <a class="sidebar-link" href="{{ route('managements.index') }}">
         <i data-feather="briefcase"></i>
         <span>Managers</span>
     </a>
 </li>
 
-<li class="sidebar-item">
+<li class="sidebar-item {{ request()->routeIs('posts.*') ? 'active' : '' }}">
     <a class="sidebar-link" href="{{ route('posts.index') }}">
         <i data-feather="file-text"></i>
         <span>Posts</span>
     </a>
 </li>
 
-<li class="sidebar-item">
+<li class="sidebar-item {{ request()->routeIs('projects.*') ? 'active' : '' }}">
     <a class="sidebar-link" href="{{ route('projects.index') }}">
         <i data-feather="folder"></i>
         <span>Projects</span>
     </a>
 </li>
 
-<li class="sidebar-item">
+<li class="sidebar-item {{ request()->routeIs('joinRequests.*') ? 'active' : '' }}">
     <a class="sidebar-link" href="{{ route('joinRequests.index') }}">
         <i data-feather="user-plus"></i>
         <span>Join Requests</span>
     </a>
 </li>
 
-<li class="sidebar-item">
+<li class="sidebar-item {{ request()->routeIs('members.*') ? 'active' : '' }}">
     <a class="sidebar-link" href="{{ route('members.index') }}">
         <i data-feather="users"></i>
         <span>Members</span>

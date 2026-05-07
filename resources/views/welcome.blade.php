@@ -13,21 +13,20 @@
 
             <div class="row home-content__main wide">
 
-                <h1>
-                An Amazing App <br>
-                That Does It All.
-                </h1>
+                 <h1>
+            {{ __('home-page.hero-title-line1') }} <br>
+            {{ __('home-page.hero-title-line2') }}
+        </h1>
 
-                <h3>
-                Voluptatem ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia.
-                </h3>
-
+        <h3>
+            {{ __('home-page.hero-description') }}
+        </h3>
                 <div class="home-content__button">
-                    <a class="btn-video" href="https://player.vimeo.com/video/14592941?color=00a650&title=0&byline=0&portrait=0" data-lity>
+                    {{-- <a class="btn-video" href="https://player.vimeo.com/video/14592941?color=00a650&title=0&byline=0&portrait=0" data-lity>
                         <span class="video-icon"></span>
-                    </a>
-                    <a href="#download" class="smoothscroll btn btn--primary btn--large">
-                        Get The App
+                    </a> --}}
+                    <a href="{{ route('join-us.index') }}" class="smoothscroll btn btn--primary btn--large">
+                        {{ __('home-page.join-us') }}
                     </a>
                 </div>
 
@@ -47,8 +46,8 @@
     ================================================== -->
     <section id="download" class="s-download">
 
-        <div class="row download-content">
-            <div class="col-six md-seven download-content__text pull-right" data-aos="fade-up">
+        <div class="row download-content @if(app()->getLocale() !== 'ar') flex-row-reverse @endif">
+            <div class="col-six md-seven download-content__text @if(app()->getLocale() !== 'ar') pull-right @endif" data-aos="fade-up">
                 <h1 class="display-2">
                     {{ __('home-page.about-us.title') }}
                 </h1>
@@ -61,8 +60,9 @@
                 </ul> --}}
             </div>
             <div class="download-content__image" data-aos="fade-up">
-                <img src="images/phone-app-profile-550.png"
-                     srcset="images/phone-app-profile-550.png 1x, images/phone-app-profile-1100.png 2x">
+                <img src="{{ asset('user/images/about-us-final.png') }}"
+     srcset="{{ asset('user/images/about-us-final.png') }} 1x, {{ asset('user/images/about-us-final.png') }} 2x"
+     alt="Home Photo">
             </div>
         </div>
 

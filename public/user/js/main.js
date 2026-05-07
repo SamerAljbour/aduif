@@ -251,8 +251,17 @@
     var clSmoothScroll = function () {
 
         $('.smoothscroll').on('click', function (e) {
+            var href = $(this).attr('href');
+            if (!href || href.indexOf('#') !== 0) {
+                return;
+            }
+
             var target = this.hash,
                 $target = $(target);
+
+            if (!$target.length) {
+                return;
+            }
 
             e.preventDefault();
             e.stopPropagation();
