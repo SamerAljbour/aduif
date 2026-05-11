@@ -51,5 +51,26 @@ return [
 
         ]
     ],
+    'get_in_touch' => 'تواصل معنا',
 
+    'stay_in_touch' => 'لنبقى على تواصل',
+
+    'contact_desc' => 'هل لديك سؤال أو ترغب بالتواصل معنا؟<br>أرسل لنا رسالة وسنرد عليك قريبًا.',
+
+    'full_name' => 'الاسم الكامل',
+    'email_address' => 'البريد الإلكتروني',
+    'subject' => 'الموضوع',
+    'message' => 'الرسالة',
+
+    'placeholder_name' => 'الاسم الكامل',
+    'placeholder_email' => 'example@email.com',
+    'placeholder_subject' => 'عن ماذا تريد التحدث؟',
+    'placeholder_message' => 'أخبرنا كيف يمكننا مساعدتك…',
+
+    'send_message' => 'إرسال الرسالة',
+    'required_fields' => 'يرجى تعبئة جميع الحقول المطلوبة.',
+    'too_many_attempts' => 'عدد المحاولات كبير، يرجى الانتظار قليلاً.',
+    'something_wrong' => 'حدث خطأ ما، يرجى المحاولة مرة أخرى.',
+    'network_error' => 'خطأ في الشبكة، يرجى التحقق من الاتصال.',
+    'sending' => 'جاري الإرسال...',
 ];

@@ -12,7 +12,7 @@ class PostController extends Controller
     /* ───────── INDEX ───────── */
     public function index()
     {
-        $posts = Post::with('translations')->latest()->get();
+        $posts = Post::with('translations')->latest()->paginate(10);
 
         return view('dashboard.posts.index', compact('posts'));
     }

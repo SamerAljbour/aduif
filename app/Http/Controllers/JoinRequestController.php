@@ -135,7 +135,7 @@ class JoinRequestController extends Controller
     }
     public function adminIndex()
     {
-        $requests = JoinRequest::with('translations')->latest()->get();
+        $requests = JoinRequest::with('translations')->latest()->paginate(10);
         return view('dashboard.joinRequests.index', compact('requests'));
     }
 

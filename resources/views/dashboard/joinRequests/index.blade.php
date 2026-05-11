@@ -139,6 +139,11 @@
             </table>
 
         </div>
+         @if($joinRequests->hasPages())
+            <div class="mgmt-pagination">
+                {{ $joinRequests->onEachSide(1)->links('pagination::bootstrap-5') }}
+            </div>
+        @endif
     </div>
 </div>
 

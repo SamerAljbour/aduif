@@ -165,6 +165,11 @@
             </p>
 
         </div>
+         @if($posts->hasPages())
+            <div class="mgmt-pagination">
+                {{ $posts->onEachSide(1)->links('pagination::bootstrap-5') }}
+            </div>
+        @endif
     </div>
 
 </div>

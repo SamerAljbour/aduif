@@ -10,7 +10,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::with('translations')->latest()->get();
+        $projects = Project::with('translations')->latest()->paginate(10);
         return view('dashboard.projects.index', compact('projects'));
     }
 

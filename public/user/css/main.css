@@ -3285,7 +3285,7 @@ html.no-csstransitions .home-content__main {
  *
  * ------------------------------------------------------------------- */
 .s-footer {
-    padding-top: 16rem;
+    /* padding-top: 16rem; */
     padding-bottom: 12rem;
     color: rgba(255, 255, 255, 0.4);
     position: relative;

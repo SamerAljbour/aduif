@@ -123,6 +123,11 @@
             </table>
 
         </div>
+         @if($members->hasPages())
+            <div class="mgmt-pagination">
+                {{ $members->onEachSide(1)->links('pagination::bootstrap-5') }}
+            </div>
+        @endif
     </div>
 </div>
 

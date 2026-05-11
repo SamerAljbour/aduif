@@ -124,7 +124,11 @@
                 No projects match your search.
             </p>
         </div>
-
+ @if($projects->hasPages())
+            <div class="mgmt-pagination">
+                {{ $projects->onEachSide(1)->links('pagination::bootstrap-5') }}
+            </div>
+        @endif
     </div>
 
 </div>

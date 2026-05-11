@@ -13,7 +13,9 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $members = Member::with(['translations', 'documents'])->latest()->get();
+        $members = Member::with(['translations', 'documents'])
+            ->latest()
+            ->paginate(10);
         // dd($members);
         return view('dashboard.members.index', compact('members'));
     }

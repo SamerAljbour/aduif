@@ -11,16 +11,19 @@
         <nav class="row header-nav-wrap wide">
             <ul class="header-main-nav">
                 <li class="{{ request()->is('/') ? 'current' : '' }}">
-                    <a class="smoothscroll" href="#home" title="intro"> {{ __('header.home') }} </a>
+                    <a class="smoothscroll"  href="{{ url('/') }}#home" title="intro"> {{ __('header.home') }} </a>
                 </li>
                 <li>
-                    <a class="smoothscroll" href="#about" title="about"> {{ __('header.about_us') }} </a>
+                    <a class="smoothscroll" href="{{ url('/') }}#about-us" title="about"> {{ __('header.about_us') }} </a>
                 </li>
                 <li>
-                    <a class="smoothscroll" href="#features" title="features"> {{ __('header.goals') }} </a>
+                    <a class="smoothscroll" href="{{ url('/') }}#mission" title="mission"> {{ __('header.mission') }} </a>
                 </li>
                 <li>
-                    <a class="smoothscroll" href="#pricing" title="pricing"> {{ __('header.vision') }} </a>
+                    <a class="smoothscroll" href="{{ url('/') }}#vision" title="vision"> {{ __('header.vision') }} </a>
+                </li>
+                <li>
+                    <a class="smoothscroll" href="{{ url('/') }}#goals" title="goals"> {{ __('header.goals') }} </a>
                 </li>
                 <li class="{{ request()->routeIs('managements.showManagers') ? 'current' : '' }}">
                     <a href="{{ route('managements.showManagers') }}" title="managers"> {{ __('header.management') }} </a>

@@ -51,4 +51,26 @@ return [
 
         ]
     ],
+    'get_in_touch' => 'Contactez-nous',
+
+    'stay_in_touch' => 'Restons en contact',
+
+    'contact_desc' => 'Vous avez une question ou souhaitez nous contacter ?<br>Envoyez-nous un message et nous vous répondrons rapidement.',
+
+    'full_name' => 'Nom complet',
+    'email_address' => 'Adresse e-mail',
+    'subject' => 'Sujet',
+    'message' => 'Message',
+
+    'placeholder_name' => 'Jean Dupont',
+    'placeholder_email' => 'jean@example.com',
+    'placeholder_subject' => 'De quoi s’agit-il ?',
+    'placeholder_message' => 'Dites-nous comment nous pouvons vous aider…',
+
+    'send_message' => 'Envoyer le message',
+    'required_fields' => 'Veuillez remplir tous les champs obligatoires.',
+    'too_many_attempts' => 'Trop de tentatives. Veuillez patienter un instant.',
+    'something_wrong' => 'Une erreur est survenue. Veuillez réessayer.',
+    'network_error' => 'Erreur réseau. Veuillez vérifier votre connexion.',
+    'sending' => 'Envoi...',
 ];
