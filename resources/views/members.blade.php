@@ -16,7 +16,7 @@
             --mem-line:   #d8dee8;
             --mem-soft:   #f6f7f9;
             --mem-gold:   #b9933f;
-            --mem-green:  #00a650;
+            --mem-green:  #FF7782;
             --mem-blue:   #234d73;
         }
 
@@ -73,7 +73,7 @@
             padding: .3rem .75rem; border-radius: .45rem;
             backdrop-filter: blur(4px);
         }
-        .mem-badge--green { background: rgba(0,166,80,.82); }
+        .mem-badge--green { background: rgba(255,119,130,.82); }
 
         /* ── Content side ── */
         .mem-card__content {

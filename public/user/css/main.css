@@ -105,7 +105,7 @@ body {
  * ## links
  * ------------------------------------------------------------------- */
 a {
-    color: #00a650;
+    color: #FF7782;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
 }
@@ -449,7 +449,7 @@ ul.disc li::before {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #00a650;
+    background: #FF7782;
     position: absolute;
     left: -16px;
     top: 11px;
@@ -458,7 +458,7 @@ ul.disc li::before {
 
 dt {
     margin: 0;
-    color: #00a650;
+    color: #FF7782;
 }
 
 dd {
@@ -578,7 +578,7 @@ form,
 }
 
 .pace .pace-progress {
-    background: #00a650;
+    background: #FF7782;
     position: fixed;
     z-index: 900;
     top: 0;
@@ -621,7 +621,7 @@ form,
     margin-left: -30px;
     margin-top: -30px;
     padding: 0;
-    background-color: #00a650;
+    background-color: #FF7782;
     border-radius: 100%;
     -webkit-animation: sk-scaleout 1s infinite ease-in-out;
     animation: sk-scaleout 1s infinite ease-in-out;
@@ -753,8 +753,8 @@ input[type="password"]:focus,
 textarea:focus,
 select:focus {
     color: #000000;
-    box-shadow: 0 0 5px rgba(0, 166, 80, 0.8);
-    border: 1px solid #00a650;
+    box-shadow: 0 0 5px rgba(255, 119, 130, 0.8);
+    border: 1px solid #FF7782;
 }
 
 label,
@@ -837,7 +837,7 @@ textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-    -webkit-text-fill-color: #00a650;
+    -webkit-text-fill-color: #FF7782;
     transition: background-color 5000s ease-in-out 0s;
 }
 
@@ -895,8 +895,8 @@ button.btn--primary,
 input[type="submit"].btn--primary,
 input[type="reset"].btn--primary,
 input[type="button"].btn--primary {
-    background: #00a650;
-    border-color: #00a650;
+    background: #FF7782;
+    border-color: #FF7782;
     color: #ffffff;
 }
 
@@ -910,8 +910,8 @@ button.btn--primary:focus,
 input[type="submit"].btn--primary:focus,
 input[type="reset"].btn--primary:focus,
 input[type="button"].btn--primary:focus {
-    background: #008d44;
-    border-color: #008d44;
+    background: #FF7782;
+    border-color: #FF7782;
 }
 
 /* button modifiers
@@ -997,8 +997,8 @@ input::-moz-focus-inner {
 }
 
 .alert-box--success {
-    background-color: #c8e675;
-    color: #758c36;
+    background-color: rgba(255, 119, 130, 0.14);
+    color: #FF7782;
 }
 
 .alert-box--info {
@@ -1177,7 +1177,7 @@ input::-moz-focus-inner {
 }
 
 .stats-tabs li a:hover {
-    color: #00a650;
+    color: #FF7782;
 }
 
 .stats-tabs li a em {
@@ -1376,7 +1376,7 @@ input::-moz-focus-inner {
 
 .pgn .current,
 .pgn .current:hover {
-    background-color: #00a650;
+    background-color: #FF7782;
     color: white;
 }
 
@@ -1491,7 +1491,7 @@ input::-moz-focus-inner {
 
 .subhead {
     margin-top: 0;
-    color: #00a650;
+    color: #FF7782;
     font-size: 2.4rem;
     line-height: 1.1667;
     margin-bottom: 0.8rem;
@@ -1519,7 +1519,7 @@ input::-moz-focus-inner {
     display: inline-block;
     height: 1px;
     width: 320px;
-    background-color: #00a650;
+    background-color: #FF7782;
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -1583,7 +1583,7 @@ input::-moz-focus-inner {
 
 .slick-slider .slick-dots li.slick-active button,
 .slick-slider .slick-dots li:hover button {
-    background: #00a650;
+    background: #FF7782;
 }
 
 /* -------------------------------------------------------------------
@@ -1745,11 +1745,11 @@ input::-moz-focus-inner {
 
 .header-nav-wrap .header-main-nav li a:hover,
 .header-nav-wrap .header-main-nav li a:focus {
-    color: #00a650;
+    color: #FF7782;
 }
 
 .header-nav-wrap .header-main-nav li.current a {
-    color: #00a650;
+    color: #FF7782;
 }
 
 .header-nav-wrap .header-social {
@@ -1784,7 +1784,7 @@ input::-moz-focus-inner {
 
 .header-nav-wrap .header-social li a:hover,
 .header-nav-wrap .header-social li a:focus {
-    background-color: #00a650;
+    background-color: #FF7782;
 }
 
 .s-header--blog .header-social li a {
@@ -2111,7 +2111,7 @@ input::-moz-focus-inner {
     content: "";
     height: 2px;
     width: 8rem;
-    background-color: #00a650;
+    background-color: #FF7782;
     position: absolute;
     left: 8px;
     top: 0;
@@ -2192,11 +2192,11 @@ input::-moz-focus-inner {
 }
 
 .btn-video:hover::after {
-    color: #00a650;
+    color: #FF7782;
 }
 
 .btn-video:hover .video-icon {
-    background-color: #00a650;
+    background-color: #FF7782;
     background-image: url(../images/icons/icon-play.svg);
 }
 
@@ -2630,7 +2630,7 @@ html.no-csstransitions .home-content__main {
 .s-about {
     padding-top: 20rem;
     padding-bottom: 0;
-    background-color: #00a650;
+    background-color: #FF7782;
     color: rgba(255, 255, 255, 0.8);
     overflow: hidden;
     position: relative;
@@ -2666,7 +2666,7 @@ html.no-csstransitions .home-content__main {
 }
 
 .about-desc__slider .slick-dots li button {
-    background: #006933;
+    background: #FF7782;
 }
 
 .about-desc__slider .slick-dots li.slick-active button,
@@ -2769,7 +2769,7 @@ html.no-csstransitions .home-content__main {
     font-weight: 700;
     text-align: center;
     color: #ffffff;
-    background-color: #00a650;
+    background-color: #FF7782;
     height: 4.8rem;
     width: 4.8rem;
     border-radius: 50%;
@@ -2815,7 +2815,7 @@ html.no-csstransitions .home-content__main {
 
 .item-feature__icon {
     float: left;
-    color: #00a650;
+    color: #FF7782;
     font-size: 4.8rem;
     margin-top: -1.8rem;
 }
@@ -2973,7 +2973,7 @@ html.no-csstransitions .home-content__main {
 
 .testimonials__name {
     font-weight: 700;
-    color: #00a650;
+    color: #FF7782;
     margin-right: 4px;
 }
 
@@ -3087,7 +3087,7 @@ html.no-csstransitions .home-content__main {
 }
 
 .item-plan--popular .item-plan__block {
-    background-color: #00a650;
+    background-color: #FF7782;
     border: none;
 }
 
@@ -3108,8 +3108,8 @@ html.no-csstransitions .home-content__main {
 
 .item-plan--popular .btn:hover,
 .item-plan--popular .btn:focus {
-    background-color: #006933;
-    border: 0.2rem solid #006933;
+    background-color: #FF7782;
+    border: 0.2rem solid #FF7782;
     color: #ffffff;
 }
 
@@ -3166,7 +3166,7 @@ html.no-csstransitions .home-content__main {
  * ------------------------------------------------------------------- */
 .s-download {
     padding-top: 12rem;
-    background-color: #00a650;
+    background-color: #FF7782;
     color: rgba(255, 255, 255, 0.8);
     overflow: hidden;
     position: relative;
@@ -3297,11 +3297,11 @@ html.no-csstransitions .home-content__main {
 
 .s-footer a:hover,
 .s-footer a:focus {
-    color: #00a650;
+    color: #FF7782;
 }
 
 .s-footer .display-2 {
-    color: #00a650;
+    color: #FF7782;
     margin-bottom: 1.6rem;
 }
 
@@ -3388,8 +3388,8 @@ html.no-csstransitions .home-content__main {
 
 .footer__subscribe #mc-form input[type="submit"] {
     color: #ffffff;
-    background: #00a650;
-    border-color: #00a650;
+    background: #FF7782;
+    border-color: #FF7782;
     margin-right: 0;
     padding: 0 20px 0 24px;
     height: 6.4rem;
@@ -3461,7 +3461,7 @@ html.no-csstransitions .home-content__main {
 
 .footer__social li a:hover,
 .footer__social li a:focus {
-    background-color: #00a650;
+    background-color: #FF7782;
     color: #ffffff;
 }
 
@@ -3499,7 +3499,7 @@ html.no-csstransitions .home-content__main {
 
 .footer__site-links li a:hover,
 .footer__site-links li a:focus {
-    color: #00a650;
+    color: #FF7782;
 }
 
 /* -------------------------------------------------------------------
@@ -3513,7 +3513,7 @@ html.no-csstransitions .home-content__main {
     font-weight: 600;
     font-size: 2.2rem;
     line-height: 1.455;
-    color: #00a650;
+    color: #FF7782;
 }
 
 .footer__contact .footer__mail-link:hover,
@@ -3584,7 +3584,7 @@ html.no-csstransitions .home-content__main {
 .go-top a:focus,
 .go-top a:visited:hover,
 .go-top a:visited:focus {
-    background-color: #00a650;
+    background-color: #FF7782;
 }
 
 .go-top.link-is-visible {
@@ -3751,7 +3751,7 @@ a.page-header__search-trigger span {
 
 a.page-header__search-trigger:hover span,
 a.page-header__search-trigger:focus span {
-    color: #00a650;
+    color: #FF7782;
 }
 
 .page-header__search {
@@ -3866,7 +3866,7 @@ a.page-header__search-trigger:focus span {
 
 .page-header__overlay-close:hover::before,
 .page-header__overlay-close:hover::after {
-    background-color: #00a650;
+    background-color: #FF7782;
 }
 
 .page-header__overlay-close::before,
@@ -3923,7 +3923,7 @@ body.search-is-visible {
     content: "";
     height: 1px;
     width: 100px;
-    background-color: rgba(0, 166, 80, 0.5);
+    background-color: rgba(255, 119, 130, 0.5);
     position: absolute;
     top: 0;
     left: 50%;
@@ -4100,7 +4100,7 @@ body.search-is-visible {
 
 .entries .item-entry__title a:hover,
 .entries .item-entry__title a:focus {
-    border-bottom: 1px solid rgba(0, 166, 80, 0.5);
+    border-bottom: 1px solid rgba(255, 119, 130, 0.5);
 }
 
 .entries .item-entry__cat {
@@ -4133,7 +4133,7 @@ body.search-is-visible {
 
 .entries .more-link:hover,
 .entries .more-link:focus {
-    color: #00a650;
+    color: #FF7782;
 }
 
 .entries-wrap + .pagination-wrap {
@@ -4249,7 +4249,7 @@ body.search-is-visible {
 
 .blog-single-nav a:hover,
 .blog-single-nav a:focus {
-    color: #00a650;
+    color: #FF7782;
 }
 
 .blog-single-nav__prev {
@@ -4667,14 +4667,14 @@ mission-eyebrow {
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #00a650;
+    color: #FF7782;
     margin-bottom: 0.8rem;
 }
 
 .mission-divider {
     width: 48px;
     height: 3px;
-    background: #00a650;
+    background: #FF7782;
     margin: 1.6rem auto 0;
     border-radius: 2px;
 }
@@ -4687,7 +4687,7 @@ mission-eyebrow {
 }
 
 .mission-card {
-    border: 1.5px solid #e6f9ee;
+    border: 1.5px solid rgba(255, 119, 130, 0.28);
     border-radius: 14px;
     padding: 3rem 2.8rem;
     position: relative;
@@ -4701,20 +4701,20 @@ mission-eyebrow {
     left: 0;
     width: 4px;
     height: 100%;
-    background: #00a650;
+    background: #FF7782;
     border-radius: 4px 0 0 4px;
 }
 
 .mission-card__icon {
     width: 52px;
     height: 52px;
-    background: #e6f9ee;
+    background: rgba(255, 119, 130, 0.14);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.6rem;
-    color: #00a650;
+    color: #FF7782;
 }
 
 .mission-card__icon svg {
@@ -4728,7 +4728,7 @@ mission-eyebrow {
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #00a650;
+    color: #FF7782;
     margin-bottom: 0.6rem;
 }
 

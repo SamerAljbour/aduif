@@ -629,9 +629,9 @@
 {{-- ======= STYLES ======= --}}
 <style>
 :root {
-    --c-green:      #00a650;
-    --c-green-dark: #008f44;
-    --c-green-glow: rgba(0, 166, 80, 0.18);
+    --c-green:      #FF7782;
+    --c-green-dark: #FF7782;
+    --c-green-glow: rgba(255, 119, 130, 0.18);
     --c-dark:       #111314;
     --c-dark-2:     #1a1d1e;
     --c-white:      #ffffff;
@@ -664,7 +664,7 @@
     height: 400px;
     bottom: -150px;
     left: -100px;
-    background: radial-gradient(circle, rgba(0,166,80,0.10) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(255,119,130,0.10) 0%, transparent 65%);
 }
 
 /* ── Inner layout ───────────────────────────────────────── */
@@ -752,7 +752,7 @@
     width: 38px;
     height: 38px;
     background: var(--c-green-glow);
-    border: 1px solid rgba(0,166,80,0.3);
+    border: 1px solid rgba(255,119,130,0.3);
     border-radius: 50%;
     flex-shrink: 0;
     color: var(--c-green);
@@ -817,8 +817,8 @@
 
 .contact-input:focus {
     border-color: var(--c-green);
-    background: rgba(0,166,80,0.06);
-    box-shadow: 0 0 0 3px rgba(0,166,80,0.12);
+    background: rgba(255,119,130,0.06);
+    box-shadow: 0 0 0 3px rgba(255,119,130,0.12);
 }
 
 .contact-input.is-invalid {
@@ -873,7 +873,7 @@
     background: var(--c-green-dark);
     border-color: var(--c-green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(0,166,80,0.30);
+    box-shadow: 0 10px 24px rgba(255,119,130,0.30);
 }
 
 .contact-btn:active  { transform: translateY(0); }
@@ -905,8 +905,8 @@
     font-size: 1.3rem;
 }
 .contact-alert--success {
-    background: rgba(0,166,80,0.12);
-    color: #69e09a;
+    background: rgba(255,119,130,0.12);
+    color: #FF7782;
     border-left: 3px solid var(--c-green);
 }
 
