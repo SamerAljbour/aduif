@@ -16,9 +16,9 @@
                 </p>
 
                 <ul class="footer__social">
-                    <li><a href="#0"><i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                    <li><a href="#0"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
-                    <li><a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.facebook.com/people/ADUIF-Jordanie/100064318494988/" target="_blank"> <i class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
+                    {{-- <li><a href="#0"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                    <li><a href="#0"><i class="fab fa-instagram" aria-hidden="true"></i></a></li> --}}
                 </ul>
             </div>
 
@@ -53,10 +53,9 @@
                 </p>
 
                 <div class="cl-copyright">
-                    <span><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
- {{ __('footer.copyright') }} <script>document.write(new Date().getFullYear());</script> {{ __('footer.rights_reserved') }}
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</span>
+                    <span>
+                        {{ __('footer.copyright') }} <script>document.write(new Date().getFullYear());</script> {{ __('footer.rights_reserved') }}
+                    </span>
                 </div>
             </div>
 

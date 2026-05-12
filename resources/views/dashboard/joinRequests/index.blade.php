@@ -139,9 +139,9 @@
             </table>
 
         </div>
-         @if($joinRequests->hasPages())
+         @if($requests->hasPages())
             <div class="mgmt-pagination">
-                {{ $joinRequests->onEachSide(1)->links('pagination::bootstrap-5') }}
+                {{ $requests->onEachSide(1)->links('pagination::bootstrap-5') }}
             </div>
         @endif
     </div>

@@ -48,9 +48,9 @@
 
             <ul class="header-social">
 
-    <li><a href="#0"><i class="fab fa-facebook-f"></i></a></li>
-    <li><a href="#0"><i class="fab fa-twitter"></i></a></li>
-    <li><a href="#0"><i class="fab fa-instagram"></i></a></li>
+    <li><a href="https://www.facebook.com/people/ADUIF-Jordanie/100064318494988/" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+    {{-- <li><a href="#0"><i class="fab fa-twitter"></i></a></li>
+    <li><a href="#0"><i class="fab fa-instagram"></i></a></li> --}}
 
     <li>
         @if(app()->getLocale() == 'fr')
