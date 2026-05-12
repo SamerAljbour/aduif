@@ -45,7 +45,9 @@ Route::middleware(['locale'])->group(function () {
     Route::resource('join-us', JoinRequestController::class);
 
     Route::get('/', function () {
-        return view('welcome');
+        $projects = \App\Models\Project::with('translations')->latest()->get();
+
+        return view('welcome', compact('projects'));
     });
     Route::get('members', [MemberController::class, 'showMembers'])
         ->name('members.showMembers');

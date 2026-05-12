@@ -19,6 +19,17 @@ return [
         'title' => "notre objectif ",
         'description' => "L'association vise à créer une plateforme de communication et de mise en réseau pour ses membres en organisant des événements culturels. Elle a également pour objectif de collaborer avec des établissements d'enseignement et des entreprises afin d'établir des partenariats bénéfiques pour les diplômés. De surcroît, elle cherche à encourager la participation aux initiatives sociales et communautaires pour contribuer au développement de la société jordanienne, tout en renforçant le principe de l’interculturalité dans le but de respecter et de préserver les identités culturelles",
     ],
+    'projects' => [
+        'title' => 'Nos projets',
+        'description' => 'Decouvrez les initiatives et projets portes par l association.',
+        'empty_title' => 'Projets a venir',
+        'empty_description' => 'De nouveaux projets seront bientot annonces. Revenez prochainement pour decouvrir nos initiatives.',
+        'statuses' => [
+            'coming_soon' => 'Bientot',
+            'active' => 'Actif',
+            'completed' => 'Termine',
+        ],
+    ],
     'mission' => [
         'eyebrow' => 'Notre mission',
         'title' => 'Ce qui nous anime',

@@ -48,6 +48,7 @@
             <table class="mgmt-table">
                 <thead>
                     <tr>
+                        <th>Photo</th>
                         <th>Title (AR)</th>
                         <th>Title (FR)</th>
                         <th>Status</th>
@@ -58,6 +59,19 @@
                 <tbody id="mgmtTableBody">
                     @forelse($projects as $p)
                         <tr class="mgmt-row">
+
+                            {{-- PHOTO --}}
+                            <td>
+                                @if($p->image)
+                                    <img src="{{ asset('storage/'.$p->image) }}"
+                                         class="mgmt-avatar"
+                                         alt="project photo">
+                                @else
+                                    <div class="mgmt-avatar mgmt-avatar--placeholder">
+                                        P
+                                    </div>
+                                @endif
+                            </td>
 
                             {{-- TITLE AR --}}
                             <td>
@@ -114,7 +128,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="mgmt-empty">No projects found.</td>
+                            <td colspan="5" class="mgmt-empty">No projects found.</td>
                         </tr>
                     @endforelse
                 </tbody>

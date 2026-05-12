@@ -229,7 +229,6 @@
     <!-- features
     ================================================== -->
     <section id="goals" class="s-features target-section">
-
         <div class="row section-header narrower align-center has-bottom-sep" data-aos="fade-up">
             <div class="col-full">
                 <h1 class="display-1">
@@ -240,9 +239,75 @@
                 <p class="lead">
                     {{ __('home-page.goals.description') }}
                 </p>
+            </div>
+        </div>
+    </section>
+
+    {{-- projects section --}}
+    <section id="projects" class="s-projects target-section">
+        @php
+            $projectLocale = app()->getLocale();
+            $projectFallbackLocale = $projectLocale === 'ar' ? 'fr' : 'ar';
+        @endphp
+
+        <div class="row section-header narrower align-center has-bottom-sep" data-aos="fade-up">
+            <div class="col-full">
+                <h1 class="display-1">
+                    {{ __('home-page.projects.title') }}
+                </h1>
+                <div class="mission-divider" style="margin-bottom: 3rem;"></div>
+
+                <p class="lead">
+                    {{ __('home-page.projects.description') }}
                 </p>
             </div>
         </div>
+
+        @if(($projects ?? collect())->isNotEmpty())
+            <div class="row projects-grid {{ $projectLocale === 'ar' ? 'projects-grid--rtl' : 'projects-grid--ltr' }}" data-aos="fade-up">
+                @foreach($projects as $project)
+                    @php
+                        $translation = $project->translations->firstWhere('locale', $projectLocale)
+                            ?: $project->translations->firstWhere('locale', $projectFallbackLocale);
+
+                        $statusLabel = __('home-page.projects.statuses.' . $project->status);
+                    @endphp
+
+                    @if($translation)
+                        <article class="project-card" dir="{{ $projectLocale === 'ar' ? 'rtl' : 'ltr' }}">
+                            <div class="project-card__media">
+                                @if($project->image)
+                                    <img src="{{ asset('storage/'.$project->image) }}"
+                                         alt="{{ $translation->title }}">
+                                @else
+                                    <div class="project-card__placeholder">
+                                        {{ mb_strtoupper(mb_substr($translation->title, 0, 1)) }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="project-card__body">
+                                <span class="project-card__status project-card__status--{{ $project->status }}">
+                                    {{ $statusLabel }}
+                                </span>
+
+                                <h3 class="project-card__title">
+                                    {{ $translation->title }}
+                                </h3>
+
+                                <p class="project-card__desc">
+                                    {{ $translation->description }}
+                                </p>
+                            </div>
+                        </article>
+                    @endif
+                @endforeach
+            </div>
+        @else
+            <div class="row projects-coming-soon" data-aos="fade-up" dir="{{ $projectLocale === 'ar' ? 'rtl' : 'ltr' }}">
+                <p>{{ __('home-page.projects.statuses.coming_soon') }}</p>
+            </div>
+        @endif
     </section>
 
 
@@ -638,6 +703,150 @@
     --c-red:        #e53935;
 }
 
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    margin-top: 5rem;
+}
+
+.s-projects {
+    padding: 14rem 0 12rem;
+    background: #f2f2f2;
+}
+
+.projects-grid--single {
+    grid-template-columns: minmax(0, 560px);
+    justify-content: center;
+}
+
+.projects-coming-soon {
+    justify-content: center;
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.projects-coming-soon p {
+    margin: 0;
+    color: var(--c-green);
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.3;
+}
+
+.projects-grid--rtl {
+    direction: rtl;
+}
+
+.projects-grid--ltr {
+    direction: ltr;
+}
+
+.project-card {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    text-align: left;
+}
+
+.project-card--empty {
+    text-align: center;
+}
+
+.project-card--empty .project-card__status {
+    align-self: center;
+}
+
+.projects-grid--rtl .project-card {
+    text-align: right;
+}
+
+.project-card__media {
+    aspect-ratio: 16 / 10;
+    background: #f8fafc;
+    overflow: hidden;
+}
+
+.project-card__media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.project-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 119, 130, 0.12);
+    color: var(--c-green);
+    font-size: 5rem;
+    font-weight: 800;
+}
+
+.project-card__body {
+    padding: 2.4rem 2.4rem 2.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    flex: 1;
+}
+
+.project-card__status {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    border-radius: 999px;
+    padding: 0.35rem 1rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.projects-grid--rtl .project-card__status {
+    align-self: flex-end;
+}
+
+.project-card__status--active {
+    background: rgba(255, 119, 130, 0.14);
+    color: var(--c-green);
+}
+
+.project-card__status--completed {
+    background: #eef2ff;
+    color: #4338ca;
+}
+
+.project-card__status--coming_soon {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.project-card__title {
+    margin: 0;
+    color: #0f172a;
+    font-size: 2.2rem;
+    line-height: 1.25;
+    font-weight: 800;
+}
+
+.project-card__desc {
+    margin: 0;
+    color: #475569;
+    font-size: 1.45rem;
+    line-height: 1.75;
+}
+
 /* ── Section ────────────────────────────────────────────── */
 .s-contact {
     position: relative;
@@ -912,11 +1121,14 @@
 
 /* ── Responsive ─────────────────────────────────────────── */
 @media screen and (max-width: 900px) {
+    .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .contact__info    { padding-right: 0; margin-bottom: 4rem; }
     .contact__heading { font-size: 4rem !important; }
 }
 
 @media screen and (max-width: 600px) {
+    .projects-grid { grid-template-columns: 1fr; gap: 20px; }
+    .project-card__body { padding: 2rem; }
     .s-contact        { padding: 6rem 0 5rem; }
     .cf-row           { grid-template-columns: 1fr; }
     .contact-card     { padding: 2.4rem 2rem; }
