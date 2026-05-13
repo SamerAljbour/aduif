@@ -703,14 +703,14 @@ a.page-header__search-trigger span {
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #FF7782;
+    color: #191231;
     margin-bottom: 0.8rem;
 }
 
 .mission-divider {
     width: 48px;
     height: 3px;
-    background: #FF7782;
+    background: #191231;
     margin: 1.6rem auto 0;
     border-radius: 2px;
 }
@@ -723,7 +723,7 @@ a.page-header__search-trigger span {
 }
 
 .mission-card {
-    border: 1.5px solid rgba(255, 119, 130, 0.28);
+    border: 1.5px solid rgba(25, 18, 49, 0.28);
     border-radius: 14px;
     padding: 3rem 2.8rem;
     position: relative;
@@ -740,14 +740,14 @@ a.page-header__search-trigger span {
     left: auto;
     width: 4px;
     height: 100%;
-    background: #FF7782;
+    background: #191231;
     border-radius: 0 4px 4px 0; /* ← flipped radius */
 }
 
 .mission-card__icon {
     width: 52px;
     height: 52px;
-    background: rgba(255, 119, 130, 0.14);
+    background: rgba(25, 18, 49, 0.14);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -755,7 +755,7 @@ a.page-header__search-trigger span {
     margin-bottom: 1.6rem;
     margin-right: 0;
     margin-left: auto; /* pushes icon to the right */
-    color: #FF7782;
+    color: #191231;
 }
 
 .mission-card__icon svg {
@@ -770,7 +770,7 @@ a.page-header__search-trigger span {
     font-weight: 700;
     letter-spacing: 0.08em; /* reduced — Arabic doesn't need wide tracking */
     text-transform: uppercase;
-    color: #FF7782;
+    color: #191231;
     margin-bottom: 0.6rem;
     font-family: "IBM Plex Sans", sans-serif;
 }

@@ -5,9 +5,9 @@
 
 <style>
 :root {
-    --brand: #FF7782;
-    --brand-dark: #FF7782;
-    --brand-light: rgba(255, 119, 130, 0.14);
+    --brand: #191231;
+    --brand-dark: #191231;
+    --brand-light: rgba(25, 18, 49, 0.14);
     --text: #0f172a;
     --text-muted: #64748b;
     --surface: #ffffff;
@@ -142,7 +142,7 @@ letter-spacing: 0.2rem;
     display: flex; align-items: center; gap: 10px; background: var(--bg);
     user-select: none;
 }
-.jr-radio-option:hover { border-color: var(--brand); background: rgba(255, 119, 130, 0.08); }
+.jr-radio-option:hover { border-color: var(--brand); background: rgba(25, 18, 49, 0.08); }
 .jr-radio-option.selected { border-color: var(--brand); background: var(--brand-light); }
 .jr-radio-option input[type=radio] { display: none; }
 .jr-radio-dot {
@@ -163,7 +163,7 @@ letter-spacing: 0.2rem;
     text-align: center; cursor: pointer; transition: all 0.2s;
     background: var(--bg); position: relative;
 }
-.jr-upload-zone:hover { border-color: var(--brand); background: rgba(255, 119, 130, 0.08); }
+.jr-upload-zone:hover { border-color: var(--brand); background: rgba(25, 18, 49, 0.08); }
 .jr-upload-zone.has-file { border-color: var(--brand); border-style: solid; background: var(--brand-light); }
 .jr-upload-zone input[type=file] {
     position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
@@ -183,7 +183,7 @@ letter-spacing: 0.2rem;
     cursor: pointer;
 }
 .jr-multi-zone:hover,
-.jr-multi-zone.drag-over { border-color: var(--brand); background: rgba(255, 119, 130, 0.08); }
+.jr-multi-zone.drag-over { border-color: var(--brand); background: rgba(25, 18, 49, 0.08); }
 .jr-multi-zone input[type=file] {
     position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
 }
@@ -579,7 +579,7 @@ letter-spacing: 0.2rem;
                                    onchange="jrSingleFile('photo', this)"
                                    data-required="true" />
                             <div class="jr-upload-icon">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF7782" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                             </div>
                             <div class="jr-upload-title">{{ __('joinUs.upload.photo') }}</div>
                             <div class="jr-upload-sub">{{ __('joinUs.upload.photo_hint') }}</div>
@@ -597,7 +597,7 @@ letter-spacing: 0.2rem;
                                    onchange="jrSingleFile('cv', this)"
                                    data-required="true" />
                             <div class="jr-upload-icon">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF7782" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                             </div>
                             <div class="jr-upload-title">{{ __('joinUs.upload.cv') }}</div>
                             <div class="jr-upload-sub">{{ __('joinUs.upload.cv_hint') }}</div>
@@ -629,7 +629,7 @@ letter-spacing: 0.2rem;
                            onchange="jrAddDocs(this.files)" />
                     <div class="jr-multi-zone-inner">
                         <div class="jr-multi-zone-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF7782" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                         </div>
                         <div class="jr-multi-zone-title">{{ __('joinUs.upload.docs_drop') }}</div>
                         <div class="jr-multi-zone-sub">{{ __('joinUs.upload.docs_hint') }}</div>
@@ -697,7 +697,7 @@ letter-spacing: 0.2rem;
     @if(session('success'))
     <div class="jr-success active">
         <div class="jr-success-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#FF7782" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h2 style="font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-bottom:.75rem;">{{ __('joinUs.success.title') }}</h2>
         <p style="color:var(--text-muted);font-size:15px;line-height:1.6;max-width:380px;margin-bottom:2rem;">
@@ -855,7 +855,7 @@ letter-spacing: 0.2rem;
             item.className = 'jr-doc-item';
             item.innerHTML = `
                 <div class="jr-doc-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF7782" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 </div>
                 <div class="jr-doc-info">
                     <div class="jr-doc-name" title="${f.name}">${f.name}</div>

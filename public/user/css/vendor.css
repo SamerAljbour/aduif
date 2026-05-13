@@ -1490,7 +1490,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 .lity-close:active::after,
 .lity-close:visited::before,
 .lity-close:visited::after {
-  background-color: #FF7782;
+  background-color: #191231;
 }
 
 /* Image */
@@ -1588,7 +1588,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   }
 
   .atn {
-    color: #FF7782;
+    color: #191231;
   }
 
   .atv {
@@ -1600,7 +1600,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   }
 
   .var {
-    color: #FF7782;
+    color: #191231;
   }
 
   .fun {
@@ -1611,7 +1611,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
 
 @media print, projection {
   .str {
-    color: #FF7782;
+    color: #191231;
   }
 
   .kwd {
@@ -1649,7 +1649,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   }
 
   .atv {
-    color: #FF7782;
+    color: #191231;
   }
 
 }
