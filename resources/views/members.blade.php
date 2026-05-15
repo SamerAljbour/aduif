@@ -114,12 +114,17 @@
                         <strong id="memberModalEmail"></strong>
                     </div>
                     <div class="member-modal__field">
+                        <span>{{ __('members.modal.degree') }}</span>
+                        <strong id="memberModalDegree"></strong>
+                    </div>
+                    //REMOVE IT
+                    <div class="member-modal__field">
                         <span>{{ __('members.modal.phone') }}</span>
                         <strong id="memberModalPhone"></strong>
                     </div>
-                    <div class="member-modal__field">
-                        <span>{{ __('members.modal.degree') }}</span>
-                        <strong id="memberModalDegree"></strong>
+                    <div class="member-modal__field member-modal__field--full">
+                        <span>{{ __('members.modal.university') }}</span>
+                        <strong id="memberModalUniversity"></strong>
                     </div>
                     <div class="member-modal__field">
                         <span>{{ __('members.modal.job') }}</span>
@@ -132,10 +137,6 @@
                     <div class="member-modal__field">
                         <span>{{ __('members.modal.interests') }}</span>
                         <strong id="memberModalInterests"></strong>
-                    </div>
-                    <div class="member-modal__field member-modal__field--full">
-                        <span>{{ __('members.modal.university') }}</span>
-                        <strong id="memberModalUniversity"></strong>
                     </div>
                 </div>
 

@@ -14,4 +14,5 @@ return [
     'register' => 'Inscription',
     'logout' => 'Déconnexion',
     'dashboard' => 'Tableau de bord',
+    'posts' => 'Publications',
 ];

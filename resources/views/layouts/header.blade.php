@@ -16,11 +16,14 @@
                 <li>
                     <a class="smoothscroll" href="#about" title="about"> {{ __('header.about_us') }} </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a class="smoothscroll" href="#features" title="features"> {{ __('header.goals') }} </a>
                 </li>
                 <li>
                     <a class="smoothscroll" href="#pricing" title="pricing"> {{ __('header.vision') }} </a>
+                </li> --}}
+                <li class="{{ request()->routeIs('posts.allPosts') ? 'current' : '' }}">
+                    <a href="{{ route('posts.allPosts') }}" title="managers"> {{ __('header.posts') }} </a>
                 </li>
                 <li class="{{ request()->routeIs('managements.showManagers') ? 'current' : '' }}">
                     <a href="{{ route('managements.showManagers') }}" title="managers"> {{ __('header.management') }} </a>

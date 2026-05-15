@@ -23,4 +23,5 @@ return [
 
     'type_news' => 'أخبار',
     'type_memory' => 'ذكريات',
+    ''
 ];
