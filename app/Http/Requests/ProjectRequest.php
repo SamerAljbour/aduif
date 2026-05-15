@@ -19,6 +19,8 @@ class ProjectRequest extends FormRequest
 
             'description_ar' => 'required|string',
             'description_fr' => 'required|string',
+
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ];
     }
 }

@@ -251,32 +251,40 @@
     var clSmoothScroll = function () {
 
         $('.smoothscroll').on('click', function (e) {
+
             var href = $(this).attr('href');
-            if (!href || href.indexOf('#') !== 0) {
+
+            if (!href || href.indexOf('#') === -1) {
                 return;
             }
 
-            var target = this.hash,
+            var target = href.substring(href.indexOf('#')),
                 $target = $(target);
 
             if (!$target.length) {
                 return;
             }
 
-            e.preventDefault();
-            e.stopPropagation();
+            // only prevent default if already on homepage
+            if (
+                window.location.pathname === '/' ||
+                window.location.pathname === ''
+            ) {
 
-            $('html, body').stop().animate({
-                'scrollTop': $target.offset().top
-            }, cfg.scrollDuration, 'swing').promise().done(function () {
+                e.preventDefault();
+                e.stopPropagation();
 
-                // check if menu is open
-                if ($('body').hasClass('menu-is-open')) {
-                    $('.header-menu-toggle').trigger('click');
-                }
+                $('html, body').stop().animate({
+                    'scrollTop': $target.offset().top
+                }, cfg.scrollDuration, 'swing').promise().done(function () {
 
-                window.location.hash = target;
-            });
+                    if ($('body').hasClass('menu-is-open')) {
+                        $('.header-menu-toggle').trigger('click');
+                    }
+
+                    window.location.hash = target;
+                });
+            }
         });
 
     };

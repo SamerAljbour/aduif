@@ -49,6 +49,12 @@
         <span>Members</span>
     </a>
 </li>
+<li class="sidebar-item {{ request()->routeIs('contactUs.*') ? 'active' : '' }}">
+    <a class="sidebar-link" href="{{ route('contactUs.index') }}">
+        <i data-feather="mail"></i>
+        <span>Contact Us</span>
+    </a>
+</li>
 
 				</ul>
 

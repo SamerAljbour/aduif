@@ -33,11 +33,13 @@
 
         @if (isset($project))
             <form action="{{ route('projects.update', $project->id) }}"
-                  method="POST">
+                  method="POST"
+                  enctype="multipart/form-data">
             @method('PUT')
         @else
             <form action="{{ route('projects.store') }}"
-                  method="POST">
+                  method="POST"
+                  enctype="multipart/form-data">
         @endif
         @csrf
 
@@ -130,6 +132,28 @@
 
             </div>
 
+            {{-- ROW 4: IMAGE --}}
+            <div class="mgmt-form__row">
+                <div class="mgmt-form__group">
+                    <label class="mgmt-form__label">Project Photo</label>
+                    <input type="file"
+                           name="image"
+                           accept="image/*"
+                           class="mgmt-form__control @error('image') is-invalid @enderror"
+                           onchange="previewImage(event)">
+                    @error('image')
+                        <small class="mgmt-form__error">{{ $message }}</small>
+                    @enderror
+
+                    <div style="margin-top:12px;">
+                        <img id="imagePreview"
+                             src="{{ isset($project) && $project->image ? asset('storage/'.$project->image) : '' }}"
+                             alt="Project photo preview"
+                             style="{{ isset($project) && $project->image ? '' : 'display:none;' }} max-height:130px; object-fit:cover; border-radius:8px;">
+                    </div>
+                </div>
+            </div>
+
             {{-- ACTIONS --}}
             <div class="mgmt-form__actions">
                 <button type="submit" class="btn-add">
@@ -145,6 +169,20 @@
 
 {{-- IMAGE PREVIEW SCRIPT (kept empty but unchanged structure style) --}}
 <script>
+function previewImage(event) {
+    const preview = document.getElementById('imagePreview');
+    const file = event.target.files && event.target.files[0];
+
+    if (!file) {
+        preview.style.display = 'none';
+        preview.src = '';
+        return;
+    }
+
+    preview.src = URL.createObjectURL(file);
+    preview.style.display = 'block';
+}
+
 document.querySelectorAll('.alert-toast').forEach(function(el) {
     setTimeout(function() {
         el.style.transition = 'opacity 0.4s';

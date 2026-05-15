@@ -19,6 +19,17 @@ return [
         'title' => "notre objectif ",
         'description' => "L'association vise à créer une plateforme de communication et de mise en réseau pour ses membres en organisant des événements culturels. Elle a également pour objectif de collaborer avec des établissements d'enseignement et des entreprises afin d'établir des partenariats bénéfiques pour les diplômés. De surcroît, elle cherche à encourager la participation aux initiatives sociales et communautaires pour contribuer au développement de la société jordanienne, tout en renforçant le principe de l’interculturalité dans le but de respecter et de préserver les identités culturelles",
     ],
+    'projects' => [
+        'title' => 'Nos projets',
+        'description' => 'Decouvrez les initiatives et projets portes par l association.',
+        'empty_title' => 'Projets a venir',
+        'empty_description' => 'De nouveaux projets seront bientot annonces. Revenez prochainement pour decouvrir nos initiatives.',
+        'statuses' => [
+            'coming_soon' => 'Bientot',
+            'active' => 'Actif',
+            'completed' => 'Termine',
+        ],
+    ],
     'mission' => [
         'eyebrow' => 'Notre mission',
         'title' => 'Ce qui nous anime',
@@ -51,4 +62,26 @@ return [
 
         ]
     ],
+    'get_in_touch' => 'Contactez-nous',
+
+    'stay_in_touch' => 'Restons en contact',
+
+    'contact_desc' => 'Vous avez une question ou souhaitez nous contacter ?<br>Envoyez-nous un message et nous vous répondrons rapidement.',
+
+    'full_name' => 'Nom complet',
+    'email_address' => 'Adresse e-mail',
+    'subject' => 'Sujet',
+    'message' => 'Message',
+
+    'placeholder_name' => 'Jean Dupont',
+    'placeholder_email' => 'jean@example.com',
+    'placeholder_subject' => 'De quoi s’agit-il ?',
+    'placeholder_message' => 'Dites-nous comment nous pouvons vous aider…',
+
+    'send_message' => 'Envoyer le message',
+    'required_fields' => 'Veuillez remplir tous les champs obligatoires.',
+    'too_many_attempts' => 'Trop de tentatives. Veuillez patienter un instant.',
+    'something_wrong' => 'Une erreur est survenue. Veuillez réessayer.',
+    'network_error' => 'Erreur réseau. Veuillez vérifier votre connexion.',
+    'sending' => 'Envoi...',
 ];

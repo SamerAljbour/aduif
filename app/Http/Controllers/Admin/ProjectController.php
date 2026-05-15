@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\ProjectRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
     public function index()
     {
-        $projects = Project::with('translations')->latest()->get();
+        $projects = Project::with('translations')->latest()->paginate(10);
         return view('dashboard.projects.index', compact('projects'));
     }
 
@@ -21,8 +22,15 @@ class ProjectController extends Controller
 
     public function store(ProjectRequest $request)
     {
+        $image = null;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image')->store('projects', 'public');
+        }
+
         $project = Project::create([
             'status' => $request->status,
+            'image' => $image,
         ]);
 
         $project->translations()->createMany([
@@ -56,8 +64,17 @@ class ProjectController extends Controller
     {
         $project = Project::findOrFail($id);
 
+        if ($request->hasFile('image')) {
+            if ($project->image) {
+                Storage::disk('public')->delete($project->image);
+            }
+
+            $project->image = $request->file('image')->store('projects', 'public');
+        }
+
         $project->update([
             'status' => $request->status,
+            'image' => $project->image,
         ]);
 
         foreach (['ar', 'fr'] as $locale) {
@@ -77,6 +94,11 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         $project = Project::findOrFail($id);
+
+        if ($project->image) {
+            Storage::disk('public')->delete($project->image);
+        }
+
         $project->delete();
 
         return redirect()->route('projects.index')

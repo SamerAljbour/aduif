@@ -1,4 +1,4 @@
-﻿@extends('adminLayouts.app')
+@extends('adminLayouts.app')
 
 @section('content')
 @php

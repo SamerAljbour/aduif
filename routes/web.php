@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\JoinRequestController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         ->name('joinRequests.reject');
     Route::get('members', [MemberController::class, 'index'])
         ->name('members.index');
+    Route::get('/contacts', [ContactUsController::class, 'index'])
+        ->name('contactUs.index');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,7 +45,9 @@ Route::middleware(['locale'])->group(function () {
     Route::resource('join-us', JoinRequestController::class);
 
     Route::get('/', function () {
-        return view('welcome');
+        $projects = \App\Models\Project::with('translations')->latest()->get();
+
+        return view('welcome', compact('projects'));
     });
     Route::get('members', [MemberController::class, 'showMembers'])
         ->name('members.showMembers');
@@ -60,8 +65,11 @@ Route::middleware(['locale'])->group(function () {
     // });
 });
 
-
+Route::post('/contact', [ContactUsController::class, 'store'])
+    ->name('contact.store')
+    ->middleware('throttle:5,1');
 Route::get('set-locale/{lang}', function ($lang) {
+
     if (in_array($lang, ['fr', 'ar'])) {
         session(['locale' => $lang]);
     }
