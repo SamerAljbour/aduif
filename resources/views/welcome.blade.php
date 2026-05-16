@@ -316,16 +316,16 @@
 
 {{-- contact us section
 ================================================== --}}
-<section id="contact" class="s-contact">
+{{-- <section id="contact" class="s-contact"> --}}
 
     {{-- background decoration --}}
-    <div class="contact__bg-circle contact__bg-circle--1"></div>
+    {{-- <div class="contact__bg-circle contact__bg-circle--1"></div>
     <div class="contact__bg-circle contact__bg-circle--2"></div>
 
-    <div class="row contact__inner">
+    <div class="row contact__inner"> --}}
 
         {{-- LEFT — info side --}}
-        <div class="col-six md-full contact__info">
+        {{-- <div class="col-six md-full contact__info">
 
             <span class="contact__label">{{ __('home-page.get_in_touch') }}</span>
 
@@ -347,7 +347,7 @@
                         </svg>
                     </span>
                     <a href="mailto:aduif.jordanie@gmail.com">aduif.jordanie@gmail.com</a>
-                </li>
+                </li> --}}
                 {{-- <li>
                     <span class="contact__meta-icon">
                         <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -356,12 +356,12 @@
                     </span>
                     <span>{{ __('home-page.contact.location') }}</span>
                 </li> --}}
-            </ul>
+            {{-- </ul>
 
-        </div>
+        </div> --}}
 
         {{-- RIGHT — form card --}}
-        <div class="col-six md-full contact__form-col">
+        {{-- <div class="col-six md-full contact__form-col">
 
             <div class="contact-card">
 
@@ -464,7 +464,8 @@
 
     </div>
 
-</section><!-- end s-contact -->
+</section> --}}
+<!-- end s-contact -->
 
 
         {{-- <div class="row bit-narrow features block-1-2 block-mob-full">

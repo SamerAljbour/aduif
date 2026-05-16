@@ -1745,11 +1745,11 @@ input::-moz-focus-inner {
 
 .header-nav-wrap .header-main-nav li a:hover,
 .header-nav-wrap .header-main-nav li a:focus {
-    color: #191231;
+    color: #6c5ce7;
 }
 
 .header-nav-wrap .header-main-nav li.current a {
-    color: #191231;
+    color: #6c5ce7;
 }
 
 .header-nav-wrap .header-social {
@@ -1784,7 +1784,7 @@ input::-moz-focus-inner {
 
 .header-nav-wrap .header-social li a:hover,
 .header-nav-wrap .header-social li a:focus {
-    background-color: #191231;
+    background-color: #6c5ce7;
 }
 
 .s-header--blog .header-social li a {

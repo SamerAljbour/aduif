@@ -8,6 +8,7 @@ use App\Models\ContactUs;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ContactUsController extends Controller
@@ -30,8 +31,8 @@ class ContactUsController extends Controller
             $contactUs = ContactUs::create($request->validated());
 
             // Send email
-            Mail::to('your_email@gmail.com')
-                ->send(new ContactUsNotification($contactUs));
+            // Mail::to('aduif.jordanie@gmail.com')
+            //     ->send(new ContactUsNotification($contactUs));
 
             // JSON response
             if ($request->expectsJson()) {

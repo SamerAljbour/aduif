@@ -295,7 +295,7 @@ html {
 <section class="page-header">
     <div class="row page-header__content narrower text-center">
         <div class="col-full">
-            <h3 class="subhead">{{ __('management.page_title') }}</h3>
+            {{-- <h3 class="subhead">{{ __('management.page_title') }}</h3> --}}
             <h1 class="display-1">{{ __('management.title') }}</h1>
         </div>
     </div>
