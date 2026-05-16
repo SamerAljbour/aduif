@@ -346,7 +346,7 @@
                             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
                         </svg>
                     </span>
-                    <a href="mailto:support@standout.com">support@standout.com</a>
+                    <a href="mailto:aduif.jordanie@gmail.com">aduif.jordanie@gmail.com</a>
                 </li>
                 {{-- <li>
                     <span class="contact__meta-icon">
@@ -887,7 +887,29 @@
 .contact__info {
     padding-right: 5rem;
 }
+/* White input text */
+.contact-input {
+    color: #ffffff !important;
+}
 
+/* White borders */
+.contact-input {
+    border: 1px solid rgba(255, 255, 255, 0.30) !important;
+}
+
+/* Keep focus border colored */
+.contact-input:focus {
+    border-color: var(--c-green) !important;
+    color: #ffffff !important;
+}
+
+/* Fix autofill text color (Chrome/Safari) */
+.contact-input:-webkit-autofill,
+.contact-input:-webkit-autofill:hover,
+.contact-input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #ffffff !important;
+    box-shadow: 0 0 0px 1000px var(--c-dark-2) inset !important;
+}
 .contact__label {
     display: inline-block;
     font-size: 1.1rem;
@@ -1100,7 +1122,7 @@
 
 /* ── Feedback ───────────────────────────────────────────── */
 .contact-feedback { font-size: 1.3rem; line-height: 1.4; }
-.contact-feedback--success { color: var(--c-green); }
+.contact-feedback--success { color: green; }
 .contact-feedback--error   { color: #ef9a9a; }
 
 /* ── Session banner ─────────────────────────────────────── */
@@ -1114,9 +1136,9 @@
     font-size: 1.3rem;
 }
 .contact-alert--success {
-    background: rgba(25,18,49,0.12);
-    color: #191231;
-    border-left: 3px solid var(--c-green);
+  background: rgba(25, 18, 49, 0.25) !important;
+    color: #ffffff !important;
+    border-left: 3px solid var(--c-green) !important;
 }
 
 /* ── Responsive ─────────────────────────────────────────── */

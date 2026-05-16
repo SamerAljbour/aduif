@@ -28,8 +28,8 @@
 
     <!-- favicons
     ================================================== -->
-    <link rel="shortcut icon" href="{{ asset('user/favicon.ico') }}" type="image/x-icon">
-    <link rel="icon" href="{{ asset('user/favicon.ico') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('user/images/aduif-white.png') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('user/images/aduif-white.png') }}" type="image/x-icon">
 
 </head>
 

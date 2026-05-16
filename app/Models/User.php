@@ -17,6 +17,7 @@ class User extends Authenticatable
         'password',
         'role',
         'photo',
+        'status',
         'is_active',
     ];
 
@@ -30,8 +31,20 @@ class User extends Authenticatable
         return $this->role === 'admin';
     }
 
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
     public function isEditor()
     {
         return $this->role === 'editor';
+    }
+
+    /**
+     * Send the password reset notification.
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new \App\Notifications\ResetPassword($token));
     }
 }

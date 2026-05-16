@@ -30,8 +30,10 @@
         <div class="row footer__bottom">
             <div class="col-five tab-full">
                 <div class="footer__logo">
-                    <a href="index.html">
-                        <img src="images/logo.svg" alt="Homepage">
+                    <a href="{{ url('/') }}">
+                         <img src="{{ asset('user/images/aduif-white.png') }}"
+     alt="Homepage"
+     style="width: auto; height: 64px; max-width: 160px; object-fit: contain; border-radius: 50%;">
                     </a>
                 </div>
 
@@ -60,7 +62,7 @@
 
                 <p class="footer__contact">
                     Do you have a question? Send us a word: <br>
-                    <a href="mailto:#0" class="footer__mail-link">support@standout.com</a>
+                    <a href="mailto:aduif.jordanie@gmail.com" class="footer__mail-link">aduif.jordanie@gmail.com</a>
                 </p>
 
                 <div class="cl-copyright">

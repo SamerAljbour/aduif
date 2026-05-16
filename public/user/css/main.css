@@ -3513,7 +3513,7 @@ html.no-csstransitions .home-content__main {
     font-weight: 600;
     font-size: 2.2rem;
     line-height: 1.455;
-    color: #191231;
+    /* color: #191231; */
 }
 
 .footer__contact .footer__mail-link:hover,
@@ -4397,6 +4397,82 @@ body.search-is-visible {
         margin-left: 0;
         margin-right: 0;
     }
+}
+
+/* -------------------------------------------------------------------
+ * Override: Force user-front hover color to #6c5ce7
+ * Appended to ensure it loads after existing rules.
+ * ------------------------------------------------------------------- */
+:root {
+    --user-hover-color: #6c5ce7;
+}
+
+a:hover,
+a:focus,
+.header-nav-wrap .header-main-nav li a:hover,
+.header-nav-wrap .header-social li a:hover,
+.header-menu-toggle:hover,
+.footer__social li a:hover,
+.footer__site-links li a:hover,
+.footer__contact .footer__mail-link:hover,
+.go-top a:hover,
+.page-header__meta a:hover,
+.entries .item-entry__title a:hover,
+.entries .item-entry__cat a:hover,
+.blog-content__tags .blog-content__tag-list a:hover,
+.blog-single-nav a:hover,
+.pgn__num:hover,
+.pgn .current:hover,
+.pgn .inactive:hover,
+.slick-slider .slick-dots li button:hover,
+.slick-slider .slick-dots li:hover button,
+.btn:hover,
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+.btn--primary:hover,
+.btn--stroke:hover,
+.more-link:hover,
+.entries .more-link:hover,
+.stats-tabs li a:hover,
+.blog-single-nav a:hover,
+.page-header__search-trigger:hover span,
+.page-header__overlay-close:hover::before,
+.page-header__overlay-close:hover::after,
+.footer__subscribe #mc-form input[type="email"]:hover,
+.item-plan--popular .btn:hover,
+.entries .item-entry__thumb:hover .item-entry__thumb-link::before,
+.entries .item-entry__thumb:hover .item-entry__thumb-link::after,
+.entries .item-entry__thumb:hover .item-entry__thumb-link img,
+.entries .item-entry__thumb img:hover,
+.blog-content__tags .blog-content__tag-list a:hover,
+.blog-single-nav a:hover,
+.blog-single-nav a:focus {
+    color: var(--user-hover-color) !important;
+    fill: var(--user-hover-color) !important;
+    stroke: var(--user-hover-color) !important;
+    border-color: var(--user-hover-color) !important;
+}
+
+/* Buttons that change background on hover should use the hover color */
+.btn:hover,
+.btn--primary:hover,
+.item-plan--popular .btn:hover,
+.btn--stroke:hover {
+    background-color: var(--user-hover-color) !important;
+    border-color: var(--user-hover-color) !important;
+    color: #ffffff !important;
+}
+
+/* Icons / SVGs */
+svg:hover,
+.feather:hover,
+i.fab:hover,
+i:hover {
+    color: var(--user-hover-color) !important;
+    fill: var(--user-hover-color) !important;
+    stroke: var(--user-hover-color) !important;
 }
 
 @media only screen and (max-width: 600px) {

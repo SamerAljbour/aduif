@@ -1,7 +1,10 @@
 <nav id="sidebar" class="sidebar js-sidebar">
 			<div class="sidebar-content js-simplebar">
-				<a class="sidebar-brand" href="index.html">
-          <span class="align-middle">AdminKit</span>
+                <a class="sidebar-brand" href="{{ route('admin.dashboard') }}">
+                    <img src="{{ asset('user/images/aduif-white.png') }}"
+         alt="dashboard logo"
+         style="width: auto; height: 64px; max-width: 160px; object-fit: contain; border-radius: 50%; margin-right: 6px;">
+          <span class="align-middle">Aduif</span>
         </a>
 
 				<ul class="sidebar-nav">
@@ -43,6 +46,13 @@
     </a>
 </li>
 
+<li class="sidebar-item {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">
+	<a class="sidebar-link" href="{{ route('admin.users.index') }}">
+		<i data-feather="user-check"></i>
+		<span>Users Approval</span>
+	</a>
+</li>
+
 <li class="sidebar-item {{ request()->routeIs('members.*') ? 'active' : '' }}">
     <a class="sidebar-link" href="{{ route('members.index') }}">
         <i data-feather="users"></i>
@@ -80,7 +90,7 @@
 
 				<div class="navbar-collapse collapse">
 					<ul class="navbar-nav navbar-align">
-						<li class="nav-item dropdown">
+						{{-- <li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle" href="#" id="alertsDropdown" data-bs-toggle="dropdown">
 								<div class="position-relative">
 									<i class="align-middle" data-feather="bell"></i>
@@ -144,8 +154,8 @@
 									<a href="#" class="text-muted">Show all notifications</a>
 								</div>
 							</div>
-						</li>
-						<li class="nav-item dropdown">
+						</li> --}}
+						{{-- <li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle" href="#" id="messagesDropdown" data-bs-toggle="dropdown">
 								<div class="position-relative">
 									<i class="align-middle" data-feather="message-square"></i>
@@ -211,14 +221,15 @@
 									<a href="#" class="text-muted">Show all messages</a>
 								</div>
 							</div>
-						</li>
+						</li> --}}
 						<li class="nav-item dropdown">
 							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
                 <i class="align-middle" data-feather="settings"></i>
               </a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="{{ Auth::user()->name }}" /> <span class="text-dark">{{ Auth::user()->name }}</span>
+                {{-- <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="{{ Auth::user()->name }}" />  --}}
+                <span class="text-dark">{{ Auth::user()->name }}</span>
               </a>
 							<div class="dropdown-menu dropdown-menu-end">
 								{{-- <a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Profile</a>
@@ -227,6 +238,12 @@
 								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a> --}}
 								{{-- <div class="dropdown-divider"></div> --}}
+                                {{-- Reset Password Link --}}
+                                {{-- <a class="dropdown-item" href="{{ route('password.generate-reset') }}">
+                                    <i class="align-middle me-1" data-feather="lock"></i> Reset Password
+                                </a> --}}
+
+                                <div class="dropdown-divider"></div>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="dropdown-item">

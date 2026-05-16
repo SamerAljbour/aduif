@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\ManagementController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\JoinRequestController;
 use App\Http\Controllers\ProfileController;
@@ -33,6 +35,14 @@ Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
         ->name('members.index');
     Route::get('/contacts', [ContactUsController::class, 'index'])
         ->name('contactUs.index');
+
+    // User Registration Approval Routes
+    Route::get('users', [UserController::class, 'index'])->name('admin.users.index');
+    Route::post('users/{user}/approve', [UserController::class, 'approve'])->name('admin.users.approve');
+    Route::post('users/{user}/reject', [UserController::class, 'reject'])->name('admin.users.reject');
+    Route::post('users/{user}/reactivate', [UserController::class, 'reactivate'])->name('admin.users.reactivate');
+    Route::post('users/{user}/deactivate', [UserController::class, 'deactivate'])->name('admin.users.deactivate');
+    Route::post('users/{user}/activate', [UserController::class, 'activate'])->name('admin.users.activate');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

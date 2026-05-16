@@ -1,4 +1,9 @@
 <x-guest-layout>
+    <div class="auth-header">
+        <h1>Reset your password</h1>
+        <p>Choose a new password to secure your account.</p>
+    </div>
+
     <form method="POST" action="{{ route('password.store') }}">
         @csrf
 

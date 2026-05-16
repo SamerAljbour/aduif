@@ -79,7 +79,7 @@ return [
         'cv' => 'Télécharger le CV',
         'cv_hint' => 'PDF, DOC, DOCX — max 10 Mo',
         'docs' => 'Documents supplémentaires',
-        'docs_desc' => 'Joignez tout document justificatif : certificats, lettres de recommandation, articles de recherche, etc. Vous pouvez téléverser plusieurs fichiers à la fois.',
+        'docs_desc' => 'Joignez tout document justificatif : certificat',
         'docs_drop' => 'Déposez les fichiers ici ou cliquez pour parcourir',
         'docs_hint' => 'PDF, DOC, DOCX, JPG, PNG — max 10 Mo chacun',
     ],
@@ -107,6 +107,8 @@ return [
         'name_ar_required' => 'Le nom en arabe est obligatoire',
         'email_required' => 'Une adresse email valide est obligatoire',
         'file_too_large' => ':file dépasse 10 Mo et a été ignoré.',
+        'french_only' => 'Ce champ doit contenir uniquement du texte français (caractères latins)',
+        'arabic_only' => 'Ce champ doit contenir uniquement du texte arabe',
     ],
 
     'actions' => [

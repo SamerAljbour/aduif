@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Management;
 use App\Http\Requests\ManagementRequest;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 
 class ManagementController extends Controller
 {
@@ -30,6 +31,15 @@ class ManagementController extends Controller
         $photo = null;
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo')->store('managements', 'public');
+
+            $source = storage_path('app/public/' . $photo);
+            $destination = public_path('storage/' . $photo);
+
+            if (!File::exists(dirname($destination))) {
+                File::makeDirectory(dirname($destination), 0755, true);
+            }
+
+            File::copy($source, $destination);
         }
 
         // ✅ Create main record
@@ -80,6 +90,15 @@ class ManagementController extends Controller
         // ✅ Update photo if exists
         if ($request->hasFile('photo')) {
             $photo = $request->file('photo')->store('managements', 'public');
+
+            $source = storage_path('app/public/' . $photo);
+            $destination = public_path('storage/' . $photo);
+
+            if (!File::exists(dirname($destination))) {
+                File::makeDirectory(dirname($destination), 0755, true);
+            }
+
+            File::copy($source, $destination);
             $management->photo = $photo;
         }
 
@@ -133,8 +152,8 @@ class ManagementController extends Controller
 
         $currentMembers = self::flattenTree($tree)
             ->sortBy([
-                fn ($a, $b) => (Management::positionOrder()[$a->position] ?? 99) <=> (Management::positionOrder()[$b->position] ?? 99),
-                fn ($a, $b) => $a->order <=> $b->order,
+                fn($a, $b) => (Management::positionOrder()[$a->position] ?? 99) <=> (Management::positionOrder()[$b->position] ?? 99),
+                fn($a, $b) => $a->order <=> $b->order,
             ])
             ->values();
 
@@ -177,7 +196,7 @@ class ManagementController extends Controller
         return Management::query()
             ->where('type', $type)
             ->where('parent_id', $parentId)
-            ->when($ignoreId, fn ($query) => $query->whereKeyNot($ignoreId))
+            ->when($ignoreId, fn($query) => $query->whereKeyNot($ignoreId))
             ->max('order') + 1;
     }
 }

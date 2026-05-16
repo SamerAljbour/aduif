@@ -173,6 +173,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
             gap: 10px;
+            padding: 13px ;
         }
         .mem-extra__field {
             background: #fff;
@@ -248,14 +249,12 @@
                                      || !empty($member['cv']);
                         @endphp
 
-                        <article class="mem-card" id="{{ $cardId }}" data-aos="fade-up">
+                        <article class="mem-card is-open" id="{{ $cardId }}" data-aos="fade-up">
 
                             {{-- ── Clickable row ── --}}
-                            <div class="mem-card__row"
+                                <div class="mem-card__row"
                                  role="button" tabindex="0"
-                                 aria-expanded="false"
-                                 onclick="toggleMem(this)"
-                                 onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleMem(this)}">
+                                 aria-expanded="true">
 
                                 {{-- Photo --}}
                                 <div class="mem-card__media">
@@ -280,20 +279,7 @@
                                 <div class="mem-card__content">
 
                                     {{-- Arrow button — top-end corner, only if extras exist --}}
-                                    @if($hasExtra)
-                                        <button type="button"
-                                                class="mem-card__arrow"
-                                                onclick="event.stopPropagation(); toggleMem(this.closest('.mem-card').querySelector('.mem-card__row'))"
-                                                tabindex="0"
-                                                aria-label="{{ __('members.show_details') }}">
-                                            <span class="mem-card__arrow-lbl">{{ __('members.show_details') }}</span>
-                                            <svg width="20" height="12" viewBox="0 0 22 13" fill="none"
-                                                 stroke="currentColor" stroke-width="2.6"
-                                                 stroke-linecap="round" stroke-linejoin="round">
-                                                <polyline points="1,1 11,11 21,1"/>
-                                            </svg>
-                                        </button>
-                                    @endif
+                                    {{-- Details are always visible; toggle disabled --}}
                                     <div class="mem-card__head">
                                         <div>
                                             <span class="mem-card__badge">{{ __('members.status') }}</span>
@@ -308,7 +294,7 @@
                                         <p class="mem-card__bio">{{ $translation['bio'] }}</p>
                                     @endif
 
-                                    @if(!empty($member['email']) || !empty($member['phone']))
+                                    {{-- @if(!empty($member['email']) || !empty($member['phone']))
                                         <div class="mem-card__quick">
                                             @if(!empty($member['email']))
                                                 <span>
@@ -323,75 +309,70 @@
                                                 </span>
                                             @endif
                                         </div>
-                                    @endif
+                                    @endif --}}
 
                                 </div>
 
                             </div>{{-- /.mem-card__row --}}
 
                             {{-- ── Collapsible extra details ── --}}
-                            @if($hasExtra)
-                                <div class="mem-card__extra" id="{{ $cardId }}-extra" aria-hidden="true">
-                                    <div class="mem-card__extra-inner">
-                                        <div class="mem-card__extra-body">
+                          @if($hasExtra)
+    <div class="mem-card__extra" id="{{ $cardId }}-extra" aria-hidden="false">
+        <div class="mem-card__extra-inner">
+            <div class="mem-card__extra-body">
 
-                                            <dl class="mem-extra__fields">
-                                                @if(!empty($member['email']))
-                                                    <div class="mem-extra__field">
-                                                        <dt>{{ __('members.modal.email') }}</dt>
-                                                        <dd>{{ $member['email'] }}</dd>
-                                                    </div>
-                                                @endif
-                                                @if(!empty($member['phone']))
-                                                    <div class="mem-extra__field">
-                                                        <dt>{{ __('members.modal.phone') }}</dt>
-                                                        <dd>{{ $member['phone'] }}</dd>
-                                                    </div>
-                                                @endif
-                                                @if(!empty($translation['degree']))
-                                                    <div class="mem-extra__field">
-                                                        <dt>{{ __('members.modal.degree') }}</dt>
-                                                        <dd>{{ __('members.degrees.' . $translation['degree']) }}</dd>
-                                                    </div>
-                                                @endif
-                                                @if(!empty($translation['current_job']))
-                                                    <div class="mem-extra__field">
-                                                        <dt>{{ __('members.modal.job') }}</dt>
-                                                        <dd>{{ $translation['current_job'] }}</dd>
-                                                    </div>
-                                                @endif
-                                                @if(!empty($translation['workplace']))
-                                                    <div class="mem-extra__field">
-                                                        <dt>{{ __('members.modal.workplace') }}</dt>
-                                                        <dd>{{ $translation['workplace'] }}</dd>
-                                                    </div>
-                                                @endif
-                                                @if(!empty($translation['interests']))
-                                                    <div class="mem-extra__field">
-                                                        <dt>{{ __('members.modal.interests') }}</span>
-                                                        <dd>{{ $translation['interests'] }}</dd>
-                                                    </div>
-                                                @endif
-                                                @if(!empty($translation['graduation_university']))
-                                                    <div class="mem-extra__field">
-                                                        <dt>{{ __('members.modal.university') }}</dt>
-                                                        <dd>{{ $translation['graduation_university'] }}</dd>
-                                                    </div>
-                                                @endif
-                                            </dl>
+                <dl class="mem-extra__fields">
+                    @if(!empty($translation['degree']))
+                        <div class="mem-extra__field">
+                            <dt>{{ __('members.modal.degree') }}</dt>
+                            <dd>{{ __('members.degrees.' . $translation['degree']) }}</dd>
+                        </div>
+                    @endif
+                    @if(!empty($translation['graduation_university']))
+                        <div class="mem-extra__field">
+                            <dt>{{ __('members.modal.university') }}</dt>
+                            <dd>{{ $translation['graduation_university'] }}</dd>
+                        </div>
+                    @endif
+                    @if(!empty($translation['current_job']))
+                        <div class="mem-extra__field">
+                            <dt>{{ __('members.modal.job') }}</dt>
+                            <dd>{{ $translation['current_job'] }}</dd>
+                        </div>
+                    @endif
+                    @if(!empty($translation['workplace']))
+                        <div class="mem-extra__field">
+                            <dt>{{ __('members.modal.workplace') }}</dt>
+                            <dd>{{ $translation['workplace'] }}</dd>
+                        </div>
+                    @endif
+                    @if(!empty($translation['interests']))
+                    <div class="mem-extra__field">
+                        <dt>{{ __('members.modal.interests') }}</dt>
+                        <dd>{{ $translation['interests'] }}</dd>
+                    </div>
+                    @endif
+                    @if(!empty($member['email']))
+                        <div class="mem-extra__field">
+                            <dt>{{ __('members.modal.email') }}</dt>
+                            <dd>{{ $member['email'] }}</dd>
+                        </div>
+                    @endif
 
-                                            @if(!empty($member['cv']))
-                                                <a href="{{ asset('storage/'.$member['cv']) }}"
-                                                   class="mem-extra__cv-link"
-                                                   target="_blank" rel="noopener noreferrer">
-                                                    ↓ {{ __('members.modal.download_cv') }}
-                                                </a>
-                                            @endif
+                </dl>
 
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
+                @if(!empty($member['cv']))
+                    <a href="{{ asset('storage/'.$member['cv']) }}"
+                       class="mem-extra__cv-link"
+                       target="_blank" rel="noopener noreferrer">
+                        ↓ {{ __('members.modal.download_cv') }}
+                    </a>
+                @endif
+
+            </div>
+        </div>
+    </div>
+@endif
 
                         </article>
                     @empty
@@ -411,22 +392,35 @@
             @endif
         </section>
     </div>
+<style>
+    .mem-extra__fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 24px;
+}
 
+.mem-extra__field {
+    min-width: 0; /* prevents overflow in grid cells */
+}
+
+.mem-extra__field dt {
+    font-size: 12px;
+    color: var(--color-text-secondary, #888);
+    margin-bottom: 2px;
+}
+
+.mem-extra__field dd {
+    font-size: 14px;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+</style>
     <script>
         function toggleMem(rowEl) {
-            const card   = rowEl.closest('.mem-card');
-            const isOpen = card.classList.contains('is-open');
-
-            document.querySelectorAll('.mem-card.is-open').forEach(c => {
-                if (c === card) return;
-                c.classList.remove('is-open');
-                c.querySelector('.mem-card__row')?.setAttribute('aria-expanded', 'false');
-                c.querySelector('.mem-card__extra')?.setAttribute('aria-hidden', 'true');
-            });
-
-            card.classList.toggle('is-open', !isOpen);
-            rowEl.setAttribute('aria-expanded', String(!isOpen));
-            card.querySelector('.mem-card__extra')?.setAttribute('aria-hidden', String(isOpen));
+            // Disabled: extra details are always open and cannot be closed
+            return;
         }
     </script>
 @endsection

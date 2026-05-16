@@ -2,7 +2,6 @@
 
 @section('content')
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-
 <style>
 :root {
     --brand: #191231;
@@ -20,6 +19,18 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── Page shell ── */
+.s-home::after { background-color: transparent; }
+.s-home {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 100px;
+    min-height: 100vh;
+    height: auto;
+}
+
+/* ── Wrap ── */
 .jr-wrap {
     position: relative;
     z-index: 3;
@@ -27,10 +38,10 @@
     background: var(--bg);
     color: var(--text);
     max-width: 811px;
-
+    width: 100%;
     margin: 0 auto;
-    padding: 2.5rem 2rem 5rem;
-    border-radius: 2%;
+    padding: 2.5rem 2rem 4rem;
+    border-radius: 12px;
 }
 
 /* ── Header ── */
@@ -42,10 +53,10 @@
     border-radius: 100px; margin-bottom: 1rem;
     letter-spacing: 0.06em; text-transform: uppercase;
 }
-.btn, button, input[type="submit"], input[type="reset"], input[type="button"] {
-letter-spacing: 0.2rem;
-    }
-.jr-tag span { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); display: inline-block; }
+.jr-tag span {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--brand); display: inline-block;
+}
 .jr-header h1 {
     font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 700;
     color: var(--text); line-height: 1.2; margin-bottom: 0.5rem;
@@ -53,8 +64,15 @@ letter-spacing: 0.2rem;
 .jr-header p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
 
 /* ── Progress ── */
-.jr-progress { height: 3px; background: var(--border); border-radius: 100px; margin-bottom: 2rem; overflow: hidden; }
-.jr-progress-fill { height: 100%; background: var(--brand); border-radius: 100px; transition: width 0.4s cubic-bezier(.4,0,.2,1); }
+.jr-progress {
+    height: 3px; background: var(--border);
+    border-radius: 100px; margin-bottom: 2rem; overflow: hidden;
+}
+.jr-progress-fill {
+    height: 100%; background: var(--brand);
+    border-radius: 100px;
+    transition: width 0.4s cubic-bezier(.4,0,.2,1);
+}
 
 /* ── Steps nav ── */
 .jr-steps {
@@ -88,7 +106,10 @@ letter-spacing: 0.2rem;
     font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600;
     margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;
 }
-.jr-card-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand); flex-shrink: 0; }
+.jr-card-title .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--brand); flex-shrink: 0;
+}
 
 /* ── Section label ── */
 .jr-section-label {
@@ -97,22 +118,34 @@ letter-spacing: 0.2rem;
     border-bottom: 1px solid var(--border);
 }
 
-/* ── Fields ── */
-.jr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+/* ── Grid ── */
+.jr-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+}
 .jr-grid.full { grid-template-columns: 1fr; }
-.jr-field { display: flex; flex-direction: column; gap: 6px; }
+
+/* ── Fields ── */
+.jr-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
 .jr-field label {
     font-size: 13px; font-weight: 500; color: var(--text);
     display: flex; align-items: center; gap: 4px;
 }
 .req { color: var(--brand); font-size: 14px; }
+
 .jr-field input,
 .jr-field select,
 .jr-field textarea {
     border: 1.5px solid var(--border); border-radius: 8px;
     padding: 10px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif;
     color: var(--text); background: var(--bg); transition: border-color 0.2s;
-    outline: none; width: 100%;
+    outline: none; width: 100%; margin: 0;
 }
 .jr-field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 .jr-field input:focus,
@@ -121,13 +154,28 @@ letter-spacing: 0.2rem;
 .jr-field input::placeholder,
 .jr-field textarea::placeholder { color: #94a3b8; }
 .jr-field input.invalid { border-color: var(--danger) !important; }
-.jr-field .error-msg { font-size: 12px; color: var(--danger); display: none; }
-.jr-field.has-error .error-msg { display: block; }
+
+/* Error message — always in flow, visibility toggled to prevent layout shift */
+.jr-field .error-msg {
+    font-size: 12px;
+    color: var(--danger);
+    line-height: 1.4;
+    min-height: 18px;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.15s;
+}
+.jr-field.has-error .error-msg {
+    visibility: visible;
+    opacity: 1;
+}
 .jr-field.has-error input,
 .jr-field.has-error select,
 .jr-field.has-error textarea,
 .jr-field.has-error .jr-upload-zone,
 .jr-field.has-error .jr-multi-zone { border-color: var(--danger); }
+
 .jr-field select {
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
@@ -147,7 +195,8 @@ letter-spacing: 0.2rem;
 .jr-radio-option input[type=radio] { display: none; }
 .jr-radio-dot {
     width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border);
-    display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: all 0.2s;
 }
 .jr-radio-option.selected .jr-radio-dot { border-color: var(--brand); background: var(--brand); }
 .jr-radio-dot::after {
@@ -166,7 +215,8 @@ letter-spacing: 0.2rem;
 .jr-upload-zone:hover { border-color: var(--brand); background: rgba(25, 18, 49, 0.08); }
 .jr-upload-zone.has-file { border-color: var(--brand); border-style: solid; background: var(--brand-light); }
 .jr-upload-zone input[type=file] {
-    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    position: absolute; inset: 0; opacity: 0;
+    cursor: pointer; width: 100%; height: 100%;
 }
 .jr-upload-icon {
     width: 34px; height: 34px; border-radius: 8px; background: var(--brand-light);
@@ -179,16 +229,18 @@ letter-spacing: 0.2rem;
 /* ── Multi-doc upload ── */
 .jr-multi-zone {
     border: 2px dashed var(--border); border-radius: 10px;
-    padding: 1.5rem; background: var(--bg); transition: all 0.2s; position: relative;
-    cursor: pointer;
+    padding: 1.5rem; background: var(--bg); transition: all 0.2s;
+    position: relative; cursor: pointer;
 }
 .jr-multi-zone:hover,
 .jr-multi-zone.drag-over { border-color: var(--brand); background: rgba(25, 18, 49, 0.08); }
 .jr-multi-zone input[type=file] {
-    position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%;
+    position: absolute; inset: 0; opacity: 0;
+    cursor: pointer; width: 100%; height: 100%;
 }
 .jr-multi-zone-inner {
-    display: flex; flex-direction: column; align-items: center; gap: 6px; pointer-events: none;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 6px; pointer-events: none;
 }
 .jr-multi-zone-icon {
     width: 42px; height: 42px; border-radius: 10px; background: var(--brand-light);
@@ -196,6 +248,7 @@ letter-spacing: 0.2rem;
 }
 .jr-multi-zone-title { font-size: 14px; font-weight: 600; }
 .jr-multi-zone-sub { font-size: 12px; color: var(--text-muted); }
+
 .jr-docs-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 8px; }
 .jr-doc-item {
     display: flex; align-items: center; gap: 10px;
@@ -216,9 +269,7 @@ letter-spacing: 0.2rem;
     transition: all 0.15s; flex-shrink: 0; line-height: 1;
 }
 .jr-doc-remove:hover { background: var(--danger-light); border-color: var(--danger); color: var(--danger); }
-.jr-docs-count {
-    font-size: 12px; color: var(--text-muted); margin-top: 8px; text-align: right;
-}
+.jr-docs-count { font-size: 12px; color: var(--text-muted); margin-top: 8px; text-align: right; }
 
 /* ── Nav bar ── */
 .jr-nav {
@@ -238,7 +289,7 @@ letter-spacing: 0.2rem;
     cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
     display: flex; align-items: center; gap: 8px;
 }
-.jr-btn-primary:hover { background: var(--brand-dark); }
+.jr-btn-primary:hover { background: var(--brand-dark); transform: translateY(-1px); }
 .jr-btn-primary:active { transform: scale(0.98); }
 .jr-btn-submit { background: #0f172a; }
 .jr-btn-submit:hover { background: #1e293b; }
@@ -258,23 +309,24 @@ letter-spacing: 0.2rem;
 .jr-badge-green { background: var(--brand-light); color: var(--brand-dark); }
 .jr-badge-blue { background: #eff6ff; color: #1d4ed8; }
 
-/* ── Panels ── */
+/* ── Panels — hidden panels take ZERO space ── */
 .jr-panel { display: none; animation: fadeUp 0.3s ease; }
 .jr-panel.active { display: block; }
-.jr-success { display: none; flex-direction: column; align-items: center; text-align: center; padding: 4rem 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+
+/* ── Success ── */
+.jr-success {
+    display: none; flex-direction: column; align-items: center;
+    text-align: center; padding: 4rem 2rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
 .jr-success.active { display: flex; }
-.jr-success-icon { width: 68px; height: 68px; border-radius: 50%; background: var(--brand-light); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
-
-@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes slideIn { from { opacity: 0; transform: translateX(-6px); } to { opacity: 1; transform: translateX(0); } }
-
-@media (max-width: 540px) {
-    .jr-grid { grid-template-columns: 1fr; }
-    .jr-steps { flex-wrap: wrap; border-radius: 12px; }
-    .jr-step-btn { font-size: 12px; padding: 8px 4px; }
+.jr-success-icon {
+    width: 68px; height: 68px; border-radius: 50%; background: var(--brand-light);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;
 }
 
-/* ── Validation errors from Laravel ── */
+/* ── Validation error alert box ── */
 .jr-alert-errors {
     background: var(--danger-light); border: 1px solid #fecaca;
     border-radius: 10px; padding: 1rem 1.25rem; margin-bottom: 1.5rem;
@@ -282,22 +334,87 @@ letter-spacing: 0.2rem;
 }
 .jr-alert-errors ul { padding-left: 1.2rem; margin-top: 6px; }
 .jr-alert-errors li { margin-bottom: 2px; }
-/* background */
-.s-home::after {
-    background-color: transparent;
+
+/* ── Button reset (theme override) ── */
+.btn, button, input[type="submit"], input[type="reset"], input[type="button"] {
+    letter-spacing: 0.2rem;
 }
-.s-home {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* instead of center */
-    padding-top: 120px; /* space under navbar */
-    min-height: 130vh;
-    height: auto;
+
+/* ── Animations ── */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-6px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+/* ════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════ */
+
+/* Tablet — 768px */
+@media (max-width: 768px) {
+    .jr-wrap { padding: 2rem 1.5rem 4rem; }
+    .jr-header h1 { font-size: 26px; }
+    .jr-card { padding: 1.5rem; }
+    .jr-review-key { min-width: 120px; }
+}
+
+/* Large mobile — 640px */
+@media (max-width: 640px) {
+    .jr-grid { grid-template-columns: 1fr; }
+    .jr-wrap { padding: 1.75rem 1.25rem 3.5rem; }
+    .jr-header h1 { font-size: 24px; }
+    .jr-card { padding: 1.25rem; }
+}
+
+/* Small mobile — 540px */
+@media (max-width: 540px) {
+    .jr-steps {
+        flex-wrap: wrap;
+        border-radius: 12px;
+        gap: 4px;
+        padding: 6px;
+    }
+    .jr-step-btn {
+        flex: 1 1 calc(50% - 4px);
+        font-size: 12px;
+        padding: 8px 6px;
+        border-radius: 8px;
+        justify-content: center;
+        white-space: nowrap;
+    }
+    .jr-radio-group { flex-direction: column; }
+    .jr-nav { gap: 8px; }
+    .jr-btn-ghost,
+    .jr-btn-primary {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 16px;
+    }
+    .jr-review-row { flex-direction: column; gap: 4px; }
+    .jr-review-val { text-align: left; }
+    .jr-review-key { min-width: unset; }
+    .s-home { padding-top: 80px; }
+}
+
+/* Extra small — 380px */
+@media (max-width: 380px) {
+    .jr-wrap { padding: 1.25rem 1rem 3rem; }
+    .jr-step-btn .jr-step-num { display: none; }
+    .jr-step-btn { font-size: 11px; padding: 8px 4px; }
+    .jr-btn-ghost,
+    .jr-btn-primary { font-size: 13px; padding: 10px 12px; }
+    .jr-header h1 { font-size: 22px; }
+    .jr-card { padding: 1rem; }
 }
 </style>
 <section id="home" class="s-home target-section d-flex align-items-start justify-content-center">
 <div class="jr-wrap">
-
+{{-- Wrap the entire form section --}}
+@if(!session('success'))
     {{-- Laravel validation errors --}}
     @if ($errors->any())
     <div class="jr-alert-errors">
@@ -692,9 +809,9 @@ letter-spacing: 0.2rem;
         </div>
 
     </form>{{-- end form --}}
-
+@else
     {{-- ══════════════════ Success (shown after redirect with session) ══════════════════ --}}
-    @if(session('success'))
+
     <div class="jr-success active">
         <div class="jr-success-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
@@ -712,6 +829,13 @@ letter-spacing: 0.2rem;
 
 <script>
 (function () {
+    // ── Translations ──
+    const translations = {
+        required: '{{ __("joinUs.validation.required") }}',
+        french_only: '{{ __("joinUs.validation.french_only") }}',
+        arabic_only: '{{ __("joinUs.validation.arabic_only") }}',
+    };
+
     // ── State ──
     let current = 1;
     const totalSteps = 4;
@@ -769,8 +893,17 @@ letter-spacing: 0.2rem;
 
         panel.querySelectorAll('[data-required="true"]').forEach((field) => {
             const fieldOk = isRequiredFieldFilled(field);
-            setFieldError(field, !fieldOk);
+            setFieldError(field, !fieldOk, 'required');
             if (!fieldOk) ok = false;
+        });
+
+        // Also validate language for all fields in this step
+        panel.querySelectorAll('[name*="_fr"], [name*="_ar"]').forEach((field) => {
+            if (field.value.trim()) { // only validate if field has content
+                if (!validateLanguage(field)) {
+                    ok = false;
+                }
+            }
         });
 
         if (step === 3) {
@@ -788,9 +921,22 @@ letter-spacing: 0.2rem;
         return field.value.trim() !== '';
     }
 
-    function setFieldError(field, hasError) {
+    function setFieldError(field, hasError, msgType = 'required') {
         const wrap = field.closest('.jr-field');
-        if (wrap) wrap.classList.toggle('has-error', hasError);
+        if (wrap) {
+            wrap.classList.toggle('has-error', hasError);
+            // Update error message based on type using translations
+            const errorMsg = wrap.querySelector('.error-msg');
+            if (errorMsg && hasError) {
+                if (msgType === 'french') {
+                    errorMsg.textContent = translations.french_only;
+                } else if (msgType === 'arabic') {
+                    errorMsg.textContent = translations.arabic_only;
+                } else {
+                    errorMsg.textContent = translations.required;
+                }
+            }
+        }
     }
 
     function focusFirstInvalid(step) {
@@ -799,8 +945,45 @@ letter-spacing: 0.2rem;
     }
 
     document.querySelectorAll('[data-required="true"]').forEach((field) => {
-        field.addEventListener('input', () => setFieldError(field, !isRequiredFieldFilled(field)));
-        field.addEventListener('change', () => setFieldError(field, !isRequiredFieldFilled(field)));
+        field.addEventListener('input', () => setFieldError(field, !isRequiredFieldFilled(field), 'required'));
+        field.addEventListener('change', () => setFieldError(field, !isRequiredFieldFilled(field), 'required'));
+    });
+
+    // ── Language validation ──
+    const frenchRegex = /^[a-zA-Z0-9\s\-'àâäæçéèêëïîôöœûüùß.,!?;:()&%]*$/i;
+    const arabicRegex = /^[\u0600-\u06FF0-9\s\-'.,!?;:()&%]*$/;
+
+    function validateLanguage(field) {
+        const fieldName = field.name;
+        const value = field.value.trim();
+
+        if (!value) return true; // empty is ok (required check handles it)
+
+        if (fieldName.includes('_fr')) {
+            // French field: should only contain Latin characters
+            if (!frenchRegex.test(value)) {
+                setFieldError(field, true, 'french');
+                return false;
+            } else {
+                setFieldError(field, false);
+            }
+        } else if (fieldName.includes('_ar')) {
+            // Arabic field: should only contain Arabic characters
+            if (!arabicRegex.test(value)) {
+                setFieldError(field, true, 'arabic');
+                return false;
+            } else {
+                setFieldError(field, false);
+            }
+        }
+        return true;
+    }
+
+    // Attach language validation to all language-specific fields
+    document.querySelectorAll('[name*="_fr"], [name*="_ar"]').forEach((field) => {
+        field.addEventListener('input', () => validateLanguage(field));
+        field.addEventListener('blur', () => validateLanguage(field));
+        field.addEventListener('change', () => validateLanguage(field));
     });
 
     document.getElementById('jr-form').addEventListener('submit', function (event) {

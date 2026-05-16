@@ -12,15 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-
-            // 🔐 Role system
-            $table->enum('role', ['user', 'admin', 'editor'])->default('user')->after('email_verified_at');
-
-            // 🖼 Profile image (optional)
-            $table->string('photo')->nullable();
-
-            // 📊 Status control
-            $table->boolean('is_active')->default(true);
+            // $table->enum('role', ['user', 'admin', 'editor'])->default('user')->after('email_verified_at');
+            // $table->string('photo')->nullable()->after('role');
+            $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending')->after('photo');
+            // $table->boolean('is_active')->default(false)->after('status');
         });
     }
 
@@ -30,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['role', 'photo', 'is_active']);
+            $table->dropColumn(['role', 'photo', 'status', 'is_active']);
         });
     }
 };

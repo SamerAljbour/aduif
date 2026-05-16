@@ -3,8 +3,10 @@
     <header class="s-header">
 
         <div class="header-logo">
-            <a class="site-logo" href="index.html">
-                <img src="images/logo.svg" alt="Homepage">
+            <a class="site-logo" href="{{ url('/') }}">
+                <img src="{{ asset('user/images/aduif-white.png') }}"
+     alt="Homepage"
+     style="width: auto; height: 64px; max-width: 160px; object-fit: contain; border-radius: 50%;">
             </a>
         </div>
 
