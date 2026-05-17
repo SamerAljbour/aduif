@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Register — {{ config('app.name', 'Laravel') }}</title>
-
+    <title>Register — {{ config('app.name', 'Aduif') }}</title>
+    <link rel="shortcut icon" href="{{ asset('user/images/aduif-white.png') }}"  style="border-radius:50% "/>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }

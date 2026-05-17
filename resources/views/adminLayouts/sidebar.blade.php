@@ -238,10 +238,10 @@
 								<a class="dropdown-item" href="index.html"><i class="align-middle me-1" data-feather="settings"></i> Settings & Privacy</a>
 								<a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i> Help Center</a> --}}
 								{{-- <div class="dropdown-divider"></div> --}}
-                                {{-- Reset Password Link --}}
-                                {{-- <a class="dropdown-item" href="{{ route('password.generate-reset') }}">
-                                    <i class="align-middle me-1" data-feather="lock"></i> Reset Password
-                                </a> --}}
+                                {{-- Change Password Link --}}
+                                <a class="dropdown-item" href="{{ route('password.change-form') }}">
+                                    <i class="align-middle me-1" data-feather="lock"></i> Change Password
+                                </a>
 
                                 <div class="dropdown-divider"></div>
                                 <form method="POST" action="{{ route('logout') }}">

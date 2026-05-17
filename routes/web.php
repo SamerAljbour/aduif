@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\JoinRequestController;
@@ -48,6 +49,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Change Password Routes
+    Route::get('/change-password', [ChangePasswordController::class, 'show'])->name('password.change-form');
+    Route::post('/change-password', [ChangePasswordController::class, 'update'])->name('password.change');
 });
 // Route::get('/join-us', [JoinRequestController::class, 'index'])->name('admin.dashboard');
 Route::middleware(['locale'])->group(function () {
