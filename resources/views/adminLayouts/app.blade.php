@@ -18,6 +18,124 @@
 
 	<link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--bs-blue: #191231;
+			--bs-primary: #191231;
+			--bs-primary-rgb: 25, 18, 49;
+		}
+
+		.text-primary,
+		.link-primary,
+		a {
+			color: #191231;
+		}
+
+		a:hover,
+		.link-primary:hover,
+		.link-primary:focus {
+			color: #0f0a1f;
+		}
+
+		.bg-primary,
+		.badge.bg-primary,
+		.progress-bar {
+			background-color: #191231 !important;
+		}
+
+		.border-primary {
+			border-color: #191231 !important;
+		}
+
+		.btn-primary,
+		.btn-primary:disabled {
+			background-color: #191231;
+			border-color: #191231;
+		}
+
+		.btn-primary:hover,
+		.btn-primary:focus,
+		.btn-primary:active {
+			background-color: #0f0a1f;
+			border-color: #0f0a1f;
+		}
+
+		.btn-outline-primary {
+			color: #191231;
+			border-color: #191231;
+		}
+
+		.btn-outline-primary:hover,
+		.btn-outline-primary:focus,
+		.btn-outline-primary:active {
+			background-color: #191231;
+			border-color: #191231;
+			color: #ffffff;
+		}
+
+		.sidebar,
+		.sidebar-content {
+			background: #191231;
+		}
+
+		.sidebar-brand,
+		.sidebar-brand:hover {
+			background: #191231;
+		}
+
+		.sidebar-header {
+			color: rgba(255, 255, 255, 0.55);
+		}
+
+		.sidebar-link,
+		a.sidebar-link,
+		.sidebar-link i,
+		.sidebar-link svg,
+		a.sidebar-link i,
+		a.sidebar-link svg {
+			color: rgba(255, 255, 255, 0.64);
+		}
+
+		.sidebar-link,
+		a.sidebar-link {
+			border-left-color: transparent;
+		}
+
+		.sidebar-link:hover,
+		a.sidebar-link:hover {
+			background: rgba(255, 255, 255, 0.08);
+			color: #ffffff;
+		}
+
+		.sidebar-link:hover i,
+		.sidebar-link:hover svg,
+		a.sidebar-link:hover i,
+		a.sidebar-link:hover svg {
+			color: #ffffff;
+		}
+
+		.sidebar-item.active .sidebar-link,
+		.sidebar-item.active > .sidebar-link,
+		.sidebar-item.active .sidebar-link:hover,
+		.sidebar-item.active > .sidebar-link:hover {
+			background: rgba(255, 255, 255, 0.12);
+			border-left-color: transparent;
+			color: #ffffff;
+		}
+
+		.sidebar-item.active .sidebar-link i,
+		.sidebar-item.active .sidebar-link svg,
+		.sidebar-item.active > .sidebar-link i,
+		.sidebar-item.active > .sidebar-link svg {
+			color: #ffffff;
+		}
+
+		.form-control:focus,
+		.form-select:focus {
+			border-color: #191231;
+			box-shadow: 0 0 0 0.2rem rgba(25, 18, 49, 0.16);
+		}
+	</style>
 </head>
 
 <body>
@@ -33,6 +151,10 @@
 		</div>
 	</div>
 	<script src="{{ asset('admin/js/app.js') }}"></script>
+	<script>
+		window.theme = window.theme || {};
+		window.theme.primary = "#191231";
+	</script>
 
 	<script>
 		document.addEventListener("DOMContentLoaded", function() {
@@ -49,8 +171,8 @@
 
 			var ctx = lineCanvas.getContext("2d");
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-			gradient.addColorStop(0, "rgba(215, 227, 244, 1)");
-			gradient.addColorStop(1, "rgba(215, 227, 244, 0)");
+			gradient.addColorStop(0, "rgba(25, 18, 49, 0.22)");
+			gradient.addColorStop(1, "rgba(25, 18, 49, 0)");
 			// Line chart
 			new Chart(lineCanvas, {
 				type: "line",

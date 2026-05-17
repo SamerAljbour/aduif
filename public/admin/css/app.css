@@ -11098,7 +11098,7 @@ body {
 }
 .sidebar-link,
 a.sidebar-link {
-    background: #222e3c;
+    background: #191231;
     border-left: 3px solid transparent;
     color: rgba(233, 236, 239, 0.5);
     cursor: pointer;
@@ -12400,7 +12400,7 @@ span.flatpickr-weekday {
     border: 0.5px solid transparent;
 }
 .alert-toast--success {
-    background: rgba(25, 18, 49, 0.10);
+    background: rgba(25, 18, 49, 0.1);
     color: #191231;
     border-color: rgba(25, 18, 49, 0.24);
 }
@@ -12521,7 +12521,7 @@ span.flatpickr-weekday {
 }
 .mgmt-form__control:focus {
     border-color: #191231;
-    box-shadow: 0 0 0 2px rgba(25, 18, 49, 0.10);
+    box-shadow: 0 0 0 2px rgba(25, 18, 49, 0.1);
 }
 .mgmt-form__control.is-invalid {
     border-color: #b02a37;
@@ -12585,7 +12585,7 @@ textarea.mgmt-form__control {
     border: 0.5px solid transparent;
 }
 .alert-toast--success {
-    background: rgba(25, 18, 49, 0.10);
+    background: rgba(25, 18, 49, 0.1);
     color: #191231;
     border-color: rgba(25, 18, 49, 0.24);
 }
@@ -12691,7 +12691,7 @@ textarea.mgmt-form__control {
 }
 .mgmt-search:focus {
     border-color: #191231;
-    box-shadow: 0 0 0 2px rgba(25, 18, 49, 0.10);
+    box-shadow: 0 0 0 2px rgba(25, 18, 49, 0.1);
 }
 
 /* ── Table ── */
@@ -12788,11 +12788,11 @@ textarea.mgmt-form__control {
     white-space: nowrap;
 }
 .badge--pos {
-    background: rgba(25, 18, 49, 0.10);
+    background: rgba(25, 18, 49, 0.1);
     color: #0f0a1f;
 }
 .badge--current {
-    background: rgba(25, 18, 49, 0.10);
+    background: rgba(25, 18, 49, 0.1);
     color: #191231;
 }
 .badge--former {
@@ -12830,7 +12830,7 @@ textarea.mgmt-form__control {
     color: #191231;
 }
 .btn-row--edit:hover {
-    background: rgba(25, 18, 49, 0.10);
+    background: rgba(25, 18, 49, 0.1);
     color: #191231;
     text-decoration: none;
 }
@@ -12893,13 +12893,16 @@ textarea.mgmt-form__control {
     font-weight: 500;
     line-height: 1;
     box-shadow: none;
-    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    transition:
+        background 0.15s,
+        border-color 0.15s,
+        color 0.15s;
 }
 
 .mgmt-pagination .page-link:hover,
 .mgmt-pagination .page-link:focus {
     border-color: rgba(25, 18, 49, 0.45);
-    background: rgba(25, 18, 49, 0.10);
+    background: rgba(25, 18, 49, 0.1);
     color: #0f0a1f;
     box-shadow: 0 0 0 2px rgba(25, 18, 49, 0.08);
 }

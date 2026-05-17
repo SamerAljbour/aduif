@@ -38,13 +38,13 @@ class ContactUsController extends Controller
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => true,
-                    'message' => 'Thank you! Your message has been sent successfully.',
+                    'message' => trans('contact.success'),
                 ]);
             }
 
             return back()->with(
                 'success',
-                'Thank you! Your message has been sent successfully.'
+                trans('contact.success')
             );
         } catch (\Exception $e) {
 
@@ -53,14 +53,14 @@ class ContactUsController extends Controller
             if ($request->expectsJson()) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Failed to send message.',
+                    'message' => trans('contact.error'),
                     'error' => $e->getMessage(),
                 ], 500);
             }
 
             return back()->with(
                 'error',
-                'Failed to send message.'
+                trans('contact.error')
             );
         }
     }
