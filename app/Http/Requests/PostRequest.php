@@ -53,9 +53,9 @@ class PostRequest extends FormRequest
                 $validator->errors()->add('photos', 'At least one photo is required.');
             }
 
-            if ($videoCount < 1) {
-                $validator->errors()->add('videos', 'At least one video is required.');
-            }
+            // if ($videoCount < 1) {
+            //     $validator->errors()->add('videos', 'At least one video is required.');
+            // }
         });
     }
 

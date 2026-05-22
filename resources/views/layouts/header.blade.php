@@ -46,6 +46,9 @@
                     <li class="{{ request()->routeIs('members.showMembers') ? 'current' : '' }}">
                         <a href="{{ route('members.showMembers') }}" title="Members"> {{ __('header.members') }} </a>
                     </li>
+                    <li class="{{ request()->routeIs('posts.allPosts') ? 'current' : '' }}">
+                        <a href="{{ route('posts.allPosts') }}" title="Posts"> {{ __('header.posts') }} </a>
+                    </li>
                     @auth
                     <li class="{{ request()->routeIs('admin.dashboard') ? 'current' : '' }}">
                         <a href="{{ route('admin.dashboard') }}" title="dashboard"> {{ __('header.dashboard') }} </a>

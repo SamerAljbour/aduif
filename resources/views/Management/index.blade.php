@@ -130,7 +130,7 @@ html {
     min-height: 330px;
     max-height: 430px;
     object-fit: cover;
-    object-position: center top;
+    /* object-position: center top; */
     display: block;
     background: #6d6f73;
 }

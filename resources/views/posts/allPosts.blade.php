@@ -77,7 +77,7 @@
 
                     </article>
                 @empty
-                    <p style="text-align:center;">{{ __('posts.No_news_found') }}</p>
+                    <p style="text-align:center;">{{ __('posts.no_news_found') }}</p>
                 @endforelse
 
             </div>
@@ -134,7 +134,7 @@
 
                     </article>
                 @empty
-                    <p style="text-align:center;">{{ __('posts.No_memories_found') }}</p>
+                    <p style="text-align:center;">{{ __('posts.no_memories_found') }}</p>
                 @endforelse
 
             </div>

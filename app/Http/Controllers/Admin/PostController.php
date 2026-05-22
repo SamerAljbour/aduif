@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class PostController extends Controller
 {
@@ -28,16 +29,71 @@ class PostController extends Controller
     {
         $image = null;
 
+        // ✅ Main image
         if ($request->hasFile('image')) {
+
             $image = $request->file('image')->store('posts', 'public');
+
+            $source = storage_path('app/public/' . $image);
+            $destination = public_path('storage/' . $image);
+
+            if (!File::exists(dirname($destination))) {
+                File::makeDirectory(dirname($destination), 0755, true);
+            }
+
+            File::copy($source, $destination);
+        }
+
+        // ✅ Photos
+        $photos = [];
+
+        if ($request->hasFile('photos')) {
+
+            foreach ($request->file('photos') as $photo) {
+
+                $path = $photo->store('posts/photos', 'public');
+
+                $source = storage_path('app/public/' . $path);
+                $destination = public_path('storage/' . $path);
+
+                if (!File::exists(dirname($destination))) {
+                    File::makeDirectory(dirname($destination), 0755, true);
+                }
+
+                File::copy($source, $destination);
+
+                $photos[] = $path;
+            }
+        }
+
+        // ✅ Videos
+        $videos = [];
+
+        if ($request->hasFile('videos')) {
+
+            foreach ($request->file('videos') as $video) {
+
+                $path = $video->store('posts/videos', 'public');
+
+                $source = storage_path('app/public/' . $path);
+                $destination = public_path('storage/' . $path);
+
+                if (!File::exists(dirname($destination))) {
+                    File::makeDirectory(dirname($destination), 0755, true);
+                }
+
+                File::copy($source, $destination);
+
+                $videos[] = $path;
+            }
         }
 
         $post = Post::create([
             'type' => $request->type,
             'event_date' => $request->event_date,
             'image' => $image,
-            'photos' => $this->storeFiles($request->file('photos', []), 'posts/photos'),
-            'videos' => $this->storeFiles($request->file('videos', []), 'posts/videos'),
+            'photos' => $photos,
+            'videos' => $videos,
         ]);
 
         $post->translations()->createMany([
