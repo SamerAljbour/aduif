@@ -157,7 +157,7 @@
                 <h1 class="display-1">
                     {{ __('home-page.vision.title') }}
                 </h1>
-                            <div class="mission-divider" style="background-color: #fff; margin-bottom: 3rem;"></div>
+                            <div class="mission-divider" style="background-color: var(--color-primary); margin-bottom: 3rem;"></div>
 
                 <p class="lead">
                     {{ __('home-page.vision.description') }}
@@ -695,12 +695,12 @@
 {{-- ======= STYLES ======= --}}
 <style>
 :root {
-    --c-green:      #191231;
-    --c-green-dark: #191231;
-    --c-green-glow: rgba(25, 18, 49, 0.18);
-    --c-dark:       #111314;
-    --c-dark-2:     #1a1d1e;
-    --c-white:      #ffffff;
+    --c-green:      var(--color-primary);
+    --c-green-dark: var(--color-accent-light);
+    --c-green-glow: rgba(var(--color-accent-rgb), 0.18);
+    --c-dark:       var(--color-primary);
+    --c-dark-2:     var(--color-primary);
+    --c-white:      var(--color-surface);
     --c-red:        #e53935;
 }
 
@@ -713,7 +713,7 @@
 
 .s-projects {
     padding: 14rem 0 12rem;
-    background: #f2f2f2;
+    background: var(--color-bg);
 }
 
 .projects-grid--single {
@@ -744,11 +744,11 @@
 }
 
 .project-card {
-    background: #ffffff;
-    border: 1px solid rgba(15, 23, 42, 0.08);
+    background: var(--color-surface);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.08);
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 16px 42px rgba(15, 23, 42, 0.08);
+    box-shadow: 0 16px 42px rgba(var(--color-primary-rgb), 0.08);
     display: flex;
     flex-direction: column;
     min-height: 100%;
@@ -769,7 +769,7 @@
 
 .project-card__media {
     aspect-ratio: 16 / 10;
-    background: #f8fafc;
+    background: var(--color-bg);
     overflow: hidden;
 }
 
@@ -786,7 +786,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: rgba(25, 18, 49, 0.12);
+    background: rgba(var(--color-primary-rgb), 0.12);
     color: var(--c-green);
     font-size: 5rem;
     font-weight: 800;
@@ -819,23 +819,23 @@
 }
 
 .project-card__status--active {
-    background: rgba(25, 18, 49, 0.14);
-    color: var(--c-green);
+    background: rgba(var(--color-accent-rgb), 0.14);
+    color: var(--color-accent);
 }
 
 .project-card__status--completed {
-    background: #eef2ff;
-    color: #4338ca;
+    background: rgba(var(--color-accent-rgb), 0.14);
+    color: var(--color-accent);
 }
 
 .project-card__status--coming_soon {
-    background: #f1f5f9;
-    color: #64748b;
+    background: var(--color-bg);
+    color: var(--color-muted);
 }
 
 .project-card__title {
     margin: 0;
-    color: #0f172a;
+    color: var(--color-primary);
     font-size: 2.2rem;
     line-height: 1.25;
     font-weight: 800;
@@ -843,7 +843,7 @@
 
 .project-card__desc {
     margin: 0;
-    color: #475569;
+    color: var(--color-muted);
     font-size: 1.45rem;
     line-height: 1.75;
 }
@@ -874,7 +874,7 @@
     height: 400px;
     bottom: -150px;
     left: -100px;
-    background: radial-gradient(circle, rgba(25,18,49,0.10) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(var(--color-primary-rgb), 0.10) 0%, transparent 65%);
 }
 
 /* ── Inner layout ───────────────────────────────────────── */
@@ -890,7 +890,7 @@
 }
 /* White input text */
 .contact-input {
-    color: #ffffff !important;
+    color: var(--color-surface) !important;
 }
 
 /* White borders */
@@ -901,14 +901,14 @@
 /* Keep focus border colored */
 .contact-input:focus {
     border-color: var(--c-green) !important;
-    color: #ffffff !important;
+    color: var(--color-surface) !important;
 }
 
 /* Fix autofill text color (Chrome/Safari) */
 .contact-input:-webkit-autofill,
 .contact-input:-webkit-autofill:hover,
 .contact-input:-webkit-autofill:focus {
-    -webkit-text-fill-color: #ffffff !important;
+    -webkit-text-fill-color: var(--color-surface) !important;
     box-shadow: 0 0 0px 1000px var(--c-dark-2) inset !important;
 }
 .contact__label {
@@ -984,7 +984,7 @@
     width: 38px;
     height: 38px;
     background: var(--c-green-glow);
-    border: 1px solid rgba(25,18,49,0.3);
+    border: 1px solid rgba(var(--color-primary-rgb), 0.30);
     border-radius: 50%;
     flex-shrink: 0;
     color: var(--c-green);
@@ -1032,9 +1032,9 @@
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.10);
     border-radius: 8px;
-    color: #fff;
+    color: var(--color-surface);
     font-size: 1.4rem;
-    font-family: inherit;
+    font-family: 'Tajawal', sans-serif !important;
     padding: 12px 15px;
     outline: none;
     transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
@@ -1049,8 +1049,8 @@
 
 .contact-input:focus {
     border-color: var(--c-green);
-    background: rgba(25,18,49,0.06);
-    box-shadow: 0 0 0 3px rgba(25,18,49,0.12);
+    background: rgba(var(--color-primary-rgb), 0.06);
+    box-shadow: 0 0 0 3px rgba(var(--color-primary-rgb), 0.12);
 }
 
 .contact-input.is-invalid {
@@ -1088,8 +1088,8 @@
     gap: 10px;
     background: var(--c-green);
     border: 2px solid var(--c-green);
-    color: #fff;
-    font-family: inherit;
+    color: var(--color-surface);
+    font-family: 'Tajawal', sans-serif !important;
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: 0.16em;
@@ -1105,7 +1105,7 @@
     background: var(--c-green-dark);
     border-color: var(--c-green-dark);
     transform: translateY(-2px);
-    box-shadow: 0 10px 24px rgba(25,18,49,0.30);
+    box-shadow: 0 10px 24px rgba(var(--color-primary-rgb), 0.30);
 }
 
 .contact-btn:active  { transform: translateY(0); }
@@ -1137,8 +1137,8 @@
     font-size: 1.3rem;
 }
 .contact-alert--success {
-  background: rgba(25, 18, 49, 0.25) !important;
-    color: #ffffff !important;
+  background: rgba(var(--color-primary-rgb), 0.25) !important;
+    color: var(--color-surface) !important;
     border-left: 3px solid var(--c-green) !important;
 }
 

@@ -14,7 +14,7 @@ class PostRequest extends FormRequest
         $post = $this->postModel();
 
         return [
-            'type' => 'required|in:news,memory',
+            'type' => 'required|in:event,news,memory',
             'event_date' => 'required|date',
 
             'image' => ($post?->image ? 'nullable' : 'required') . '|image|max:2048',
@@ -44,14 +44,14 @@ class PostRequest extends FormRequest
             $existingPhotos = array_intersect($post?->photos ?? [], $this->input('existing_photos', []));
             $existingVideos = array_intersect($post?->videos ?? [], $this->input('existing_videos', []));
 
-            $photoCount = count($existingPhotos)
-                + count($this->file('photos', []));
-            $videoCount = count($existingVideos)
-                + count($this->file('videos', []));
+            // $photoCount = count($existingPhotos)
+            //     + count($this->file('photos', []));
+            // $videoCount = count($existingVideos)
+            //     + count($this->file('videos', []));
 
-            if ($photoCount < 1) {
-                $validator->errors()->add('photos', 'At least one photo is required.');
-            }
+            // if ($photoCount < 1) {
+            //     $validator->errors()->add('photos', 'At least one photo is required.');
+            // }
 
             // if ($videoCount < 1) {
             //     $validator->errors()->add('videos', 'At least one video is required.');

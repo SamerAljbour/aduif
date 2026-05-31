@@ -3,25 +3,31 @@
 <head>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Tajawal', sans-serif !important;
             line-height: 1.6;
-            color: #333;
+            color: var(--color-primary);
+        }
+        p {
+            text-align: justify;
+            text-align-last: auto;
+            text-justify: inter-word;
+            hyphens: auto;
         }
         .container {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background-color: #f5f5f5;
+            background-color: var(--color-bg);
         }
         .header {
-            background-color: #4CAF50;
-            color: white;
+            background-color: var(--color-accent);
+            color: var(--color-surface);
             padding: 20px;
             text-align: center;
             border-radius: 5px 5px 0 0;
         }
         .content {
-            background-color: white;
+            background-color: var(--color-surface);
             padding: 20px;
             border-radius: 0 0 5px 5px;
         }
@@ -30,11 +36,11 @@
         }
         .label {
             font-weight: bold;
-            color: #4CAF50;
+            color: var(--color-accent);
         }
         .footer {
             text-align: center;
-            color: #777;
+            color: var(--color-muted);
             font-size: 12px;
             margin-top: 20px;
         }
@@ -68,7 +74,7 @@
 
             <hr>
 
-            <p style="color: #777; font-size: 12px;">
+            <p style="color: var(--color-muted); font-size: 12px;">
                 This message was sent from the contact form at {{ config('app.name') }}
             </p>
         </div>

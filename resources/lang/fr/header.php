@@ -15,4 +15,5 @@ return [
     'logout' => 'Déconnexion',
     'dashboard' => 'Tableau de bord',
     'posts' => 'Publications',
+    'contact_us' => 'Contactez-nous',
 ];

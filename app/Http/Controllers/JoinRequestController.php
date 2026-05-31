@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreJoinRequest;
 use App\Models\JoinRequest;
 use App\Models\JoinRequestDocument;
+use App\Support\PublicStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Member;
@@ -37,11 +38,11 @@ class JoinRequestController extends Controller
         $cvPath = null;
 
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('join_requests/photos', 'public');
+            $photoPath = PublicStorage::put($request->file('photo'), 'join_requests/photos');
         }
 
         if ($request->hasFile('cv')) {
-            $cvPath = $request->file('cv')->store('join_requests/cv', 'public');
+            $cvPath = PublicStorage::put($request->file('cv'), 'join_requests/cv');
         }
 
         // ✅ Create main record
@@ -83,7 +84,7 @@ class JoinRequestController extends Controller
         if ($request->hasFile('documents')) {
             foreach ($request->file('documents') as $file) {
 
-                $path = $file->store('join_requests/documents', 'public');
+                $path = PublicStorage::put($file, 'join_requests/documents');
 
                 // detect type (optional)
                 $type = str_contains($file->getMimeType(), 'image')

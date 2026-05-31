@@ -21,8 +21,8 @@ return [
     ],
 
     'fields' => [
-        'name_fr' => 'Nom complet (Français)',
-        'name_ar' => 'Nom complet (Arabe)',
+        'name_fr' => 'Nom et prénom (Français)',
+        'name_ar' => 'Nom et prénom (Arabe)',
         'email' => 'Adresse email',
         'phone' => 'Numéro de téléphone',
         'nationality' => 'Nationalité',

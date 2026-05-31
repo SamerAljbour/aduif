@@ -11,6 +11,9 @@ $t = $post->translations->firstWhere('locale', $locale)
 
 $photos = $post->photos ?? [];
 $videos = $post->videos ?? [];
+$postImage = $post->image
+    ? (Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/'.$post->image))
+    : null;
 
 @endphp
 <style>
@@ -41,8 +44,8 @@ $videos = $post->videos ?? [];
 .single-post-media-card {
     overflow: hidden;
     border-radius: 10px;
-    background: #f8fafc;
-    border: 1px solid #e5e7eb;
+    background: var(--color-bg);
+    border: 1px solid var(--color-accent-light);
 }
 
 .single-post-media-card:only-child {
@@ -61,12 +64,12 @@ $videos = $post->videos ?? [];
 
 .single-post-media-card video {
     aspect-ratio: 16 / 9;
-    background: #020617;
+    background: var(--color-primary);
 }
 
 .single-post-section-title {
     margin: 0 0 1.2rem;
-    color: #0f172a;
+    color: var(--color-primary);
     font-size: 2rem;
     line-height: 1.2;
 }
@@ -89,7 +92,7 @@ $videos = $post->videos ?? [];
 
 <!-- ================= HEADER ================= -->
 <div class="page-header page-header--single"
-     style="background-image:url('{{ $post->image ? asset('storage/'.$post->image) : asset('images/blog/blog-bg-01.jpg') }}')">
+     style="background-image:url('{{ $postImage ?? asset('images/blog/blog-bg-01.jpg') }}')">
 
     <div class="row page-header__content">
         <div class="col-full">
@@ -125,7 +128,7 @@ $videos = $post->videos ?? [];
             {{-- SIGNATURE PHOTO --}}
             @if($post->image)
                 <div class="single-post-section single-post-signature">
-                    <img src="{{ asset('storage/'.$post->image) }}"
+                    <img src="{{ $postImage }}"
                          alt="{{ $t->title ?? __('posts.no_title') }}">
                 </div>
             @endif
@@ -206,7 +209,7 @@ $videos = $post->videos ?? [];
                 {{ $prevT?->title ?? __('posts.no_title') }}
             </a>
         @else
-            <span style="color:#94a3b8; font-size:14px;">
+            <span style="color:var(--color-muted); font-size:14px;">
                 {{ __('posts.no_previous') }}
                 {{-- {{ __('posts.type_' . $post->type) }} --}}
             </span>
@@ -226,7 +229,7 @@ $videos = $post->videos ?? [];
                 {{ $nextT?->title ?? __('posts.no_title') }}
             </a>
         @else
-            <span style="color:#94a3b8; font-size:14px;">
+            <span style="color:var(--color-muted); font-size:14px;">
                 {{ __('posts.no_next') }}
                 {{-- {{ __('posts.type_' . $post->type) }} --}}
             </span>

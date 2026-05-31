@@ -17,70 +17,86 @@
 	<title>Aduif</title>
 
 	<link href="{{ asset('admin/css/app.css') }}" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 	<style>
 		:root {
-			--bs-blue: #191231;
-			--bs-primary: #191231;
-			--bs-primary-rgb: 25, 18, 49;
+			--color-primary: #1B2A4A;
+			--color-primary-rgb: 27, 42, 74;
+			--color-accent: #4A6FA5;
+			--color-accent-rgb: 74, 111, 165;
+			--color-accent-light: #6B8FC4;
+			--color-accent-light-rgb: 107, 143, 196;
+			--color-bg: #F2F4F7;
+			--color-surface: #FFFFFF;
+			--color-muted: #5A6A85;
+			--bs-blue: var(--color-accent);
+			--bs-primary: var(--color-accent);
+			--bs-primary-rgb: var(--color-accent-rgb);
+		}
+
+		html,
+		body,
+		* {
+			font-family: 'Tajawal', sans-serif !important;
 		}
 
 		.text-primary,
 		.link-primary,
 		a {
-			color: #191231;
+			color: var(--color-accent);
 		}
 
 		a:hover,
 		.link-primary:hover,
 		.link-primary:focus {
-			color: #0f0a1f;
+			color: var(--color-accent);
 		}
 
 		.bg-primary,
 		.badge.bg-primary,
 		.progress-bar {
-			background-color: #191231 !important;
+			background-color: var(--color-accent) !important;
 		}
 
 		.border-primary {
-			border-color: #191231 !important;
+			border-color: var(--color-primary) !important;
 		}
 
 		.btn-primary,
 		.btn-primary:disabled {
-			background-color: #191231;
-			border-color: #191231;
+			background-color: var(--color-accent);
+			border-color: var(--color-accent);
+			color: var(--color-surface);
 		}
 
 		.btn-primary:hover,
 		.btn-primary:focus,
 		.btn-primary:active {
-			background-color: #0f0a1f;
-			border-color: #0f0a1f;
+			background-color: var(--color-accent-light);
+			border-color: var(--color-accent-light);
 		}
 
 		.btn-outline-primary {
-			color: #191231;
-			border-color: #191231;
+			color: var(--color-primary);
+			border-color: var(--color-primary);
 		}
 
 		.btn-outline-primary:hover,
 		.btn-outline-primary:focus,
 		.btn-outline-primary:active {
-			background-color: #191231;
-			border-color: #191231;
-			color: #ffffff;
+			background-color: var(--color-primary);
+			border-color: var(--color-primary);
+			color: var(--color-surface);
 		}
 
 		.sidebar,
 		.sidebar-content {
-			background: #191231;
+			background: var(--color-primary);
 		}
 
 		.sidebar-brand,
 		.sidebar-brand:hover {
-			background: #191231;
+			background: var(--color-primary);
 		}
 
 		.sidebar-header {
@@ -104,14 +120,14 @@
 		.sidebar-link:hover,
 		a.sidebar-link:hover {
 			background: rgba(255, 255, 255, 0.08);
-			color: #ffffff;
+			color: var(--color-surface);
 		}
 
 		.sidebar-link:hover i,
 		.sidebar-link:hover svg,
 		a.sidebar-link:hover i,
 		a.sidebar-link:hover svg {
-			color: #ffffff;
+			color: var(--color-surface);
 		}
 
 		.sidebar-item.active .sidebar-link,
@@ -120,20 +136,27 @@
 		.sidebar-item.active > .sidebar-link:hover {
 			background: rgba(255, 255, 255, 0.12);
 			border-left-color: transparent;
-			color: #ffffff;
+			color: var(--color-surface);
 		}
 
 		.sidebar-item.active .sidebar-link i,
 		.sidebar-item.active .sidebar-link svg,
 		.sidebar-item.active > .sidebar-link i,
 		.sidebar-item.active > .sidebar-link svg {
-			color: #ffffff;
+			color: var(--color-surface);
 		}
 
 		.form-control:focus,
 		.form-select:focus {
-			border-color: #191231;
-			box-shadow: 0 0 0 0.2rem rgba(25, 18, 49, 0.16);
+			border-color: var(--color-primary);
+			box-shadow: 0 0 0 0.2rem rgba(var(--color-primary-rgb), 0.16);
+		}
+
+		p {
+			text-align: justify;
+			text-align-last: auto;
+			text-justify: inter-word;
+			hyphens: auto;
 		}
 	</style>
 </head>
@@ -153,7 +176,7 @@
 	<script src="{{ asset('admin/js/app.js') }}"></script>
 	<script>
 		window.theme = window.theme || {};
-		window.theme.primary = "#191231";
+		window.theme.primary = "#4A6FA5";
 	</script>
 
 	<script>
@@ -171,8 +194,8 @@
 
 			var ctx = lineCanvas.getContext("2d");
 			var gradient = ctx.createLinearGradient(0, 0, 0, 225);
-			gradient.addColorStop(0, "rgba(25, 18, 49, 0.22)");
-			gradient.addColorStop(1, "rgba(25, 18, 49, 0)");
+			gradient.addColorStop(0, "rgba(27, 42, 74, 0.22)");
+			gradient.addColorStop(1, "rgba(27, 42, 74, 0)");
 			// Line chart
 			new Chart(lineCanvas, {
 				type: "line",

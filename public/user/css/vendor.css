@@ -1345,7 +1345,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   width: 100%;
   text-align: center;
   font-size: 14px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Tajawal', sans-serif;
   opacity: 0;
   -webkit-transition: opacity 0.3s ease;
   -o-transition: opacity 0.3s ease;
@@ -1418,7 +1418,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   color: white;
   font-style: normal;
   font-size: 30px;
-  font-family: Arial, sans-serif;
+  font-family: 'Tajawal', sans-serif;
   line-height: 42px;
   border: 0;
   background: transparent;
@@ -1470,7 +1470,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
   color: #fff;
   font-style: normal;
   font-size: 30px;
-  font-family: Arial, sans-serif;
+  font-family: 'Tajawal', sans-serif;
   line-height: 36px;
   border: 0;
   background: transparent;
@@ -1539,7 +1539,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos] {
  * ------------------------------------------------------------------- */
 .prettyprint {
   background: #F1F1F1;
-  font-family: Menlo, 'Bitstream Vera Sans Mono', 'DejaVu Sans Mono', Monaco, Consolas, monospace;
+  font-family: 'Tajawal', sans-serif;
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;

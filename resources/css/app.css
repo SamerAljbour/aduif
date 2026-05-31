@@ -1,3 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --color-primary: #1B2A4A;
+        --color-primary-rgb: 27, 42, 74;
+        --color-accent: #4A6FA5;
+        --color-accent-rgb: 74, 111, 165;
+        --color-accent-light: #6B8FC4;
+        --color-accent-light-rgb: 107, 143, 196;
+        --color-bg: #F2F4F7;
+        --color-surface: #FFFFFF;
+        --color-muted: #5A6A85;
+    }
+
+    html,
+    body,
+    * {
+        font-family: 'Tajawal', sans-serif !important;
+    }
+
+    body {
+        font-family: 'Tajawal', sans-serif;
+        background: var(--color-bg);
+        color: var(--color-primary);
+        line-height: 1.8;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    h1 {
+        font-weight: 900;
+    }
+
+    h1,
+    h2,
+    h3 {
+        color: var(--color-primary);
+    }
+
+    h2,
+    h3 {
+        font-weight: 700;
+    }
+
+    h4,
+    h5,
+    h6,
+    .card-title {
+        font-weight: 500;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+        line-height: 1.4;
+    }
+
+    p,
+    li,
+    td {
+        font-weight: 400;
+        line-height: 1.9;
+    }
+
+    small,
+    .small,
+    caption,
+    label,
+    .text-muted {
+        font-weight: 300;
+    }
+
+    a {
+        color: var(--color-accent);
+    }
+
+    a:hover {
+        color: var(--color-accent-light);
+    }
+
+    p {
+        text-align: justify;
+        text-align-last: auto;
+        text-justify: inter-word;
+        hyphens: auto;
+    }
+}

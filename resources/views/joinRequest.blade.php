@@ -1,23 +1,29 @@
 @extends('userLayouts.app')
 
 @section('content')
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
 <style>
 :root {
-    --brand: #191231;
-    --brand-dark: #191231;
-    --brand-light: rgba(25, 18, 49, 0.14);
-    --text: #0f172a;
-    --text-muted: #64748b;
-    --surface: #ffffff;
-    --bg: #f8fafc;
-    --border: #e2e8f0;
+    --brand: var(--color-accent);
+    --brand-dark: var(--color-accent-light);
+    --brand-light: rgba(var(--color-accent-rgb), 0.14);
+    --text: var(--color-primary);
+    --text-muted: var(--color-muted);
+    --surface: var(--color-surface);
+    --bg: var(--color-bg);
+    --border: var(--color-accent-light);
     --radius: 12px;
     --danger: #ef4444;
-    --danger-light: #fef2f2;
+    --danger-light: rgba(239, 68, 68, 0.10);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body, *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tajawal', sans-serif !important; }
+body { line-height: 1.8; -webkit-font-smoothing: antialiased; }
+h1 { font-weight: 900; }
+h2, h3 { font-weight: 700; }
+h4, h5, h6 { font-weight: 500; }
+h1, h2, h3, h4 { line-height: 1.4; }
+p, li, td { line-height: 1.9; }
 
 /* ── Page shell ── */
 .s-home::after { background-color: transparent; }
@@ -34,7 +40,7 @@
 .jr-wrap {
     position: relative;
     z-index: 3;
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Tajawal', sans-serif !important;
     background: var(--bg);
     color: var(--text);
     max-width: 811px;
@@ -58,7 +64,7 @@
     background: var(--brand); display: inline-block;
 }
 .jr-header h1 {
-    font-family: 'Syne', sans-serif; font-size: 30px; font-weight: 700;
+    font-family: 'Tajawal', sans-serif !important; font-size: 30px; font-weight: 700;
     color: var(--text); line-height: 1.2; margin-bottom: 0.5rem;
 }
 .jr-header p { color: var(--text-muted); font-size: 15px; line-height: 1.6; }
@@ -83,18 +89,18 @@
 .jr-step-btn {
     flex: 1; display: flex; align-items: center; justify-content: center; gap: 7px;
     padding: 9px 6px; border-radius: 100px; border: none; background: transparent;
-    cursor: pointer; transition: all 0.25s; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.25s; font-family: 'Tajawal', sans-serif !important;
     font-size: 13px; font-weight: 500; color: var(--text-muted); white-space: nowrap;
     margin-bottom: 0;
 }
-.jr-step-btn.active { background: var(--text); color: #fff; }
+.jr-step-btn.active { background: var(--text); color: var(--color-surface); }
 .jr-step-btn.done { color: var(--brand-dark); }
 .jr-step-num {
     width: 20px; height: 20px; border-radius: 50%; display: flex;
     align-items: center; justify-content: center; font-size: 11px; font-weight: 600;
     background: var(--border); color: var(--text-muted); flex-shrink: 0; transition: all 0.25s;
 }
-.jr-step-btn.active .jr-step-num { background: var(--brand); color: #fff; }
+.jr-step-btn.active .jr-step-num { background: var(--brand); color: var(--color-surface); }
 .jr-step-btn.done .jr-step-num { background: var(--brand-light); color: var(--brand-dark); }
 
 /* ── Card ── */
@@ -103,7 +109,7 @@
     border-radius: var(--radius); padding: 2rem; margin-bottom: 1rem;
 }
 .jr-card-title {
-    font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 600;
+    font-family: 'Tajawal', sans-serif !important; font-size: 15px; font-weight: 600;
     margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px;
 }
 .jr-card-title .dot {
@@ -143,16 +149,16 @@
 .jr-field select,
 .jr-field textarea {
     border: 1.5px solid var(--border); border-radius: 8px;
-    padding: 10px 14px; font-size: 14px; font-family: 'DM Sans', sans-serif;
+    padding: 10px 14px; font-size: 14px; font-family: 'Tajawal', sans-serif !important;
     color: var(--text); background: var(--bg); transition: border-color 0.2s;
     outline: none; width: 100%; margin: 0;
 }
 .jr-field textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
 .jr-field input:focus,
 .jr-field select:focus,
-.jr-field textarea:focus { border-color: var(--brand); background: #fff; }
+.jr-field textarea:focus { border-color: var(--brand); background: var(--color-surface); }
 .jr-field input::placeholder,
-.jr-field textarea::placeholder { color: #94a3b8; }
+.jr-field textarea::placeholder { color: var(--color-muted); }
 .jr-field input.invalid { border-color: var(--danger) !important; }
 
 /* Error message — always in flow, visibility toggled to prevent layout shift */
@@ -190,7 +196,7 @@
     display: flex; align-items: center; gap: 10px; background: var(--bg);
     user-select: none;
 }
-.jr-radio-option:hover { border-color: var(--brand); background: rgba(25, 18, 49, 0.08); }
+.jr-radio-option:hover { border-color: var(--brand); background: rgba(var(--color-primary-rgb), 0.08); }
 .jr-radio-option.selected { border-color: var(--brand); background: var(--brand-light); }
 .jr-radio-option input[type=radio] { display: none; }
 .jr-radio-dot {
@@ -201,7 +207,7 @@
 .jr-radio-option.selected .jr-radio-dot { border-color: var(--brand); background: var(--brand); }
 .jr-radio-dot::after {
     content: ''; width: 6px; height: 6px; border-radius: 50%;
-    background: white; display: none;
+    background: var(--color-surface); display: none;
 }
 .jr-radio-option.selected .jr-radio-dot::after { display: block; }
 .jr-radio-label { font-size: 14px; font-weight: 500; }
@@ -212,7 +218,7 @@
     text-align: center; cursor: pointer; transition: all 0.2s;
     background: var(--bg); position: relative;
 }
-.jr-upload-zone:hover { border-color: var(--brand); background: rgba(25, 18, 49, 0.08); }
+.jr-upload-zone:hover { border-color: var(--brand); background: rgba(var(--color-primary-rgb), 0.08); }
 .jr-upload-zone.has-file { border-color: var(--brand); border-style: solid; background: var(--brand-light); }
 .jr-upload-zone input[type=file] {
     position: absolute; inset: 0; opacity: 0;
@@ -233,7 +239,7 @@
     position: relative; cursor: pointer;
 }
 .jr-multi-zone:hover,
-.jr-multi-zone.drag-over { border-color: var(--brand); background: rgba(25, 18, 49, 0.08); }
+.jr-multi-zone.drag-over { border-color: var(--brand); background: rgba(var(--color-primary-rgb), 0.08); }
 .jr-multi-zone input[type=file] {
     position: absolute; inset: 0; opacity: 0;
     cursor: pointer; width: 100%; height: 100%;
@@ -279,20 +285,20 @@
 .jr-btn-ghost {
     padding: 10px 20px; border: 1.5px solid var(--border); border-radius: 8px;
     background: transparent; color: var(--text-muted); font-size: 14px; font-weight: 500;
-    cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.2s; font-family: 'Tajawal', sans-serif !important;
     display: flex; align-items: center; gap: 6px;
 }
 .jr-btn-ghost:hover { border-color: var(--text); color: var(--text); }
 .jr-btn-primary {
     padding: 10px 28px; border-radius: 8px; background: var(--brand);
-    color: #fff; font-size: 14px; font-weight: 600; border: none;
-    cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+    color: var(--color-surface); font-size: 14px; font-weight: 600; border: none;
+    cursor: pointer; transition: all 0.2s; font-family: 'Tajawal', sans-serif !important;
     display: flex; align-items: center; gap: 8px;
 }
 .jr-btn-primary:hover { background: var(--brand-dark); transform: translateY(-1px); }
 .jr-btn-primary:active { transform: scale(0.98); }
-.jr-btn-submit { background: #0f172a; }
-.jr-btn-submit:hover { background: #1e293b; }
+.jr-btn-submit { background: var(--color-primary); }
+.jr-btn-submit:hover { background: var(--color-accent-light); }
 
 /* ── Review ── */
 .jr-review-row {
@@ -307,7 +313,7 @@
     border-radius: 100px; font-size: 12px; font-weight: 500;
 }
 .jr-badge-green { background: var(--brand-light); color: var(--brand-dark); }
-.jr-badge-blue { background: #eff6ff; color: #1d4ed8; }
+.jr-badge-blue { background: rgba(var(--color-accent-rgb), 0.12); color: var(--color-accent); }
 
 /* ── Panels — hidden panels take ZERO space ── */
 .jr-panel { display: none; animation: fadeUp 0.3s ease; }
@@ -696,7 +702,7 @@
                                    onchange="jrSingleFile('photo', this)"
                                    data-required="true" />
                             <div class="jr-upload-icon">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
                             </div>
                             <div class="jr-upload-title">{{ __('joinUs.upload.photo') }}</div>
                             <div class="jr-upload-sub">{{ __('joinUs.upload.photo_hint') }}</div>
@@ -714,7 +720,7 @@
                                    onchange="jrSingleFile('cv', this)"
                                    data-required="true" />
                             <div class="jr-upload-icon">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                             </div>
                             <div class="jr-upload-title">{{ __('joinUs.upload.cv') }}</div>
                             <div class="jr-upload-sub">{{ __('joinUs.upload.cv_hint') }}</div>
@@ -746,7 +752,7 @@
                            onchange="jrAddDocs(this.files)" />
                     <div class="jr-multi-zone-inner">
                         <div class="jr-multi-zone-icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                         </div>
                         <div class="jr-multi-zone-title">{{ __('joinUs.upload.docs_drop') }}</div>
                         <div class="jr-multi-zone-sub">{{ __('joinUs.upload.docs_hint') }}</div>
@@ -814,9 +820,9 @@
 
     <div class="jr-success active">
         <div class="jr-success-icon">
-            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <h2 style="font-family:'Syne',sans-serif;font-size:24px;font-weight:700;margin-bottom:.75rem;">{{ __('joinUs.success.title') }}</h2>
+        <h2 style="font-family: 'Tajawal', sans-serif !important;font-size:24px;font-weight:700;margin-bottom:.75rem;">{{ __('joinUs.success.title') }}</h2>
         <p style="color:var(--text-muted);font-size:15px;line-height:1.6;max-width:380px;margin-bottom:2rem;">
             {{ __('joinUs.success.desc') }}
         </p>
@@ -1038,7 +1044,7 @@
             item.className = 'jr-doc-item';
             item.innerHTML = `
                 <div class="jr-doc-icon">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#191231" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
                 </div>
                 <div class="jr-doc-info">
                     <div class="jr-doc-name" title="${f.name}">${f.name}</div>

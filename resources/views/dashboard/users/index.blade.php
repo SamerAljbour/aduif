@@ -24,7 +24,7 @@
     </div>
 
     {{-- TABS --}}
-    <div style="margin-bottom: 20px; border-bottom: 2px solid #e2e8f0;">
+    <div style="margin-bottom: 20px; border-bottom: 2px solid var(--color-accent-light);">
         <div style="display: flex; gap: 20px;">
             <button onclick="switchTab('pending')" class="tab-button active" id="tab-pending">
                 Pending ({{ $pendingUsers->total() }})
@@ -85,13 +85,13 @@
                                         <div style="display: flex; gap: 10px;">
                                             <form action="{{ route('admin.users.approve', $user) }}" method="POST" style="display: inline;">
                                                 @csrf
-                                                <button type="submit" class="btn-row btn-row--edit" style="background-color: #10b981; color: white; border: none;">
+                                                <button type="submit" class="btn-row btn-row--edit" style="background-color: var(--color-accent); color: var(--color-surface); border: none;">
                                                     ✓ Approve
                                                 </button>
                                             </form>
                                             <form action="{{ route('admin.users.reject', $user) }}" method="POST" style="display: inline;">
                                                 @csrf
-                                                <button type="submit" class="btn-row btn-row--edit" style="background-color: #ef4444; color: white; border: none;">
+                                                <button type="submit" class="btn-row btn-row--edit" style="background-color: #ef4444; color: var(--color-surface); border: none;">
                                                     ✗ Reject
                                                 </button>
                                             </form>
@@ -176,14 +176,14 @@
                                             @if($user->is_active)
                                             <form action="{{ route('admin.users.deactivate', $user) }}" method="POST" style="display: inline;">
                                                 @csrf
-                                                <button type="submit" class="btn-row btn-row--edit" style="background-color: #f59e0b; color: white; border: none;">
+                                                <button type="submit" class="btn-row btn-row--edit" style="background-color: var(--color-accent-light); color: var(--color-surface); border: none;">
                                                     Deactivate
                                                 </button>
                                             </form>
                                         @else
                                             <form action="{{ route('admin.users.activate', $user) }}" method="POST" style="display: inline;">
                                                 @csrf
-                                                <button type="submit" class="btn-row btn-row--edit" style="background-color: #10b981; color: white; border: none;">
+                                                <button type="submit" class="btn-row btn-row--edit" style="background-color: var(--color-accent); color: var(--color-surface); border: none;">
                                                     Activate
                                                 </button>
                                             </form>
@@ -259,7 +259,7 @@
                                         @if(auth()->check() && auth()->user()->email === 'aduif.jordanie@gmail.com' && auth()->id() !== $user->id)
                                             <form action="{{ route('admin.users.reactivate', $user) }}" method="POST" style="display: inline;">
                                             @csrf
-                                            <button type="submit" class="btn-row btn-row--edit" style="background-color: #3b82f6; color: white; border: none;">
+                                            <button type="submit" class="btn-row btn-row--edit" style="background-color: var(--color-accent); color: var(--color-surface); border: none;">
                                                 ↻ Reactivate
                                             </button>
                                         </form>
@@ -298,18 +298,18 @@
         cursor: pointer;
         font-size: 14px;
         font-weight: 500;
-        color: #64748b;
+        color: var(--color-muted);
         border-bottom: 3px solid transparent;
         transition: all 0.3s ease;
     }
 
     .tab-button.active {
-        color: #1e293b;
-        border-bottom-color: #3b82f6;
+        color: var(--color-accent-light);
+        border-bottom-color: var(--color-accent);
     }
 
     .tab-button:hover {
-        color: #1e293b;
+        color: var(--color-accent-light);
     }
 
     .tab-content {

@@ -103,8 +103,15 @@
 
                             {{-- TYPE --}}
                             <td>
+                                @php
+                                    $typeClass = match ($post->type) {
+                                        'event' => 'badge--former',
+                                        'news' => 'badge--current',
+                                        default => 'badge--honorary',
+                                    };
+                                @endphp
                                 <span class="badge
-                                    {{ $post->type == 'news' ? 'badge--current' : 'badge--honorary' }}">
+                                    {{ $typeClass }}">
                                     {{ ucfirst($post->type) }}
                                 </span>
                             </td>

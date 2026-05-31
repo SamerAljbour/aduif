@@ -98,7 +98,7 @@
                                         📄 CV
                                     </a>
                                 @else
-                                    <span style="font-size:12px;color:#64748b;">No CV</span>
+                                    <span style="font-size:12px;color:var(--color-muted);">No CV</span>
                                 @endif
                             </td>
 
@@ -169,20 +169,20 @@
 .mgmt-modal__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(15, 23, 42, 0.55);
+    background: rgba(var(--color-primary-rgb), 0.55);
     backdrop-filter: blur(3px);
 }
 
 .mgmt-modal__container {
     position: relative;
-    background: #fff;
+    background: var(--color-surface);
     border-radius: 16px;
     width: 92%;
     max-width: 860px;
     max-height: 88vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 24px 64px rgba(15,23,42,.18);
+    box-shadow: 0 24px 64px rgba(var(--color-primary-rgb), 0.18);
     overflow: hidden;
 }
 
@@ -192,8 +192,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 18px 24px;
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-accent-light);
     flex-shrink: 0;
 }
 
@@ -207,24 +207,24 @@
     margin: 0 0 4px;
     font-size: 16px;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--color-primary);
 }
 
 .mgmt-modal__close {
-    background: #f1f5f9;
+    background: var(--color-bg);
     border: none;
     border-radius: 8px;
     width: 34px;
     height: 34px;
     cursor: pointer;
     font-size: 14px;
-    color: #64748b;
+    color: var(--color-muted);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background .15s;
 }
-.mgmt-modal__close:hover { background: #e2e8f0; color: #0f172a; }
+.mgmt-modal__close:hover { background: var(--color-accent-light); color: var(--color-primary); }
 
 /* Body */
 .mgmt-modal__body {
@@ -248,9 +248,9 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .08em;
-    color: #94a3b8;
+    color: var(--color-muted);
     padding: 18px 24px 8px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid var(--color-bg);
     margin: 0;
 }
 .modal-section-title:first-child { border-top: none; }
@@ -263,14 +263,14 @@
 .modal-info-table td {
     padding: 10px 24px;
     font-size: 13.5px;
-    color: #334155;
-    border-bottom: 1px solid #f1f5f9;
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-bg);
     vertical-align: top;
 }
 
 .modal-info-table td:first-child {
     font-weight: 600;
-    color: #64748b;
+    color: var(--color-muted);
     width: 38%;
     white-space: nowrap;
 }
@@ -288,27 +288,27 @@
     align-items: center;
     gap: 8px;
     padding: 10px 14px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-accent-light);
     border-radius: 10px;
     text-decoration: none;
-    color: #334155;
+    color: var(--color-primary);
     font-size: 13px;
     font-weight: 500;
     transition: all .15s;
 }
 .modal-doc-card:hover {
-    background: #eff6ff;
-    border-color: #93c5fd;
-    color: #1d4ed8;
+    background: rgba(var(--color-accent-rgb), 0.12);
+    border-color: var(--color-accent-light);
+    color: var(--color-accent);
 }
 
 .modal-doc-icon { font-size: 18px; }
 
 .modal-doc-badge {
     font-size: 10px;
-    background: #e0e7ff;
-    color: #4338ca;
+    background: rgba(var(--color-accent-light-rgb), 0.24);
+    color: var(--color-accent);
     border-radius: 4px;
     padding: 1px 6px;
     font-weight: 600;
@@ -318,7 +318,7 @@
 .modal-empty-docs {
     padding: 12px 24px 18px;
     font-size: 13px;
-    color: #94a3b8;
+    color: var(--color-muted);
 }
 
 /* Status badge fix */
@@ -329,6 +329,8 @@
 </style>
 
 <script>
+const storageBaseUrl = @json(asset('storage'));
+
 function mgmtFilter() {
     const q = document.getElementById('mgmtSearch').value.toLowerCase();
     document.querySelectorAll('#mgmtTableBody .mgmt-row').forEach(row => {
@@ -345,7 +347,7 @@ function openMemberModal(btn) {
     // ── Avatar
     const avatarEl = document.getElementById('modalAvatar');
     if (member.photo) {
-        avatarEl.outerHTML = `<img id="modalAvatar" src="/storage/${member.photo}" class="mgmt-avatar mgmt-avatar--modal" alt="photo">`;
+        avatarEl.outerHTML = `<img id="modalAvatar" src="${storageBaseUrl}/${member.photo}" class="mgmt-avatar mgmt-avatar--modal" alt="photo">`;
     } else {
         const initial = (ar.name || fr.name || 'M').charAt(0).toUpperCase();
         const el = document.getElementById('modalAvatar');
@@ -367,7 +369,7 @@ const docs = member.documents || [];
     const docsHtml = docs.length
         ? `<div class="modal-docs-grid">
             ${docs.map((doc, i) => `
-                <a href="/storage/${doc.file_path}" target="_blank" class="modal-doc-card">
+                <a href="${storageBaseUrl}/${doc.file_path}" target="_blank" class="modal-doc-card">
                     <span class="modal-doc-icon">${doc.type === 'certificate' ? '🎓' : '📄'}</span>
                     <span>Document ${i + 1}</span>
                     <span class="modal-doc-badge">${doc.type}</span>
@@ -378,14 +380,14 @@ const docs = member.documents || [];
 
     // ── CV row
     const cvHtml = member.cv
-        ? `<a href="/storage/${member.cv}" target="_blank" class="btn-row btn-row--edit">📄 View CV</a>`
-        : `<span style="color:#94a3b8">No CV uploaded</span>`;
+        ? `<a href="${storageBaseUrl}/${member.cv}" target="_blank" class="btn-row btn-row--edit">📄 View CV</a>`
+        : `<span style="color:var(--color-muted)">No CV uploaded</span>`;
 
     // ── Rows helper
     const row = (label, value) => `
         <tr>
             <td>${label}</td>
-            <td>${value || '<span style="color:#94a3b8">—</span>'}</td>
+            <td>${value || '<span style="color:var(--color-muted)">—</span>'}</td>
         </tr>`;
 
     document.getElementById('memberModalBody').innerHTML = `
@@ -407,7 +409,7 @@ const docs = member.documents || [];
             ${row('University', ar.graduation_university)}
             ${row('Current Job', ar.current_job)}
             ${row('Workplace', ar.workplace)}
-            ${row('Interests', ar.interests)}
+            ${row('Tajawalests', ar.interests)}
             ${row('Bio', ar.bio)}
         </table>
 
@@ -420,7 +422,7 @@ const docs = member.documents || [];
             ${row('University', fr.graduation_university)}
             ${row('Current Job', fr.current_job)}
             ${row('Workplace', fr.workplace)}
-            ${row('Interests', fr.interests)}
+            ${row('Tajawalests', fr.interests)}
             ${row('Bio', fr.bio)}
         </table>
 

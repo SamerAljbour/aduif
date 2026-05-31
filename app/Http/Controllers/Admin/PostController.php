@@ -5,8 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
+use App\Support\PublicStorage;
 
 class PostController extends Controller
 {
@@ -32,16 +31,7 @@ class PostController extends Controller
         // ✅ Main image
         if ($request->hasFile('image')) {
 
-            $image = $request->file('image')->store('posts', 'public');
-
-            $source = storage_path('app/public/' . $image);
-            $destination = public_path('storage/' . $image);
-
-            if (!File::exists(dirname($destination))) {
-                File::makeDirectory(dirname($destination), 0755, true);
-            }
-
-            File::copy($source, $destination);
+            $image = PublicStorage::put($request->file('image'), 'posts');
         }
 
         // ✅ Photos
@@ -51,16 +41,7 @@ class PostController extends Controller
 
             foreach ($request->file('photos') as $photo) {
 
-                $path = $photo->store('posts/photos', 'public');
-
-                $source = storage_path('app/public/' . $path);
-                $destination = public_path('storage/' . $path);
-
-                if (!File::exists(dirname($destination))) {
-                    File::makeDirectory(dirname($destination), 0755, true);
-                }
-
-                File::copy($source, $destination);
+                $path = PublicStorage::put($photo, 'posts/photos');
 
                 $photos[] = $path;
             }
@@ -73,16 +54,7 @@ class PostController extends Controller
 
             foreach ($request->file('videos') as $video) {
 
-                $path = $video->store('posts/videos', 'public');
-
-                $source = storage_path('app/public/' . $path);
-                $destination = public_path('storage/' . $path);
-
-                if (!File::exists(dirname($destination))) {
-                    File::makeDirectory(dirname($destination), 0755, true);
-                }
-
-                File::copy($source, $destination);
+                $path = PublicStorage::put($video, 'posts/videos');
 
                 $videos[] = $path;
             }
@@ -136,10 +108,10 @@ class PostController extends Controller
         if ($request->hasFile('image')) {
 
             if ($post->image) {
-                Storage::disk('public')->delete($post->image);
+                PublicStorage::delete($post->image);
             }
 
-            $post->image = $request->file('image')->store('posts', 'public');
+            $post->image = PublicStorage::put($request->file('image'), 'posts');
         }
 
         $photos = array_values(array_merge(
@@ -183,7 +155,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
 
         if ($post->image) {
-            Storage::disk('public')->delete($post->image);
+            PublicStorage::delete($post->image);
         }
 
         $this->deleteFiles($post->photos ?? []);
@@ -196,6 +168,11 @@ class PostController extends Controller
     }
     public function posts()
     {
+        $events = Post::with('translation')
+            ->where('type', 'event')
+            ->latest()
+            ->get();
+
         $news = Post::with('translation')
             ->where('type', 'news')
             ->latest()
@@ -206,7 +183,7 @@ class PostController extends Controller
             ->latest()
             ->get();
 
-        return view('posts.allPosts', compact('news', 'memories'));
+        return view('posts.allPosts', compact('events', 'news', 'memories'));
     }
     public function showPost($id)
     {
@@ -237,7 +214,7 @@ class PostController extends Controller
 
         return array_values(array_filter(array_map(
             fn($file) => $file instanceof \Illuminate\Http\UploadedFile
-                ? $file->store($directory, 'public')
+                ? PublicStorage::put($file, $directory)
                 : null,
             $files
         )));
@@ -251,7 +228,7 @@ class PostController extends Controller
     private function deleteFiles(array $files): void
     {
         foreach ($files as $file) {
-            Storage::disk('public')->delete($file);
+            PublicStorage::delete($file);
         }
     }
 }

@@ -21,18 +21,24 @@
     <div class="row text-center" style="margin-bottom:40px;">
         <div class="col-full">
             <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('news')"> {{ __('posts.news') }} </button>
+                <button class="tab-btn active" onclick="switchTab('events')"> {{ __('posts.events') }} </button>
+                <button class="tab-btn" onclick="switchTab('news')"> {{ __('posts.news') }} </button>
                 <button class="tab-btn" onclick="switchTab('memories')"> {{ __('posts.memories') }} </button>
             </div>
         </div>
     </div>
 
-    {{-- ================= NEWS ================= --}}
-    <div id="newsTab" class="tab-content active">
+    {{-- ================= EVENTS ================= --}}
+    <div id="eventsTab" class="tab-content active">
         <div class="row entries-wrap add-top-padding">
             <div class="entries">
 
-                @forelse($news as $post)
+                @forelse($events as $post)
+                    @php
+                        $image = $post->image
+                            ? (Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/'.$post->image))
+                            : asset('images/thumbs/post/default.jpg');
+                    @endphp
                     <article class="col-block">
 
                         <div class="item-entry" data-aos="fade-up">
@@ -41,8 +47,70 @@
                             <div class="item-entry__thumb">
                                 <a href="{{ route('post.singlePost', $post->id) }}" class="item-entry__thumb-link">
                                     <img
-                                        src="{{ $post->image ?? asset('images/thumbs/post/default.jpg') }}"
-                                        srcset="{{ $post->image ?? asset('images/thumbs/post/default.jpg') }} 1x"
+                                        src="{{ $image }}"
+                                        srcset="{{ $image }} 1x"
+                                        alt="{{ $post->translation?->title ?? 'post image' }}">
+                                </a>
+                            </div>
+
+                            {{-- TEXT --}}
+                            <div class="item-entry__text">
+
+                                <div class="item-entry__cat">
+                                    <a href="{{ route('post.singlePost', $post->id) }}">
+                                        {{ $post->event_date?->format('M d, Y') ?? 'No date' }}
+                                    </a>
+                                </div>
+
+                                <h1 class="item-entry__title">
+                                    <a href="{{ route('post.singlePost', $post->id) }}">
+                                        {{ $post->translation?->title ?? 'No title' }}
+                                    </a>
+                                </h1>
+
+                                <div class="item-entry__content">
+                                    <p>
+                                        {{ Str::limit($post->translation?->description, 120) }}
+                                    </p>
+
+                                    <a class="more-link" href="{{ route('post.singlePost', $post->id) }}">
+                                        Read More
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </article>
+                @empty
+                    <p style="text-align:center;">{{ __('posts.no_events_found') }}</p>
+                @endforelse
+
+            </div>
+        </div>
+    </div>
+
+    {{-- ================= NEWS ================= --}}
+    <div id="newsTab" class="tab-content">
+        <div class="row entries-wrap add-top-padding">
+            <div class="entries">
+
+                @forelse($news as $post)
+                    @php
+                        $image = $post->image
+                            ? (Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/'.$post->image))
+                            : asset('images/thumbs/post/default.jpg');
+                    @endphp
+                    <article class="col-block">
+
+                        <div class="item-entry" data-aos="fade-up">
+
+                            {{-- IMAGE --}}
+                            <div class="item-entry__thumb">
+                                <a href="{{ route('post.singlePost', $post->id) }}" class="item-entry__thumb-link">
+                                    <img
+                                        src="{{ $image }}"
+                                        srcset="{{ $image }} 1x"
                                         alt="{{ $post->translation?->title ?? 'post image' }}">
                                 </a>
                             </div>
@@ -90,6 +158,11 @@
             <div class="entries">
 
                 @forelse($memories as $post)
+                    @php
+                        $image = $post->image
+                            ? (Str::startsWith($post->image, ['http://', 'https://']) ? $post->image : asset('storage/'.$post->image))
+                            : asset('images/thumbs/post/default.jpg');
+                    @endphp
                     <article class="col-block">
 
                         <div class="item-entry" data-aos="fade-up">
@@ -98,8 +171,8 @@
                             <div class="item-entry__thumb">
                                 <a href="{{ route('post.singlePost', $post->id) }}" class="item-entry__thumb-link">
                                     <img
-                                        src="{{ $post->image ?? asset('images/thumbs/post/default.jpg') }}"
-                                        srcset="{{ $post->image ?? asset('images/thumbs/post/default.jpg') }} 1x"
+                                        src="{{ $image }}"
+                                        srcset="{{ $image }} 1x"
                                         alt="{{ $post->translation?->title ?? 'post image' }}">
                                 </a>
                             </div>
@@ -148,7 +221,7 @@
 .tabs {
     display: inline-flex;
     gap: 10px;
-    background: #f1f5f9;
+    background: var(--color-bg);
     padding: 6px;
     border-radius: 999px;
     line-height: 1;
@@ -167,8 +240,8 @@
 }
 
 .tab-btn.active {
-    background: #0f172a;
-    color: white;
+    background: var(--color-primary);
+    color: var(--color-surface);
 }
 
 .tab-content {
@@ -231,13 +304,13 @@ function switchTab(tab) {
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
 
-    if (tab === 'news') {
-        document.querySelectorAll('.tab-btn')[0].classList.add('active');
-        document.getElementById('newsTab').classList.add('active');
-    } else {
-        document.querySelectorAll('.tab-btn')[1].classList.add('active');
-        document.getElementById('memoriesTab').classList.add('active');
-    }
+    const tabs = ['events', 'news', 'memories'];
+    const index = tabs.indexOf(tab);
+    const activeIndex = index === -1 ? 0 : index;
+    const activeTab = tabs[activeIndex];
+
+    document.querySelectorAll('.tab-btn')[activeIndex].classList.add('active');
+    document.getElementById(activeTab + 'Tab').classList.add('active');
 }
 </script>
 

@@ -11,16 +11,16 @@
            Design tokens  (mirrors management page)
         ───────────────────────────────────────── */
         :root {
-            --mem-ink:    #111827;
-            --mem-muted:  #667085;
-            --mem-line:   #d8dee8;
-            --mem-soft:   #f6f7f9;
-            --mem-gold:   #b9933f;
-            --mem-green:  #191231;
-            --mem-blue:   #234d73;
+            --mem-ink:    var(--color-primary);
+            --mem-muted:  var(--color-muted);
+            --mem-line:   var(--color-accent-light);
+            --mem-soft:   var(--color-bg);
+            --mem-gold:   var(--color-accent);
+            --mem-green:  var(--color-accent);
+            --mem-blue:   var(--color-accent-light);
         }
 
-        .members-page { background: #fff; color: var(--mem-ink); }
+        .members-page { background: var(--color-surface); color: var(--mem-ink); }
 
         /* ── List ── */
         .members-list { display: flex; flex-direction: column; gap: 34px; }
@@ -46,7 +46,7 @@
             min-width: 280px;
             position: relative;
             overflow: hidden;
-            background: #6d6f73;
+            background: var(--color-muted);
             min-height: 330px;
             max-height: 430px;
         }
@@ -60,7 +60,7 @@
         .mem-card__avatar {
             width: 100%; height: 100%; min-height: 330px;
             display: flex; align-items: center; justify-content: center;
-            color: #fff; font-size: 6rem; font-weight: 800;
+            color: var(--color-surface); font-size: 6rem; font-weight: 800;
         }
         .mem-card__badges {
             position: absolute; bottom: 1rem;
@@ -68,12 +68,12 @@
             display: flex; gap: .5rem; flex-wrap: wrap;
         }
         .mem-badge {
-            background: rgba(0,0,0,.6); color: #fff;
+            background: rgba(var(--color-primary-rgb), .72); color: var(--color-surface);
             font-size: 1rem; font-weight: 700;
             padding: .3rem .75rem; border-radius: .45rem;
             backdrop-filter: blur(4px);
         }
-        .mem-badge--green { background: rgba(25,18,49,.82); }
+        .mem-badge--green { background: rgba(var(--color-primary-rgb), 0.82); }
 
         /* ── Content side ── */
         .mem-card__content {
@@ -176,8 +176,8 @@
             padding: 13px ;
         }
         .mem-extra__field {
-            background: #fff;
-            border: 1px solid #ebedf1;
+            background: var(--color-surface);
+            border: 1px solid var(--color-accent-light);
             border-radius: 6px;
             padding: 12px 14px;
         }
@@ -194,14 +194,28 @@
 
         .mem-extra__cv-link {
             display: inline-flex; align-items: center; gap: .6rem;
-            background: var(--mem-ink); color: #fff;
+            background: var(--mem-ink); color: var(--color-surface);
             text-decoration: none;
             padding: .9rem 1.6rem; border-radius: .8rem;
             font-size: 1.25rem; font-weight: 700;
             width: fit-content;
-            transition: background .2s;
+            border: 1px solid var(--mem-ink);
+            box-shadow: 0 8px 18px rgba(var(--color-primary-rgb), 0.16);
+            transition: background .2s, border-color .2s, color .2s, transform .15s, box-shadow .2s;
         }
-        .mem-extra__cv-link:hover { background: var(--mem-green); }
+        .mem-extra__cv-link:hover,
+        .mem-extra__cv-link:focus {
+            background: var(--color-accent);
+            border-color: var(--color-accent);
+            color: var(--color-surface);
+            text-decoration: none;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(var(--color-accent-rgb), 0.24);
+        }
+        .mem-extra__cv-link:active {
+            transform: translateY(0);
+            box-shadow: 0 6px 16px rgba(var(--color-primary-rgb), 0.18);
+        }
 
         /* Empty */
         .members-empty {
@@ -405,7 +419,7 @@
 
 .mem-extra__field dt {
     font-size: 12px;
-    color: var(--color-text-secondary, #888);
+    color: var(--color-text-secondary, var(--color-muted));
     margin-bottom: 2px;
 }
 

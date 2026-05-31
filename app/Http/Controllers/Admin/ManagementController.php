@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Management;
 use App\Http\Requests\ManagementRequest;
+use App\Support\PublicStorage;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
 
 class ManagementController extends Controller
 {
@@ -30,16 +30,7 @@ class ManagementController extends Controller
         // ✅ Upload photo
         $photo = null;
         if ($request->hasFile('photo')) {
-            $photo = $request->file('photo')->store('managements', 'public');
-
-            $source = storage_path('app/public/' . $photo);
-            $destination = public_path('storage/' . $photo);
-
-            if (!File::exists(dirname($destination))) {
-                File::makeDirectory(dirname($destination), 0755, true);
-            }
-
-            File::copy($source, $destination);
+            $photo = PublicStorage::put($request->file('photo'), 'managements');
         }
 
         // ✅ Create main record
@@ -89,17 +80,8 @@ class ManagementController extends Controller
 
         // ✅ Update photo if exists
         if ($request->hasFile('photo')) {
-            $photo = $request->file('photo')->store('managements', 'public');
-
-            $source = storage_path('app/public/' . $photo);
-            $destination = public_path('storage/' . $photo);
-
-            if (!File::exists(dirname($destination))) {
-                File::makeDirectory(dirname($destination), 0755, true);
-            }
-
-            File::copy($source, $destination);
-            $management->photo = $photo;
+            PublicStorage::delete($management->photo);
+            $management->photo = PublicStorage::put($request->file('photo'), 'managements');
         }
 
         // ✅ Update main fields
@@ -108,6 +90,7 @@ class ManagementController extends Controller
             'phone' => $request->phone,
             'position' => $request->position,
             'type' => $request->type,
+            'photo' => $management->photo,
         ];
 
         if ($shouldAssignOrder) {
@@ -137,6 +120,7 @@ class ManagementController extends Controller
     public function destroy($id)
     {
         $management = Management::findOrFail($id);
+        PublicStorage::delete($management->photo);
         $management->delete();
 
         return redirect()->route('managements.index')

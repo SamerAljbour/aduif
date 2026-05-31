@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('event_date')->nullable();
             $table->string('image')->nullable();
 
-            $table->enum('type', ['news', 'memory']);
+            $table->enum('type', ['event', 'news', 'memory']);
 
             $table->timestamps();
         });

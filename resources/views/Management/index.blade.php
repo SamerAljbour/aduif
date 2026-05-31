@@ -4,12 +4,12 @@
 
 <style>
 :root {
-    --mgmt-ink: #111827;
-    --mgmt-muted: #667085;
-    --mgmt-line: #d8dee8;
-    --mgmt-soft: #f6f7f9;
-    --mgmt-gold: #b9933f;
-    --mgmt-blue: #234d73;
+    --mgmt-ink: var(--color-primary);
+    --mgmt-muted: var(--color-muted);
+    --mgmt-line: var(--color-accent-light);
+    --mgmt-soft: var(--color-bg);
+    --mgmt-gold: var(--color-accent);
+    --mgmt-blue: var(--color-accent-light);
     --mgmt-site-nav-height: 78px;
     --mgmt-tabs-height: 82px;
 }
@@ -19,7 +19,7 @@ html {
 }
 
 .mgmt-page {
-    background: #fff;
+    background: var(--color-surface);
     color: var(--mgmt-ink);
     direction: {{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }};
     padding: 46px 22px 90px;
@@ -34,7 +34,7 @@ html {
     position: sticky;
     top: var(--mgmt-site-nav-height);
     z-index: 120;
-    background: rgba(255,255,255,.94);
+    background: var(--color-surface);
     border-block: 1px solid var(--mgmt-line);
     backdrop-filter: blur(10px);
     margin-bottom: 42px;
@@ -53,7 +53,7 @@ html {
     border: 1px solid var(--mgmt-line);
     border-radius: 6px;
     color: var(--mgmt-ink);
-    background: #fff;
+    background: var(--color-surface);
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -67,15 +67,19 @@ html {
 
 .mgmt-tab:hover,
 .mgmt-tab.is-active {
-    background: var(--mgmt-ink);
-    border-color: var(--mgmt-ink);
-    color: #fff;
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-surface);
     transform: translateY(-1px);
 }
 
 .mgmt-section {
     scroll-margin-top: calc(var(--mgmt-site-nav-height) + var(--mgmt-tabs-height) + 18px);
     padding: 18px 0 56px;
+}
+
+.mgmt-section:not(.is-active) {
+    display: none;
 }
 
 .mgmt-section + .mgmt-section {
@@ -132,14 +136,14 @@ html {
     object-fit: cover;
     /* object-position: center top; */
     display: block;
-    background: #6d6f73;
+    background: var(--color-muted);
 }
 
 .mgmt-row-card__photo--empty {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
+    color: var(--color-surface);
     font-size: 5rem;
     font-weight: 800;
 }
@@ -196,7 +200,7 @@ html {
 
 .mgmt-row-card__details div {
     background: var(--mgmt-soft);
-    border: 1px solid #ebedf1;
+    border: 1px solid var(--color-accent-light);
     border-radius: 6px;
     padding: 12px 14px;
     min-width: 0;
@@ -305,19 +309,12 @@ html {
     <div class="mgmt-shell">
         <nav class="mgmt-tabs" aria-label="{{ __('management.tabs_label') }}">
             <div class="mgmt-tabs__inner">
+                <a class="mgmt-tab is-active" href="#honorary-president" aria-current="true">{{ __('management.tab_honorary_president') }}</a>
                 <a class="mgmt-tab" href="#current-management">{{ __('management.tab_current') }}</a>
-                <a class="mgmt-tab" href="#honorary-president">{{ __('management.tab_honorary_president') }}</a>
                 <a class="mgmt-tab" href="#advisory-committee">{{ __('management.tab_advisory') }}</a>
                 <a class="mgmt-tab" href="#former-presidents">{{ __('management.tab_former_presidents') }}</a>
             </div>
         </nav>
-
-        @include('Management._management_section', [
-            'id' => 'current-management',
-            'title' => __('management.tab_current'),
-            'members' => $currentMembers,
-            'empty' => __('management.no_current'),
-        ])
 
         @include('Management._management_section', [
             'id' => 'honorary-president',
@@ -325,6 +322,14 @@ html {
             'members' => $honoraryMembers,
             'empty' => __('management.no_honorary_president'),
             'badge' => __('management.honorary_president_label'),
+            'active' => true,
+        ])
+
+        @include('Management._management_section', [
+            'id' => 'current-management',
+            'title' => __('management.tab_current'),
+            'members' => $currentMembers,
+            'empty' => __('management.no_current'),
         ])
 
         @include('Management._management_section', [
@@ -357,18 +362,15 @@ const mgmtStickyOffset = () => {
     return navHeight + tabsHeight + 18;
 };
 
-const setActiveMgmtTab = () => {
-    const probe = window.scrollY + mgmtStickyOffset() + 8;
-    let current = mgmtSections[0]?.id || '';
-
+const setActiveMgmtTab = activeId => {
     mgmtSections.forEach(section => {
-        if (section.offsetTop <= probe) {
-            current = section.id;
-        }
+        const isActive = section.id === activeId;
+        section.classList.toggle('is-active', isActive);
+        section.toggleAttribute('hidden', !isActive);
     });
 
     mgmtTabs.forEach(tab => {
-        const isActive = tab.getAttribute('href') === '#' + current;
+        const isActive = tab.getAttribute('href') === '#' + activeId;
         tab.classList.toggle('is-active', isActive);
         tab.toggleAttribute('aria-current', isActive);
     });
@@ -380,6 +382,7 @@ mgmtTabs.forEach(tab => {
         if (!target) return;
 
         event.preventDefault();
+        setActiveMgmtTab(target.id);
         window.scrollTo({
             top: target.offsetTop - mgmtStickyOffset(),
             behavior: 'smooth',
@@ -387,9 +390,7 @@ mgmtTabs.forEach(tab => {
     });
 });
 
-window.addEventListener('scroll', setActiveMgmtTab, { passive: true });
-window.addEventListener('resize', setActiveMgmtTab);
-window.addEventListener('load', setActiveMgmtTab);
+setActiveMgmtTab(mgmtSections[0]?.id || '');
 </script>
 
 @endsection

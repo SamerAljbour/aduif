@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Member;
+use App\Models\MemberTranslation;
 use Illuminate\Http\Request;
 
 class MemberController extends Controller
@@ -13,8 +14,22 @@ class MemberController extends Controller
      */
     public function index()
     {
+        $locale = app()->getLocale() === 'ar' ? 'ar' : 'fr';
+        $fallbackLocale = $locale === 'fr' ? 'ar' : 'fr';
+
         $members = Member::with(['translations', 'documents'])
-            ->latest()
+            ->orderBy(
+                MemberTranslation::select('name')
+                    ->whereColumn('member_translations.member_id', 'members.id')
+                    ->where('locale', $locale)
+                    ->limit(1)
+            )
+            ->orderBy(
+                MemberTranslation::select('name')
+                    ->whereColumn('member_translations.member_id', 'members.id')
+                    ->where('locale', $fallbackLocale)
+                    ->limit(1)
+            )
             ->paginate(10);
         // dd($members);
         return view('dashboard.members.index', compact('members'));
@@ -26,7 +41,20 @@ class MemberController extends Controller
         $locale = app()->getLocale() === 'ar' ? 'ar' : 'fr';
         $fallbackLocale = $locale === 'fr' ? 'ar' : 'fr';
 
-        $members = Member::with(['translations'])->latest()->paginate(12);
+        $members = Member::with(['translations'])
+            ->orderBy(
+                MemberTranslation::select('name')
+                    ->whereColumn('member_translations.member_id', 'members.id')
+                    ->where('locale', $locale)
+                    ->limit(1)
+            )
+            ->orderBy(
+                MemberTranslation::select('name')
+                    ->whereColumn('member_translations.member_id', 'members.id')
+                    ->where('locale', $fallbackLocale)
+                    ->limit(1)
+            )
+            ->paginate(12);
 
         $memberProfiles = $members->getCollection()->map(function (Member $member) use ($locale, $fallbackLocale) {
             $translation = $member->translations->firstWhere('locale', $locale)

@@ -71,7 +71,7 @@
 
                                 {{-- Strength bar --}}
                                 <div class="mt-3">
-                                    <div style="height: 6px; background: #e9ecef; border-radius: 100px; overflow: hidden;">
+                                    <div style="height: 6px; background: var(--color-bg); border-radius: 100px; overflow: hidden;">
                                         <div id="password-strength-bar"
                                              role="progressbar"
                                              aria-valuenow="0"
@@ -80,18 +80,18 @@
                                              style="height: 100%; width: 0%; border-radius: 100px; transition: width 0.3s ease, background-color 0.3s ease;"></div>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mt-2">
-                                        <small id="password-strength-label" style="font-weight: 500; transition: color 0.3s; color: #6c757d;">Enter a password</small>
+                                        <small id="password-strength-label" style="font-weight: 500; transition: color 0.3s; color: var(--color-muted);">Enter a password</small>
                                         <small id="password-score" class="text-muted"></small>
                                     </div>
                                 </div>
 
                                 {{-- Criteria badges --}}
                                 <div class="mt-2 d-flex flex-wrap gap-2 align-items-center" id="password-criteria">
-                                    <span class="badge" id="criteria-length"  style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: #f1f3f5; color: #868e96; border: 1px solid #dee2e6;">8+ chars</span>
-                                    <span class="badge" id="criteria-lower"   style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: #f1f3f5; color: #868e96; border: 1px solid #dee2e6;">lowercase</span>
-                                    <span class="badge" id="criteria-upper"   style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: #f1f3f5; color: #868e96; border: 1px solid #dee2e6;">uppercase</span>
-                                    <span class="badge" id="criteria-number"  style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: #f1f3f5; color: #868e96; border: 1px solid #dee2e6;">number</span>
-                                    <span class="badge" id="criteria-symbol"  style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: #f1f3f5; color: #868e96; border: 1px solid #dee2e6;">symbol</span>
+                                    <span class="badge" id="criteria-length"  style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: var(--color-bg); color: var(--color-muted); border: 1px solid var(--color-accent-light);">8+ chars</span>
+                                    <span class="badge" id="criteria-lower"   style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: var(--color-bg); color: var(--color-muted); border: 1px solid var(--color-accent-light);">lowercase</span>
+                                    <span class="badge" id="criteria-upper"   style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: var(--color-bg); color: var(--color-muted); border: 1px solid var(--color-accent-light);">uppercase</span>
+                                    <span class="badge" id="criteria-number"  style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: var(--color-bg); color: var(--color-muted); border: 1px solid var(--color-accent-light);">number</span>
+                                    <span class="badge" id="criteria-symbol"  style="font-weight: 400; font-size: 11px; padding: 4px 9px; border-radius: 100px; background: var(--color-bg); color: var(--color-muted); border: 1px solid var(--color-accent-light);">symbol</span>
                                 </div>
 
                                 @error('password')
@@ -132,7 +132,7 @@
                                 var LABELS = ['Too weak', 'Too weak', 'Getting there', 'Strong', 'Very strong'];
 
                                 var MET_STYLE   = 'font-weight:400;font-size:11px;padding:4px 9px;border-radius:100px;background:#d3f9d8;color:#2b8a3e;border:1px solid #8ce99a;';
-                                var UNMET_STYLE = 'font-weight:400;font-size:11px;padding:4px 9px;border-radius:100px;background:#f1f3f5;color:#868e96;border:1px solid #dee2e6;';
+                                var UNMET_STYLE = 'font-weight:400;font-size:11px;padding:4px 9px;border-radius:100px;background:var(--color-bg);color:var(--color-muted);border:1px solid var(--color-accent-light);';
 
                                 function testPassword(value) {
                                     return {
@@ -160,7 +160,7 @@
                                         strengthBar.style.backgroundColor = 'transparent';
                                         strengthBar.setAttribute('aria-valuenow', 0);
                                         strengthLabel.textContent  = 'Enter a password';
-                                        strengthLabel.style.color  = '#6c757d';
+                                        strengthLabel.style.color  = 'var(--color-muted)';
                                         scoreLabel.textContent     = '';
                                         return;
                                     }

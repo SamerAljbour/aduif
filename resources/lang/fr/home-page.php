@@ -2,7 +2,7 @@
 return [
 
     'hero-title-line1' => "L'Association des Diplômés",
-    'hero-title-line2' => "des Universités et Instituts Français",
+    'hero-title-line2' => "des Universités et Instituts Français en Jordanie",
 
     'hero-description' => "Une association jordanienne réunissant les diplômés des universités et instituts français afin de renforcer les liens académiques, culturels et professionnels.",
 

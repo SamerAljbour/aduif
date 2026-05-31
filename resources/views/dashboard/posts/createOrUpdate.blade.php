@@ -124,6 +124,11 @@
 
                         <option value="">Select Type</option>
 
+                        <option value="event"
+                            {{ (old('type', $post->type ?? '') == 'event') ? 'selected' : '' }}>
+                            Event
+                        </option>
+
                         <option value="news"
                             {{ (old('type', $post->type ?? '') == 'news') ? 'selected' : '' }}>
                             News
@@ -272,9 +277,9 @@
 .media-preview-card {
     position: relative;
     overflow: hidden;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--color-accent-light);
     border-radius: 8px;
-    background: #f8fafc;
+    background: var(--color-bg);
     aspect-ratio: 4 / 3;
 }
 
@@ -299,8 +304,8 @@
     height: 28px;
     border: 0;
     border-radius: 50%;
-    background: rgba(15, 23, 42, .86);
-    color: #fff;
+    background: rgba(var(--color-primary-rgb), 0.86);
+    color: var(--color-surface);
     cursor: pointer;
     font-size: 18px;
     line-height: 1;
@@ -309,7 +314,7 @@
 .mgmt-form__hint {
     display: block;
     margin-top: 8px;
-    color: #475569;
+    color: var(--color-muted);
     font-size: 13px;
 }
 </style>

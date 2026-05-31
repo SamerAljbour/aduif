@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\ProjectRequest;
-use Illuminate\Support\Facades\Storage;
+use App\Support\PublicStorage;
 
 class ProjectController extends Controller
 {
@@ -25,7 +25,7 @@ class ProjectController extends Controller
         $image = null;
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image')->store('projects', 'public');
+            $image = PublicStorage::put($request->file('image'), 'projects');
         }
 
         $project = Project::create([
@@ -66,10 +66,10 @@ class ProjectController extends Controller
 
         if ($request->hasFile('image')) {
             if ($project->image) {
-                Storage::disk('public')->delete($project->image);
+                PublicStorage::delete($project->image);
             }
 
-            $project->image = $request->file('image')->store('projects', 'public');
+            $project->image = PublicStorage::put($request->file('image'), 'projects');
         }
 
         $project->update([
@@ -96,7 +96,7 @@ class ProjectController extends Controller
         $project = Project::findOrFail($id);
 
         if ($project->image) {
-            Storage::disk('public')->delete($project->image);
+            PublicStorage::delete($project->image);
         }
 
         $project->delete();

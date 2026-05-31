@@ -1,7 +1,7 @@
 
     <!-- footer
     ================================================== -->
-    <footer class="s-footer footer">
+    <footer id="site-footer" class="s-footer footer">
 
         <div class="row footer__bottom">
             <div class="col-five tab-full">
@@ -13,7 +13,7 @@
                     </a>
                 </div>
 
-                <p>
+                <p style="color: var(--color-surface);">
                {{ __('home-page.hero-description') }}
                 </p>
 
@@ -68,4 +68,3 @@
         </div>
 
     </footer> <!-- end s-footer -->
-

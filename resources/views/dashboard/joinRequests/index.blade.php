@@ -126,7 +126,7 @@
                                         </form>
 
                                     @elseif($r->status == 'approved')
-                                        <span style="font-size:12px;color:#64748b;">
+                                        <span style="font-size:12px;color:var(--color-muted);">
                                             No actions
                                         </span>
                                     @endif
@@ -189,20 +189,20 @@
 .mgmt-modal__overlay {
     position: absolute;
     inset: 0;
-    background: rgba(15, 23, 42, 0.55);
+    background: rgba(var(--color-primary-rgb), 0.55);
     backdrop-filter: blur(3px);
 }
 
 .mgmt-modal__container {
     position: relative;
-    background: #fff;
+    background: var(--color-surface);
     border-radius: 16px;
     width: 92%;
     max-width: 860px;
     max-height: 88vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 24px 64px rgba(15,23,42,.18);
+    box-shadow: 0 24px 64px rgba(var(--color-primary-rgb), 0.18);
     overflow: hidden;
 }
 
@@ -211,8 +211,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 18px 24px;
-    background: #f8fafc;
-    border-bottom: 1px solid #e2e8f0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-accent-light);
     flex-shrink: 0;
 }
 
@@ -226,24 +226,24 @@
     margin: 0 0 4px;
     font-size: 16px;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--color-primary);
 }
 
 .mgmt-modal__close {
-    background: #f1f5f9;
+    background: var(--color-bg);
     border: none;
     border-radius: 8px;
     width: 34px;
     height: 34px;
     cursor: pointer;
     font-size: 14px;
-    color: #64748b;
+    color: var(--color-muted);
     display: flex;
     align-items: center;
     justify-content: center;
     transition: background .15s;
 }
-.mgmt-modal__close:hover { background: #e2e8f0; color: #0f172a; }
+.mgmt-modal__close:hover { background: var(--color-accent-light); color: var(--color-primary); }
 
 .mgmt-modal__body {
     padding: 0;
@@ -264,9 +264,9 @@
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: .08em;
-    color: #94a3b8;
+    color: var(--color-muted);
     padding: 18px 24px 8px;
-    border-top: 1px solid #f1f5f9;
+    border-top: 1px solid var(--color-bg);
     margin: 0;
 }
 .modal-section-title:first-child { border-top: none; }
@@ -279,14 +279,14 @@
 .modal-info-table td {
     padding: 10px 24px;
     font-size: 13.5px;
-    color: #334155;
-    border-bottom: 1px solid #f1f5f9;
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-bg);
     vertical-align: top;
 }
 
 .modal-info-table td:first-child {
     font-weight: 600;
-    color: #64748b;
+    color: var(--color-muted);
     width: 38%;
     white-space: nowrap;
 }
@@ -303,25 +303,25 @@
     align-items: center;
     gap: 8px;
     padding: 10px 14px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: var(--color-bg);
+    border: 1px solid var(--color-accent-light);
     border-radius: 10px;
     text-decoration: none;
-    color: #334155;
+    color: var(--color-primary);
     font-size: 13px;
     font-weight: 500;
     transition: all .15s;
 }
 .modal-doc-card:hover {
-    background: #eff6ff;
-    border-color: #93c5fd;
-    color: #1d4ed8;
+    background: rgba(var(--color-accent-rgb), 0.12);
+    border-color: var(--color-accent-light);
+    color: var(--color-accent);
 }
 
 .modal-doc-badge {
     font-size: 10px;
-    background: #e0e7ff;
-    color: #4338ca;
+    background: rgba(var(--color-accent-light-rgb), 0.24);
+    color: var(--color-accent);
     border-radius: 4px;
     padding: 1px 6px;
     font-weight: 600;
@@ -331,7 +331,7 @@
 .modal-empty-docs {
     padding: 12px 24px 18px;
     font-size: 13px;
-    color: #94a3b8;
+    color: var(--color-muted);
 }
 
 .badge--rejected {
@@ -342,6 +342,8 @@
 
 {{-- SCRIPTS --}}
 <script>
+const storageBaseUrl = @json(asset('storage'));
+
 function mgmtFilter() {
     let q = document.getElementById('mgmtSearch').value.toLowerCase();
     let rows = document.querySelectorAll('#mgmtTableBody .mgmt-row');
@@ -363,7 +365,7 @@ function escapeHtml(value) {
 }
 
 function emptyValue() {
-    return '<span style="color:#94a3b8">-</span>';
+    return '<span style="color:var(--color-muted)">-</span>';
 }
 
 function openJoinRequestModal(btn) {
@@ -373,7 +375,7 @@ function openJoinRequestModal(btn) {
 
     const avatarEl = document.getElementById('modalAvatar');
     avatarEl.outerHTML = request.photo
-        ? `<img id="modalAvatar" src="/storage/${escapeHtml(request.photo)}" class="mgmt-avatar mgmt-avatar--modal" alt="photo">`
+        ? `<img id="modalAvatar" src="${storageBaseUrl}/${escapeHtml(request.photo)}" class="mgmt-avatar mgmt-avatar--modal" alt="photo">`
         : `<div id="modalAvatar" class="mgmt-avatar mgmt-avatar--placeholder mgmt-avatar--modal">${escapeHtml((fr.name || ar.name || 'R').charAt(0).toUpperCase())}</div>`;
 
     document.getElementById('modalName').textContent = fr.name || ar.name || 'Request Details';
@@ -391,7 +393,7 @@ function openJoinRequestModal(btn) {
     const docsHtml = docs.length
         ? `<div class="modal-docs-grid">
             ${docs.map((doc, i) => `
-                <a href="/storage/${escapeHtml(doc.file_path)}" target="_blank" class="modal-doc-card">
+                <a href="${storageBaseUrl}/${escapeHtml(doc.file_path)}" target="_blank" class="modal-doc-card">
                     <span>File</span>
                     <span>Document ${i + 1}</span>
                     <span class="modal-doc-badge">${escapeHtml(doc.type || 'file')}</span>
@@ -401,8 +403,8 @@ function openJoinRequestModal(btn) {
         : '<p class="modal-empty-docs">No documents attached.</p>';
 
     const cvHtml = request.cv
-        ? `<a href="/storage/${escapeHtml(request.cv)}" target="_blank" class="btn-row btn-row--edit">View CV</a>`
-        : '<span style="color:#94a3b8">No CV uploaded</span>';
+        ? `<a href="${storageBaseUrl}/${escapeHtml(request.cv)}" target="_blank" class="btn-row btn-row--edit">View CV</a>`
+        : '<span style="color:var(--color-muted)">No CV uploaded</span>';
 
     const row = (label, value) => `
         <tr>
@@ -432,7 +434,7 @@ function openJoinRequestModal(btn) {
             ${textRow('University', ar.graduation_university)}
             ${textRow('Current Job', ar.current_job)}
             ${textRow('Workplace', ar.workplace)}
-            ${textRow('Interests', ar.interests)}
+            ${textRow('Tajawalests', ar.interests)}
             ${textRow('Bio', ar.bio)}
         </table>
 
@@ -444,7 +446,7 @@ function openJoinRequestModal(btn) {
             ${textRow('University', fr.graduation_university)}
             ${textRow('Current Job', fr.current_job)}
             ${textRow('Workplace', fr.workplace)}
-            ${textRow('Interests', fr.interests)}
+            ${textRow('Tajawalests', fr.interests)}
             ${textRow('Bio', fr.bio)}
         </table>
 

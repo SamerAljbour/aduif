@@ -304,7 +304,7 @@
 <style>
 .dashboard-overview .card {
     border: 0;
-    box-shadow: 0 10px 30px rgba(15, 23, 42, .06);
+    box-shadow: 0 10px 30px rgba(var(--color-primary-rgb), 0.06);
 }
 
 .dashboard-header {
@@ -314,7 +314,7 @@
 
 .dashboard-subtitle {
     margin: 6px 0 0;
-    color: #64748b;
+    color: var(--color-muted);
     font-size: 14px;
 }
 
@@ -331,7 +331,7 @@
 }
 
 .stat-card__label {
-    color: #64748b;
+    color: var(--color-muted);
     font-size: 13px;
     font-weight: 700;
     text-transform: uppercase;
@@ -340,14 +340,14 @@
 
 .stat-card h2 {
     margin: 14px 0 6px;
-    color: #0f172a;
+    color: var(--color-primary);
     font-size: 34px;
     font-weight: 800;
 }
 
 .stat-card p {
     margin: 0;
-    color: #64748b;
+    color: var(--color-muted);
     font-size: 13px;
 }
 
@@ -357,7 +357,7 @@
 
 .dashboard-mini-title {
     margin: 18px 0 8px;
-    color: #64748b;
+    color: var(--color-muted);
     font-size: 12px;
     font-weight: 800;
     text-transform: uppercase;
@@ -371,7 +371,7 @@
 }
 
 .dashboard-table th {
-    color: #64748b;
+    color: var(--color-muted);
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
