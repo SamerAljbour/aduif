@@ -27,13 +27,8 @@ class PostRequest extends FormRequest
             'existing_videos' => 'nullable|array',
             'existing_videos.*' => 'string',
 
-            // Arabic
-            'title_ar' => 'required|string|max:255',
-            'description_ar' => 'required|string',
-
-            // French
-            'title_fr' => 'required|string|max:255',
-            'description_fr' => 'required|string',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
         ];
     }
 

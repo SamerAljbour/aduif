@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Http\Requests\ProjectRequest;
+use App\Services\AutoTranslateService;
 use App\Support\PublicStorage;
 
 class ProjectController extends Controller
@@ -33,18 +34,7 @@ class ProjectController extends Controller
             'image' => $image,
         ]);
 
-        $project->translations()->createMany([
-            [
-                'locale' => 'ar',
-                'title' => $request->title_ar,
-                'description' => $request->description_ar,
-            ],
-            [
-                'locale' => 'fr',
-                'title' => $request->title_fr,
-                'description' => $request->description_fr,
-            ],
-        ]);
+        $this->saveTranslations($project, $request);
 
         return redirect()->route('projects.index')
             ->with('success', 'Project created successfully');
@@ -54,10 +44,9 @@ class ProjectController extends Controller
     {
         $project = Project::with('translations')->findOrFail($id);
 
-        $ar = $project->translations->where('locale', 'ar')->first();
-        $fr = $project->translations->where('locale', 'fr')->first();
+        $translation = $this->translationForCurrentLocale($project->translations);
 
-        return view('dashboard.projects.createOrUpdate', compact('project', 'ar', 'fr'));
+        return view('dashboard.projects.createOrUpdate', compact('project', 'translation'));
     }
 
     public function update(ProjectRequest $request, $id)
@@ -77,15 +66,7 @@ class ProjectController extends Controller
             'image' => $project->image,
         ]);
 
-        foreach (['ar', 'fr'] as $locale) {
-            $project->translations()->updateOrCreate(
-                ['locale' => $locale],
-                [
-                    'title' => $request->input("title_$locale"),
-                    'description' => $request->input("description_$locale"),
-                ]
-            );
-        }
+        $this->saveTranslations($project, $request);
 
         return redirect()->route('projects.index')
             ->with('success', 'Project updated successfully');
@@ -103,5 +84,30 @@ class ProjectController extends Controller
 
         return redirect()->route('projects.index')
             ->with('success', 'Project deleted successfully');
+    }
+
+    private function saveTranslations(Project $project, ProjectRequest $request): void
+    {
+        $translations = app(AutoTranslateService::class)->translateFields([
+            'title' => $request->title,
+            'description' => $request->description,
+        ], app()->getLocale());
+
+        foreach ($translations as $locale => $data) {
+            $project->translations()->updateOrCreate(
+                ['locale' => $locale],
+                $data
+            );
+        }
+    }
+
+    private function translationForCurrentLocale($translations): ?object
+    {
+        $locale = app()->getLocale();
+
+        return $translations->firstWhere('locale', $locale)
+            ?? $translations->firstWhere('locale', 'en')
+            ?? $translations->firstWhere('locale', 'ar')
+            ?? $translations->firstWhere('locale', 'fr');
     }
 }

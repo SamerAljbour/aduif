@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Management;
 use App\Http\Requests\ManagementRequest;
+use App\Services\AutoTranslateService;
 use App\Support\PublicStorage;
 use Illuminate\Support\Collection;
 
@@ -44,18 +45,7 @@ class ManagementController extends Controller
         ]);
 
         // ✅ Create translations
-        $management->translations()->createMany([
-            [
-                'locale' => 'ar',
-                'name' => $request->name_ar,
-                'bio' => $request->bio_ar,
-            ],
-            [
-                'locale' => 'fr',
-                'name' => $request->name_fr,
-                'bio' => $request->bio_fr,
-            ],
-        ]);
+        $this->saveTranslations($management, $request);
 
         return redirect()->route('managements.index')
             ->with('success', 'Created successfully');
@@ -66,10 +56,9 @@ class ManagementController extends Controller
         $management = Management::with('translations')->findOrFail($id);
 
         // ✅ Get translations safely
-        $ar = $management->translations->firstWhere('locale', 'ar');
-        $fr = $management->translations->firstWhere('locale', 'fr');
+        $translation = $this->translationForCurrentLocale($management->translations);
 
-        return view('dashboard.management.createOrUpdate', compact('management', 'ar', 'fr'));
+        return view('dashboard.management.createOrUpdate', compact('management', 'translation'));
     }
 
     public function update(ManagementRequest $request, $id)
@@ -100,18 +89,7 @@ class ManagementController extends Controller
         $management->update($data);
 
         // ❗ FIXED: correct updateOrCreate (DO NOT use translation())
-        foreach (['ar', 'fr'] as $locale) {
-            $management->translations()->updateOrCreate(
-                [
-                    'management_id' => $management->id,
-                    'locale' => $locale
-                ],
-                [
-                    'name' => $request->input("name_$locale"),
-                    'bio'  => $request->input("bio_$locale"),
-                ]
-            );
-        }
+        $this->saveTranslations($management, $request);
 
         return redirect()->route('managements.index')
             ->with('success', 'Updated successfully');
@@ -182,5 +160,30 @@ class ManagementController extends Controller
             ->where('parent_id', $parentId)
             ->when($ignoreId, fn($query) => $query->whereKeyNot($ignoreId))
             ->max('order') + 1;
+    }
+
+    private function saveTranslations(Management $management, ManagementRequest $request): void
+    {
+        $translations = app(AutoTranslateService::class)->translateFields([
+            'name' => $request->name,
+            'bio' => $request->bio,
+        ], app()->getLocale());
+
+        foreach ($translations as $locale => $data) {
+            $management->translations()->updateOrCreate(
+                ['locale' => $locale],
+                $data
+            );
+        }
+    }
+
+    private function translationForCurrentLocale(Collection $translations): ?object
+    {
+        $locale = app()->getLocale();
+
+        return $translations->firstWhere('locale', $locale)
+            ?? $translations->firstWhere('locale', 'en')
+            ?? $translations->firstWhere('locale', 'ar')
+            ?? $translations->firstWhere('locale', 'fr');
     }
 }

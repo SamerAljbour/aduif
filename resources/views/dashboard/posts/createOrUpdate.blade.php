@@ -45,29 +45,17 @@
 
         <div class="mgmt-form__body">
 
-            {{-- ROW 1: TITLE (AR / FR) --}}
+            {{-- ROW 1: TITLE --}}
             <div class="mgmt-form__row">
 
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Title (Arabic)</label>
+                    <label class="mgmt-form__label">Title</label>
                     <input type="text"
-                           name="title_ar"
-                           class="mgmt-form__control @error('title_ar') is-invalid @enderror"
+                           name="title"
+                           class="mgmt-form__control @error('title') is-invalid @enderror"
                            required
-                           value="{{ old('title_ar', $ar->title ?? '') }}">
-                    @error('title_ar')
-                        <small class="mgmt-form__error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Title (French)</label>
-                    <input type="text"
-                           name="title_fr"
-                           class="mgmt-form__control @error('title_fr') is-invalid @enderror"
-                           required
-                           value="{{ old('title_fr', $fr->title ?? '') }}">
-                    @error('title_fr')
+                           value="{{ old('title', $translation->title ?? '') }}">
+                    @error('title')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
@@ -78,23 +66,12 @@
             <div class="mgmt-form__row">
 
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Description (Arabic)</label>
-                    <textarea name="description_ar"
-                              class="mgmt-form__control @error('description_ar') is-invalid @enderror"
+                    <label class="mgmt-form__label">Description</label>
+                    <textarea name="description"
+                              class="mgmt-form__control @error('description') is-invalid @enderror"
                               required
-                              rows="3">{{ old('description_ar', $ar->description ?? '') }}</textarea>
-                    @error('description_ar')
-                        <small class="mgmt-form__error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Description (French)</label>
-                    <textarea name="description_fr"
-                              class="mgmt-form__control @error('description_fr') is-invalid @enderror"
-                              required
-                              rows="3">{{ old('description_fr', $fr->description ?? '') }}</textarea>
-                    @error('description_fr')
+                              rows="3">{{ old('description', $translation->description ?? '') }}</textarea>
+                    @error('description')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>

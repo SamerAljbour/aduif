@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Services\AutoTranslateService;
 use App\Support\PublicStorage;
 
 class PostController extends Controller
@@ -68,18 +69,7 @@ class PostController extends Controller
             'videos' => $videos,
         ]);
 
-        $post->translations()->createMany([
-            [
-                'locale' => 'ar',
-                'title' => $request->title_ar,
-                'description' => $request->description_ar,
-            ],
-            [
-                'locale' => 'fr',
-                'title' => $request->title_fr,
-                'description' => $request->description_fr,
-            ],
-        ]);
+        $this->saveTranslations($post, $request);
 
         return redirect()->route('posts.index')
             ->with('success', 'Post created successfully');
@@ -90,10 +80,9 @@ class PostController extends Controller
     {
         $post = Post::with('translations')->findOrFail($id);
 
-        $ar = $post->translations->where('locale', 'ar')->first();
-        $fr = $post->translations->where('locale', 'fr')->first();
+        $translation = $this->translationForCurrentLocale($post->translations);
 
-        return view('dashboard.posts.createOrUpdate', compact('post', 'ar', 'fr'));
+        return view('dashboard.posts.createOrUpdate', compact('post', 'translation'));
     }
 
     /* ───────── UPDATE ───────── */
@@ -135,15 +124,7 @@ class PostController extends Controller
             'videos' => $videos,
         ]);
 
-        foreach (['ar', 'fr'] as $locale) {
-            $post->translations()->updateOrCreate(
-                ['locale' => $locale],
-                [
-                    'title' => $request->input("title_$locale"),
-                    'description' => $request->input("description_$locale"),
-                ]
-            );
-        }
+        $this->saveTranslations($post, $request);
 
         return redirect()->route('posts.index')
             ->with('success', 'Post updated successfully');
@@ -230,5 +211,30 @@ class PostController extends Controller
         foreach ($files as $file) {
             PublicStorage::delete($file);
         }
+    }
+
+    private function saveTranslations(Post $post, PostRequest $request): void
+    {
+        $translations = app(AutoTranslateService::class)->translateFields([
+            'title' => $request->title,
+            'description' => $request->description,
+        ], app()->getLocale());
+
+        foreach ($translations as $locale => $data) {
+            $post->translations()->updateOrCreate(
+                ['locale' => $locale],
+                $data
+            );
+        }
+    }
+
+    private function translationForCurrentLocale($translations): ?object
+    {
+        $locale = app()->getLocale();
+
+        return $translations->firstWhere('locale', $locale)
+            ?? $translations->firstWhere('locale', 'en')
+            ?? $translations->firstWhere('locale', 'ar')
+            ?? $translations->firstWhere('locale', 'fr');
     }
 }

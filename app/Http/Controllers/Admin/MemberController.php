@@ -14,8 +14,8 @@ class MemberController extends Controller
      */
     public function index()
     {
-        $locale = app()->getLocale() === 'ar' ? 'ar' : 'fr';
-        $fallbackLocale = $locale === 'fr' ? 'ar' : 'fr';
+        $locale = $this->currentLocale();
+        [$firstFallback, $secondFallback] = $this->fallbackLocales($locale);
 
         $members = Member::with(['translations', 'documents'])
             ->orderBy(
@@ -27,7 +27,13 @@ class MemberController extends Controller
             ->orderBy(
                 MemberTranslation::select('name')
                     ->whereColumn('member_translations.member_id', 'members.id')
-                    ->where('locale', $fallbackLocale)
+                    ->where('locale', $firstFallback)
+                    ->limit(1)
+            )
+            ->orderBy(
+                MemberTranslation::select('name')
+                    ->whereColumn('member_translations.member_id', 'members.id')
+                    ->where('locale', $secondFallback)
                     ->limit(1)
             )
             ->paginate(10);
@@ -38,8 +44,8 @@ class MemberController extends Controller
     // show the members to the public
     public function showMembers()
     {
-        $locale = app()->getLocale() === 'ar' ? 'ar' : 'fr';
-        $fallbackLocale = $locale === 'fr' ? 'ar' : 'fr';
+        $locale = $this->currentLocale();
+        [$firstFallback, $secondFallback] = $this->fallbackLocales($locale);
 
         $members = Member::with(['translations'])
             ->orderBy(
@@ -51,14 +57,21 @@ class MemberController extends Controller
             ->orderBy(
                 MemberTranslation::select('name')
                     ->whereColumn('member_translations.member_id', 'members.id')
-                    ->where('locale', $fallbackLocale)
+                    ->where('locale', $firstFallback)
+                    ->limit(1)
+            )
+            ->orderBy(
+                MemberTranslation::select('name')
+                    ->whereColumn('member_translations.member_id', 'members.id')
+                    ->where('locale', $secondFallback)
                     ->limit(1)
             )
             ->paginate(12);
 
-        $memberProfiles = $members->getCollection()->map(function (Member $member) use ($locale, $fallbackLocale) {
+        $memberProfiles = $members->getCollection()->map(function (Member $member) use ($locale, $firstFallback, $secondFallback) {
             $translation = $member->translations->firstWhere('locale', $locale)
-                ?: $member->translations->firstWhere('locale', $fallbackLocale);
+                ?: $member->translations->firstWhere('locale', $firstFallback)
+                ?: $member->translations->firstWhere('locale', $secondFallback);
 
             return [
                 'id' => $member->id,
@@ -83,6 +96,18 @@ class MemberController extends Controller
         $members->setCollection($memberProfiles);
 
         return view('members', compact('members', 'locale'));
+    }
+
+    private function currentLocale(): string
+    {
+        $locale = app()->getLocale();
+
+        return in_array($locale, ['en', 'ar', 'fr'], true) ? $locale : 'fr';
+    }
+
+    private function fallbackLocales(string $locale): array
+    {
+        return array_values(array_diff(['en', 'ar', 'fr'], [$locale]));
     }
 
     /**

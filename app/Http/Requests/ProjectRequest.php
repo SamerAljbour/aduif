@@ -14,11 +14,8 @@ class ProjectRequest extends FormRequest
         return [
             'status' => 'required|in:coming_soon,active,completed',
 
-            'title_ar' => 'required|string|max:255',
-            'title_fr' => 'required|string|max:255',
-
-            'description_ar' => 'required|string',
-            'description_fr' => 'required|string',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
 
             'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:4096',
         ];

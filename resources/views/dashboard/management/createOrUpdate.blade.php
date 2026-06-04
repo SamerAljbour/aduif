@@ -45,26 +45,15 @@
 
         <div class="mgmt-form__body">
 
-            {{-- ROW 1: NAMES --}}
+            {{-- ROW 1: NAME --}}
             <div class="mgmt-form__row">
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Name (Arabic)</label>
+                    <label class="mgmt-form__label">Name</label>
                     <input type="text"
-                           name="name_ar"
-                           class="mgmt-form__control @error('name_ar') is-invalid @enderror"
-                           value="{{ old('name_ar', $ar->name ?? '') }}">
-                    @error('name_ar')
-                        <small class="mgmt-form__error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Name (French)</label>
-                    <input type="text"
-                           name="name_fr"
-                           class="mgmt-form__control @error('name_fr') is-invalid @enderror"
-                           value="{{ old('name_fr', $fr->name ?? '') }}">
-                    @error('name_fr')
+                           name="name"
+                           class="mgmt-form__control @error('name') is-invalid @enderror"
+                           value="{{ old('name', $translation->name ?? '') }}">
+                    @error('name')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>
@@ -73,21 +62,11 @@
             {{-- ROW 2: BIO --}}
             <div class="mgmt-form__row">
                 <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Bio (Arabic)</label>
-                    <textarea name="bio_ar"
-                              class="mgmt-form__control @error('bio_ar') is-invalid @enderror"
-                              rows="3">{{ old('bio_ar', $ar->bio ?? '') }}</textarea>
-                    @error('bio_ar')
-                        <small class="mgmt-form__error">{{ $message }}</small>
-                    @enderror
-                </div>
-
-                <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Bio (French)</label>
-                    <textarea name="bio_fr"
-                              class="mgmt-form__control @error('bio_fr') is-invalid @enderror"
-                              rows="3">{{ old('bio_fr', $fr->bio ?? '') }}</textarea>
-                    @error('bio_fr')
+                    <label class="mgmt-form__label">Bio</label>
+                    <textarea name="bio"
+                              class="mgmt-form__control @error('bio') is-invalid @enderror"
+                              rows="3">{{ old('bio', $translation->bio ?? '') }}</textarea>
+                    @error('bio')
                         <small class="mgmt-form__error">{{ $message }}</small>
                     @enderror
                 </div>

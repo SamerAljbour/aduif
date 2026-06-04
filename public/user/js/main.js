@@ -265,24 +265,31 @@
                 return;
             }
 
-            // only prevent default if already on homepage
-            if (
-                window.location.pathname === '/' ||
-                window.location.pathname === ''
-            ) {
+            var currentPath = window.location.pathname.replace(/\/+$/, '') || '/',
+                linkPath = this.pathname.replace(/\/+$/, '') || '/',
+                headerHeight = $('.s-header').outerHeight() || 0,
+                scrollTop = Math.max($target.offset().top - headerHeight, 0);
+
+            // only intercept links that target a section on the current page
+            if (linkPath === currentPath) {
 
                 e.preventDefault();
                 e.stopPropagation();
 
                 $('html, body').stop().animate({
-                    'scrollTop': $target.offset().top
+                    'scrollTop': scrollTop
                 }, cfg.scrollDuration, 'swing').promise().done(function () {
 
                     if ($('body').hasClass('menu-is-open')) {
                         $('.header-menu-toggle').trigger('click');
                     }
 
-                    window.location.hash = target;
+                    if (history.pushState) {
+                        history.pushState(null, '', target);
+                    }
+                    else {
+                        window.location.hash = target;
+                    }
                 });
             }
         });

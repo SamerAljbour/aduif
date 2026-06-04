@@ -2,7 +2,8 @@
 
 @section('content')
     @php
-        $locale = app()->getLocale() === 'ar' ? 'ar' : 'fr';
+        $locale = $locale ?? app()->getLocale();
+        $locale = in_array($locale, ['en', 'ar', 'fr'], true) ? $locale : 'fr';
         $dir    = $locale === 'ar' ? 'rtl' : 'ltr';
     @endphp
 

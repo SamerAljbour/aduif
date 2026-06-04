@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreJoinRequest;
 use App\Models\JoinRequest;
 use App\Models\JoinRequestDocument;
+use App\Services\AutoTranslateService;
 use App\Support\PublicStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -55,39 +56,33 @@ class JoinRequestController extends Controller
         ]);
 
         // ✅ Save French translation
-        $join->translations()->create([
-            'locale' => 'fr',
-            'name' => $request->name_fr,
-            'specialization' => $request->specialization_fr,
-            'degree' => $request->degree,
-            'graduation_university' => $request->graduation_university_fr,
-            'current_job' => $request->current_job_fr,
-            'workplace' => $request->workplace_fr,
-            'interests' => $request->interests_fr,
-            'bio' => $request->bio_fr,
-        ]);
+        $translations = app(AutoTranslateService::class)->translateFields([
+            'name' => $request->name,
+            'specialization' => $request->specialization,
+            'graduation_university' => $request->graduation_university,
+            'current_job' => $request->current_job,
+            'workplace' => $request->workplace,
+            'interests' => $request->interests,
+            'bio' => $request->bio,
+        ], app()->getLocale());
 
         // ✅ Save Arabic translation
-        $join->translations()->create([
-            'locale' => 'ar',
-            'name' => $request->name_ar,
-            'specialization' => $request->specialization_ar,
-            'degree' => $request->degree,
-            'graduation_university' => $request->graduation_university_ar,
-            'current_job' => $request->current_job_ar,
-            'workplace' => $request->workplace_ar,
-            'interests' => $request->interests_ar,
-            'bio' => $request->bio_ar,
-        ]);
+        foreach ($translations as $locale => $data) {
+            $join->translations()->updateOrCreate(
+                ['locale' => $locale],
+                $data + ['degree' => $request->degree]
+            );
+        }
 
         // ✅ Multi documents upload
         if ($request->hasFile('documents')) {
             foreach ($request->file('documents') as $file) {
 
+                $mimeType = $file->getClientMimeType() ?: $file->getMimeType();
                 $path = PublicStorage::put($file, 'join_requests/documents');
 
                 // detect type (optional)
-                $type = str_contains($file->getMimeType(), 'image')
+                $type = str_contains($mimeType, 'image')
                     ? 'certificate'
                     : 'other';
 

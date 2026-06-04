@@ -32,7 +32,7 @@
 
             </div> <!-- end home-content__main -->
 
-            <a href="#about" class="home-scroll smoothscroll">
+            <a href="#about-us" class="home-scroll smoothscroll">
                 <span class="home-scroll__text">Scroll Down</span>
                 <span class="home-scroll__icon"></span>
             </a>
@@ -733,6 +733,7 @@
     font-size: 2.4rem;
     font-weight: 800;
     line-height: 1.3;
+    text-align: center;
 }
 
 .projects-grid--rtl {

@@ -10,7 +10,7 @@ class Localization
 {
     public function handle($request, Closure $next)
     {
-        $allowed = ['fr', 'ar'];
+        $allowed = ['en', 'fr', 'ar'];
 
         $localeFromParam = $request->query('lang');
 

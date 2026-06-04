@@ -61,17 +61,13 @@
 </li>        {{-- <li><a href="#0"><i class="fab fa-twitter"></i></a></li>
         <li><a href="#0"><i class="fab fa-instagram"></i></a></li> --}}
 
-        <li>
-            @if(app()->getLocale() == 'fr')
-                <a href="{{ route('set.locale', 'ar') }}">
-                    AR
-                </a>
-            @else
-                <a href="{{ route('set.locale', 'fr') }}">
-                    FR
-                </a>
+        @foreach(['en' => 'EN', 'fr' => 'FR', 'ar' => 'AR'] as $locale => $label)
+            @if(app()->getLocale() !== $locale)
+                <li>
+                    <a href="{{ route('set.locale', $locale) }}">{{ $label }}</a>
+                </li>
             @endif
-        </li>
+        @endforeach
 
     </ul>
             </nav>

@@ -22,11 +22,9 @@ class ManagementRequest extends FormRequest
             'type' => 'required|in:current,former,honorary,consultant',
 
 
-            // translations
-            'name_ar' => 'required|string|max:255',
-            'name_fr' => 'required|string|max:255',
-            'bio_ar'  => 'required|string',
-            'bio_fr'  => 'required|string',
+            // source-language content
+            'name' => 'required|string|max:255',
+            'bio'  => 'required|string',
         ];
     }
 }

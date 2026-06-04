@@ -375,7 +375,7 @@ kbd,
 samp,
 code,
 pre {
-    font-family: 'Tajawal', sans-serif;
+    font-family: "Tajawal", sans-serif;
 }
 
 pre {
@@ -1947,7 +1947,7 @@ input::-moz-focus-inner {
     }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
     .header-nav-wrap .header-social li {
         font-size: 15px;
     }
@@ -1959,7 +1959,7 @@ input::-moz-focus-inner {
     }
 }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1200px) {
     .s-header {
         position: fixed;
         top: 0;
@@ -2043,7 +2043,7 @@ input::-moz-focus-inner {
 /* -------------------------------------------------------------------
  * ## make sure the menu is visible on larger screens
  * ------------------------------------------------------------------- */
-@media only screen and (min-width: 1001px) {
+@media only screen and (min-width: 1201px) {
     .header-nav-wrap {
         display: block !important;
     }
@@ -2245,7 +2245,7 @@ input::-moz-focus-inner {
     line-height: 5.6rem;
     text-transform: uppercase;
     letter-spacing: 0.3rem;
-    color: var(--color-primary);
+    color: var(--color-surface);
     border-bottom: 1px solid transparent;
     -webkit-transition: all 0.3s ease-in-out;
     transition: all 0.3s ease-in-out;
@@ -2263,7 +2263,7 @@ input::-moz-focus-inner {
     display: block;
     height: 5.6rem;
     width: 5.6rem;
-    background-color: var(--color-primary);
+    background-color: var(--color-accent);
     background-image: url(../images/icons/icon-arrow-down.svg);
     background-position: center center;
     background-repeat: no-repeat;
@@ -2277,7 +2277,12 @@ input::-moz-focus-inner {
 }
 
 .home-scroll:hover .home-scroll__text {
-    border-bottom: 1px solid var(--color-surface);
+    color: var(--color-accent-light);
+    border-bottom: 1px solid var(--color-accent-light);
+}
+
+.home-scroll:hover .home-scroll__icon {
+    background-color: var(--color-accent-light);
 }
 
 /* animate .home-content__main
@@ -2372,7 +2377,7 @@ html.no-csstransitions .home-content__main {
 
 @media only screen and (max-width: 1600px) {
     .home-content__main {
-        max-width: 1200px;
+        max-width: 1300px;
     }
 
     .home-content h1 {
@@ -2382,7 +2387,7 @@ html.no-csstransitions .home-content__main {
 
 @media only screen and (max-width: 1400px) {
     .s-home .home-image-part {
-        width: calc(50% - 150px);
+        width: calc(50% - 200px);
     }
 
     .home-content h1 {
@@ -2395,7 +2400,7 @@ html.no-csstransitions .home-content__main {
     }
 
     .home-content__main {
-        max-width: 1000px;
+        max-width: calc(100% - 140px);
     }
 
     .home-content__button .btn {
@@ -2415,8 +2420,8 @@ html.no-csstransitions .home-content__main {
     }
 
     .s-home .home-image-part {
-        width: calc(50% - 100px);
-        height: calc(100% - 176px);
+        width: calc(50% - 200px);
+        height: calc(100% - 78px);
     }
 
     .home-content h1 {
@@ -2450,7 +2455,7 @@ html.no-csstransitions .home-content__main {
 
 @media only screen and (max-width: 1000px) {
     .s-home .home-image-part {
-        width: calc(50% - 80px);
+        width: calc(50% - 120px);
     }
 
     .home-content h1 {
@@ -2485,7 +2490,7 @@ html.no-csstransitions .home-content__main {
 
 @media only screen and (max-width: 900px) {
     .s-home .home-image-part {
-        width: calc(50% - 40px);
+        width: calc(50% - 100px);
     }
 
     .home-content h1 {
@@ -2508,7 +2513,7 @@ html.no-csstransitions .home-content__main {
 
 @media only screen and (max-width: 800px) {
     .s-home .home-image-part {
-        width: calc(50% - 80px);
+        width: calc(50% - 100px);
     }
 
     .home-content h1 {
@@ -3206,10 +3211,10 @@ html.no-csstransitions .home-content__main {
     position: relative;
 }
 
-.s-download .display-1,
+/* .s-download .display-1,
 .s-download .display-2 {
     color: var(--color-surface);
-}
+} */
 
 .s-download .download-content__badges {
     list-style: none;
@@ -4984,10 +4989,21 @@ input[type="button"].btn--primary:focus,
 }
 
 .mission-card__icon,
-.go-top a,
 .project-card__status--active {
     background: rgba(var(--color-accent-rgb), 0.14);
     color: var(--color-accent);
+}
+
+.go-top a,
+.go-top a:visited {
+    background-color: var(--color-accent);
+}
+
+.go-top a:hover,
+.go-top a:focus,
+.go-top a:visited:hover,
+.go-top a:visited:focus {
+    background-color: var(--color-accent-light);
 }
 
 /* Global Tajawal typography */
