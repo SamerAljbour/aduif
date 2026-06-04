@@ -61,13 +61,25 @@
 </li>        {{-- <li><a href="#0"><i class="fab fa-twitter"></i></a></li>
         <li><a href="#0"><i class="fab fa-instagram"></i></a></li> --}}
 
-        @foreach(['en' => 'EN', 'fr' => 'FR', 'ar' => 'AR'] as $locale => $label)
-            @if(app()->getLocale() !== $locale)
-                <li>
-                    <a href="{{ route('set.locale', $locale) }}">{{ $label }}</a>
-                </li>
-            @endif
-        @endforeach
+        @php
+            $languageOptions = ['en' => 'English', 'fr' => 'Français', 'ar' => 'العربية'];
+            $currentLanguage = $languageOptions[app()->getLocale()] ?? strtoupper(app()->getLocale());
+        @endphp
+        <li class="header-language">
+            <button type="button" class="header-language__toggle" aria-haspopup="true" aria-expanded="false">
+                {{ $currentLanguage }}
+            </button>
+            <ul class="header-language__menu" aria-label="Language selector">
+                @foreach($languageOptions as $locale => $label)
+                    <li>
+                        <a class="{{ app()->getLocale() === $locale ? 'is-active' : '' }}"
+                           href="{{ route('set.locale', $locale) }}">
+                            {{ $label }}
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </li>
 
     </ul>
             </nav>

@@ -244,6 +244,11 @@ input[type="button"] {
     margin-left: 0;
 }
 
+.header-language__menu {
+    right: auto;
+    left: 0;
+}
+
 /* Hamburger toggle — move to left */
 .header-menu-toggle {
     right: auto;
