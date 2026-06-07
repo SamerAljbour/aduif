@@ -32,7 +32,8 @@ p, li, td { line-height: 1.9; }
     justify-content: center;
     align-items: flex-start;
     padding-top: 100px;
-    min-height: 100vh;
+    padding-bottom: 2rem;
+    min-height: auto;
     height: auto;
 }
 
@@ -471,7 +472,7 @@ p, li, td { line-height: 1.9; }
                 <div class="jr-card-title"><span class="dot"></span> {{ __('joinUs.sections.personal') }}</div>
                 <div style="display:flex;flex-direction:column;gap:1rem;">
 
-                    <div class="jr-grid">
+                    <div class="jr-grid full">
                         <div class="jr-field @error('name') has-error @enderror">
                             <label for="name">{{ __('joinUs.fields.name') }} <span class="req">*</span></label>
                             <input type="text" id="name" name="name"
@@ -553,8 +554,6 @@ p, li, td { line-height: 1.9; }
                                    data-required="true" />
                             <span class="error-msg">@error('specialization') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
-                    </div>
-                    <div class="jr-grid">
 
                         <div class="jr-field @error('graduation_university') has-error @enderror">
                             <label for="graduation_university">{{ __('joinUs.fields.university') }} <span class="req">*</span></label>
@@ -593,8 +592,6 @@ p, li, td { line-height: 1.9; }
                                    data-required="true" />
                             <span class="error-msg">@error('current_job') {{ $message }} @else {{ __('joinUs.validation.required') }} @enderror</span>
                         </div>
-                    </div>
-                    <div class="jr-grid">
                         <div class="jr-field @error('workplace') has-error @enderror">
                             <label for="workplace">{{ __('joinUs.fields.workplace') }} <span class="req">*</span></label>
                             <input type="text" id="workplace" name="workplace"

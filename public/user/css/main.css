@@ -1835,7 +1835,9 @@ input::-moz-focus-inner {
     font-weight: 700;
     line-height: 1;
     cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
 }
 
 .header-language__toggle:hover,
@@ -1861,7 +1863,10 @@ input::-moz-focus-inner {
     opacity: 0;
     visibility: hidden;
     transform: translateY(-6px);
-    transition: opacity 0.18s ease, visibility 0.18s ease, transform 0.18s ease;
+    transition:
+        opacity 0.18s ease,
+        visibility 0.18s ease,
+        transform 0.18s ease;
 }
 
 .header-language:hover .header-language__menu,
@@ -3468,7 +3473,7 @@ html.no-csstransitions .home-content__main {
 }
 
 .footer__bottom {
-    margin-top: 4.8rem;
+    /* margin-top: 4.8rem; */
     padding-top: 3.9rem;
     border-top: 1px solid rgba(255, 255, 255, 0.03);
 }
