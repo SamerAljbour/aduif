@@ -45,8 +45,9 @@ class ProjectController extends Controller
         $project = Project::with('translations')->findOrFail($id);
 
         $translation = $this->translationForCurrentLocale($project->translations);
+        $translationsByLocale = $project->translations->keyBy('locale');
 
-        return view('dashboard.projects.createOrUpdate', compact('project', 'translation'));
+        return view('dashboard.projects.createOrUpdate', compact('project', 'translation', 'translationsByLocale'));
     }
 
     public function update(ProjectRequest $request, $id)
@@ -88,6 +89,22 @@ class ProjectController extends Controller
 
     private function saveTranslations(Project $project, ProjectRequest $request): void
     {
+        if ($request->filled('translations')) {
+            foreach (AutoTranslateService::SUPPORTED_LOCALES as $locale) {
+                $data = $request->input("translations.$locale", []);
+
+                $project->translations()->updateOrCreate(
+                    ['locale' => $locale],
+                    [
+                        'title' => $data['title'] ?? '',
+                        'description' => $data['description'] ?? '',
+                    ]
+                );
+            }
+
+            return;
+        }
+
         $translations = app(AutoTranslateService::class)->translateFields([
             'title' => $request->title,
             'description' => $request->description,

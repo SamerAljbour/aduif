@@ -27,8 +27,15 @@ class PostRequest extends FormRequest
             'existing_videos' => 'nullable|array',
             'existing_videos.*' => 'string',
 
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
+            'title' => 'required_without:translations|string|max:255',
+            'description' => 'required_without:translations|string',
+            'translations' => 'nullable|array',
+            'translations.en.title' => 'required_with:translations|string|max:255',
+            'translations.en.description' => 'required_with:translations|string',
+            'translations.ar.title' => 'required_with:translations|string|max:255',
+            'translations.ar.description' => 'required_with:translations|string',
+            'translations.fr.title' => 'required_with:translations|string|max:255',
+            'translations.fr.description' => 'required_with:translations|string',
         ];
     }
 

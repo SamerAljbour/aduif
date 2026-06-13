@@ -53,7 +53,7 @@
         }
         .mem-card__media img {
             width: 100%; height: 100%;
-            object-fit: cover; object-position: center top;
+            object-fit: cover;
             display: block;
             transition: transform .4s ease;
         }

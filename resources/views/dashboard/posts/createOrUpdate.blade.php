@@ -1,6 +1,14 @@
 @extends('adminLayouts.app')
 
 @section('content')
+@php
+    $locales = [
+        'en' => 'English',
+        'ar' => 'Arabic',
+        'fr' => 'French',
+    ];
+    $translationsByLocale = $translationsByLocale ?? collect();
+@endphp
 
 @if (session('success'))
     <div class="alert-toast alert-toast--success" id="successAlert">
@@ -45,38 +53,73 @@
 
         <div class="mgmt-form__body">
 
-            {{-- ROW 1: TITLE --}}
-            <div class="mgmt-form__row">
+            @if(isset($post))
+                @foreach($locales as $locale => $label)
+                    @php
+                        $localeTranslation = $translationsByLocale->get($locale);
+                        $titleError = "translations.$locale.title";
+                        $descriptionError = "translations.$locale.description";
+                    @endphp
 
-                <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Title</label>
-                    <input type="text"
-                           name="title"
-                           class="mgmt-form__control @error('title') is-invalid @enderror"
-                           required
-                           value="{{ old('title', $translation->title ?? '') }}">
-                    @error('title')
-                        <small class="mgmt-form__error">{{ $message }}</small>
-                    @enderror
+                    <div class="mgmt-card__header" style="margin: 0 0 16px; border-radius: 8px;">
+                        <span class="mgmt-card__label">{{ $label }} Content</span>
+                    </div>
+
+                    <div class="mgmt-form__row">
+                        <div class="mgmt-form__group">
+                            <label class="mgmt-form__label">Title ({{ strtoupper($locale) }})</label>
+                            <input type="text"
+                                   name="translations[{{ $locale }}][title]"
+                                   class="mgmt-form__control @error($titleError) is-invalid @enderror"
+                                   required
+                                   value="{{ old("translations.$locale.title", $localeTranslation->title ?? '') }}">
+                            @error($titleError)
+                                <small class="mgmt-form__error">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mgmt-form__row">
+                        <div class="mgmt-form__group">
+                            <label class="mgmt-form__label">Description ({{ strtoupper($locale) }})</label>
+                            <textarea name="translations[{{ $locale }}][description]"
+                                      class="mgmt-form__control @error($descriptionError) is-invalid @enderror"
+                                      required
+                                      rows="3">{{ old("translations.$locale.description", $localeTranslation->description ?? '') }}</textarea>
+                            @error($descriptionError)
+                                <small class="mgmt-form__error">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="mgmt-form__row">
+                    <div class="mgmt-form__group">
+                        <label class="mgmt-form__label">Title</label>
+                        <input type="text"
+                               name="title"
+                               class="mgmt-form__control @error('title') is-invalid @enderror"
+                               required
+                               value="{{ old('title') }}">
+                        @error('title')
+                            <small class="mgmt-form__error">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
 
-            </div>
-
-            {{-- ROW 2: DESCRIPTION --}}
-            <div class="mgmt-form__row">
-
-                <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Description</label>
-                    <textarea name="description"
-                              class="mgmt-form__control @error('description') is-invalid @enderror"
-                              required
-                              rows="3">{{ old('description', $translation->description ?? '') }}</textarea>
-                    @error('description')
-                        <small class="mgmt-form__error">{{ $message }}</small>
-                    @enderror
+                <div class="mgmt-form__row">
+                    <div class="mgmt-form__group">
+                        <label class="mgmt-form__label">Description</label>
+                        <textarea name="description"
+                                  class="mgmt-form__control @error('description') is-invalid @enderror"
+                                  required
+                                  rows="3">{{ old('description') }}</textarea>
+                        @error('description')
+                            <small class="mgmt-form__error">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
-
-            </div>
+            @endif
 
             {{-- ROW 3: DATE + TYPE --}}
             <div class="mgmt-form__row">

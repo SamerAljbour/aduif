@@ -104,6 +104,10 @@
 
                             {{-- ACTIONS --}}
                             <td>
+                                <a href="{{ route('members.edit', $m) }}"
+                                   class="btn-row btn-row--edit">
+                                    Edit
+                                </a>
                                 <button class="btn-row btn-row--edit"
                                         onclick="openMemberModal(this)"
                                                   data-member='@json($m->load("translations", "documents"), JSON_HEX_APOS | JSON_HEX_QUOT)'>

@@ -14,6 +14,8 @@ return [
 
     'no_title' => 'Untitled',
     'no_date' => 'No date',
+    'post_image_alt' => 'Post image',
+    'read_more' => 'Read More',
 
     'prev' => 'Previous',
     'next' => 'Next',

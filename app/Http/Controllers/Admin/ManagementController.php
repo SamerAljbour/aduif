@@ -57,8 +57,9 @@ class ManagementController extends Controller
 
         // ✅ Get translations safely
         $translation = $this->translationForCurrentLocale($management->translations);
+        $translationsByLocale = $management->translations->keyBy('locale');
 
-        return view('dashboard.management.createOrUpdate', compact('management', 'translation'));
+        return view('dashboard.management.createOrUpdate', compact('management', 'translation', 'translationsByLocale'));
     }
 
     public function update(ManagementRequest $request, $id)
@@ -164,6 +165,22 @@ class ManagementController extends Controller
 
     private function saveTranslations(Management $management, ManagementRequest $request): void
     {
+        if ($request->filled('translations')) {
+            foreach (AutoTranslateService::SUPPORTED_LOCALES as $locale) {
+                $data = $request->input("translations.$locale", []);
+
+                $management->translations()->updateOrCreate(
+                    ['locale' => $locale],
+                    [
+                        'name' => $data['name'] ?? '',
+                        'bio' => $data['bio'] ?? '',
+                    ]
+                );
+            }
+
+            return;
+        }
+
         $translations = app(AutoTranslateService::class)->translateFields([
             'name' => $request->name,
             'bio' => $request->bio,

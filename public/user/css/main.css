@@ -1907,14 +1907,22 @@ input::-moz-focus-inner {
 }
 
 .sticky .header-nav-wrap .header-social {
-    margin: 16px 0 0 0;
+    margin: 15px 0 0 0;
 }
 
 .sticky .header-nav-wrap .header-social li a {
     background-color: rgba(255, 255, 255, 0.05);
-    line-height: 44px;
-    height: 44px;
-    width: 44px;
+    line-height: 48px;
+    height: 48px;
+    width: 48px;
+}
+
+.sticky .header-language__toggle {
+    height: 48px;
+}
+
+.sticky .header-language__menu {
+    top: calc(100% + 8px);
 }
 
 /* -------------------------------------------------------------------
@@ -2250,7 +2258,7 @@ input::-moz-focus-inner {
 .home-content h1 {
     font-family: "Tajawal", sans-serif;
     font-weight: 600;
-    font-size: 7.8rem;
+    font-size: 5.8rem;
     line-height: 1.231;
     color: var(--color-surface);
     margin-top: 0;
@@ -2508,7 +2516,7 @@ html.no-csstransitions .home-content__main {
     }
 
     .home-content h1 {
-        font-size: 7.2rem;
+        font-size: 6.2rem;
     }
 }
 
@@ -2518,7 +2526,7 @@ html.no-csstransitions .home-content__main {
     }
 
     .home-content h1 {
-        font-size: 6.6rem;
+        font-size: 5.6rem;
     }
 
     .home-content h3 {

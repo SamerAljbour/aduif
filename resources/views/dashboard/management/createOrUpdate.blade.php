@@ -1,6 +1,14 @@
 @extends('adminLayouts.app')
 
 @section('content')
+@php
+    $locales = [
+        'en' => 'English',
+        'ar' => 'Arabic',
+        'fr' => 'French',
+    ];
+    $translationsByLocale = $translationsByLocale ?? collect();
+@endphp
 
 @if (session('success'))
     <div class="alert-toast alert-toast--success" id="successAlert">
@@ -45,32 +53,73 @@
 
         <div class="mgmt-form__body">
 
-            {{-- ROW 1: NAME --}}
-            <div class="mgmt-form__row">
-                <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Name</label>
-                    <input type="text"
-                           name="name"
-                           class="mgmt-form__control @error('name') is-invalid @enderror"
-                           value="{{ old('name', $translation->name ?? '') }}">
-                    @error('name')
-                        <small class="mgmt-form__error">{{ $message }}</small>
-                    @enderror
-                </div>
-            </div>
+            @if(isset($management))
+                @foreach($locales as $locale => $label)
+                    @php
+                        $localeTranslation = $translationsByLocale->get($locale);
+                        $nameError = "translations.$locale.name";
+                        $bioError = "translations.$locale.bio";
+                    @endphp
 
-            {{-- ROW 2: BIO --}}
-            <div class="mgmt-form__row">
-                <div class="mgmt-form__group">
-                    <label class="mgmt-form__label">Bio</label>
-                    <textarea name="bio"
-                              class="mgmt-form__control @error('bio') is-invalid @enderror"
-                              rows="3">{{ old('bio', $translation->bio ?? '') }}</textarea>
-                    @error('bio')
-                        <small class="mgmt-form__error">{{ $message }}</small>
-                    @enderror
+                    <div class="mgmt-card__header" style="margin: 0 0 16px; border-radius: 8px;">
+                        <span class="mgmt-card__label">{{ $label }} Content</span>
+                    </div>
+
+                    <div class="mgmt-form__row">
+                        <div class="mgmt-form__group">
+                            <label class="mgmt-form__label">Name ({{ strtoupper($locale) }})</label>
+                            <input type="text"
+                                   name="translations[{{ $locale }}][name]"
+                                   class="mgmt-form__control @error($nameError) is-invalid @enderror"
+                                   required
+                                   value="{{ old("translations.$locale.name", $localeTranslation->name ?? '') }}">
+                            @error($nameError)
+                                <small class="mgmt-form__error">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="mgmt-form__row">
+                        <div class="mgmt-form__group">
+                            <label class="mgmt-form__label">Bio ({{ strtoupper($locale) }})</label>
+                            <textarea name="translations[{{ $locale }}][bio]"
+                                      class="mgmt-form__control @error($bioError) is-invalid @enderror"
+                                      required
+                                      rows="3">{{ old("translations.$locale.bio", $localeTranslation->bio ?? '') }}</textarea>
+                            @error($bioError)
+                                <small class="mgmt-form__error">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <div class="mgmt-form__row">
+                    <div class="mgmt-form__group">
+                        <label class="mgmt-form__label">Name</label>
+                        <input type="text"
+                               name="name"
+                               class="mgmt-form__control @error('name') is-invalid @enderror"
+                               required
+                               value="{{ old('name') }}">
+                        @error('name')
+                            <small class="mgmt-form__error">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
-            </div>
+
+                <div class="mgmt-form__row">
+                    <div class="mgmt-form__group">
+                        <label class="mgmt-form__label">Bio</label>
+                        <textarea name="bio"
+                                  class="mgmt-form__control @error('bio') is-invalid @enderror"
+                                  required
+                                  rows="3">{{ old('bio') }}</textarea>
+                        @error('bio')
+                            <small class="mgmt-form__error">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+            @endif
 
             {{-- ROW 3: EMAIL, PHONE, POSITION, TYPE --}}
             <div class="mgmt-form__row">

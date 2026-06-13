@@ -81,8 +81,9 @@ class PostController extends Controller
         $post = Post::with('translations')->findOrFail($id);
 
         $translation = $this->translationForCurrentLocale($post->translations);
+        $translationsByLocale = $post->translations->keyBy('locale');
 
-        return view('dashboard.posts.createOrUpdate', compact('post', 'translation'));
+        return view('dashboard.posts.createOrUpdate', compact('post', 'translation', 'translationsByLocale'));
     }
 
     /* ───────── UPDATE ───────── */
@@ -215,6 +216,22 @@ class PostController extends Controller
 
     private function saveTranslations(Post $post, PostRequest $request): void
     {
+        if ($request->filled('translations')) {
+            foreach (AutoTranslateService::SUPPORTED_LOCALES as $locale) {
+                $data = $request->input("translations.$locale", []);
+
+                $post->translations()->updateOrCreate(
+                    ['locale' => $locale],
+                    [
+                        'title' => $data['title'] ?? '',
+                        'description' => $data['description'] ?? '',
+                    ]
+                );
+            }
+
+            return;
+        }
+
         $translations = app(AutoTranslateService::class)->translateFields([
             'title' => $request->title,
             'description' => $request->description,

@@ -49,7 +49,7 @@
                                     <img
                                         src="{{ $image }}"
                                         srcset="{{ $image }} 1x"
-                                        alt="{{ $post->translation?->title ?? 'post image' }}">
+                                        alt="{{ $post->translation?->title ?? __('posts.post_image_alt') }}">
                                 </a>
                             </div>
 
@@ -58,13 +58,13 @@
 
                                 <div class="item-entry__cat">
                                     <a href="{{ route('post.singlePost', $post->id) }}">
-                                        {{ $post->event_date?->format('M d, Y') ?? 'No date' }}
+                                        {{ $post->event_date?->translatedFormat('d F Y') ?? __('posts.no_date') }}
                                     </a>
                                 </div>
 
                                 <h1 class="item-entry__title">
                                     <a href="{{ route('post.singlePost', $post->id) }}">
-                                        {{ $post->translation?->title ?? 'No title' }}
+                                        {{ $post->translation?->title ?? __('posts.no_title') }}
                                     </a>
                                 </h1>
 
@@ -74,7 +74,7 @@
                                     </p>
 
                                     <a class="more-link" href="{{ route('post.singlePost', $post->id) }}">
-                                        Read More
+                                        {{ __('posts.read_more') }}
                                     </a>
                                 </div>
 
@@ -111,7 +111,7 @@
                                     <img
                                         src="{{ $image }}"
                                         srcset="{{ $image }} 1x"
-                                        alt="{{ $post->translation?->title ?? 'post image' }}">
+                                        alt="{{ $post->translation?->title ?? __('posts.post_image_alt') }}">
                                 </a>
                             </div>
 
@@ -120,13 +120,13 @@
 
                                 <div class="item-entry__cat">
                                     <a href="{{ route('post.singlePost', $post->id) }}">
-                                        {{ $post->event_date?->format('M d, Y') ?? 'No date' }}
+                                        {{ $post->event_date?->translatedFormat('d F Y') ?? __('posts.no_date') }}
                                     </a>
                                 </div>
 
                                 <h1 class="item-entry__title">
                                     <a href="{{ route('post.singlePost', $post->id) }}">
-                                        {{ $post->translation?->title ?? 'No title' }}
+                                        {{ $post->translation?->title ?? __('posts.no_title') }}
                                     </a>
                                 </h1>
 
@@ -136,7 +136,7 @@
                                     </p>
 
                                     <a class="more-link" href="{{ route('post.singlePost', $post->id) }}">
-                                        Read More
+                                        {{ __('posts.read_more') }}
                                     </a>
                                 </div>
 
@@ -173,7 +173,7 @@
                                     <img
                                         src="{{ $image }}"
                                         srcset="{{ $image }} 1x"
-                                        alt="{{ $post->translation?->title ?? 'post image' }}">
+                                        alt="{{ $post->translation?->title ?? __('posts.post_image_alt') }}">
                                 </a>
                             </div>
 
@@ -182,13 +182,13 @@
 
                                 <div class="item-entry__cat">
                                     <a href="{{ route('post.singlePost', $post->id) }}">
-                                        {{ $post->event_date?->format('M d, Y') ?? 'No date' }}
+                                        {{ $post->event_date?->translatedFormat('d F Y') ?? __('posts.no_date') }}
                                     </a>
                                 </div>
 
                                 <h1 class="item-entry__title">
                                     <a href="{{ route('post.singlePost', $post->id) }}">
-                                        {{ $post->translation?->title ?? 'No title' }}
+                                        {{ $post->translation?->title ?? __('posts.no_title') }}
                                     </a>
                                 </h1>
 
@@ -198,7 +198,7 @@
                                     </p>
 
                                     <a class="more-link" href="{{ route('post.singlePost', $post->id) }}">
-                                        Read More
+                                        {{ __('posts.read_more') }}
                                     </a>
                                 </div>
 

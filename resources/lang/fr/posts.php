@@ -14,6 +14,8 @@ return [
 
     'no_title' => 'Sans titre',
     'no_date' => 'Aucune date',
+    'post_image_alt' => 'Image de l\'article',
+    'read_more' => 'Lire la suite',
 
     // 'type' => 'Type',
 

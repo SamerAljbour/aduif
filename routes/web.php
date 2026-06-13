@@ -34,6 +34,10 @@ Route::prefix('admin')->middleware(['auth', 'verified', 'locale'])->group(functi
         ->name('joinRequests.reject');
     Route::get('members', [MemberController::class, 'index'])
         ->name('members.index');
+    Route::get('members/{member}/edit', [MemberController::class, 'edit'])
+        ->name('members.edit');
+    Route::put('members/{member}', [MemberController::class, 'update'])
+        ->name('members.update');
     Route::get('/contacts', [ContactUsController::class, 'index'])
         ->name('contactUs.index');
 

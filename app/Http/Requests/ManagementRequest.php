@@ -22,9 +22,16 @@ class ManagementRequest extends FormRequest
             'type' => 'required|in:current,former,honorary,consultant',
 
 
-            // source-language content
-            'name' => 'required|string|max:255',
-            'bio'  => 'required|string',
+            // translated content
+            'name' => 'required_without:translations|string|max:255',
+            'bio'  => 'required_without:translations|string',
+            'translations' => 'nullable|array',
+            'translations.en.name' => 'required_with:translations|string|max:255',
+            'translations.en.bio' => 'required_with:translations|string',
+            'translations.ar.name' => 'required_with:translations|string|max:255',
+            'translations.ar.bio' => 'required_with:translations|string',
+            'translations.fr.name' => 'required_with:translations|string|max:255',
+            'translations.fr.bio' => 'required_with:translations|string',
         ];
     }
 }
